@@ -114,7 +114,7 @@ public class SwaggerConfig {
         // 用ApiInfoBuilder进行定制
         return new ApiInfoBuilder()
                 // 设置标题
-                .title("标题：制造业数字化综合服务平台_接口文档")
+                .title("标题：金谷创客空间智慧运维管理系统")
                 // 描述
                 .description("描述：用于管理制造业数字化综合服务平台,具体包括应用服务,Handle品,行业智库,新闻动态,企业管理,招商管理等模块...")
                 // 作者信息
