@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.room.mapper.RoomLookMapper">
+
+    <resultMap type="RoomLook" id="RoomLookResult">
+        <result property="lookId" column="look_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="customerPhone" column="customer_phone"/>
+        <result property="appointTime" column="appoint_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="RoomLookDtoPage" id="RoomLookDtoPageResult">
+        <result property="lookId" column="look_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="customerPhone" column="customer_phone"/>
+        <result property="appointTime" column="appoint_time"/>
+    </resultMap>
+
+    <sql id="selectRoomLookVo">
+        select look_id,
+               room_id,
+               user_id,
+               customer_name,
+               customer_phone,
+               appoint_time,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_room_look
+    </sql>
+
+    <sql id="selectRoomLookDTOList">
+        select l.look_id,
+               l.room_id,
+               i.room_name,
+               l.user_id,
+               u.nick_name,
+               l.customer_name,
+               l.customer_phone,
+               l.appoint_time
+        from t_room_look l,
+             t_room_info i,
+             sys_user u
+        where l.room_id = i.room_id
+          and l.user_id = u.user_id
+    </sql>
+
+    <select id="selectRoomLookList" parameterType="RoomLookVoPage" resultMap="RoomLookDtoPageResult">
+        <include refid="selectRoomLookDTOList"/>
+        <if test="roomName != null  and roomName != ''">and r.room_name like concat('%',#{roomName},'%')</if>
+        <if test="nickName != null  and nickName != ''">and u.nick_name like concat('%',#{nickName},'%')</if>
+        <if test="customerName != null  and customerName != ''">and l.customer_name like concat('%',
+            #{customerName},'%')
+        </if>
+        <if test="customerPhone != null  and customerPhone != ''">and l.customer_phone like
+            concat('%',#{customerPhone},'%')
+        </if>
+        <if test="appointTimeStart != null ">and appoint_time &gt; #{appointTimeStart}</if>
+        <if test="appointTimeEnd != null ">and appoint_time &lt; #{appointTimeEnd}</if>
+    </select>
+
+    <select id="selectRoomLookByLookId" parameterType="String" resultMap="RoomLookResult">
+        <include refid="selectRoomLookVo"/>
+        where look_id = #{lookId}
+    </select>
+
+    <insert id="insertRoomLook" parameterType="RoomLook" keyProperty="lookId" useGeneratedKeys="true">
+        insert into t_room_look
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lookId != null">look_id,</if>
+            <if test="roomId != null">room_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="customerPhone != null">customer_phone,</if>
+            <if test="appointTime != null">appoint_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lookId != null">#{lookId},</if>
+            <if test="roomId != null">#{roomId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="customerName != null">#{customerName},</if>
+            <if test="customerPhone != null">#{customerPhone},</if>
+            <if test="appointTime != null">#{appointTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRoomLook" parameterType="RoomLook">
+        update t_room_look
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roomId != null">room_id = #{roomId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="customerName != null">customer_name = #{customerName},</if>
+            <if test="customerPhone != null">customer_phone = #{customerPhone},</if>
+            <if test="appointTime != null">appoint_time = #{appointTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where look_id = #{lookId}
+    </update>
+
+    <delete id="deleteRoomLookByLookId" parameterType="String">
+        delete
+        from t_room_look
+        where look_id = #{lookId}
+    </delete>
+
+    <delete id="deleteRoomLookByLookIds" parameterType="String">
+        delete from t_room_look where look_id in
+        <foreach item="lookId" collection="array" open="(" separator="," close=")">
+            #{lookId}
+        </foreach>
+    </delete>
+</mapper>

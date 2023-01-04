@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.common.core.mapper.FileInfoMapper">
+
+    <resultMap type="FileInfo" id="FileInfoResult">
+        <result property="fileId" column="file_id"/>
+        <result property="fileName" column="file_name"/>
+        <result property="newFileName" column="new_file_name"/>
+        <result property="originalFileName" column="original_file_name"/>
+        <result property="businessId" column="business_id"/>
+        <result property="url" column="url"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectFileInfoVo">
+        select file_id,
+               file_name,
+               new_file_name,
+               original_file_name,
+               business_id,
+               url,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from sys_file_info
+    </sql>
+
+    <select id="selectFileInfoList" parameterType="FileInfo" resultMap="FileInfoResult">
+        <include refid="selectFileInfoVo"/>
+        <where>
+            <if test="fileName != null  and fileName != ''">and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="newFileName != null  and newFileName != ''">and new_file_name like concat('%', #{newFileName},
+                '%')
+            </if>
+            <if test="originalFileName != null  and originalFileName != ''">and original_file_name like concat('%',
+                #{originalFileName}, '%')
+            </if>
+            <if test="businessId != null  and businessId != ''">and business_id = #{businessId}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectFileInfoByFileId" parameterType="String" resultMap="FileInfoResult">
+        <include refid="selectFileInfoVo"/>
+        where file_id = #{fileId}
+    </select>
+
+    <insert id="insertFileInfo" parameterType="FileInfo">
+        insert into sys_file_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">file_id,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="newFileName != null">new_file_name,</if>
+            <if test="originalFileName != null">original_file_name,</if>
+            <if test="businessId != null">business_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="url != null">url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">#{fileId},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="newFileName != null">#{newFileName},</if>
+            <if test="originalFileName != null">#{originalFileName},</if>
+            <if test="businessId != null">#{businessId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="url != null">#{url},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFileInfo" parameterType="FileInfo">
+        update sys_file_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="newFileName != null">new_file_name = #{newFileName},</if>
+            <if test="originalFileName != null">original_file_name = #{originalFileName},</if>
+            <if test="businessId != null">business_id = #{businessId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="url != null">url = #{url},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteFileInfoByFileId" parameterType="String">
+        delete
+        from sys_file_info
+        where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteFileInfoByFileIds" parameterType="String">
+        delete from sys_file_info where file_id in
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+
+
+    <update id="emptyBusinessId">
+        update sys_file_info
+        set business_id=null
+        where business_id = #{businessId}
+    </update>
+</mapper>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.activity.mapper.ActivityInfoMapper">
+
+    <resultMap type="ActivityInfo" id="ActivityInfoResult">
+        <result property="activityId" column="activity_id"/>
+        <result property="activityTitle" column="activity_title"/>
+        <result property="activityContent" column="activity_content"/>
+        <result property="status" column="status"/>
+        <result property="releaseTime" column="release_time"/>
+        <result property="activityStartTime" column="activity_start_time"/>
+        <result property="activityEndTime" column="activity_end_time"/>
+        <result property="activityAddress" column="activity_address"/>
+        <result property="registerDeadline" column="register_deadline"/>
+        <result property="registerNumber" column="register_number"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <resultMap type="ActivityInfoDto" id="ActivityInfoDtoResult">
+        <result property="activityId" column="activity_id"/>
+        <result property="activityTitle" column="activity_title"/>
+        <result property="activityContent" column="activity_content"/>
+        <result property="status" column="status"/>
+        <result property="releaseTime" column="release_time"/>
+        <result property="activityStartTime" column="activity_start_time"/>
+        <result property="activityEndTime" column="activity_end_time"/>
+        <result property="activityAddress" column="activity_address"/>
+        <result property="registerDeadline" column="register_deadline"/>
+        <result property="registerNumber" column="register_number"/>
+        <result property="signNumber" column="signNumber"/>
+    </resultMap>
+
+    <resultMap type="ActivitySignDto" id="ActivitySignDtoResult">
+        <result property="activityId" column="activity_id"/>
+        <result property="isSign" column="isSign"/>
+    </resultMap>
+
+
+    <sql id="selectActivityInfoVo">
+        select activity_id,
+               ai.activity_title,
+               ai.activity_content,
+               ai.status,
+               ai.release_time,
+               ai.activity_start_time,
+               ai.activity_end_time,
+               ai.activity_address,
+               ai.register_deadline,
+               ai.register_number,
+               (select COUNT(DISTINCT aur.activity_id, aur.user_id)
+                from t_activity_user_relation aur
+                where aur.activity_id = ai.activity_id) signNumber
+        from t_activity_info ai
+    </sql>
+
+    <select id="selectActivityInfoList" parameterType="ActivityInfo" resultMap="ActivityInfoDtoResult">
+        <include refid="selectActivityInfoVo"/>
+        <where>
+            <if test="activityTitle != null  and activityTitle != ''">and ai.activity_title like
+                concat('%',#{activityTitle},'%')
+            </if>
+            <if test="activityContent != null  and activityContent != ''">and ai.activity_content = #{activityContent}
+            </if>
+            <if test="status != null  and status != ''">and ai.status = #{status}</if>
+            <if test="releaseTime != null ">and ai.release_time = #{releaseTime}</if>
+            <if test="activityStartTime != null ">and ai.activity_start_time = #{activityStartTime}</if>
+            <if test="activityEndTime != null ">and ai.activity_end_time = #{activityEndTime}</if>
+            <if test="activityAddress != null  and activityAddress != ''">and ai.activity_address = #{activityAddress}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectActivityInfoByActivityId" parameterType="String" resultMap="ActivityInfoResult">
+        <include refid="selectActivityInfoVo"/>
+        where activity_id = #{activityId}
+    </select>
+
+    <insert id="insertActivityInfo" parameterType="ActivityInfo">
+        insert into t_activity_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">activity_id,</if>
+            <if test="activityTitle != null">activity_title,</if>
+            <if test="activityContent != null">activity_content,</if>
+            <if test="status != null">status,</if>
+            <if test="releaseTime != null">release_time,</if>
+            <if test="activityStartTime != null">activity_start_time,</if>
+            <if test="activityEndTime != null">activity_end_time,</if>
+            <if test="activityAddress != null">activity_address,</if>
+            <if test="registerDeadline != null">register_deadline,</if>
+            <if test="registerNumber != null">register_number,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">#{activityId},</if>
+            <if test="activityTitle != null">#{activityTitle},</if>
+            <if test="activityContent != null">#{activityContent},</if>
+            <if test="status != null">#{status},</if>
+            <if test="releaseTime != null">#{releaseTime},</if>
+            <if test="activityStartTime != null">#{activityStartTime},</if>
+            <if test="activityEndTime != null">#{activityEndTime},</if>
+            <if test="activityAddress != null">#{activityAddress},</if>
+            <if test="registerDeadline != null">#{registerDeadline},</if>
+            <if test="registerNumber != null">#{registerNumber},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateActivityInfo" parameterType="ActivityInfo">
+        update t_activity_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="activityTitle != null">activity_title = #{activityTitle},</if>
+            <if test="activityContent != null">activity_content = #{activityContent},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="releaseTime != null">release_time = #{releaseTime},</if>
+            <if test="activityStartTime != null">activity_start_time = #{activityStartTime},</if>
+            <if test="activityEndTime != null">activity_end_time = #{activityEndTime},</if>
+            <if test="activityAddress != null">activity_address = #{activityAddress},</if>
+            <if test="registerDeadline != null">register_deadline = #{registerDeadline},</if>
+            <if test="registerNumber != null">register_number = #{registerNumber},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where activity_id = #{activityId}
+    </update>
+
+    <delete id="deleteActivityInfoByActivityId" parameterType="String">
+        delete
+        from t_activity_info
+        where activity_id = #{activityId}
+    </delete>
+
+    <delete id="deleteActivityInfoByActivityIds" parameterType="String">
+        delete from t_activity_info where activity_id in
+        <foreach item="activityId" collection="array" open="(" separator="," close=")">
+            #{activityId}
+        </foreach>
+    </delete>
+
+
+    <select id="selectSignList" resultMap="ActivitySignDtoResult">
+        SELECT ai.activity_id,
+               (CASE WHEN aur.user_id is null THEN 0 ELSE 1 END) isSign
+        FROM t_activity_info ai
+                 LEFT JOIN t_activity_user_relation aur
+                           ON ai.activity_id = aur.activity_id
+                               AND aur.user_id = #{userId}
+    </select>
+</mapper>

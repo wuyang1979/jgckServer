@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.activity.mapper.ActivityUserRelationMapper">
+
+    <resultMap type="ActivityUserRelation" id="ActivityUserRelationResult">
+        <result property="activityId" column="activity_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="ActivityPersonDto" id="ActivityPersonDtoResult">
+        <result property="nickName" column="nick_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="phoneNumber" column="phonenumber"/>
+        <result property="roleName" column="role_name"/>
+        <result property="sex" column="sex"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="signTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectActivityUserRelationVo">
+        select activity_id, user_id, create_by, create_time, update_by, update_time
+        from t_activity_user_relation
+    </sql>
+
+    <select id="selectActivityUserRelationList" parameterType="ActivityUserRelation"
+            resultMap="ActivityUserRelationResult">
+        <include refid="selectActivityUserRelationVo"/>
+        <where>
+            <if test="activityId != null  and activityId != ''">and activity_id = #{activityId}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <select id="selectActivityUserRelationByActivityId" parameterType="String" resultMap="ActivityUserRelationResult">
+        <include refid="selectActivityUserRelationVo"/>
+        where activity_id = #{activityId}
+    </select>
+
+    <insert id="insertActivityUserRelation" parameterType="ActivityUserRelation">
+        insert into t_activity_user_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">activity_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">#{activityId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateActivityUserRelation" parameterType="ActivityUserRelation">
+        update t_activity_user_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where activity_id = #{activityId}
+    </update>
+
+    <delete id="deleteActivityUserRelationByActivityId" parameterType="String">
+        delete
+        from t_activity_user_relation
+        where activity_id = #{activityId}
+    </delete>
+
+    <delete id="deleteActivityUserRelationByActivityIds" parameterType="String">
+        delete from t_activity_user_relation where activity_id in
+        <foreach item="activityId" collection="array" open="(" separator="," close=")">
+            #{activityId}
+        </foreach>
+    </delete>
+
+    <select id="getRelationByActivityIdAndUserId" parameterType="String" resultType="int">
+        select count(1) from t_activity_user_relation aur
+        <where>
+            <if test="activityId!=null and activityId !=''">and aur.activity_id=#{activityId}</if>
+            <if test="userId!=null and userId !=''">and aur.user_id=#{userId}</if>
+        </where>
+    </select>
+
+    <select id="getRelationByActivityId" parameterType="String" resultType="int">
+        select count(1) from t_activity_user_relation aur
+        <where>
+            <if test="activityId !=null and activityId !=''">
+                and aur.activity_id=#{activityId}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteActivityUserRelationByActivityIdAndUserId" parameterType="String">
+        delete
+        from t_activity_user_relation
+        where activity_id = #{activityId}
+          and user_id = #{userId}
+    </delete>
+
+
+    <select id="selectActivityPersonList" resultMap="ActivityPersonDtoResult">
+        SELECT aur.user_id,
+               su.nick_name,
+               su.phonenumber,
+               GROUP_CONCAT(sr.role_name) role_name,
+               su.sex,
+               sd.dept_name,
+               aur.create_time
+        FROM t_activity_user_relation aur
+                 LEFT JOIN sys_user su ON aur.user_id = su.user_id
+                 LEFT JOIN sys_user_role sur ON su.user_id = sur.user_id
+                 LEFT JOIN sys_role sr ON sr.role_id = sur.role_id
+                 LEFT JOIN sys_dept sd ON su.dept_id = sd.dept_id
+        WHERE aur.activity_id = #{activityId}
+        GROUP BY aur.user_id
+    </select>
+
+
+</mapper>

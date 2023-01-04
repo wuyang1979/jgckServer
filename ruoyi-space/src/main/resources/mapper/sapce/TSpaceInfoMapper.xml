@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.space.mapper.TSpaceInfoMapper">
+
+    <resultMap type="TSpaceInfo" id="TSpaceInfoResult">
+        <result property="spaceId" column="space_id"/>
+        <result property="spaceName" column="space_name"/>
+        <result property="spaceAddress" column="space_address"/>
+        <result property="remark" column="remark"/>
+        <result property="companyName" column="company_name"/>
+        <result property="accountBank" column="account_bank"/>
+        <result property="accountNum" column="account_num"/>
+        <result property="delstatus" column="delstatus"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectTSpaceInfoVo">
+        select space_id,
+               space_name,
+               space_address,
+               remark,
+               company_name,
+               account_bank,
+               account_num,
+               delstatus,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_space_info
+    </sql>
+
+    <select id="selectTSpaceInfoList" parameterType="TSpaceInfo" resultMap="TSpaceInfoResult">
+        <include refid="selectTSpaceInfoVo"/>
+        <where>
+            <if test="spaceId != null  and spaceId != ''">and space_id = #{spaceId}</if>
+            <if test="spaceName != null  and spaceName != ''">and space_name like concat('%', #{spaceName}, '%')</if>
+            <if test="spaceAddress != null  and spaceAddress != ''">and space_address = #{spaceAddress}</if>
+            <if test="remark != null  and remark != ''">and remark = #{remark}</if>
+            <if test="companyName != null  and companyName != ''">and company_name = #{companyName}</if>
+            <if test="accountBank != null  and accountBank != ''">and account_bank = #{accountBank}</if>
+            <if test="accountNum != null  and accountNum != ''">and account_num = #{accountNum}</if>
+            <if test="delstatus != null ">and delstatus = #{delstatus}</if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''">and update_by = #{updateBy}</if>
+            <if test="updateTime != null ">and update_time = #{updateTime}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectTSpaceInfoBySpaceId" parameterType="String" resultMap="TSpaceInfoResult">
+        <include refid="selectTSpaceInfoVo"/>
+        where space_id = #{spaceId}
+    </select>
+
+    <insert id="insertTSpaceInfo" parameterType="TSpaceInfo" keyProperty="spaceId" useGeneratedKeys="true">
+        insert into t_space_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="spaceId != null">space_id,</if>
+            <if test="spaceName != null">space_name,</if>
+            <if test="spaceAddress != null">space_address,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="accountBank != null">account_bank,</if>
+            <if test="accountNum  != null">account_num ,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delstatus != null">delstatus,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="spaceId != null">#{spaceId},</if>
+            <if test="spaceName != null">#{spaceName},</if>
+            <if test="spaceAddress != null">#{spaceAddress},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="accountBank != null">#{accountBank},</if>
+            <if test="accountNum  != null">#{accountNum},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delstatus != null">#{delstatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTSpaceInfo" parameterType="TSpaceInfo">
+        update t_space_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spaceName != null">space_name = #{spaceName},</if>
+            <if test="spaceAddress != null">space_address = #{spaceAddress},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="accountBank != null">account_bank = #{accountBank},</if>
+            <if test="accountNum  != null">account_num = #{accountNum },</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delstatus != null">delstatus = #{delstatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where space_id = #{spaceId}
+    </update>
+
+    <delete id="deleteTSpaceInfoBySpaceId" parameterType="String">
+        delete
+        from t_space_info
+        where space_id = #{spaceId}
+    </delete>
+
+    <delete id="deleteTSpaceInfoBySpaceIds" parameterType="String">
+        delete from t_space_info where space_id in
+        <foreach item="spaceId" collection="array" open="(" separator="," close=")">
+            #{spaceId}
+        </foreach>
+    </delete>
+</mapper>

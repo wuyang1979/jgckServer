@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.room.mapper.RoomInfoMapper">
+
+    <resultMap type="RoomInfo" id="RoomInfoResult">
+        <result property="roomId" column="room_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="roomType" column="room_type"/>
+        <result property="floor" column="floor"/>
+        <result property="area" column="area"/>
+        <result property="remark" column="remark"/>
+        <result property="roomAddress" column="room_address"/>
+        <result property="price" column="price"/>
+        <result property="bottomPrice" column="bottom_price"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="RoomInfoVo" id="RoomInfoVoResult">
+        <result property="roomId" column="room_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="roomType" column="room_type"/>
+        <result property="roomStatus" column="room_status"/>
+        <result property="floor" column="floor"/>
+        <result property="area" column="area"/>
+        <result property="remark" column="remark"/>
+        <result property="roomAddress" column="room_address"/>
+        <result property="price" column="price"/>
+        <result property="bottomPrice" column="bottom_price"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="spaceName" column="space_name"/>
+    </resultMap>
+
+    <sql id="selectRoomInfoVo">
+        select room_id,
+               room_name,
+               space_id,
+               room_type,
+               floor,
+               area,
+               remark,
+               room_address,
+               price,
+               bottom_price,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_room_info
+    </sql>
+
+    <sql id="selectRoomInfoAndSpaceNameVo">
+        SELECT r.room_id,
+               r.room_name,
+               r.space_id,
+               r.room_type,
+               r.room_status,
+               r.floor,
+               r.area,
+               r.remark,
+               r.room_address,
+               r.price,
+               r.bottom_price,
+               r.create_by,
+               r.create_time
+        FROM t_room_info r
+                 LEFT JOIN t_space_info s
+                           ON r.space_id = s.space_id
+    </sql>
+
+
+    <select id="selectRoomInfoList" parameterType="RoomInfo" resultMap="RoomInfoVoResult">
+        <include refid="selectRoomInfoAndSpaceNameVo"/>
+        <where>
+            <if test="roomId != null  and roomId != ''">and room_id = #{roomId}</if>
+            <if test="roomName != null  and roomName != ''">and room_name like concat('%',#{roomName},'%')</if>
+            <if test="spaceName != null  and spaceName != ''">and space_name like concat('%',#{spaceName},'%')</if>
+            <if test="spaceId != null  and spaceId != ''">and r.space_id in(#{spaceId})</if>
+            <if test="roomType != null ">and room_type = #{roomType}</if>
+            <if test="roomStatus != null ">and room_status = #{roomStatus}</if>
+            <if test="floor != null  and floor != ''">and floor = #{floor}</if>
+            <if test="area != null  and area != ''">and area = #{area}</if>
+            <if test="roomAddress != null  and roomAddress != ''">and room_address = #{roomAddress}</if>
+            <if test="price != null  and price != ''">and price = #{price}</if>
+            <if test="bottomPrice != null  and bottomPrice != ''">and bottom_price = #{bottomPrice}</if>
+        </where>
+        order by r.create_time desc
+
+    </select>
+
+    <select id="selectRoomInfoByRoomId" parameterType="String" resultMap="RoomInfoResult">
+        <include refid="selectRoomInfoVo"/>
+        where room_id = #{roomId}
+    </select>
+
+    <insert id="insertRoomInfo" parameterType="RoomInfo" keyProperty="roomId" useGeneratedKeys="true">
+        insert into t_room_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">room_id,</if>
+            <if test="roomName != null">room_name,</if>
+            <if test="spaceId != null">space_id,</if>
+            <if test="roomType != null">room_type,</if>
+            <if test="floor != null">floor,</if>
+            <if test="area != null">area,</if>
+            <if test="remark != null">remark,</if>
+            <if test="roomAddress != null">room_address,</if>
+            <if test="price != null">price,</if>
+            <if test="bottomPrice != null">bottom_price,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">#{roomId},</if>
+            <if test="roomName != null">#{roomName},</if>
+            <if test="spaceId != null">#{spaceId},</if>
+            <if test="roomType != null">#{roomType},</if>
+            <if test="floor != null">#{floor},</if>
+            <if test="area != null">#{area},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="roomAddress != null">#{roomAddress},</if>
+            <if test="price != null">#{price},</if>
+            <if test="bottomPrice != null">#{bottomPrice},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRoomInfo" parameterType="RoomInfo">
+        update t_room_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spaceId != null">space_id = #{spaceId},</if>
+            <if test="roomName != null">room_name = #{roomName},</if>
+            <if test="roomType != null">room_type = #{roomType},</if>
+            <if test="roomStatus != null">room_status = #{roomStatus},</if>
+            <if test="floor != null">floor = #{floor},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="roomAddress != null">room_address = #{roomAddress},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="bottomPrice != null">bottom_price = #{bottomPrice},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where room_id = #{roomId}
+    </update>
+
+    <delete id="deleteRoomInfoByRoomId" parameterType="String">
+        delete
+        from t_room_info
+        where room_id = #{roomId}
+    </delete>
+
+    <delete id="deleteRoomInfoByRoomIds" parameterType="String">
+        delete from t_room_info where room_id in
+        <foreach item="roomId" collection="array" open="(" separator="," close=")">
+            #{roomId}
+        </foreach>
+    </delete>
+</mapper>

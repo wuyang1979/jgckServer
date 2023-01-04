@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.common.core.mapper.StatisticsMapper">
+
+    <resultMap id="SettleStatisticsDtoResult" type="SettleStatisticsDto">
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+    </resultMap>
+
+    <resultMap id="ContractExpireDtoResult" type="ContractExpireDto">
+        <result property="roomType" column="room_type"/>
+        <result property="roomName" column="room_name"/>
+        <result property="leaseEndTime" column="lease_end_time"/>
+    </resultMap>
+
+    <resultMap id="CredentialExpireDtoResult" type="CredentialExpireDto">
+        <result property="credentialType" column="dict_value"/>
+        <result property="userName" column="nick_name"/>
+        <result property="credentialExpireTime" column="credential_expire_Time"/>
+    </resultMap>
+
+
+    <select id="getSettleStatistics" resultMap="SettleStatisticsDtoResult">
+        SELECT t1.dict_label name,
+               COUNT(ri.room_id) value
+        FROM
+            (
+            SELECT
+            sdd.dict_value, sdd.dict_label
+            FROM
+            sys_dict_type sdt
+            LEFT JOIN sys_dict_data sdd ON sdt.dict_type = sdd.dict_type
+            WHERE
+            sdt.dict_type = 'room_status'
+            ) t1
+            LEFT JOIN t_room_info ri
+        ON t1.dict_value = ri.room_status
+            AND ri.room_type = #{roomType}
+        GROUP BY
+            t1.dict_label
+    </select>
+
+
+    <select id="getContractExpire" resultMap="ContractExpireDtoResult">
+        SELECT t.room_name, t.room_type, t.lease_end_time
+        FROM (SELECT ci.contract_number,
+                     TO_DAYS(ci.lease_end_time) - TO_DAYS(
+                             NOW()) surplus,
+                     ri.room_name,
+                     ri.room_type,
+                     ci.contract_status,
+                     ci.lease_end_time
+              FROM t_contract_info ci
+                       LEFT JOIN t_room_info ri ON ci.room_id = ri.room_id
+              WHERE ci.contract_status = 0
+                AND TO_DAYS(ci.lease_end_time) - TO_DAYS(
+                      NOW()) > 0) t
+        WHERE t.room_type = 2
+            AND t.surplus &lt; 20
+           OR t.room_type &lt;&gt; 2
+            AND t.surplus &lt; 20
+    </select>
+
+
+    <select id="getCredentialExpire" resultMap="CredentialExpireDtoResult">
+        SELECT t2.nick_name,
+               t2.dict_value,
+               t2.credential_expire_time
+        FROM (SELECT ci.credential_id,
+                     su.nick_name,
+                     t1.dict_label,
+                     t1.dict_value,
+                     ci.credential_expire_time,
+                     TO_DAYS(ci.credential_expire_time) - TO_DAYS(
+                             NOW()) surplus
+              FROM t_credential_info ci
+                       LEFT JOIN sys_user su ON ci.user_id = su.user_id
+                       LEFT JOIN (SELECT sdd.dict_value,
+                                         sdd.dict_label
+                                  FROM sys_dict_type sdt
+                                           LEFT JOIN sys_dict_data sdd ON sdt.dict_type = sdd.dict_type
+                                  WHERE sdt.dict_type = 'credential_type') t1 ON ci.credential_type = t1.dict_value
+              WHERE TO_DAYS(ci.credential_expire_time) - TO_DAYS(
+                      NOW()) > 0) t2
+        WHERE t2.surplus &lt; 20
+    </select>
+
+</mapper>

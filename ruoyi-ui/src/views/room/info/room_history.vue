@@ -1,0 +1,167 @@
+<template>
+  <div class="div_top">
+    <div style="width: 100%;height: 28px;">
+      <div class="div_button_right">
+        <el-button @click="backRoom" size="mini" type="primary">返回</el-button>
+      </div>
+    </div>
+
+    <div class="div_body">
+      <div class="div_title">
+        房源信息
+      </div>
+      <div class="div_room_info" style="height: 100px;padding-left: 10px">
+        <el-row style="padding-bottom: 20px">
+          <el-col :span="6">
+            <span> 房源名称：</span>{{ roomInfo.roomName }}
+          </el-col>
+          <el-col :span="6">
+            <span> 房间号码：</span>{{ roomInfo.roomNumber }}
+          </el-col>
+          <el-col :span="6">
+            <span style="float: left"> 房间楼层：</span>
+            <dict-tag :options="dict.type.room_floor" :value="roomInfo.floor"/>
+          </el-col>
+          <el-col :span="6">
+            <span> 房间面积：</span>{{ roomInfo.area }}
+          </el-col>
+        </el-row>
+        <el-row style="padding-bottom: 20px">
+          <el-col :span="6">
+            <span> 出租价格：</span>{{ roomInfo.price }}
+          </el-col>
+          <el-col :span="6">
+            <span> 最低价格：</span>{{ roomInfo.bottomPrice }}
+          </el-col>
+          <el-col :span="6">
+            <span> 房间地址：</span>{{ roomInfo.roomAddress }}
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col>
+            <el-tooltip effect="dark"
+                        :content="roomInfo.remark"
+                        placement="top">
+              <div class="div_remark"><span>备注：</span>{{ roomInfo.remark }}
+              </div>
+            </el-tooltip>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="div_title">
+        历史租户
+      </div>
+      <div class="div_history_table">
+        <el-table v-loading="loading" :data="infoList" height="400">
+          <el-table-column label="租客名称" align="center" prop="tenantsName" width="180"/>
+          <el-table-column label="证件号码" align="center" prop="cardNumber"/>
+          <el-table-column label="联系人名称" align="center" prop="contactName"/>
+          <el-table-column label="联系人电话" align="center" prop="contactPhone"/>
+          <el-table-column label="年租金" align="center" prop="yearMoney"/>
+          <el-table-column label="租赁日期" align="center">
+            <template slot-scope="scope">
+          <span>{{
+              parseTime(scope.row.leaseStartTime, '{y}-{m}-{d}') + '~' + parseTime(scope.row.leaseEndTime, '{y}-{m}-{d}')
+            }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="签约日期" align="center" prop="signTime" width="180">
+            <template slot-scope="scope">
+              <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import {getRoom} from "@/api/room/info";
+import {intCovString} from "@/api/common/common";
+import {listTenantsHistory} from "@/api/tenants/info";
+
+export default {
+  name: "room_history",
+  dicts: ['room_floor'],
+  data() {
+    return {
+
+      roomInfo: {},
+
+      roomId: '',
+
+      infoList: [],
+
+      loading: false,
+
+      queryParams:{
+        pageNum:1,
+        pageSize:999,
+        roomId:this.roomId,
+      }
+    }
+  },
+  created() {
+    this.roomId = this.$route.query.id;
+    console.info("history=>", this.$route.query.id)
+    this.getRoom();
+    this.getList();
+  },
+  methods: {
+
+    getList() {
+      this.loading = true
+      this.queryParams.roomId=this.roomId;
+      listTenantsHistory(this.queryParams).then(respone => {
+        this.infoList = respone.rows;
+        this.loading=false;
+        console.info("this.infoList=>",respone)
+        console.info("this.infoList=>",this.infoList)
+      })
+    },
+
+    getRoom() {
+      getRoom(this.roomId).then(respone => {
+        this.roomInfo = respone.data;
+        this.roomInfo.floor = intCovString(this.roomInfo.floor)
+        console.info("this.roomInfo=>", this.roomInfo)
+      })
+    },
+
+    //返回房源列表
+    backRoom() {
+      this.$router.push({
+        path: '/business/room/info'
+      })
+    }
+  }
+};
+</script>
+
+<style scoped>
+.div_top {
+  padding: 20px;
+}
+
+.div_button_right {
+  float: right;
+}
+
+
+.div_title {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.div_remark {
+  width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+</style>

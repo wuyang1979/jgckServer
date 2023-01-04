@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tenants.mapper.TenantsInfoMapper">
+
+    <resultMap type="TenantsInfo" id="TenantsInfoResult">
+        <result property="tenantsId" column="tenants_id"/>
+        <result property="tenantsName" column="tenants_name"/>
+        <result property="cardType" column="card_type"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="registerAddress" column="register_address"/>
+        <result property="officeAddress" column="office_address"/>
+        <result property="phone" column="phone"/>
+        <result property="fax" column="fax"/>
+        <result property="email" column="email"/>
+        <result property="contactPhone" column="contact_phone"/>
+        <result property="contactName" column="contact_name"/>
+        <result property="sex" column="sex"/>
+        <result property="profession" column="profession"/>
+        <result property="communicationAddress" column="communication_address"/>
+        <result property="emergencyContactName" column="emergency_contact_name"/>
+        <result property="emergencyContactPhone" column="emergency_contact_phone"/>
+        <result property="remark" column="remark"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="TenantsInfoHistory" id="TenantsInfoHistoryResult">
+        <result property="tenantsName" column="tenants_name"/>
+        <result property="cardNumber" column="card_number"/>
+        <result property="contactPhone" column="contact_phone"/>
+        <result property="contactName" column="contact_name"/>
+        <result property="yearMoney" column="year_money"/>
+        <result property="leaseStartTime" column="lease_start_time"/>
+        <result property="leaseEndTime" column="lease_end_time"/>
+        <result property="signTime" column="sign_time"/>
+    </resultMap>
+
+    <sql id="selectTenantsInfoHistoryVo">
+        select t.tenants_name,
+               t.card_number,
+               t.contact_name,
+               t.contact_phone,
+               c.year_money,
+               c.lease_start_time,
+               c.lease_end_time,
+               c.sign_time
+        from t_contract_info c
+                 LEFT JOIN t_room_info r ON c.room_id = r.room_id
+                 LEFT JOIN t_tenants_info t ON c.tenants_id = t.tenants_id
+
+    </sql>
+
+    <select id="selectTenantsInfoHistoryList" parameterType="TenantsInfoHistoryVo" resultMap="TenantsInfoHistoryResult">
+        <include refid="selectTenantsInfoHistoryVo"></include>
+        <where>
+            <if test="roomId !=null and roomId !=''">r.room_id = #{roomId}</if>
+        </where>
+        ORDER BY c.sign_time desc
+    </select>
+
+    <sql id="selectTenantsInfoVo">
+        select tenants_id,
+               tenants_name,
+               card_type,
+               card_number,
+               register_address,
+               office_address,
+               phone,
+               fax,
+               email,
+               contact_phone,
+               contact_name,
+               sex,
+               profession,
+               communication_address,
+               emergency_contact_name,
+               emergency_contact_phone,
+               remark,
+               del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_tenants_info
+    </sql>
+
+    <select id="selectTenantsInfoList" parameterType="TenantsInfo" resultMap="TenantsInfoResult">
+        <include refid="selectTenantsInfoVo"/>
+        <where>
+            <if test="tenantsName != null  and tenantsName != ''">and tenants_name like concat('%', #{tenantsName},
+                '%')
+            </if>
+            <if test="cardType != null ">and card_type = #{cardType}</if>
+            <if test="cardNumber != null  and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="registerAddress != null  and registerAddress != ''">and register_address = #{registerAddress}</if>
+            <if test="officeAddress != null  and officeAddress != ''">and office_address = #{officeAddress}</if>
+            <if test="phone != null  and phone != ''">and phone = #{phone}</if>
+            <if test="fax != null  and fax != ''">and fax = #{fax}</if>
+            <if test="email != null  and email != ''">and email = #{email}</if>
+            <if test="contactPhone != null  and contactPhone != ''">and contact_phone = #{contactPhone}</if>
+            <if test="contactName != null  and contactName != ''">and contact_name like concat('%', #{contactName},
+                '%')
+            </if>
+            <if test="sex != null ">and sex = #{sex}</if>
+            <if test="profession != null  and profession != ''">and profession = #{profession}</if>
+            <if test="communicationAddress != null  and communicationAddress != ''">and communication_address =
+                #{communicationAddress}
+            </if>
+            <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like
+                concat('%', #{emergencyContactName}, '%')
+            </if>
+            <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone =
+                #{emergencyContactPhone}
+            </if>
+            <if test="remark != null  and remark != ''">and remark = #{remark}</if>
+        </where>
+    </select>
+
+    <select id="selectTenantsInfoByTenantsId" parameterType="String" resultMap="TenantsInfoResult">
+        <include refid="selectTenantsInfoVo"/>
+        where tenants_id = #{tenantsId}
+    </select>
+
+    <insert id="insertTenantsInfo" parameterType="TenantsInfo" keyProperty="tenantsId" useGeneratedKeys="true">
+        insert into t_tenants_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tenantsId != null">tenants_id,</if>
+            <if test="tenantsName != null">tenants_name,</if>
+            <if test="cardType != null">card_type,</if>
+            <if test="cardNumber != null">card_number,</if>
+            <if test="registerAddress != null">register_address,</if>
+            <if test="officeAddress != null">office_address,</if>
+            <if test="phone != null">phone,</if>
+            <if test="fax != null">fax,</if>
+            <if test="email != null">email,</if>
+            <if test="contactPhone != null">contact_phone,</if>
+            <if test="contactName != null">contact_name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="profession != null">profession,</if>
+            <if test="communicationAddress != null">communication_address,</if>
+            <if test="emergencyContactName != null">emergency_contact_name,</if>
+            <if test="emergencyContactPhone != null">emergency_contact_phone,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tenantsId != null">#{tenantsId},</if>
+            <if test="tenantsName != null">#{tenantsName},</if>
+            <if test="cardType != null">#{cardType},</if>
+            <if test="cardNumber != null">#{cardNumber},</if>
+            <if test="registerAddress != null">#{registerAddress},</if>
+            <if test="officeAddress != null">#{officeAddress},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="fax != null">#{fax},</if>
+            <if test="email != null">#{email},</if>
+            <if test="contactPhone != null">#{contactPhone},</if>
+            <if test="contactName != null">#{contactName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="profession != null">#{profession},</if>
+            <if test="communicationAddress != null">#{communicationAddress},</if>
+            <if test="emergencyContactName != null">#{emergencyContactName},</if>
+            <if test="emergencyContactPhone != null">#{emergencyContactPhone},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTenantsInfo" parameterType="TenantsInfo">
+        update t_tenants_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tenantsName != null">tenants_name = #{tenantsName},</if>
+            <if test="cardType != null">card_type = #{cardType},</if>
+            <if test="cardNumber != null">card_number = #{cardNumber},</if>
+            <if test="registerAddress != null">register_address = #{registerAddress},</if>
+            <if test="officeAddress != null">office_address = #{officeAddress},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="fax != null">fax = #{fax},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="profession != null">profession = #{profession},</if>
+            <if test="communicationAddress != null">communication_address = #{communicationAddress},</if>
+            <if test="emergencyContactName != null">emergency_contact_name = #{emergencyContactName},</if>
+            <if test="emergencyContactPhone != null">emergency_contact_phone = #{emergencyContactPhone},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where tenants_id = #{tenantsId}
+    </update>
+
+    <delete id="deleteTenantsInfoByTenantsId" parameterType="String">
+        delete
+        from t_tenants_info
+        where tenants_id = #{tenantsId}
+    </delete>
+
+    <delete id="deleteTenantsInfoByTenantsIds" parameterType="String">
+        delete from t_tenants_info where tenants_id in
+        <foreach item="tenantsId" collection="array" open="(" separator="," close=")">
+            #{tenantsId}
+        </foreach>
+    </delete>
+</mapper>

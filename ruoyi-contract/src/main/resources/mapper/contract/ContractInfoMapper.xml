@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.contract.mapper.ContractInfoMapper">
+
+    <resultMap type="ContractInfo" id="ContractInfoResult">
+        <result property="contractId" column="contract_id"/>
+        <result property="contractNumber" column="contract_number"/>
+        <result property="yearMoney" column="year_money"/>
+        <result property="togetherPersonId" column="together_person_id"/>
+        <result property="contractType" column="contract_type"/>
+        <result property="leaseStartTime" column="lease_start_time"/>
+        <result property="leaseEndTime" column="lease_end_time"/>
+        <result property="paymentPeriod" column="payment_period"/>
+        <result property="paymentFirstTime" column="payment_first_time"/>
+        <result property="paymentFirstMoney" column="payment_first_money"/>
+        <result property="paymentDeadline" column="payment_deadline"/>
+        <result property="roomId" column="room_id"/>
+        <result property="securityDeposit" column="security_deposit"/>
+        <result property="tenantsId" column="tenants_id"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="ContractInfoPageDto" id="ContractInfoDtoResult">
+        <result property="contractId" column="contract_id"/>
+        <result property="contractNumber" column="contract_number"/>
+        <result property="yearMoney" column="year_money"/>
+        <result property="togetherPersonId" column="together_person_id"/>
+        <result property="contractType" column="contract_type"/>
+        <result property="leaseStartTime" column="lease_start_time"/>
+        <result property="leaseEndTime" column="lease_end_time"/>
+        <result property="paymentPeriod" column="payment_period"/>
+        <result property="paymentFirstTime" column="payment_first_time"/>
+        <result property="paymentFirstMoney" column="payment_first_money"/>
+        <result property="paymentDeadline" column="payment_deadline"/>
+        <result property="roomId" column="room_id"/>
+        <result property="securityDeposit" column="security_deposit"/>
+        <result property="tenantsId" column="tenants_id"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="roomName" column="room_name"/>
+        <result property="roomArea" column="area"/>
+        <result property="contractStatus" column="contract_status"/>
+    </resultMap>
+
+    <sql id="selectContractInfoVo">
+        select contract_id,
+               contract_number,
+               year_money,
+               together_person_id,
+               contract_type,
+               lease_start_time,
+               lease_end_time,
+               payment_period,
+               payment_first_time,
+               payment_first_money,
+               payment_deadline,
+               room_id,
+               security_deposit,
+               tenants_id,
+               sign_time,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_contract_info
+    </sql>
+
+
+    <sql id="selectContractInfoDto">
+        select c.contract_id,
+               c.contract_number,
+               c.year_money,
+               c.together_person_id,
+               c.contract_type,
+               c.lease_start_time,
+               c.lease_end_time,
+               c.payment_period,
+               c.payment_first_time,
+               c.payment_first_money,
+               c.payment_deadline,
+               c.room_id,
+               c.security_deposit,
+               c.tenants_id,
+               c.sign_time,
+               r.room_name,
+               r.area,
+               c.contract_status
+        from t_contract_info c
+                 left join t_room_info r on c.room_id = r.room_id
+    </sql>
+
+
+    <select id="selectContractInfoList" parameterType="ContractInfo" resultMap="ContractInfoDtoResult">
+        <include refid="selectContractInfoDto"/>
+        <where>
+            <if test="contractNumber != null  and contractNumber != ''">and contract_number like
+                concat('%',#{contractNumber},'%')
+            </if>
+            <if test="leaseStartTime != null ">and lease_start_time = #{leaseStartTime}</if>
+            <if test="leaseEndTime != null ">and lease_end_time = #{leaseEndTime}</if>
+            <if test="paymentType != null ">and payment_type = #{paymentType}</if>
+            <if test="paymentPeriod != null  and paymentPeriod != ''">and payment_period = #{paymentPeriod}</if>
+            <if test="paymentFirstTime != null ">and payment_first_time = #{paymentFirstTime}</if>
+            <if test="paymentFirstMoney != null  and paymentFirstMoney != ''">and payment_first_money =
+                #{paymentFirstMoney}
+            </if>
+            <if test="paymentDeadline != null  and paymentDeadline != ''">and payment_deadline = #{paymentDeadline}</if>
+            <if test="roomId != null  and roomId != ''">and room_id = #{roomId}</if>
+            <if test="securityDeposit != null  and securityDeposit != ''">and security_deposit = #{securityDeposit}</if>
+            <if test="tenantsId != null  and tenantsId != ''">and tenants_id = #{tenantsId}</if>
+            <if test="signTime != null ">and sign_time = #{signTime}</if>
+            <if test="signTimeStart != null ">and sign_time &gt; #{signTimeStart}</if>
+            <if test="signTimeEnd != null ">and sign_time &lt; #{signTimeEnd}</if>
+        </where>
+        order by c.contract_status,c.sign_time desc
+    </select>
+
+    <select id="selectContractInfoByContractId" parameterType="String" resultMap="ContractInfoResult">
+        <include refid="selectContractInfoVo"/>
+        where contract_id = #{contractId}
+    </select>
+
+    <insert id="insertContractInfo" parameterType="ContractInfo">
+        insert into t_contract_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">contract_id,</if>
+            <if test="contractNumber != null">contract_number,</if>
+            <if test="yearMoney != null">year_money,</if>
+            <if test="togetherPersonId != null">together_person_id,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="leaseStartTime != null">lease_start_time,</if>
+            <if test="leaseEndTime != null">lease_end_time,</if>
+            <if test="paymentType != null">payment_type,</if>
+            <if test="paymentPeriod != null">payment_period,</if>
+            <if test="paymentFirstTime != null">payment_first_time,</if>
+            <if test="paymentFirstMoney != null">payment_first_money,</if>
+            <if test="paymentDeadline != null">payment_deadline,</if>
+            <if test="roomId != null">room_id,</if>
+            <if test="securityDeposit != null">security_deposit,</if>
+            <if test="tenantsId != null">tenants_id,</if>
+            <if test="signTime != null">sign_time,</if>
+            <if test="contractStatus != null">contract_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">#{contractId},</if>
+            <if test="contractNumber != null">#{contractNumber},</if>
+            <if test="yearMoney != null">#{yearMoney},</if>
+            <if test="togetherPersonId != null">#{togetherPersonId},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="leaseStartTime != null">#{leaseStartTime},</if>
+            <if test="leaseEndTime != null">#{leaseEndTime},</if>
+            <if test="paymentType != null">#{paymentType},</if>
+            <if test="paymentPeriod != null">#{paymentPeriod},</if>
+            <if test="paymentFirstTime != null">#{paymentFirstTime},</if>
+            <if test="paymentFirstMoney != null">#{paymentFirstMoney},</if>
+            <if test="paymentDeadline != null">#{paymentDeadline},</if>
+            <if test="roomId != null">#{roomId},</if>
+            <if test="securityDeposit != null">#{securityDeposit},</if>
+            <if test="tenantsId != null">#{tenantsId},</if>
+            <if test="signTime != null">#{signTime},</if>
+            <if test="contractStatus != null">#{contractStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateContractInfo" parameterType="ContractInfoPageVo">
+        update t_contract_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractNumber != null">contract_number = #{contractNumber},</if>
+            <if test="yearMoney != null">year_money = #{yearMoney},</if>
+            <if test="togetherPersonId != null">together_person_id = #{togetherPersonId},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="leaseStartTime != null">lease_start_time = #{leaseStartTime},</if>
+            <if test="leaseEndTime != null">lease_end_time = #{leaseEndTime},</if>
+            <if test="paymentType != null">payment_type = #{paymentType},</if>
+            <if test="paymentPeriod != null">payment_period = #{paymentPeriod},</if>
+            <if test="paymentFirstTime != null">payment_first_time = #{paymentFirstTime},</if>
+            <if test="paymentFirstMoney != null">payment_first_money = #{paymentFirstMoney},</if>
+            <if test="paymentDeadline != null">payment_deadline = #{paymentDeadline},</if>
+            <if test="roomId != null">room_id = #{roomId},</if>
+            <if test="securityDeposit != null">security_deposit = #{securityDeposit},</if>
+            <if test="tenantsId != null">tenants_id = #{tenantsId},</if>
+            <if test="signTime != null">sign_time = #{signTime},</if>
+            <if test="contractStatus != null">contract_status = #{contractStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where contract_id = #{contractId}
+    </update>
+
+    <delete id="deleteContractInfoByContractId" parameterType="String">
+        delete
+        from t_contract_info
+        where contract_id = #{contractId}
+    </delete>
+
+    <delete id="deleteContractInfoByContractIds" parameterType="String">
+        delete from t_contract_info where contract_id in
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+</mapper>
