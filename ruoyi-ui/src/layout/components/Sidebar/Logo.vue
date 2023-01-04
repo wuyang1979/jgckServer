@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '制造业数字化综合服务平台',
+      title: '金谷创客空间智慧运维管理系统',
       logo: ""
     }
   }
