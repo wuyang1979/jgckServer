@@ -71,8 +71,18 @@
     </select>
 
     <select id="selectDeptById" parameterType="Long" resultMap="SysDeptResult">
-        <include refid="selectDeptVo"/>
-        where dept_id = #{deptId}
+        select d.dept_id,
+               d.parent_id,
+               d.ancestors,
+               d.dept_name,
+               d.order_num,
+               d.leader,
+               d.phone,
+               d.email,
+               d.status,
+               (select dept_name from sys_dept where dept_id = d.parent_id) parent_name
+        from sys_dept d
+        where d.dept_id = #{deptId}
     </select>
 
     <select id="checkDeptExistUser" parameterType="Long" resultType="int">
@@ -178,5 +188,14 @@
         set del_flag = '2'
         where dept_id = #{deptId}
     </delete>
+
+    <sql id="getIdAndParentId">
+        select dept_id, parent_id, dept_name, status
+        from sys_dept
+        WHERE del_flag = 0
+    </sql>
+    <select id="getDeptIdAndParentId" resultMap="SysDeptResult">
+        <include refid="getIdAndParentId"></include>
+    </select>
 
 </mapper> 

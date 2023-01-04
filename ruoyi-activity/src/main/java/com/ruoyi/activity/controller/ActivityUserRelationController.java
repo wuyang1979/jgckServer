@@ -104,7 +104,8 @@ public class ActivityUserRelationController extends BaseController {
     @Log(title = "活动与用户关系", businessType = BusinessType.DELETE)
     @DeleteMapping("/all")
     public AjaxResult removeByActivityId(@RequestParam(name = "activityId") String activityId) {
-        return toAjax(activityUserRelationService.deleteActivityUserRelationByActivity(activityId));
+        activityUserRelationService.deleteActivityUserRelationByActivity(activityId);
+        return success();
     }
 
     @GetMapping("/person")

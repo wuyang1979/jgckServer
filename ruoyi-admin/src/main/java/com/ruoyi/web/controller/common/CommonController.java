@@ -2,7 +2,10 @@ package com.ruoyi.web.controller.common;
 
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.FileInfo;
+import com.ruoyi.common.core.service.IFileInfoService;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.file.FileUtils;
@@ -14,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 通用请求处理
@@ -31,14 +36,14 @@ import java.util.List;
 @Api(tags = "通用请求")
 @RestController
 @RequestMapping("/common")
-public class CommonController {
+public class CommonController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired
     private ServerConfig serverConfig;
 
-    @Value("${ruoyi.relative-profile}")
-    private String relativeProfile;
+    @Autowired
+    private IFileInfoService fileInfoService;
 
     @Value("${ruoyi.profile-img}")
     private String profileImg;
@@ -80,6 +85,7 @@ public class CommonController {
      * 通用上传请求（单个）
      */
     @PostMapping("/upload")
+    @Transactional
     public AjaxResult uploadFile(MultipartFile file) throws Exception {
         try {
             // 上传文件路径
@@ -87,13 +93,23 @@ public class CommonController {
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + fileName;
-            String src = relativeProfile + fileName;
+//            String src = relativeProfile + fileName;
             AjaxResult ajax = AjaxResult.success();
+			    //todo 保存文件信息
+            FileInfo fileInfo=new FileInfo();
+            fileInfo.setCreateBy(getUsername());
+            fileInfo.setFileId(UUID.randomUUID().toString());
+            fileInfo.setFileName(fileName);
+            fileInfo.setNewFileName(FileUtils.getName(fileName));
+            fileInfo.setOriginalFileName(file.getOriginalFilename());
+            fileInfo.setUrl(url);
+            fileInfoService.insertFileInfo(fileInfo);
             ajax.put("url", url);
-            ajax.put("src", src);
+//            ajax.put("src", src);
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
+			ajax.put("id",fileInfo.getFileId());
             return ajax;
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,6 +135,7 @@ public class CommonController {
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
+			
             return ajax;
         } catch (Exception e) {
             e.printStackTrace();

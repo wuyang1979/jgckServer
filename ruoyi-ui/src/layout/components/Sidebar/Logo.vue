@@ -35,8 +35,8 @@ export default {
   },
   data() {
     return {
-      title: '金谷创客空间智慧运维管理系统',
-      logo: ""
+      title: '金谷创客空间',
+      logo: logoImg
     }
   }
 }
@@ -66,8 +66,8 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 25px;
+      height: 25px;
       vertical-align: middle;
       margin-right: 12px;
     }

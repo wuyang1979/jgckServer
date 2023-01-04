@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ruoyi.common.core.domain.entity.SysDeptAndUser;
+import com.ruoyi.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.annotation.DataScope;
@@ -33,6 +35,9 @@ public class SysDeptServiceImpl implements ISysDeptService {
     private SysDeptMapper deptMapper;
 
     @Autowired
+    private SysUserMapper userMapper;
+
+    @Autowired
     private SysRoleMapper roleMapper;
 
     /**
@@ -45,6 +50,18 @@ public class SysDeptServiceImpl implements ISysDeptService {
     @DataScope(deptAlias = "d")
     public List<SysDept> selectDeptList(SysDept dept) {
         return deptMapper.selectDeptList(dept);
+    }
+
+    /**
+     * 查询部门树结构信息
+     *
+     * @param dept 部门信息
+     * @return 部门树信息集合
+     */
+    @Override
+    public List<TreeSelect> selectDeptTreeList(SysDept dept) {
+        List<SysDept> depts = SpringUtils.getAopProxy(this).selectDeptList(dept);
+        return buildDeptTreeSelect(depts);
     }
 
     /**
@@ -292,4 +309,103 @@ public class SysDeptServiceImpl implements ISysDeptService {
     private boolean hasChild(List<SysDept> list, SysDept t) {
         return getChildList(list, t).size() > 0;
     }
+
+
+    /**
+     * 获取机构树
+     *
+     * @return
+     */
+    @Override
+    public SysDeptAndUser getTree(Long userId) {
+        List<SysDept> deptList = deptMapper.getDeptIdAndParentId();
+        List<SysUser> userList = userMapper.getListByDeptId();
+        return buildTree(deptList, userList,userId);
+    }
+
+
+    /**
+     * 构建机构树
+     *
+     * @param deptlist
+     * @param userList
+     * @return
+     */
+    public SysDeptAndUser buildTree(List<SysDept> deptlist, List<SysUser> userList,Long userId) {
+        //创建机构树
+        SysDeptAndUser sysDeptAndUser = new SysDeptAndUser();
+        //todo 递归生成树
+        for (SysDept dept : deptlist) {
+            if ("0".equals(dept.getParentId().toString())) {
+//                if (userId.toString().equals(dept.getDeptId().toString())) {
+                List<SysDeptAndUser> treeList = new ArrayList<>();
+                List<SysUser> newUser = userList.stream().filter(u -> dept.getDeptId().equals(u.getDeptId())).collect(Collectors.toList());
+                for (SysUser u : newUser) {
+                    treeList.add(sysUserConversionSysDeptAndUser(u));
+                }
+                sysDeptAndUser = sysDeptConversionSysDeptAndUser(dept);
+                sysDeptAndUser.setChildren(recursiveTree(dept, deptlist, userList));
+                sysDeptAndUser.getChildren().addAll(treeList);
+            }
+        }
+        return sysDeptAndUser;
+    }
+
+
+    /**
+     * Dept转机构树类型
+     *
+     * @param sysDept
+     * @return
+     */
+    private SysDeptAndUser sysDeptConversionSysDeptAndUser(SysDept sysDept) {
+        SysDeptAndUser sysDeptAndUser = new SysDeptAndUser();
+        sysDeptAndUser.setId(sysDept.getDeptId().toString());
+        sysDeptAndUser.setLabel(sysDept.getDeptName());
+        sysDeptAndUser.setUser(false);
+        return sysDeptAndUser;
+    }
+
+    /**
+     * User转机构树类型
+     *
+     * @param sysUser
+     * @return
+     */
+    private SysDeptAndUser sysUserConversionSysDeptAndUser(SysUser sysUser) {
+        SysDeptAndUser sysDeptAndUser = new SysDeptAndUser();
+        sysDeptAndUser.setId(sysUser.getUserId().toString());
+        sysDeptAndUser.setLabel(sysUser.getNickName());
+        sysDeptAndUser.setChildren(new ArrayList<>());
+        sysDeptAndUser.setUser(true);
+        return sysDeptAndUser;
+    }
+
+
+    /**
+     * 递归生成树
+     *
+     * @param dept
+     * @param depts
+     * @return
+     */
+    private List<SysDeptAndUser> recursiveTree(SysDept dept, List<SysDept> depts, List<SysUser> users) {
+        List<SysDeptAndUser> list = new ArrayList<>();
+        List<SysDept> collect = depts.stream().filter(d -> dept.getDeptId().equals(d.getParentId())).collect(Collectors.toList());
+        for (SysDept sysDept : collect) {
+            List<SysDeptAndUser> userTreeList = new ArrayList<>();
+            List<SysUser> userList = users.stream().filter(u -> sysDept.getDeptId().equals(u.getDeptId())).collect(Collectors.toList());
+            for (SysUser user : userList) {
+                userTreeList.add(sysUserConversionSysDeptAndUser(user));
+            }
+            List<SysDeptAndUser> list1 = recursiveTree(sysDept, depts, users);
+            SysDeptAndUser sysDeptAndUser = sysDeptConversionSysDeptAndUser(sysDept);
+            sysDeptAndUser.setChildren(list1);
+            sysDeptAndUser.getChildren().addAll(userTreeList);
+            list.add(sysDeptAndUser);
+        }
+        return list;
+    }
+
+
 }

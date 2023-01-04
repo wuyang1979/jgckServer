@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUserSpaceMapper">
+
+	<resultMap type="SysUserSpace" id="SysUserSpaceResult">
+		<result property="userId"     column="user_id"      />
+		<result property="spaceId"     column="sapce_id"      />
+	</resultMap>
+
+	<delete id="deleteUserSpaceByUserId" parameterType="Long">
+		delete from sys_user_space where user_id=#{userId}
+	</delete>
+	
+	<select id="countUserSpaceBySpaceId" resultType="Integer">
+	    select count(1) from sys_user_space where space_id=#{spaceId}
+	</select>
+	
+	<delete id="deleteUserSpace" parameterType="Long">
+ 		delete from sys_user_space where user_id in
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach> 
+ 	</delete>
+	
+	<insert id="batchUserSpace">
+		insert into sys_user_space(user_id, space_id) values
+		<foreach item="item" index="index" collection="list" separator=",">
+			(#{item.userId},#{item.spaceId})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteUserSpaceInfo" parameterType="SysUserSpace">
+		delete from sys_user_space where user_id=#{userId} and space_id=#{spaceId}
+	</delete>
+	
+	<delete id="deleteUserSpaceInfos">
+	    delete from sys_user_space where space_id=#{spaceId} and user_id in
+ 	    <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+ 	        #{userId}
+            </foreach> 
+	</delete>
+
+
+
+	<select id="selectSpaceListByUserId" parameterType="Long" resultType="String">
+		select s.space_id
+		from t_space_info s
+				 left join sys_user_space us on us.space_id = s.space_id
+				 left join sys_user u on u.user_id = us.user_id
+		where u.user_id = #{userId}
+	</select>
+</mapper> 

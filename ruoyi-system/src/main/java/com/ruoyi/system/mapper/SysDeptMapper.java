@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysDeptAndUser;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.common.core.domain.entity.SysDept;
 
@@ -115,4 +116,8 @@ public interface SysDeptMapper {
      * @return 结果
      */
     public int deleteDeptById(Long deptId);
+
+
+
+    public List<SysDept> getDeptIdAndParentId();
 }

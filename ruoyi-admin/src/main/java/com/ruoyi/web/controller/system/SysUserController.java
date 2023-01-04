@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.space.service.ITSpaceInfoService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -28,6 +30,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -47,7 +50,13 @@ public class SysUserController extends BaseController {
     private ISysRoleService roleService;
 
     @Autowired
+    private ISysDeptService deptService;
+
+    @Autowired
     private ISysPostService postService;
+
+    @Autowired
+    private ITSpaceInfoService spaceInfoService;
 
     /**
      * 获取用户列表
@@ -56,6 +65,7 @@ public class SysUserController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(SysUser user) {
         startPage();
+        user.setDeptId(user.getDeptId()!=null?user.getDeptId():getDeptId());
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
@@ -97,11 +107,17 @@ public class SysUserController extends BaseController {
         List<SysRole> roles = roleService.selectRoleAll();
         ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         ajax.put("posts", postService.selectPostAll());
+        // todo 空间list
+        ajax.put("spaces", spaceInfoService.selectAllSpace());
+
         if (StringUtils.isNotNull(userId)) {
             SysUser sysUser = userService.selectUserById(userId);
             ajax.put(AjaxResult.DATA_TAG, sysUser);
             ajax.put("postIds", postService.selectPostListByUserId(userId));
             ajax.put("roleIds", sysUser.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
+            // todo 空间ids
+            ajax.put("spaceIds",spaceInfoService.selectSpaceListByUserId(userId));
+//            ajax.put("spaceIds", sysUser.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
         }
         return ajax;
     }
@@ -213,5 +229,25 @@ public class SysUserController extends BaseController {
         userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
         return success();
+    }
+
+    /**
+     * 获取部门树列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/deptTree")
+    public AjaxResult deptTree(SysDept dept) {
+        return success(deptService.selectDeptTreeList(dept));
+    }
+
+
+    /**
+     * 根据登陆人获取机构树
+     *
+     * @return
+     */
+    @GetMapping("/userDeptTree")
+    public AjaxResult userDeptTree() {
+        return success(deptService.getTree(getDeptId()));
     }
 }

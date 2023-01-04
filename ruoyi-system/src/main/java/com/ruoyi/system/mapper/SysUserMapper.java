@@ -141,4 +141,11 @@ public interface SysUserMapper {
      * @param userNames
      */
     void deleteFrontUsers(@Param("list") List<String> userNames);
+	
+	
+	/**
+     * 获取机构树用户list
+     * @return
+     */
+    public List<SysUser> getListByDeptId();
 }

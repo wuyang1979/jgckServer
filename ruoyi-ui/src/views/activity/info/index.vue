@@ -196,7 +196,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="报名人数" prop="registerNumber">
-              <el-input type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
+              <el-input oninput="if(value.length>3)value=value.slice(0,3)" type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -310,7 +310,7 @@ export default {
         Authorization: getToken()
       },
 
-      url: process.env.VUE_APP_BASE_API + 'common/upload',
+      url: process.env.VUE_APP_BASE_API + '/common/upload',
 
       upload: false,
 
@@ -361,8 +361,7 @@ export default {
         activityTitle: [{required: true, message: '请输入活动标题', trigger: 'blur'},
           {max: 20, message: "活动标题长度不能超过20字符"}],
         registerNumber: [{required: true, message: '请输入报名人数', trigger: 'blur'},
-          {required: true, pattern: /^[0-9]*$/, message: "请输入0-9之间的数字", trigger: "blur"},
-          {max: 5, message: "报名人数长度不能超过5字符"}],
+          {required: true, pattern: /^[0-9]*$/, message: '请输入0-9之间的数字', trigger: 'blur'}],
         activityStartTime: [{required: true, message: "请选择活动开始时间", trigger: 'blur'},
           {max: 20, message: "活动开始时间长度不能超过20字符"}],
         registerDeadline: [{required: true, message: '请选择截止时间', trigger: 'blur'},
@@ -375,6 +374,7 @@ export default {
   created() {
     this.getList();
     this.getSign();
+    console.info("this.url=>", process.env.VUE_APP_BASE_API)
   },
   methods: {
 
