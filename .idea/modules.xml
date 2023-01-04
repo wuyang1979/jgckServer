@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/jgckServer.iml" filepath="$PROJECT_DIR$/.idea/jgckServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-activity/ruoyi-activity.iml" filepath="$PROJECT_DIR$/ruoyi-activity/ruoyi-activity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-admin/ruoyi-admin.iml" filepath="$PROJECT_DIR$/ruoyi-admin/ruoyi-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-common/ruoyi-common.iml" filepath="$PROJECT_DIR$/ruoyi-common/ruoyi-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-contract/ruoyi-contract.iml" filepath="$PROJECT_DIR$/ruoyi-contract/ruoyi-contract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-credential/ruoyi-credential.iml" filepath="$PROJECT_DIR$/ruoyi-credential/ruoyi-credential.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-framework/ruoyi-framework.iml" filepath="$PROJECT_DIR$/ruoyi-framework/ruoyi-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-generator/ruoyi-generator.iml" filepath="$PROJECT_DIR$/ruoyi-generator/ruoyi-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-quartz/ruoyi-quartz.iml" filepath="$PROJECT_DIR$/ruoyi-quartz/ruoyi-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-room/ruoyi-room.iml" filepath="$PROJECT_DIR$/ruoyi-room/ruoyi-room.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-space/ruoyi-space.iml" filepath="$PROJECT_DIR$/ruoyi-space/ruoyi-space.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-system/ruoyi-system.iml" filepath="$PROJECT_DIR$/ruoyi-system/ruoyi-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-tenants/ruoyi-tenants.iml" filepath="$PROJECT_DIR$/ruoyi-tenants/ruoyi-tenants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xy-news/xy-news.iml" filepath="$PROJECT_DIR$/xy-news/xy-news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xy-system/xy-system.iml" filepath="$PROJECT_DIR$/xy-system/xy-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xy-weixin/xy-weixin.iml" filepath="$PROJECT_DIR$/xy-weixin/xy-weixin.iml" />
+    </modules>
+  </component>
+</project>

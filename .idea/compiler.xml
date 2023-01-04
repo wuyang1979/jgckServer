@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ruoyi-contract" />
+        <module name="ruoyi-generator" />
+        <module name="ruoyi-admin" />
+        <module name="xy-weixin" />
+        <module name="xy-system" />
+        <module name="ruoyi-quartz" />
+        <module name="ruoyi-activity" />
+        <module name="xy-news" />
+        <module name="ruoyi-space" />
+        <module name="ruoyi-credential" />
+        <module name="ruoyi-room" />
+        <module name="ruoyi-tenants" />
+        <module name="ruoyi-system" />
+        <module name="ruoyi-framework" />
+        <module name="ruoyi-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jgckServer" target="1.8" />
+      <module name="ruoyi-activity" target="1.8" />
+      <module name="ruoyi-admin" target="1.8" />
+      <module name="ruoyi-common" target="1.8" />
+      <module name="ruoyi-contract" target="1.8" />
+      <module name="ruoyi-credential" target="1.8" />
+      <module name="ruoyi-framework" target="1.8" />
+      <module name="ruoyi-generator" target="1.8" />
+      <module name="ruoyi-quartz" target="1.8" />
+      <module name="ruoyi-room" target="1.8" />
+      <module name="ruoyi-space" target="1.8" />
+      <module name="ruoyi-system" target="1.8" />
+      <module name="ruoyi-tenants" target="1.8" />
+      <module name="xy-news" target="1.8" />
+      <module name="xy-system" target="1.8" />
+      <module name="xy-weixin" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

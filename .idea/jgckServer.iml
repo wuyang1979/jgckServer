@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-activity/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-admin/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-common/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-contract/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-credential/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-framework/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-generator/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-quartz/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-room/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-space/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-system/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ruoyi-tenants/target" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/xy-news/target" />
+      <excludeFolder url="file://$MODULE_DIR$/xy-system/target" />
+      <excludeFolder url="file://$MODULE_DIR$/xy-weixin/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
