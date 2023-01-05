@@ -493,7 +493,7 @@ public class SysUserServiceImpl implements ISysUserService {
             userNames.add(userMapper.getUserNameByUserId(userId));
         }
         //删除前台用户
-        userMapper.deleteFrontUsers(userNames);
+//        userMapper.deleteFrontUsers(userNames);
         // 删除用户与角色关联
         userRoleMapper.deleteUserRole(userIds);
         // 删除用户与岗位关联

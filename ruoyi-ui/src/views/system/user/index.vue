@@ -365,6 +365,21 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="空间">
+              <el-select v-model="form.spaceIds" multiple placeholder="请选择空间">
+                <el-option
+                  v-for="item in spaceOptions"
+                  :key="item.spaceId"
+                  :label="item.spaceName"
+                  :value="item.spaceId"
+                  :disabled="item.status == 1"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="备注">
               <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"
@@ -428,6 +443,7 @@ import {
   updateUser,
   resetUserPwd,
   changeUserStatus,
+  deptTreeSelect,
 } from '@/api/system/user'
 import { getToken } from '@/utils/auth'
 import { treeselect } from '@/api/system/dept'
@@ -470,6 +486,8 @@ export default {
       postOptions: [],
       // 角色选项
       roleOptions: [],
+      // 空间选项
+      spaceOptions:[],
       // 表单参数
       form: {},
       defaultProps: {
@@ -672,6 +690,7 @@ export default {
       getUser().then((response) => {
         this.postOptions = response.posts
         this.roleOptions = response.roles
+	this.spaceOptions = response.spaces;
         this.open = true
         this.title = '添加用户'
         this.form.password = this.initPassword
@@ -686,8 +705,10 @@ export default {
         this.form = response.data
         this.postOptions = response.posts
         this.roleOptions = response.roles
+	this.spaceOptions = response.spaces;
         this.form.postIds = response.postIds
         this.form.roleIds = response.roleIds
+	this.form.spaceIds = response.spaceIds
         this.open = true
         this.title = '修改用户'
         this.form.password = ''
