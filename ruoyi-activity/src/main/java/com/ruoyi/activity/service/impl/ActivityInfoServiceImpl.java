@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.activity.domain.dto.ActivityInfoDto;
 import com.ruoyi.activity.domain.dto.ActivitySignDto;
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class ActivityInfoServiceImpl implements IActivityInfoService {
      * @param activityInfo 活动基本信息
      * @return 活动基本信息
      */
+    @DataScope(deptAlias = "ai", userAlias = "ai")
     @Override
     public List<ActivityInfoDto> selectActivityInfoList(ActivityInfo activityInfo) {
         return activityInfoMapper.selectActivityInfoList(activityInfo);

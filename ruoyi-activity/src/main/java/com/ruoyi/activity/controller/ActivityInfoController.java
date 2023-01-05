@@ -83,6 +83,8 @@ public class ActivityInfoController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody ActivityInfo activityInfo) {
         activityInfo.setCreateBy(getUsername());
+        activityInfo.setUserId(getUserId().toString());
+        activityInfo.setDeptId(getDeptId().toString());
         return toAjax(activityInfoService.insertActivityInfo(activityInfo));
     }
 

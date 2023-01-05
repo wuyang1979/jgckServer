@@ -17,8 +17,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.space.domain.TSpaceInfo;
-import com.ruoyi.space.service.ITSpaceInfoService;
+import com.ruoyi.space.domain.SpaceInfo;
+import com.ruoyi.space.service.ISpaceInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -30,18 +30,18 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/space/info")
-public class TSpaceInfoController extends BaseController {
+public class SpaceInfoController extends BaseController {
     @Autowired
-    private ITSpaceInfoService tSpaceInfoService;
+    private ISpaceInfoService tSpaceInfoService;
 
     /**
      * 查询空间基本信息列表
      */
     @PreAuthorize("@ss.hasPermi('space:info:list')")
     @GetMapping("/list")
-    public TableDataInfo list(TSpaceInfo tSpaceInfo) {
+    public TableDataInfo list(SpaceInfo spaceInfo) {
         startPage();
-        List<TSpaceInfo> list = tSpaceInfoService.selectTSpaceInfoList(tSpaceInfo);
+        List<SpaceInfo> list = tSpaceInfoService.selectSpaceInfoList(spaceInfo);
         return getDataTable(list);
     }
 
@@ -51,9 +51,9 @@ public class TSpaceInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('space:info:export')")
     @Log(title = "空间基本信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, TSpaceInfo tSpaceInfo) {
-        List<TSpaceInfo> list = tSpaceInfoService.selectTSpaceInfoList(tSpaceInfo);
-        ExcelUtil<TSpaceInfo> util = new ExcelUtil<TSpaceInfo>(TSpaceInfo.class);
+    public void export(HttpServletResponse response, SpaceInfo spaceInfo) {
+        List<SpaceInfo> list = tSpaceInfoService.selectSpaceInfoList(spaceInfo);
+        ExcelUtil<SpaceInfo> util = new ExcelUtil<SpaceInfo>(SpaceInfo.class);
         util.exportExcel(response, list, "空间基本信息数据");
     }
 
@@ -63,7 +63,7 @@ public class TSpaceInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('space:info:query')")
     @GetMapping(value = "/{spaceId}")
     public AjaxResult getInfo(@PathVariable("spaceId") String spaceId) {
-        return success(tSpaceInfoService.selectTSpaceInfoBySpaceId(spaceId));
+        return success(tSpaceInfoService.selectSpaceInfoBySpaceId(spaceId));
     }
 
     /**
@@ -72,10 +72,12 @@ public class TSpaceInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('space:info:add')")
     @Log(title = "空间基本信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody TSpaceInfo tSpaceInfo) {
-        tSpaceInfo.setCreateBy(getUsername());
-        tSpaceInfoService.insertTSpaceInfo(tSpaceInfo);
-        return toAjax(tSpaceInfo.getSpaceId());
+    public AjaxResult add(@RequestBody SpaceInfo spaceInfo) {
+        spaceInfo.setCreateBy(getUsername());
+        spaceInfo.setUserId(getUserId().toString());
+        spaceInfo.setDeptId(getDeptId().toString());
+        tSpaceInfoService.insertSpaceInfo(spaceInfo);
+        return toAjax(spaceInfo.getSpaceId());
     }
 
     /**
@@ -84,9 +86,9 @@ public class TSpaceInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('space:info:edit')")
     @Log(title = "空间基本信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody TSpaceInfo tSpaceInfo) {
-        tSpaceInfo.setUpdateBy(getUsername());
-        return toAjax(tSpaceInfoService.updateTSpaceInfo(tSpaceInfo));
+    public AjaxResult edit(@RequestBody SpaceInfo spaceInfo) {
+        spaceInfo.setUpdateBy(getUsername());
+        return toAjax(tSpaceInfoService.updateSpaceInfo(spaceInfo));
     }
 
     /**
@@ -96,6 +98,6 @@ public class TSpaceInfoController extends BaseController {
     @Log(title = "空间基本信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{spaceIds}")
     public AjaxResult remove(@PathVariable String[] spaceIds) {
-        return toAjax(tSpaceInfoService.deleteTSpaceInfoBySpaceIds(spaceIds));
+        return toAjax(tSpaceInfoService.deleteSpaceInfoBySpaceIds(spaceIds));
     }
 }

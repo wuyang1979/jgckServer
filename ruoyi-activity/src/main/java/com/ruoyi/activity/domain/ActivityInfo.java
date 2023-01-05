@@ -75,6 +75,10 @@ public class ActivityInfo extends BaseEntity {
     @Excel(name = "报名人数")
     private Long registerNumber;
 
+    private String userId;
+
+    private String deptId;
+
     public void setActivityId(String activityId) {
         this.activityId = activityId;
     }
@@ -155,6 +159,22 @@ public class ActivityInfo extends BaseEntity {
         this.registerNumber = registerNumber;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -168,6 +188,8 @@ public class ActivityInfo extends BaseEntity {
                 .append("activityAddress", getActivityAddress())
                 .append("registerDeadline", getRegisterDeadline())
                 .append("registerNumber", getRegisterNumber())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

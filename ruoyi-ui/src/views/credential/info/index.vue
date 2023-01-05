@@ -125,8 +125,8 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="110px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="用户姓名" prop="userId">
-              <treeselect :disabled="isUser" v-model="form.userId" :options="treeData" :disable-branch-nodes="true"
+            <el-form-item label="用户姓名" prop="bindUserId">
+              <treeselect :disabled="isUser" v-model="form.bindUserId" :options="treeData" :disable-branch-nodes="true"
                           :show-count="true"
                           placeholder="请选择用户姓名"/>
             </el-form-item>
@@ -212,7 +212,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        userId: null,
+        bindUserId:null,
         credentialType: null,
         credentialExpireTime: null,
       },
@@ -220,7 +220,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        userId: [{required: true, message: '请选择用户姓名', trigger: 'change'}],
+        bindUserId: [{required: true, message: '请选择用户姓名', trigger: 'change'}],
         credentialType: [{required: true, message: '请选择证件类型', trigger: 'change'}],
         credentialExpireTime: [{required: true, message: '请选择证件到期时间', trigger: 'change'}],
       }
@@ -231,7 +231,7 @@ export default {
     this.initTree();
   },
   watch: {
-    'form.userId': 'handleChangeUserId'
+    'form.bindUserId': 'handleChangeUserId'
   },
   methods: {
 

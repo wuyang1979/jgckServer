@@ -2,6 +2,7 @@ package com.ruoyi.room.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.UUID;
 import com.ruoyi.room.domain.dto.RoomLookDtoPage;
@@ -40,6 +41,7 @@ public class RoomLookServiceImpl implements IRoomLookService {
      * @param roomLookVoPage 房源带看基本信息
      * @return 房源带看基本信息
      */
+    @DataScope(userAlias = "l",deptAlias = "l")
     @Override
     public List<RoomLookDtoPage> selectRoomLookList(RoomLookVoPage roomLookVoPage) {
         return roomLookMapper.selectRoomLookList(roomLookVoPage);

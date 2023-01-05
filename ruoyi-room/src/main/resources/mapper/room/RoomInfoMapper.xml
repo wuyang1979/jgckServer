@@ -92,6 +92,7 @@
             <if test="roomAddress != null  and roomAddress != ''">and room_address = #{roomAddress}</if>
             <if test="price != null  and price != ''">and price = #{price}</if>
             <if test="bottomPrice != null  and bottomPrice != ''">and bottom_price = #{bottomPrice}</if>
+            ${params.dataScope}
         </where>
         order by r.create_time desc
 
@@ -109,12 +110,15 @@
             <if test="roomName != null">room_name,</if>
             <if test="spaceId != null">space_id,</if>
             <if test="roomType != null">room_type,</if>
+            <if test="roomStatus != null">room_status,</if>
             <if test="floor != null">floor,</if>
             <if test="area != null">area,</if>
             <if test="remark != null">remark,</if>
             <if test="roomAddress != null">room_address,</if>
             <if test="price != null">price,</if>
             <if test="bottomPrice != null">bottom_price,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -125,12 +129,15 @@
             <if test="roomName != null">#{roomName},</if>
             <if test="spaceId != null">#{spaceId},</if>
             <if test="roomType != null">#{roomType},</if>
+            <if test="roomStatus != null">#{roomStatus},</if>
             <if test="floor != null">#{floor},</if>
             <if test="area != null">#{area},</if>
             <if test="remark != null">#{remark},</if>
             <if test="roomAddress != null">#{roomAddress},</if>
             <if test="price != null">#{price},</if>
             <if test="bottomPrice != null">#{bottomPrice},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>

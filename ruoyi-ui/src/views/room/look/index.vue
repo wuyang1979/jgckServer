@@ -168,8 +168,8 @@
             </el-select>
           </template>
         </el-form-item>
-        <el-form-item label="带看人" prop="userId">
-          <treeselect v-model="form.userId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
+        <el-form-item label="带看人" prop="bindUserId">
+          <treeselect v-model="form.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
         </el-form-item>
         <el-form-item label="客户姓名" prop="customerName">
           <el-input v-model="form.customerName" placeholder="请输入客户姓名"/>
@@ -215,8 +215,8 @@
             </el-select>
           </template>
         </el-form-item>
-        <el-form-item label="带看人" prop="userId">
-          <treeselect v-model="queryForm.userId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
+        <el-form-item label="带看人" prop="bindUserId">
+          <treeselect v-model="queryForm.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
         </el-form-item>
         <el-form-item label="客户姓名" prop="customerName">
           <el-input readonly v-model="queryForm.customerName" placeholder="请输入客户姓名"/>
@@ -241,7 +241,7 @@
 
 <script>
 import {listLook, getLook, delLook, addLook, updateLook, getTree} from "@/api/room/look";
-import {listRoom} from "@/api/room/info";
+import {listRoomNoScope} from "../../../api/room/info";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
@@ -299,7 +299,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        userId: [{required: true, message: '请选择带看人', trigger: 'change'}],
+        bindUserId: [{required: true, message: '请选择带看人', trigger: 'change'}],
         customerName: [{required: true, message: '请输入租客名称', trigger: 'blur'}, {
           max: 50,
           message: "租客名称长度不能超过50字符",
@@ -338,7 +338,7 @@ export default {
 
     initRoom() {
       var list = [];
-      listRoom(this.roomQueryParams).then(respone => {
+      listRoomNoScope(this.roomQueryParams).then(respone => {
         var rooms = respone.rows
         rooms.forEach(rs => {
           list.push({
@@ -377,10 +377,9 @@ export default {
     // 查看空间详情
     queryLook(row) {
       this.query = true;
-      this.title = "房源基本信息详情";
+      this.title = "房源带看基本信息详情";
       this.queryForm = row;
       this.getRoomList("")
-      var arr = [this.queryForm.userId];
       this.treeData.forEach(t => {
         this.$set(t, 'disabled', true)
       })
@@ -448,8 +447,6 @@ export default {
       getLook(lookId).then(response => {
         this.form = response.data;
         this.getRoomList("")
-        var arr = [this.form.userId];
-        console.info("this->", this.$refs)
         this.open = true;
         this.title = "修改房源带看基本信息";
       });

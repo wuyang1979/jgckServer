@@ -18,6 +18,15 @@ export function listTenants(query) {
   })
 }
 
+// 查询租客基本信息列表(无数据过滤)
+export function listTenantsNoScope(query) {
+  return request({
+    url: '/tenants/info/listNoScope',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询租客基本信息详细
 export function getTenants(tenantsId) {
   return request({

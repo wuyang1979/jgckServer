@@ -101,7 +101,7 @@
           <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="260px">
+      <el-table-column label="操作" align="left" class-name="small-padding fixed-width" width="260px">
         <template slot-scope="scope">
           <el-button
             :disabled="scope.row.contractStatus=='1'"
@@ -350,9 +350,10 @@
 
 <script>
 import {listContract, getContract, delContract, addContract, updateContract} from "@/api/contract/info";
-import {listTenants} from "@/api/tenants/info";
-import {listRoom, getRoom, updateRoom} from "@/api/room/info";
+import {getRoom, updateRoom} from "@/api/room/info";
 import {intCovString} from "@/api/common/common";
+import {listTenantsNoScope} from "../../../api/tenants/info";
+import {listRoomNoScope} from "../../../api/room/info";
 
 export default {
   name: "Info",
@@ -513,7 +514,9 @@ export default {
 
     //添加租客跳转按钮
     insertTenants() {
-      this.$router.push("/business/tenants/info")
+      this.open=false;
+      this.form={};
+      this.$router.push("/business/tenants/info");
     },
 
     //处理预约时间参数
@@ -571,7 +574,7 @@ export default {
     //初始化roomList
     initRoom() {
       var list = [];
-      listRoom(this.roomQueryParams).then(respone => {
+      listRoomNoScope(this.roomQueryParams).then(respone => {
         var rooms = respone.rows
         rooms.forEach(rs => {
           list.push({
@@ -599,7 +602,7 @@ export default {
 
     initTenants() {
       var list = [];
-      listTenants(this.tenantsQueryParams).then(respone => {
+      listTenantsNoScope(this.tenantsQueryParams).then(respone => {
         var tenants = respone.rows
         tenants.forEach(ts => {
           list.push({

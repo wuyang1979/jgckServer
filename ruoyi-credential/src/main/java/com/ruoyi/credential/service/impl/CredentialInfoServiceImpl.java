@@ -3,6 +3,7 @@ package com.ruoyi.credential.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.credential.domain.dto.CredentialInfoDtoPage;
 import com.ruoyi.credential.domain.vo.CredentialInfoVoPage;
@@ -40,6 +41,7 @@ public class CredentialInfoServiceImpl implements ICredentialInfoService {
      * @param credentialInfoVoPage 证件基本信息
      * @return 证件基本信息
      */
+    @DataScope(userAlias = "ci",deptAlias = "ci")
     @Override
     public List<CredentialInfoDtoPage> selectCredentialInfoList(CredentialInfoVoPage credentialInfoVoPage) {
         return credentialInfoMapper.selectCredentialInfoList(credentialInfoVoPage);

@@ -25,8 +25,8 @@ public class CredentialInfo extends BaseEntity {
     /**
      * 用户id
      */
-    @Excel(name = "用户id")
-    private String userId;
+    @Excel(name = "证件绑定用户id")
+    private String bindUserId;
 
     /**
      * 证件类型
@@ -40,6 +40,10 @@ public class CredentialInfo extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "证件到期时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date credentialExpireTime;
+
+    private String userId;
+
+    private String deptId;
 
     public void setCredentialId(String credentialId) {
         this.credentialId = credentialId;
@@ -73,13 +77,31 @@ public class CredentialInfo extends BaseEntity {
         return credentialExpireTime;
     }
 
+    public String getBindUserId() {
+        return bindUserId;
+    }
+
+    public void setBindUserId(String bindUserId) {
+        this.bindUserId = bindUserId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("credentialId", getCredentialId())
-                .append("userId", getUserId())
+                .append("bindUserId", getBindUserId())
                 .append("credentialType", getCredentialType())
                 .append("credentialExpireTime", getCredentialExpireTime())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

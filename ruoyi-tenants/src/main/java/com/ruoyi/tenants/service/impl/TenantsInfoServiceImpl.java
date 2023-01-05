@@ -2,6 +2,7 @@ package com.ruoyi.tenants.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.tenants.domain.dto.TenantsInfoHistory;
 import com.ruoyi.tenants.domain.vo.TenantsInfoHistoryVo;
@@ -50,8 +51,14 @@ public class TenantsInfoServiceImpl implements ITenantsInfoService {
      * @param tenantsInfo 租客基本信息
      * @return 租客基本信息
      */
+    @DataScope(userAlias = "t",deptAlias = "t")
     @Override
     public List<TenantsInfo> selectTenantsInfoList(TenantsInfo tenantsInfo) {
+        return tenantsInfoMapper.selectTenantsInfoList(tenantsInfo);
+    }
+
+    @Override
+    public List<TenantsInfo> listNoScope(TenantsInfo tenantsInfo) {
         return tenantsInfoMapper.selectTenantsInfoList(tenantsInfo);
     }
 

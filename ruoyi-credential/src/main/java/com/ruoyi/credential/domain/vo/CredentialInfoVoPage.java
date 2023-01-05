@@ -3,6 +3,7 @@ package com.ruoyi.credential.domain.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,6 +15,7 @@ import java.util.Date;
  * @author gubut
  * @date 2022-12-30
  */
+@Data
 public class CredentialInfoVoPage extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,7 @@ public class CredentialInfoVoPage extends BaseEntity {
      * 用户id
      */
     @Excel(name = "用户id")
-    private String userId;
+    private String bindUserId;
 
     /**
      * 用户姓名
@@ -47,57 +49,8 @@ public class CredentialInfoVoPage extends BaseEntity {
     @Excel(name = "证件到期时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date credentialExpireTime;
 
-    public void setCredentialId(String credentialId) {
-        this.credentialId = credentialId;
-    }
+    private String userId;
 
-    public String getCredentialId() {
-        return credentialId;
-    }
+    private String deptId;
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setCredentialType(Long credentialType) {
-        this.credentialType = credentialType;
-    }
-
-    public Long getCredentialType() {
-        return credentialType;
-    }
-
-    public void setCredentialExpireTime(Date credentialExpireTime) {
-        this.credentialExpireTime = credentialExpireTime;
-    }
-
-    public Date getCredentialExpireTime() {
-        return credentialExpireTime;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("credentialId", getCredentialId())
-                .append("userId", getUserId())
-                .append("credentialType", getCredentialType())
-                .append("credentialExpireTime", getCredentialExpireTime())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .toString();
-    }
 }

@@ -109,10 +109,9 @@ public class TenantsInfo extends BaseEntity {
     @Excel(name = "紧急联系人电话")
     private String emergencyContactPhone;
 
-    /**
-     * 删除标志（0代表存在 2代表删除）
-     */
-    private String delFlag;
+    private String userId;
+
+    private String deptId;
 
     public void setTenantsId(String tenantsId) {
         this.tenantsId = tenantsId;
@@ -242,12 +241,20 @@ public class TenantsInfo extends BaseEntity {
         this.emergencyContactPhone = emergencyContactPhone;
     }
 
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getDelFlag() {
-        return delFlag;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
     @Override
@@ -270,7 +277,8 @@ public class TenantsInfo extends BaseEntity {
                 .append("emergencyContactName", getEmergencyContactName())
                 .append("emergencyContactPhone", getEmergencyContactPhone())
                 .append("remark", getRemark())
-                .append("delFlag", getDelFlag())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

@@ -2,6 +2,7 @@ package com.ruoyi.room.domain.vo;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author gubt
  * @date 2022-12-05
  */
+@Data
 public class RoomInfoVo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -69,91 +71,13 @@ public class RoomInfoVo extends BaseEntity {
      */
     private String spaceName;
 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
+    /**
+     * 数据过滤用户id
+     */
+    private String userId;
 
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setSpaceId(String spaceId) {
-        this.spaceId = spaceId;
-    }
-
-    public String getSpaceId() {
-        return spaceId;
-    }
-
-    public Long getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(Long roomType) {
-        this.roomType = roomType;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    public String getFloor() {
-        return floor;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setRoomAddress(String roomAddress) {
-        this.roomAddress = roomAddress;
-    }
-
-    public String getRoomAddress() {
-        return roomAddress;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setBottomPrice(String bottomPrice) {
-        this.bottomPrice = bottomPrice;
-    }
-
-    public String getBottomPrice() {
-        return bottomPrice;
-    }
-
-    public String getSpaceName() {
-        return spaceName;
-    }
-
-    public void setSpaceName(String spaceName) {
-        this.spaceName = spaceName;
-    }
-
-    public Long getRoomStatus() {
-        return roomStatus;
-    }
-
-    public void setRoomStatus(Long roomStatus) {
-        this.roomStatus = roomStatus;
-    }
+    /**
+     * 数据过滤部门id
+     */
+    private String deptId;
 }

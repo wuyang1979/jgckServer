@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.room.domain.dto.RoomInfoDtoPage;
 import com.ruoyi.room.domain.vo.RoomInfoVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author gubt
  * @date 2022-12-05
  */
+@Api(tags = "房源管理")
 @RestController
 @RequestMapping("/room/info")
 public class RoomInfoController extends BaseController {
@@ -39,6 +42,7 @@ public class RoomInfoController extends BaseController {
     /**
      * 查询房源基本信息列表
      */
+    @ApiOperation("查询房源信息列表")
     @PreAuthorize("@ss.hasPermi('room:info:list')")
     @GetMapping("/list")
     public TableDataInfo list(RoomInfoVo roomInfoVo) {
@@ -48,8 +52,21 @@ public class RoomInfoController extends BaseController {
     }
 
     /**
+     * 查询房源基本信息列表（无数据筛选）
+     */
+    @ApiOperation("查询房源列表（无数据筛选）")
+    @PreAuthorize("@ss.hasPermi('room:info:list')")
+    @GetMapping("/listNoScope")
+    public TableDataInfo listNoScope(RoomInfoVo roomInfoVo) {
+        startPage();
+        List<RoomInfoDtoPage> list = roomInfoService.listNoScope(roomInfoVo);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出房源基本信息列表
      */
+    @ApiOperation("导出房源信息")
     @PreAuthorize("@ss.hasPermi('room:info:export')")
     @Log(title = "房源基本信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +79,7 @@ public class RoomInfoController extends BaseController {
     /**
      * 获取房源基本信息详细信息
      */
+    @ApiOperation("获取房源详情")
     @PreAuthorize("@ss.hasPermi('room:info:query')")
     @GetMapping(value = "/{roomId}")
     public AjaxResult getInfo(@PathVariable("roomId") String roomId) {
@@ -71,11 +89,14 @@ public class RoomInfoController extends BaseController {
     /**
      * 新增房源基本信息
      */
+    @ApiOperation("信息房源信息")
     @PreAuthorize("@ss.hasPermi('room:info:add')")
     @Log(title = "房源基本信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody RoomInfo roomInfo) {
         roomInfo.setCreateBy(getUsername());
+        roomInfo.setUserId(getUserId().toString());
+        roomInfo.setDeptId(getDeptId().toString());
         roomInfoService.insertRoomInfo(roomInfo);
         return toAjax(roomInfo.getRoomId());
     }
@@ -83,6 +104,7 @@ public class RoomInfoController extends BaseController {
     /**
      * 修改房源基本信息
      */
+    @ApiOperation("修改房源信息")
     @PreAuthorize("@ss.hasPermi('room:info:edit')")
     @Log(title = "房源基本信息", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -93,6 +115,7 @@ public class RoomInfoController extends BaseController {
     /**
      * 删除房源基本信息
      */
+    @ApiOperation("删除房源信息")
     @PreAuthorize("@ss.hasPermi('room:info:remove')")
     @Log(title = "房源基本信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{roomIds}")

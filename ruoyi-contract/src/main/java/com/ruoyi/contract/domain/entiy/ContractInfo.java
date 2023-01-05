@@ -109,6 +109,10 @@ public class ContractInfo extends BaseEntity {
     @Excel(name = "合同状态")
     private Long contractStatus;
 
+    private String userId;
+
+    private String deptId;
+
     /**
      * 签约时间
      */
@@ -242,6 +246,22 @@ public class ContractInfo extends BaseEntity {
 
     public void setContractStatus(Long contractStatus) {
         this.contractStatus = contractStatus;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
     @Override

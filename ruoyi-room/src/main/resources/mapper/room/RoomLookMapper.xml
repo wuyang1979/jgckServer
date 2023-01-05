@@ -7,7 +7,7 @@
     <resultMap type="RoomLook" id="RoomLookResult">
         <result property="lookId" column="look_id"/>
         <result property="roomId" column="room_id"/>
-        <result property="userId" column="user_id"/>
+        <result property="bindUserId" column="bind_user_id"/>
         <result property="customerName" column="customer_name"/>
         <result property="customerPhone" column="customer_phone"/>
         <result property="appointTime" column="appoint_time"/>
@@ -31,7 +31,7 @@
     <sql id="selectRoomLookVo">
         select look_id,
                room_id,
-               user_id,
+               bind_user_Id,
                customer_name,
                customer_phone,
                appoint_time,
@@ -46,30 +46,29 @@
         select l.look_id,
                l.room_id,
                i.room_name,
-               l.user_id,
+               l.bind_user_id,
                u.nick_name,
                l.customer_name,
                l.customer_phone,
                l.appoint_time
-        from t_room_look l,
-             t_room_info i,
-             sys_user u
-        where l.room_id = i.room_id
-          and l.user_id = u.user_id
+        from t_room_look l
+                 left join t_room_info i on l.room_id = i.room_id
+                 left join sys_user u on l.bind_user_id = u.user_id
     </sql>
 
     <select id="selectRoomLookList" parameterType="RoomLookVoPage" resultMap="RoomLookDtoPageResult">
         <include refid="selectRoomLookDTOList"/>
-        <if test="roomName != null  and roomName != ''">and r.room_name like concat('%',#{roomName},'%')</if>
-        <if test="nickName != null  and nickName != ''">and u.nick_name like concat('%',#{nickName},'%')</if>
-        <if test="customerName != null  and customerName != ''">and l.customer_name like concat('%',
-            #{customerName},'%')
-        </if>
-        <if test="customerPhone != null  and customerPhone != ''">and l.customer_phone like
-            concat('%',#{customerPhone},'%')
-        </if>
-        <if test="appointTimeStart != null ">and appoint_time &gt; #{appointTimeStart}</if>
-        <if test="appointTimeEnd != null ">and appoint_time &lt; #{appointTimeEnd}</if>
+        <where>
+            <if test="roomName != null  and roomName != ''">and r.room_name like concat('%',#{roomName},'%')</if>
+            <if test="nickName != null  and nickName != ''">and u.nick_name like concat('%',#{nickName},'%')</if>
+            <if test="customerName != null  and customerName != ''">and l.customer_name like concat('%',#{customerName},'%')</if>
+            <if test="customerPhone != null  and customerPhone != ''">and l.customer_phone like concat('%',#{customerPhone},'%')</if>
+            <if test="appointTimeStart != null ">and appoint_time &gt; #{appointTimeStart}</if>
+            <if test="appointTimeEnd != null ">and appoint_time &lt; #{appointTimeEnd}</if>
+            ${params.dataScope}
+        </where>
+
+
     </select>
 
     <select id="selectRoomLookByLookId" parameterType="String" resultMap="RoomLookResult">
@@ -82,10 +81,12 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="lookId != null">look_id,</if>
             <if test="roomId != null">room_id,</if>
-            <if test="userId != null">user_id,</if>
+            <if test="bindUserId != null">bind_user_id,</if>
             <if test="customerName != null">customer_name,</if>
             <if test="customerPhone != null">customer_phone,</if>
             <if test="appointTime != null">appoint_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -94,10 +95,12 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="lookId != null">#{lookId},</if>
             <if test="roomId != null">#{roomId},</if>
-            <if test="userId != null">#{userId},</if>
+            <if test="bindUserId != null">#{bindUserId},</if>
             <if test="customerName != null">#{customerName},</if>
             <if test="customerPhone != null">#{customerPhone},</if>
             <if test="appointTime != null">#{appointTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -109,7 +112,7 @@
         update t_room_look
         <trim prefix="SET" suffixOverrides=",">
             <if test="roomId != null">room_id = #{roomId},</if>
-            <if test="userId != null">user_id = #{userId},</if>
+            <if test="bindUserId != null">bind_user_id = #{bindUserId},</if>
             <if test="customerName != null">customer_name = #{customerName},</if>
             <if test="customerPhone != null">customer_phone = #{customerPhone},</if>
             <if test="appointTime != null">appoint_time = #{appointTime},</if>

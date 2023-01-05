@@ -6,6 +6,8 @@ import com.ruoyi.tenants.domain.dto.TenantsInfoHistory;
 import com.ruoyi.tenants.domain.entiy.TenantsInfo;
 import com.ruoyi.tenants.domain.vo.TenantsInfoHistoryVo;
 import com.ruoyi.tenants.service.ITenantsInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.util.List;
  * @author gubut
  * @date 2022-12-08
  */
+@Api(tags = "历史租客管理")
 @RestController
 @RequestMapping("/tenants/history")
 public class TenantsInfoHistoryController extends BaseController {
@@ -25,9 +28,10 @@ public class TenantsInfoHistoryController extends BaseController {
     private ITenantsInfoService tenantsInfoService;
 
 
-    /**
+    /*
      * 查询租客基本信息列表
      */
+    @ApiOperation("查询历史租客列表")
     @PreAuthorize("@ss.hasPermi('tenants:history:list')")
     @GetMapping("/list")
     public TableDataInfo list(TenantsInfoHistoryVo tenantsInfoHistoryVo) {

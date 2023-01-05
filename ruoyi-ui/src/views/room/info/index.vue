@@ -79,10 +79,10 @@
           <dict-tag :options="dict.type.room_status" :value="scope.row.roomStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="房源类型" align="center" prop="roomType" >
-      <template slot-scope="scope">
-        <dict-tag :options="dict.type.room_type" :value="scope.row.roomType"/>
-      </template>
+      <el-table-column label="房源类型" align="center" prop="roomType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.room_type" :value="scope.row.roomType"/>
+        </template>
       </el-table-column>
       <el-table-column label="房源楼层" align="center" prop="floor">
         <template slot-scope="scope">
@@ -156,13 +156,16 @@
           </el-select>
         </el-form-item>
         <el-form-item label="房源面积" prop="area">
-          <el-input type="number" v-model="form.area" placeholder="请输入房间面积"/>
+          <el-input oninput="if(value.length>4)value=value.slice(0,4)" type="number" v-model="form.area"
+                    @keydown.native="channelInputLimit" placeholder="请输入房间面积"/>
         </el-form-item>
         <el-form-item label="出租价格" prop="price">
-          <el-input type="number" v-model="form.price" placeholder="请输入出售价格"/>
+          <el-input oninput="if(value.length>9)value=value.slice(0,9)" type="number" v-model="form.price"
+                    placeholder="请输入出售价格"/>
         </el-form-item>
         <el-form-item label="最低价格" prop="bottomPrice">
-          <el-input type="number" v-model="form.bottomPrice" placeholder="请输入最低价格"/>
+          <el-input oninput="if(value.length>9)value=value.slice(0,9)" type="number" v-model="form.bottomPrice"
+                    placeholder="请输入最低价格"/>
         </el-form-item>
         <el-form-item label="房源地址" prop="roomAddress">
           <el-input v-model="form.roomAddress" type="textarea" placeholder="请输入内容"/>
@@ -177,72 +180,6 @@
       </div>
     </el-dialog>
 
-    <!--房源详情对话框-->
-    <el-dialog :title="title" :visible.sync="query" width="700px" append-to-body>
-      <el-form ref="queryForm" :model="queryForm" :rules="rules" label-width="80px">
-        <el-form-item label="房源号" prop="roomName">
-          <el-input readonly v-model="queryForm.roomName" placeholder="请输入房间号码"/>
-        </el-form-item>
-<!--        <el-form-item label="空间名称" prop="spaceId">-->
-<!--          <template>-->
-<!--            <el-select-->
-<!--              disabled-->
-<!--              v-model="queryForm.spaceId"-->
-<!--              filterable-->
-<!--              remote-->
-<!--              clearable-->
-<!--              placeholder="请输入关键词"-->
-<!--              :remote-method="getSpaceList"-->
-<!--              :loading="loading">-->
-<!--              <el-option-->
-<!--                v-for="item in spaceOptions"-->
-<!--                :key="item.value"-->
-<!--                :label="item.label"-->
-<!--                :value="item.value">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
-<!--          </template>-->
-<!--        </el-form-item>-->
-        <el-form-item label="房源类型" prop="roomType">
-          <el-select disabled v-model="queryForm.roomType" placeholder="请选择房源类型">
-            <el-option
-              v-for="dict in dict.type.room_type"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="房源楼层" prop="floor">
-          <el-select disabled v-model="queryForm.floor" placeholder="请选择房间楼层">
-            <el-option
-              v-for="dict in dict.type.room_floor"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="房源面积" prop="area">
-          <el-input type="number" readonly v-model="queryForm.area" placeholder="请输入房间面积"/>
-        </el-form-item>
-        <el-form-item label="出租价格" prop="price">
-          <el-input type="number" readonly v-model="queryForm.price" placeholder="请输入出售价格"/>
-        </el-form-item>
-        <el-form-item label="最低价格" prop="bottomPrice">
-          <el-input type="number" readonly v-model="queryForm.bottomPrice" placeholder="请输入最低价格"/>
-        </el-form-item>
-        <el-form-item label="房源地址" prop="roomAddress">
-          <el-input readonly v-model="queryForm.roomAddress" type="textarea" placeholder="请输入内容"/>
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input readonly v-model="queryForm.remark" type="textarea" placeholder="请输入内容"/>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitFormQueryRoom">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -253,7 +190,7 @@ import {intCovString} from "@/api/common/common";
 
 export default {
   name: "Info",
-  dicts: ['room_type', 'room_floor','room_status'],
+  dicts: ['room_type', 'room_floor', 'room_status'],
   data() {
     return {
 
@@ -309,16 +246,13 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        roomName: [{required: true, message: '请输入房源名称', trigger: 'blur'}, {
-          max: 50,
-          message: "房源名称长度不能超过50字符",
-          trigger: "blur"
-        }],
-        type: [{required: true, message: '请选择房源类型', trigger: 'blur'}, {
-          max: 50,
-          message: "房源类型长度不能超过50字符",
-          trigger: "blur"
-        }],
+        roomName: [{required: true, message: '请输入房源名称', trigger: 'blur'}],
+        roomType: [{required: true, message: '请选择房源类型', trigger: 'blur'}],
+        floor: [{required: true, message: '请选择房源楼层', trigger: 'blur'}],
+        area: [{required: true, message: '请输入房源面积', trigger: 'blur'}],
+        price: [{required: true, message: '请输入出租价格', trigger: 'blur'}],
+        roomAddress: [{max: 200, message: '字符长度不能超过200', trigger: 'blur'}],
+        remark: [{max: 200, message: '字符长度不能超过200', trigger: 'blur'}],
       }
     };
   },
@@ -327,11 +261,15 @@ export default {
     this.initSpace();
   },
   methods: {
-    submitFormQueryRoom() {
-      this.query = false;
-      this.queryForm = {};
+    channelInputLimit(e) {
+      let key = e.key
+      // 不允许输入'e'和'.'
+      if (key === 'e' || key === '.') {
+        e.returnValue = false
+        return false
+      }
+      return true
     },
-
 
     queryRoom(row) {
       this.$router.push({
@@ -443,7 +381,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.form.spaceId='ff208f04-6d48-4cb3-b8f3-ae4ae596c53c'
+          this.form.spaceId = 'ff208f04-6d48-4cb3-b8f3-ae4ae596c53c'
           if (this.form.roomId != null) {
             updateRoom(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
@@ -465,7 +403,7 @@ export default {
     handleDelete(row) {
       const roomIds = row.roomId || this.ids;
       const roomNames = row.roomName || this.names;
-      this.$modal.confirm('是否确认删除房源号为"' + roomNames+ '"的数据项？').then(function () {
+      this.$modal.confirm('是否确认删除房源号为"' + roomNames + '"的数据项？').then(function () {
         return delRoom(roomIds);
       }).then(() => {
         this.getList();

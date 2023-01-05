@@ -3,6 +3,7 @@ package com.ruoyi.room.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.room.domain.dto.RoomInfoDtoPage;
 import com.ruoyi.room.domain.vo.RoomInfoVo;
@@ -40,8 +41,15 @@ public class RoomInfoServiceImpl implements IRoomInfoService {
      * @param roomInfoVo 房源基本信息
      * @return 房源基本信息
      */
+    @DataScope(userAlias = "r",deptAlias = "r")
     @Override
     public List<RoomInfoDtoPage> selectRoomInfoList(RoomInfoVo roomInfoVo) {
+        return roomInfoMapper.selectRoomInfoList(roomInfoVo);
+    }
+
+
+    @Override
+    public List<RoomInfoDtoPage> listNoScope(RoomInfoVo roomInfoVo) {
         return roomInfoMapper.selectRoomInfoList(roomInfoVo);
     }
 
@@ -54,6 +62,7 @@ public class RoomInfoServiceImpl implements IRoomInfoService {
     @Override
     public int insertRoomInfo(RoomInfo roomInfo) {
         roomInfo.setRoomId(UUID.randomUUID().toString());
+        roomInfo.setRoomStatus(0l);
         roomInfo.setCreateTime(DateUtils.getNowDate());
         return roomInfoMapper.insertRoomInfo(roomInfo);
     }

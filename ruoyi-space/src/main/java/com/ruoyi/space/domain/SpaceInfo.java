@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2022-12-02
  */
-public class TSpaceInfo extends BaseEntity {
+public class SpaceInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -44,10 +44,10 @@ public class TSpaceInfo extends BaseEntity {
     @Excel(name = "备注")
     private String remark;
 
-    /**
-     * 删除标识 0-未删除 1-已删除
-     */
-    private Long delstatus;
+    private String userId;
+
+    private String deptId;
+
 
     public void setSpaceId(String spaceId) {
         this.spaceId = spaceId;
@@ -71,14 +71,6 @@ public class TSpaceInfo extends BaseEntity {
 
     public String getSpaceAddress() {
         return spaceAddress;
-    }
-
-    public void setDelstatus(Long delstatus) {
-        this.delstatus = delstatus;
-    }
-
-    public Long getDelstatus() {
-        return delstatus;
     }
 
     public String getCompanyName() {
@@ -115,6 +107,22 @@ public class TSpaceInfo extends BaseEntity {
         this.remark = remark;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -125,7 +133,8 @@ public class TSpaceInfo extends BaseEntity {
                 .append("accountBank", getAccountBank())
                 .append("accountNum", getAccountNum())
                 .append("remark", getRemark())
-                .append("delstatus", getDelstatus())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

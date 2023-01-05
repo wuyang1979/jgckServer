@@ -2,6 +2,7 @@ package com.ruoyi.contract.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.UUID;
@@ -42,6 +43,7 @@ public class ContractInfoServiceImpl implements IContractInfoService {
      * @param contractInfoPageVo 合同信息
      * @return 合同信息
      */
+    @DataScope(userAlias = "c",deptAlias = "c")
     @Override
     public List<ContractInfoPageDto> selectContractInfoList(ContractInfoPageVo contractInfoPageVo) {
         return contractInfoMapper.selectContractInfoList(contractInfoPageVo);

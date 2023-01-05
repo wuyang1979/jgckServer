@@ -22,7 +22,6 @@
         <result property="emergencyContactName" column="emergency_contact_name"/>
         <result property="emergencyContactPhone" column="emergency_contact_phone"/>
         <result property="remark" column="remark"/>
-        <result property="delFlag" column="del_flag"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -64,37 +63,35 @@
     </select>
 
     <sql id="selectTenantsInfoVo">
-        select tenants_id,
-               tenants_name,
-               card_type,
-               card_number,
-               register_address,
-               office_address,
-               phone,
-               fax,
-               email,
-               contact_phone,
-               contact_name,
-               sex,
-               profession,
-               communication_address,
-               emergency_contact_name,
-               emergency_contact_phone,
-               remark,
-               del_flag,
-               create_by,
-               create_time,
-               update_by,
-               update_time
-        from t_tenants_info
+        select t.tenants_id,
+               t.tenants_name,
+               t.card_type,
+               t.card_number,
+               t.register_address,
+               t.office_address,
+               t.phone,
+               t.fax,
+               t.email,
+               t.contact_phone,
+               t.contact_name,
+               t.sex,
+               t.profession,
+               t.communication_address,
+               t.emergency_contact_name,
+               t.emergency_contact_phone,
+               t.remark,
+               t.del_flag,
+               t.create_by,
+               t.create_time,
+               t.update_by,
+               t.update_time
+        from t_tenants_info t
     </sql>
 
     <select id="selectTenantsInfoList" parameterType="TenantsInfo" resultMap="TenantsInfoResult">
         <include refid="selectTenantsInfoVo"/>
         <where>
-            <if test="tenantsName != null  and tenantsName != ''">and tenants_name like concat('%', #{tenantsName},
-                '%')
-            </if>
+            <if test="tenantsName != null  and tenantsName != ''">and tenants_name like concat('%', #{tenantsName},'%')</if>
             <if test="cardType != null ">and card_type = #{cardType}</if>
             <if test="cardNumber != null  and cardNumber != ''">and card_number = #{cardNumber}</if>
             <if test="registerAddress != null  and registerAddress != ''">and register_address = #{registerAddress}</if>
@@ -103,21 +100,14 @@
             <if test="fax != null  and fax != ''">and fax = #{fax}</if>
             <if test="email != null  and email != ''">and email = #{email}</if>
             <if test="contactPhone != null  and contactPhone != ''">and contact_phone = #{contactPhone}</if>
-            <if test="contactName != null  and contactName != ''">and contact_name like concat('%', #{contactName},
-                '%')
-            </if>
+            <if test="contactName != null  and contactName != ''">and contact_name like concat('%', #{contactName},'%')</if>
             <if test="sex != null ">and sex = #{sex}</if>
             <if test="profession != null  and profession != ''">and profession = #{profession}</if>
-            <if test="communicationAddress != null  and communicationAddress != ''">and communication_address =
-                #{communicationAddress}
-            </if>
-            <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like
-                concat('%', #{emergencyContactName}, '%')
-            </if>
-            <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone =
-                #{emergencyContactPhone}
-            </if>
+            <if test="communicationAddress != null  and communicationAddress != ''">and communication_address = #{communicationAddress}</if>
+            <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like concat('%', #{emergencyContactName},'%')</if>
+            <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone = #{emergencyContactPhone} </if>
             <if test="remark != null  and remark != ''">and remark = #{remark}</if>
+            ${params.dataScope}
         </where>
     </select>
 
@@ -146,7 +136,8 @@
             <if test="emergencyContactName != null">emergency_contact_name,</if>
             <if test="emergencyContactPhone != null">emergency_contact_phone,</if>
             <if test="remark != null">remark,</if>
-            <if test="delFlag != null">del_flag,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -170,7 +161,8 @@
             <if test="emergencyContactName != null">#{emergencyContactName},</if>
             <if test="emergencyContactPhone != null">#{emergencyContactPhone},</if>
             <if test="remark != null">#{remark},</if>
-            <if test="delFlag != null">#{delFlag},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -197,7 +189,6 @@
             <if test="emergencyContactName != null">emergency_contact_name = #{emergencyContactName},</if>
             <if test="emergencyContactPhone != null">emergency_contact_phone = #{emergencyContactPhone},</if>
             <if test="remark != null">remark = #{remark},</if>
-            <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

@@ -116,6 +116,7 @@
             <if test="signTime != null ">and sign_time = #{signTime}</if>
             <if test="signTimeStart != null ">and sign_time &gt; #{signTimeStart}</if>
             <if test="signTimeEnd != null ">and sign_time &lt; #{signTimeEnd}</if>
+            ${params.dataScope}
         </where>
         order by c.contract_status,c.sign_time desc
     </select>
@@ -145,6 +146,8 @@
             <if test="tenantsId != null">tenants_id,</if>
             <if test="signTime != null">sign_time,</if>
             <if test="contractStatus != null">contract_status,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -168,6 +171,8 @@
             <if test="tenantsId != null">#{tenantsId},</if>
             <if test="signTime != null">#{signTime},</if>
             <if test="contractStatus != null">#{contractStatus},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>

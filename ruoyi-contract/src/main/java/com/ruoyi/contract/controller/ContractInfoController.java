@@ -75,6 +75,8 @@ public class ContractInfoController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody ContractInfoPageVo contractInfoPageVo) {
         contractInfoPageVo.setCreateBy(getUsername());
+        contractInfoPageVo.setUserId(getUserId().toString());
+        contractInfoPageVo.setDeptId(getDeptId().toString());
         return toAjax(contractInfoService.insertContractInfo(contractInfoPageVo));
     }
 

@@ -9,6 +9,15 @@ export function listRoom(query) {
     })
 }
 
+// 查询房源基本信息列表
+export function listRoomNoScope(query) {
+    return request({
+        url: '/room/info/listNoScope',
+        method: 'get',
+        params: query
+    })
+}
+
 // 查询房源基本信息详细
 export function getRoom(roomId) {
     return request({

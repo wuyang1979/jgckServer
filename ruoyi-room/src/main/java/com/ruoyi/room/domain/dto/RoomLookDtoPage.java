@@ -4,12 +4,14 @@ package com.ruoyi.room.domain.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 
 import java.util.Date;
 
 /**
  * 房源带看列表dto
  */
+@Data
 public class RoomLookDtoPage extends BaseEntity {
 
     /**
@@ -30,7 +32,7 @@ public class RoomLookDtoPage extends BaseEntity {
     /**
      * 带看人账号（系统用户主键id）
      */
-    private String userId;
+    private String bindUserId;
 
     /**
      * 带看人名称
@@ -57,67 +59,7 @@ public class RoomLookDtoPage extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date appointTime;
 
-    public String getLookId() {
-        return lookId;
-    }
+   private String userId;
 
-    public void setLookId(String lookId) {
-        this.lookId = lookId;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
-
-    public Date getAppointTime() {
-        return appointTime;
-    }
-
-    public void setAppointTime(Date appointTime) {
-        this.appointTime = appointTime;
-    }
+   private String deptId;
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ruoyi.space.service.ITSpaceInfoService;
+import com.ruoyi.space.service.ISpaceInfoService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,7 +56,7 @@ public class SysUserController extends BaseController {
     private ISysPostService postService;
 
     @Autowired
-    private ITSpaceInfoService spaceInfoService;
+    private ISpaceInfoService spaceInfoService;
 
     /**
      * 获取用户列表

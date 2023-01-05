@@ -3,10 +3,12 @@ package com.ruoyi.room.domain.dto;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 
 /**
  * 房源带看列表dto
  */
+@Data
 public class RoomInfoDtoPage extends BaseEntity {
 
     /**
@@ -59,84 +61,7 @@ public class RoomInfoDtoPage extends BaseEntity {
      */
     private String bottomPrice;
 
+    private String userId;
 
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
-
-    public String getSpaceId() {
-        return spaceId;
-    }
-
-    public void setSpaceId(String spaceId) {
-        this.spaceId = spaceId;
-    }
-
-    public Long getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(Long roomType) {
-        this.roomType = roomType;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public String getFloor() {
-        return floor;
-    }
-
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getRoomAddress() {
-        return roomAddress;
-    }
-
-    public void setRoomAddress(String roomAddress) {
-        this.roomAddress = roomAddress;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getBottomPrice() {
-        return bottomPrice;
-    }
-
-    public void setBottomPrice(String bottomPrice) {
-        this.bottomPrice = bottomPrice;
-    }
-
-    public Long getRoomStatus() {
-        return roomStatus;
-    }
-
-    public void setRoomStatus(Long roomStatus) {
-        this.roomStatus = roomStatus;
-    }
+    private String deptId;
 }

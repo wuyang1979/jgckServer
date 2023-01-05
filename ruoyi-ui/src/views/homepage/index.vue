@@ -38,6 +38,9 @@
           <el-table-column prop="name" align="center" label="房源类型">
           </el-table-column>
           <el-table-column  prop="address" align="center" label="到期时间">
+            <template slot-scope="scope">
+              <span style="color: red">{{scope.row.address}}</span>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -73,13 +76,16 @@
           <!--          <el-button type="text">更多</el-button>-->
         </div>
         <el-table
-          :data="tableData"
+          :data="tableDatas"
           height="220"
           stripe
           style="width: 100%">
           <el-table-column prop="date" align="center" label="房源号"/>
           <el-table-column prop="name" align="center" label="报修人名称"/>
           <el-table-column prop="address" align="center" label="报修日期">
+            <template slot-scope="scope">
+              <span style="color: red">{{scope.row.address}}</span>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -171,21 +177,30 @@ export default {
 
       credentialData: [],
       tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        date: '7F',
+        name: '办公',
+        address: '2023-01-09'
       }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
+        date: '6F',
+        name: '办公',
+        address: '2023-01-15'
       }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
+        date: '8F',
+        name: '办公',
+        address: '2023-01-17'
+      }],
+      tableDatas: [{
+        date: '102-1',
+        name: '张三',
+        address: '2023-01-01'
       }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
+        date: '103',
+        name: '李萌',
+        address: '2022-12-29'
+      }, {
+        date: '108',
+        name: '沈七',
+        address: '2022-12-27'
       }],
       shopForm: [],
       officeForm: [],
@@ -272,8 +287,14 @@ export default {
           trigger: 'item'
         },
         legend: {
-          top: '90%',
-          left: 'center'
+          top: '80%',
+          left: 'center',
+          formatter:function (name){
+            let data=option.series[0].data
+            for (let i = 0; i < data.length; i++) {
+              return `${name}\t\t${data[i].value}`
+            }
+          },
         },
         series: [
           {
@@ -320,8 +341,14 @@ export default {
           trigger: 'item'
         },
         legend: {
-          top: '90%',
-          left: 'center'
+          top: '80%',
+          left: 'center',
+          formatter:function (name){
+            let data=option.series[0].data
+            for (let i = 0; i < data.length; i++) {
+              return `${name}\t\t${data[i].value}`
+            }
+          },
         },
         series: [
           {
@@ -368,8 +395,14 @@ export default {
           trigger: 'item'
         },
         legend: {
-          top: '90%',
-          left: 'center'
+          top: '80%',
+          left: 'center',
+          formatter:function (name){
+            let data=option.series[0].data
+            for (let i = 0; i < data.length; i++) {
+              return `${name}\t\t${data[i].value}`
+            }
+          },
         },
         series: [
           {

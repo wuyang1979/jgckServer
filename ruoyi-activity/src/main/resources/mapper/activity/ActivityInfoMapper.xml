@@ -57,6 +57,7 @@
                 from t_activity_user_relation aur
                 where aur.activity_id = ai.activity_id) signNumber
         from t_activity_info ai
+
     </sql>
 
     <select id="selectActivityInfoList" parameterType="ActivityInfo" resultMap="ActivityInfoDtoResult">
@@ -73,6 +74,7 @@
             <if test="activityEndTime != null ">and ai.activity_end_time = #{activityEndTime}</if>
             <if test="activityAddress != null  and activityAddress != ''">and ai.activity_address = #{activityAddress}
             </if>
+            ${params.dataScope}
         </where>
     </select>
 
@@ -94,6 +96,8 @@
             <if test="activityAddress != null">activity_address,</if>
             <if test="registerDeadline != null">register_deadline,</if>
             <if test="registerNumber != null">register_number,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -110,6 +114,8 @@
             <if test="activityAddress != null">#{activityAddress},</if>
             <if test="registerDeadline != null">#{registerDeadline},</if>
             <if test="registerNumber != null">#{registerNumber},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>

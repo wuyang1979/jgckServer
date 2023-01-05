@@ -51,3 +51,4 @@ export function getNowDateTime() {
   return year + "-" + month + "-" + day + " " + hour + sign2 + minutes + sign2 + seconds;
 }
 
+

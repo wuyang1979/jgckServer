@@ -2,7 +2,9 @@ package com.ruoyi.activity.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.FieldAlias;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  * @author gubut
  * @date 2022-12-22
  */
+@Data
 public class ActivityInfoDto extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -77,108 +80,7 @@ public class ActivityInfoDto extends BaseEntity {
     @Excel(name = "已报名人数")
     private Long signNumber;
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
+    private String userId;
 
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityTitle(String activityTitle) {
-        this.activityTitle = activityTitle;
-    }
-
-    public String getActivityTitle() {
-        return activityTitle;
-    }
-
-    public void setActivityContent(String activityContent) {
-        this.activityContent = activityContent;
-    }
-
-    public String getActivityContent() {
-        return activityContent;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setReleaseTime(LocalDateTime releaseTime) {
-        this.releaseTime = releaseTime;
-    }
-
-    public LocalDateTime getReleaseTime() {
-        return releaseTime;
-    }
-
-    public void setActivityStartTime(LocalDateTime activityStartTime) {
-        this.activityStartTime = activityStartTime;
-    }
-
-    public LocalDateTime getActivityStartTime() {
-        return activityStartTime;
-    }
-
-    public void setActivityEndTime(LocalDateTime activityEndTime) {
-        this.activityEndTime = activityEndTime;
-    }
-
-    public LocalDateTime getActivityEndTime() {
-        return activityEndTime;
-    }
-
-    public void setActivityAddress(String activityAddress) {
-        this.activityAddress = activityAddress;
-    }
-
-    public String getActivityAddress() {
-        return activityAddress;
-    }
-
-    public LocalDateTime getRegisterDeadline() {
-        return registerDeadline;
-    }
-
-    public void setRegisterDeadline(LocalDateTime registerDeadline) {
-        this.registerDeadline = registerDeadline;
-    }
-
-    public Long getRegisterNumber() {
-        return registerNumber;
-    }
-
-    public void setRegisterNumber(Long registerNumber) {
-        this.registerNumber = registerNumber;
-    }
-
-    public Long getSignNumber() {
-        return signNumber;
-    }
-
-    public void setSignNumber(Long signNumber) {
-        this.signNumber = signNumber;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("activityId", getActivityId())
-                .append("activityTitle", getActivityTitle())
-                .append("activityContent", getActivityContent())
-                .append("status", getStatus())
-                .append("releaseTime", getReleaseTime())
-                .append("activityStartTime", getActivityStartTime())
-                .append("activityEndTime", getActivityEndTime())
-                .append("activityAddress", getActivityAddress())
-                .append("registerDeadline", getRegisterDeadline())
-                .append("registerNumber", getRegisterNumber())
-                .append("signNumber", getSignNumber())
-                .toString();
-    }
+    private String deptId;
 }

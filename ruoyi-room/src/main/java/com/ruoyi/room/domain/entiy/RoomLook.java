@@ -33,7 +33,7 @@ public class RoomLook extends BaseEntity {
      * 带看人账号（系统用户主键id）
      */
     @Excel(name = "带看人账号", readConverterExp = "系=统用户主键id")
-    private String userId;
+    private String bindUserId;
 
     /**
      * 租客名称
@@ -53,6 +53,10 @@ public class RoomLook extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "预约时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime appointTime;
+
+    private String userId;
+
+    private String deptId;
 
     public void setLookId(String lookId) {
         this.lookId = lookId;
@@ -102,15 +106,33 @@ public class RoomLook extends BaseEntity {
         this.appointTime = appointTime;
     }
 
+    public String getBindUserId() {
+        return bindUserId;
+    }
+
+    public void setBindUserId(String bindUserId) {
+        this.bindUserId = bindUserId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("lookId", getLookId())
                 .append("roomId", getRoomId())
-                .append("userId", getUserId())
+                .append("bindUserId", getBindUserId())
                 .append("customerName", getCustomerName())
                 .append("customerPhone", getCustomerPhone())
                 .append("appointTime", getAppointTime())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

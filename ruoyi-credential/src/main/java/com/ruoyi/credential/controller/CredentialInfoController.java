@@ -84,6 +84,8 @@ public class CredentialInfoController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody CredentialInfo credentialInfo) {
         credentialInfo.setCreateBy(getUsername());
+        credentialInfo.setUserId(getUserId().toString());
+        credentialInfo.setDeptId(getDeptId().toString());
         return toAjax(credentialInfoService.insertCredentialInfo(credentialInfo));
     }
 

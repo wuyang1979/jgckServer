@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.room.domain.dto.RoomLookDtoPage;
 import com.ruoyi.room.domain.vo.RoomLookVoPage;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author gubut
  * @date 2022-12-06
  */
+@Api(tags = "房源带看")
 @RestController
 @RequestMapping("/room/look")
 public class RoomLookController extends BaseController {
@@ -39,6 +42,7 @@ public class RoomLookController extends BaseController {
     /**
      * 查询房源带看基本信息列表
      */
+    @ApiOperation("查看房源带看列表")
     @PreAuthorize("@ss.hasPermi('room:look:list')")
     @GetMapping("/list")
     public TableDataInfo list(RoomLookVoPage roomLookVoPage) {
@@ -50,6 +54,7 @@ public class RoomLookController extends BaseController {
     /**
      * 导出房源带看基本信息列表
      */
+    @ApiOperation("导出房源带看基本信息")
     @PreAuthorize("@ss.hasPermi('room:look:export')")
     @Log(title = "房源带看基本信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -62,6 +67,7 @@ public class RoomLookController extends BaseController {
     /**
      * 获取房源带看基本信息详细信息
      */
+    @ApiOperation("获取房源带看详细信息")
     @PreAuthorize("@ss.hasPermi('room:look:query')")
     @GetMapping(value = "/{lookId}")
     public AjaxResult getInfo(@PathVariable("lookId") String lookId) {
@@ -71,11 +77,14 @@ public class RoomLookController extends BaseController {
     /**
      * 新增房源带看基本信息
      */
+    @ApiOperation("信息房源带看信息")
     @PreAuthorize("@ss.hasPermi('room:look:add')")
     @Log(title = "房源带看基本信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody RoomLook roomLook) {
         roomLook.setCreateBy(getUsername());
+        roomLook.setUserId(getUserId().toString());
+        roomLook.setDeptId(getDeptId().toString());
         roomLookService.insertRoomLook(roomLook);
         return toAjax(roomLook.getLookId());
     }
@@ -83,6 +92,7 @@ public class RoomLookController extends BaseController {
     /**
      * 修改房源带看基本信息
      */
+    @ApiOperation("修改房源带看信息")
     @PreAuthorize("@ss.hasPermi('room:look:edit')")
     @Log(title = "房源带看基本信息", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -93,6 +103,7 @@ public class RoomLookController extends BaseController {
     /**
      * 删除房源带看基本信息
      */
+    @ApiOperation("删除房源带看信息")
     @PreAuthorize("@ss.hasPermi('room:look:remove')")
     @Log(title = "房源带看基本信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{lookIds}")

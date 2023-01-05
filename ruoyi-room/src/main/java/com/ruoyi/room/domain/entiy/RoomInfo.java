@@ -74,6 +74,9 @@ public class RoomInfo extends BaseEntity {
     @Excel(name = "最低价格")
     private String bottomPrice;
 
+    private String userId;
+
+    private String deptId;
 
     public void setRoomId(String roomId) {
         this.roomId = roomId;
@@ -155,6 +158,22 @@ public class RoomInfo extends BaseEntity {
         this.roomStatus = roomStatus;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -169,6 +188,8 @@ public class RoomInfo extends BaseEntity {
                 .append("roomAddress", getRoomAddress())
                 .append("price", getPrice())
                 .append("bottomPrice", getBottomPrice())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

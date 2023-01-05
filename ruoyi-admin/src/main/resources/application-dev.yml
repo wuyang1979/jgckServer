@@ -65,10 +65,15 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://1.15.111.46:3306/xn_data?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
-        username: xn_data
-        password: ENC(MD8QG1iCA6V18WFr+Kb2N4PgFDfTDqpx)
+        #url: jdbc:mysql://1.15.111.46:3306/xn_data?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+        #username: xn_data
+        #password: ENC(MD8QG1iCA6V18WFr+Kb2N4PgFDfTDqpx)
         #password: root8888
+        master:
+        url: jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+        username: root
+        password: ENC(vcf9IA4sDgHERKdkMlpI6Gl+xtWK7loC)
+        #password: qwer6666
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭

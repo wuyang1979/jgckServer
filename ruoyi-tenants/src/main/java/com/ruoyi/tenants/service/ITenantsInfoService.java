@@ -2,6 +2,7 @@ package com.ruoyi.tenants.service;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.tenants.domain.dto.TenantsInfoHistory;
 import com.ruoyi.tenants.domain.entiy.TenantsInfo;
 import com.ruoyi.tenants.domain.vo.TenantsInfoHistoryVo;
@@ -36,6 +37,14 @@ public interface ITenantsInfoService {
      * @return 租客基本信息集合
      */
     public List<TenantsInfo> selectTenantsInfoList(TenantsInfo tenantsInfo);
+
+    /**
+     * 查询租客基本信息列表(无数据过滤)
+     *
+     * @param tenantsInfo 租客基本信息
+     * @return 租客基本信息集合
+     */
+    public List<TenantsInfo> listNoScope(TenantsInfo tenantsInfo);
 
     /**
      * 新增租客基本信息

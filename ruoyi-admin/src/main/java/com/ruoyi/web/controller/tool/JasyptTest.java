@@ -9,7 +9,7 @@ public class JasyptTest {
         StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
         // 加密的密钥
         standardPBEStringEncryptor.setPassword("jgck");
-        String encryptedText = standardPBEStringEncryptor.encrypt("980423");
+        String encryptedText = standardPBEStringEncryptor.encrypt("qwer6666");
         System.out.println(encryptedText);
     }
 
@@ -17,7 +17,7 @@ public class JasyptTest {
     public void testDe() throws Exception {
         StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
         standardPBEStringEncryptor.setPassword("jgck");
-        String encryptedText = "DphsWvZsVLEvLu1OmMmGLQ==";
+        String encryptedText = "vcf9IA4sDgHERKdkMlpI6Gl+xtWK7loC";
         String plainText = standardPBEStringEncryptor.decrypt(encryptedText);
         System.out.println(plainText);
     }

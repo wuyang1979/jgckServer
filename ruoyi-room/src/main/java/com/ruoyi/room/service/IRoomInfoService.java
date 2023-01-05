@@ -30,6 +30,14 @@ public interface IRoomInfoService {
     public List<RoomInfoDtoPage> selectRoomInfoList(RoomInfoVo roomInfoVo);
 
     /**
+     * 查询房源基本信息列表(无数据过滤)
+     *
+     * @param roomInfoVo 房源基本信息
+     * @return 房源基本信息集合
+     */
+    public List<RoomInfoDtoPage> listNoScope(RoomInfoVo roomInfoVo);
+
+    /**
      * 新增房源基本信息
      *
      * @param roomInfo 房源基本信息
