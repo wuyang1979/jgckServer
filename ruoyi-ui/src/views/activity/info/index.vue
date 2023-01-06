@@ -196,7 +196,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="报名人数" prop="registerNumber">
-              <el-input oninput="if(value.length>3)value=value.slice(0,3)" type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
+              <el-input  type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -255,7 +255,7 @@
         :limit="12"
         :auto-upload="true"
         drag
-        :action="url"
+        :action="uploadUrl"
         list-type="picture"
         accept=".jpg,.png"
         :on-exceed="handleExceed"
@@ -271,6 +271,16 @@
         <el-button type="primary" @click="submitUpload">保 存</el-button>
         <el-button @click="cancelUpload">取 消</el-button>
       </div>
+    </el-dialog>
+
+    <el-dialog
+      title="查看图片"
+      :close-on-click-modal="false"
+      width="850px"
+      :visible.sync="dialogVisible"
+      append-to-body
+    >
+      <el-image :src="url" style="width: 100%; height: 400px" fit="contain"></el-image>
     </el-dialog>
 
   </div>
@@ -295,22 +305,27 @@ import {
   listFile
 } from "@/api/activity/relation";
 import {getToken} from "@/utils/auth";
+import upLoadPic from "../../../components/upLoadPic";
+import UpLoadPic from "../../../components/upLoadPic";
 
 export default {
   name: "Info",
+  components: {UpLoadPic},
   dicts: ['sys_notice_status'],
   data() {
     return {
-
+      dialogVisible: false,
+      uploadUrl: process.env.VUE_APP_BASE_API + '/common/upload/img/',
+      cover:'',
+      url: '',
       businessId: null,
-
       fileIds: [],
 
       headers: {
-        Authorization: getToken()
+        Authorization:'Bearer '+ getToken()
       },
 
-      url: process.env.VUE_APP_BASE_API + '/common/upload',
+      // url: process.env.VUE_APP_BASE_API + '/common/uploads',
 
       upload: false,
 
@@ -374,17 +389,15 @@ export default {
   created() {
     this.getList();
     this.getSign();
-    console.info("this.url=>", process.env.VUE_APP_BASE_API)
   },
   methods: {
+
 
     handleRemove(file, fileList) {
       this.fileIds = [];
       fileList.forEach(fl => {
         this.fileIds.push(fl.id);
       })
-      console.info("移除文件=>", file)
-      console.info("移除文件list=>", fileList)
     },
 
     listFile() {
@@ -430,11 +443,12 @@ export default {
         fileIds = [];
       }
       this.fileIds = fileIds
-      console.info("文件变化file=>", file)
-      console.info("文件变化fileList=>", fileList)
     },
     handlePreview(file) {
-      window.open(file.url)
+      this.cover=file.response.src
+      this.dialogVisible=true
+      // window.open(file.file.response.url)
+      console.info("file.url=>",file.response.url)
     },
 
     submitUpload() {
@@ -639,6 +653,23 @@ export default {
         ...this.queryParams
       }, `info_${new Date().getTime()}.xlsx`)
     }
+  },
+  watch:{
+    cover: {
+      handler(newVal, oldVal) {
+        console.info("newVal+>",newVal);
+        console.info("oldVal+>",oldVal);
+        if (newVal === '' || newVal === null || !newVal) {
+          this.url = ''
+          this.showUpload = true
+        } else {
+          this.url = newVal
+          this.showUpload = false
+        }
+      },
+      immediate: true,
+      deep: true,
+    },
   }
 };
 </script>
@@ -652,5 +683,6 @@ export default {
   height: 200px !important;
   width: 560px !important;
 }
+
 
 </style>

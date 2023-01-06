@@ -127,9 +127,20 @@ public class CommonController extends BaseController {
             String filePath = profileImg;
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.uploadImg(filePath, file);
-            String url = urlPrefix + "/images" + fileName;
-            String src = urlPrefix + "/images" + fileName;
+//            String url = urlPrefix + "/images" + fileName;
+            String url = urlPrefix  + fileName;
+            String src = urlPrefix  + fileName;
             AjaxResult ajax = AjaxResult.success();
+            // 保存文件信息
+            FileInfo fileInfo=new FileInfo();
+            fileInfo.setCreateBy(getUsername());
+            fileInfo.setFileId(UUID.randomUUID().toString());
+            fileInfo.setFileName(fileName);
+            fileInfo.setNewFileName(FileUtils.getName(fileName));
+            fileInfo.setOriginalFileName(file.getOriginalFilename());
+            fileInfo.setUrl(url);
+            fileInfoService.insertFileInfo(fileInfo);
+
             ajax.put("url", url);
             ajax.put("src", src);
             ajax.put("fileName", fileName);
@@ -158,7 +169,8 @@ public class CommonController extends BaseController {
             for (MultipartFile file : files) {
                 // 上传并返回新文件名称
                 String fileName = FileUploadUtils.uploadImg(filePath, file);
-                String url = urlPrefix + "/images" + fileName;
+//                String url = urlPrefix + "/images" + fileName;
+                String url = urlPrefix  + fileName;
                 urls.add(url);
                 fileNames.add(fileName);
                 newFileNames.add(FileUtils.getName(fileName));

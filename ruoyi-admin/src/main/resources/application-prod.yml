@@ -9,9 +9,9 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /home/ruoyi/uploadPath
+  profile: /www/wwwroot/uploadPath
   # 上传图片绝对路径
-  profile-img: /home/local/wlscp/fileUpload/images
+  profile-img: /www/wwwroot/uploadPath
   # 上传图片相对路径
   relative-profile: /images
   # 获取ip地址开关
@@ -19,7 +19,7 @@ ruoyi:
   # 验证码类型 math 数组计算 char 字符验证
   captchaType: math
   # 前端服务器ip地址+端口
-  url-prefix: http://161.189.65.136:80
+  url-prefix: http://1.15.111.46:39001
 
 # 开发环境配置
 server:

@@ -145,6 +145,16 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="房源" prop="roomType">
+          <el-select v-model="form.roomType" placeholder="请选择房源类型">
+            <el-option
+              v-for="dict in dict.type.room_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="房源楼层" prop="floor">
           <el-select v-model="form.floor" placeholder="请选择房间楼层">
             <el-option
