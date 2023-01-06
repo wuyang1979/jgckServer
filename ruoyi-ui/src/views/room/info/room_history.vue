@@ -11,67 +11,84 @@
         房源信息
       </div>
       <div class="div_room_info" style="height: 100px;padding-left: 10px">
-        <el-row style="padding-bottom: 20px">
-          <el-col :span="6">
-            <span> 房源名称：</span>{{ roomInfo.roomName }}
-          </el-col>
-          <el-col :span="6">
-            <span> 房间号码：</span>{{ roomInfo.roomNumber }}
-          </el-col>
-          <el-col :span="6">
-            <span style="float: left"> 房间楼层：</span>
-            <dict-tag :options="dict.type.room_floor" :value="roomInfo.floor"/>
-          </el-col>
-          <el-col :span="6">
-            <span> 房间面积：</span>{{ roomInfo.area }}
-          </el-col>
-        </el-row>
-        <el-row style="padding-bottom: 20px">
-          <el-col :span="6">
-            <span> 出租价格：</span>{{ roomInfo.price }}
-          </el-col>
-          <el-col :span="6">
-            <span> 最低价格：</span>{{ roomInfo.bottomPrice }}
-          </el-col>
-          <el-col :span="6">
-            <span> 房间地址：</span>{{ roomInfo.roomAddress }}
-          </el-col>
-        </el-row>
+        <el-form :model="roomInfo" ref="roomInfo" size="small" :inline="true" label-width="120px">
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="房源号：">
+                {{ roomInfo.roomName }}
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="状态：">
+                <dict-tag :options="dict.type.room_status" :value="roomInfo.roomStatus"/>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="楼层：">
+                <dict-tag :options="dict.type.room_floor" :value="roomInfo.floor"/>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="面积：">
+                {{ roomInfo.area }}
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="价格（元/月）：">
+                {{ roomInfo.price }}
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="底价（元/月）：">
+                {{ roomInfo.bottomPrice }}
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="地址：">
+                {{ roomInfo.roomAddress }}
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="18">
+              <el-tooltip effect="dark"
+                          :content="roomInfo.remark"
+                          placement="top">
+                <el-form-item class="form-remark" label="备注：">
+                  {{ roomInfo.remark }}
+                </el-form-item>
+              </el-tooltip>
+            </el-col>
+          </el-row>
 
-        <el-row>
-          <el-col>
-            <el-tooltip effect="dark"
-                        :content="roomInfo.remark"
-                        placement="top">
-              <div class="div_remark"><span>备注：</span>{{ roomInfo.remark }}
-              </div>
-            </el-tooltip>
-          </el-col>
-        </el-row>
+        </el-form>
       </div>
-      <div class="div_title">
+
+      <div class="div_title top20">
         历史租户
       </div>
       <div class="div_history_table">
-        <el-table v-loading="loading" :data="infoList" height="400">
-          <el-table-column label="租客名称" align="center" prop="tenantsName" width="180"/>
-          <el-table-column label="证件号码" align="center" prop="cardNumber"/>
-          <el-table-column label="联系人名称" align="center" prop="contactName"/>
-          <el-table-column label="联系人电话" align="center" prop="contactPhone"/>
-          <el-table-column label="年租金" align="center" prop="yearMoney"/>
-          <el-table-column label="租赁日期" align="center">
-            <template slot-scope="scope">
-          <span>{{
-              parseTime(scope.row.leaseStartTime, '{y}-{m}-{d}') + '~' + parseTime(scope.row.leaseEndTime, '{y}-{m}-{d}')
-            }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="签约日期" align="center" prop="signTime" width="180">
-            <template slot-scope="scope">
-              <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
+                <el-table v-loading="loading" :data="infoList" height="400">
+                  <el-table-column label="租客名称" align="center" prop="tenantsName" width="200"/>
+                  <el-table-column label="证件号码" align="center" prop="cardNumber"/>
+                  <el-table-column label="联系人名称" align="center" prop="contactName"/>
+                  <el-table-column label="联系人电话" align="center" prop="contactPhone"/>
+                  <el-table-column label="年租金" align="center" prop="yearMoney"/>
+                  <el-table-column label="租赁日期" align="center">
+                    <template slot-scope="scope">
+                  <span>{{
+                      parseTime(scope.row.leaseStartTime, '{y}-{m}-{d}') + '~' + parseTime(scope.row.leaseEndTime, '{y}-{m}-{d}')
+                    }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="签约日期" align="center" prop="signTime" width="180">
+                    <template slot-scope="scope">
+                      <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+                    </template>
+                  </el-table-column>
+                </el-table>
       </div>
     </div>
 
@@ -85,7 +102,7 @@ import {listTenantsHistory} from "@/api/tenants/info";
 
 export default {
   name: "room_history",
-  dicts: ['room_floor'],
+  dicts: ['room_floor', 'room_status'],
   data() {
     return {
 
@@ -97,10 +114,10 @@ export default {
 
       loading: false,
 
-      queryParams:{
-        pageNum:1,
-        pageSize:999,
-        roomId:this.roomId,
+      queryParams: {
+        pageNum: 1,
+        pageSize: 999,
+        roomId: this.roomId,
       }
     }
   },
@@ -114,12 +131,12 @@ export default {
 
     getList() {
       this.loading = true
-      this.queryParams.roomId=this.roomId;
+      this.queryParams.roomId = this.roomId;
       listTenantsHistory(this.queryParams).then(respone => {
         this.infoList = respone.rows;
-        this.loading=false;
-        console.info("this.infoList=>",respone)
-        console.info("this.infoList=>",this.infoList)
+        this.loading = false;
+        console.info("this.infoList=>", respone)
+        console.info("this.infoList=>", this.infoList)
       })
     },
 
@@ -154,14 +171,19 @@ export default {
 .div_title {
   font-size: 20px;
   font-weight: bold;
-  padding: 10px;
+  margin: 10px;
 }
 
-.div_remark {
+/deep/ .form-remark .el-form-item__content {
+  color: red;
   width: 200px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.top20 {
+  margin-top: 50px;
 }
 
 </style>

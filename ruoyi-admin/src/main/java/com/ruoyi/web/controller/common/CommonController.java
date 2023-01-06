@@ -146,6 +146,7 @@ public class CommonController extends BaseController {
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
+            ajax.put("id",fileInfo.getFileId());
 			
             return ajax;
         } catch (Exception e) {

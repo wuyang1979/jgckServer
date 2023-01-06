@@ -315,17 +315,20 @@ export default {
   data() {
     return {
       dialogVisible: false,
+
       uploadUrl: process.env.VUE_APP_BASE_API + '/common/upload/img/',
+
       cover:'',
+
       url: '',
+
       businessId: null,
+
       fileIds: [],
 
       headers: {
         Authorization:'Bearer '+ getToken()
       },
-
-      // url: process.env.VUE_APP_BASE_API + '/common/uploads',
 
       upload: false,
 
@@ -391,8 +394,6 @@ export default {
     this.getSign();
   },
   methods: {
-
-
     handleRemove(file, fileList) {
       this.fileIds = [];
       fileList.forEach(fl => {
@@ -415,7 +416,6 @@ export default {
         })
         this.fileList = list;
       })
-
     },
 
     cancelUpload() {
@@ -445,10 +445,8 @@ export default {
       this.fileIds = fileIds
     },
     handlePreview(file) {
-      this.cover=file.response.src
+      this.cover=file.url||file.response.src
       this.dialogVisible=true
-      // window.open(file.file.response.url)
-      console.info("file.url=>",file.response.url)
     },
 
     submitUpload() {

@@ -62,7 +62,6 @@ public class RoomInfoServiceImpl implements IRoomInfoService {
     @Override
     public int insertRoomInfo(RoomInfo roomInfo) {
         roomInfo.setRoomId(UUID.randomUUID().toString());
-        roomInfo.setRoomStatus(0l);
         roomInfo.setCreateTime(DateUtils.getNowDate());
         return roomInfoMapper.insertRoomInfo(roomInfo);
     }

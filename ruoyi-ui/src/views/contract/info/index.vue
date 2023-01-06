@@ -166,6 +166,19 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="合同状态" prop="contractStatus">
+              <el-select :disabled="isQuery" v-model="form.contractStatus"
+                         placeholder="请选择">
+                <el-option
+                  v-for="dict in dict.type.contract_status"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="房屋名称" prop="roomId">
               <el-select
                 :disabled="isQuery"
@@ -182,6 +195,19 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房源状态" prop="roomStatus">
+              <el-select disabled v-model="form.roomStatus"
+                         placeholder="请选择">
+                <el-option
+                  v-for="dict in dict.type.room_status"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -211,11 +237,11 @@
             </el-form-item>
           </el-col>
         </el-row>
-
         <el-row>
+
           <el-col :span="12">
             <el-form-item label="房屋地址" prop="roomAddress">
-              <el-input readonly v-model="form.roomAddress" placeholder="请输入保证金"/>
+              <el-input readonly v-model="form.roomAddress" placeholder="请输入房屋地址"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -357,7 +383,7 @@ import {listRoomNoScope} from "../../../api/room/info";
 
 export default {
   name: "Info",
-  dicts: ['payment_type', 'room_type', 'contract_type', 'pay_type', 'contract_status'],
+  dicts: ['payment_type', 'room_type', 'contract_type', 'pay_type', 'contract_status','room_status'],
   data() {
     return {
 
@@ -416,7 +442,8 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        contractType: [{required: true, message: '请输入合同类型', trigger: 'blur'}],
+        contractType: [{required: true, message: '请选择合同类型', trigger: 'blur'}],
+        contractStatus: [{required: true, message: '请选择合同状态', trigger: 'blur'}],
         contractNumber: [{required: true, message: '请输入合同编号', trigger: 'blur'}],
         leaseStartTime: [{required: true, message: '请选择租赁开始日期', trigger: 'blur'}],
         leaseEndTime: [{required: true, message: '请选择租赁结束日期', trigger: 'blur'}],
@@ -544,9 +571,16 @@ export default {
       this.isQuery = false;
       this.getList()
     },
+    resetRoomForm(){
+      this.form.roomId=null;
+      this.form.roomStatus=null;
+      this.form.roomAddress=null;
+      this.form.area=null;
+    },
 
     //合同类型选择框change方法
     handleChangeContractType(val) {
+      this.resetRoomForm();
       this.filterTenants();
       this.filterRooms();
       if (val === '2') {
@@ -564,8 +598,8 @@ export default {
           if (respone.code === 200) {
             this.$set(this.form, 'roomAddress', respone.data.roomAddress);
             this.$set(this.form, 'area', respone.data.area);
-            this.$set(this.form, 'type', intCovString(respone.data.type));
             this.$set(this.form, 'spaceId', respone.data.spaceId);
+            this.$set(this.form, 'roomStatus', intCovString(respone.data.roomStatus));
           }
         })
       }
@@ -629,17 +663,21 @@ export default {
     },
 
 
-//查询合同详情
+    //查询合同详情
     queryContract(row) {
       this.title = "合同基本信息详情";
+      var roomId=this.form.roomId;
       this.form = row;
       this.isQuery = true;
       this.isInsert = false;
       this.open = true;
       this.form.contractType = intCovString(this.form.contractType);
+      this.form.contractStatus = intCovString(this.form.contractStatus);
       this.form.togetherPersonId = this.initTogetherPersonIdForm(this.form.togetherPersonId);
-      this.handleChangeRoomName(this.form.roomId);
+      this.handleChangeRoomName(roomId);
       this.handleChangeContractType(this.form.contractType);
+      this.form.roomId=roomId;
+      console.info("contractForm=>",this.form)
       this.rules = {};
     },
 
@@ -677,7 +715,7 @@ export default {
         tenantsId: null,
         signTime: null,
         yearMoney: null,
-        contractStatus: null
+        contractStatus: '0'
       };
       this.resetForm("form");
     },
@@ -703,7 +741,6 @@ export default {
       this.reset();
       this.filterTenants();
       this.filterRooms();
-      this.form.paymentType = 0;
       this.open = true;
       this.title = "添加合同信息";
     },
@@ -713,10 +750,13 @@ export default {
       const contractId = row.contractId || this.ids
       getContract(contractId).then(response => {
         this.form = response.data;
+        var roomId=this.form.roomId;
         this.form.contractType = intCovString(this.form.contractType);
+        this.form.contractStatus = intCovString(this.form.contractStatus);
         this.form.togetherPersonId = this.initTogetherPersonIdForm(this.form.togetherPersonId);
-        this.handleChangeRoomName(this.form.roomId);
+        this.handleChangeRoomName(roomId);
         this.handleChangeContractType(this.form.contractType);
+        this.form.roomId=roomId;
         this.open = true;
         this.title = "修改合同信息";
       });

@@ -10,6 +10,7 @@
         <result property="yearMoney" column="year_money"/>
         <result property="togetherPersonId" column="together_person_id"/>
         <result property="contractType" column="contract_type"/>
+        <result property="contractStatus" column="contract_status"/>
         <result property="leaseStartTime" column="lease_start_time"/>
         <result property="leaseEndTime" column="lease_end_time"/>
         <result property="paymentPeriod" column="payment_period"/>
@@ -53,6 +54,7 @@
                year_money,
                together_person_id,
                contract_type,
+               contract_status,
                lease_start_time,
                lease_end_time,
                payment_period,
