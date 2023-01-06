@@ -131,12 +131,12 @@
 
     <!-- 添加或修改房源基本信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="房源号" prop="roomName">
-          <el-input v-model="form.roomName" placeholder="请输入房源名称"/>
+          <el-input v-model="form.roomName" placeholder="请输入房源号"/>
         </el-form-item>
-        <el-form-item label="房源类型" prop="roomType">
-          <el-select v-model="form.roomType" placeholder="请选择房源类型">
+        <el-form-item label="类型" prop="roomType">
+          <el-select v-model="form.roomType" placeholder="请选择类型">
             <el-option
               v-for="dict in dict.type.room_type"
               :key="dict.value"
@@ -145,18 +145,18 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="房源" prop="roomType">
-          <el-select v-model="form.roomType" placeholder="请选择房源类型">
+        <el-form-item label="状态" prop="roomStatus">
+          <el-select v-model="form.roomStatus" placeholder="请选择状态">
             <el-option
-              v-for="dict in dict.type.room_type"
+              v-for="dict in dict.type.room_status"
               :key="dict.value"
               :label="dict.label"
               :value="dict.value">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="房源楼层" prop="floor">
-          <el-select v-model="form.floor" placeholder="请选择房间楼层">
+        <el-form-item label="楼层" prop="floor">
+          <el-select v-model="form.floor" placeholder="请选择楼层">
             <el-option
               v-for="dict in dict.type.room_floor"
               :key="dict.value"
@@ -165,23 +165,23 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="房源面积" prop="area">
+        <el-form-item label="面积" prop="area">
           <el-input oninput="if(value.length>4)value=value.slice(0,4)" type="number" v-model="form.area"
-                    @keydown.native="channelInputLimit" placeholder="请输入房间面积"/>
+                    @keydown.native="channelInputLimit" placeholder="请输入面积"/>
         </el-form-item>
-        <el-form-item label="出租价格" prop="price">
+        <el-form-item label="价格（元/月）" prop="price">
           <el-input oninput="if(value.length>9)value=value.slice(0,9)" type="number" v-model="form.price"
-                    placeholder="请输入出售价格"/>
+                    placeholder="请输入价格"/>
         </el-form-item>
-        <el-form-item label="最低价格" prop="bottomPrice">
+        <el-form-item label="底价（元/月）" prop="bottomPrice">
           <el-input oninput="if(value.length>9)value=value.slice(0,9)" type="number" v-model="form.bottomPrice"
-                    placeholder="请输入最低价格"/>
+                    placeholder="请输入底价"/>
         </el-form-item>
-        <el-form-item label="房源地址" prop="roomAddress">
-          <el-input v-model="form.roomAddress" type="textarea" placeholder="请输入内容"/>
+        <el-form-item label="地址" prop="roomAddress">
+          <el-input v-model="form.roomAddress" type="textarea" placeholder="请输入地址"/>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入备注"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -256,11 +256,12 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        roomName: [{required: true, message: '请输入房源名称', trigger: 'blur'}],
-        roomType: [{required: true, message: '请选择房源类型', trigger: 'blur'}],
-        floor: [{required: true, message: '请选择房源楼层', trigger: 'blur'}],
-        area: [{required: true, message: '请输入房源面积', trigger: 'blur'}],
-        price: [{required: true, message: '请输入出租价格', trigger: 'blur'}],
+        roomName: [{required: true, message: '请输入房源号', trigger: 'blur'}],
+        roomType: [{required: true, message: '请选择类型', trigger: 'blur'}],
+        roomStatus: [{required: true, message: '请选择状态', trigger: 'blur'}],
+        floor: [{required: true, message: '请选择楼层', trigger: 'blur'}],
+        area: [{required: true, message: '请输入面积', trigger: 'blur'}],
+        price: [{required: true, message: '请输入价格', trigger: 'blur'}],
         roomAddress: [{max: 200, message: '字符长度不能超过200', trigger: 'blur'}],
         remark: [{max: 200, message: '字符长度不能超过200', trigger: 'blur'}],
       }
@@ -383,6 +384,7 @@ export default {
       getRoom(roomId).then(response => {
         this.form = response.data;
         this.form.roomType = intCovString(this.form.roomType)//将数字类型转为字符串
+        this.form.roomStatus = intCovString(this.form.roomStatus)//将数字类型转为字符串
         this.open = true;
         this.title = "修改房源基本信息";
       });

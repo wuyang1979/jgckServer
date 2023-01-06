@@ -128,8 +128,8 @@ public class CommonController extends BaseController {
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.uploadImg(filePath, file);
 //            String url = urlPrefix + "/images" + fileName;
-            String url = urlPrefix  + fileName;
-            String src = urlPrefix  + fileName;
+            String url = urlPrefix  + "/image" + fileName;
+            String src = urlPrefix  + "/image" + fileName;
             AjaxResult ajax = AjaxResult.success();
             // 保存文件信息
             FileInfo fileInfo=new FileInfo();

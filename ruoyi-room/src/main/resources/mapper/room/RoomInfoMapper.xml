@@ -9,6 +9,7 @@
         <result property="roomName" column="room_name"/>
         <result property="spaceId" column="space_id"/>
         <result property="roomType" column="room_type"/>
+        <result property="roomStatus" column="room_status"/>
         <result property="floor" column="floor"/>
         <result property="area" column="area"/>
         <result property="remark" column="remark"/>
@@ -45,6 +46,7 @@
                room_name,
                space_id,
                room_type,
+               room_status,
                floor,
                area,
                remark,

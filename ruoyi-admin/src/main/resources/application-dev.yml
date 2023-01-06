@@ -13,13 +13,13 @@ ruoyi:
   # 上传图片绝对路径
   profile-img: D:\1\nginx-1.7.11.3-Gryphon\html\image
   # 上传图片相对路径
-  relative-profile: ../assets/images
+  relative-profile: /image
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数组计算 char 字符验证
   captchaType: math
   # 前端服务器ip地址+端口
-  url-prefix: http://localhost:80
+  url-prefix: http://localhost:9527
 
 # 开发环境配置
 server:
