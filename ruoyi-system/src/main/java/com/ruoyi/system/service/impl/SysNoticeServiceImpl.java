@@ -1,7 +1,11 @@
 package com.ruoyi.system.service.impl;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.domain.SysNotice;
@@ -59,6 +63,13 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
      */
     @Override
     public int updateNotice(SysNotice notice) {
+        if (StringUtils.isNotEmpty(notice.getStatus())){
+            if (notice.getStatus().equals("1")){
+                notice.setReleaseTime(LocalDateTime.now());
+            }else if (notice.getStatus().equals("0")){
+                notice.setReleaseTime(null);
+            }
+        }
         return noticeMapper.updateNotice(notice);
     }
 

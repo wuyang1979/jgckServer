@@ -15,6 +15,7 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
+        <result property="releaseTime" column="release_time"/>
     </resultMap>
 
     <sql id="selectNoticeVo">
@@ -27,7 +28,8 @@
                create_time,
                update_by,
                update_time,
-               remark
+               remark,
+               release_time
         from sys_notice
     </sql>
 
@@ -79,6 +81,7 @@
             <if test="noticeContent != null">notice_content = #{noticeContent},</if>
             <if test="status != null and status != ''">status = #{status},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            release_time=#{releaseTime},
             update_time = sysdate()
         </set>
         where notice_id = #{noticeId}
