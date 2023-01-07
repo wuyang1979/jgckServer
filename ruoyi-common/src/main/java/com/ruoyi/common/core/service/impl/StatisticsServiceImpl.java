@@ -3,15 +3,11 @@ package com.ruoyi.common.core.service.impl;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
-import com.ruoyi.common.core.domain.entity.FileInfo;
-import com.ruoyi.common.core.mapper.FileInfoMapper;
+import com.ruoyi.common.core.domain.vo.ContractExpireVo;
 import com.ruoyi.common.core.mapper.StatisticsMapper;
-import com.ruoyi.common.core.service.IFileInfoService;
 import com.ruoyi.common.core.service.IStatisticsService;
-import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,8 +36,8 @@ public class StatisticsServiceImpl implements IStatisticsService {
 
 
     @Override
-    public List<ContractExpireDto> getContractExpire() {
-        return statisticsMapper.getContractExpire();
+    public List<ContractExpireDto> getContractExpire(ContractExpireVo contractExpireVo) {
+        return statisticsMapper.getContractExpire(contractExpireVo);
     }
 
 
