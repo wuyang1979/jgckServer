@@ -57,10 +57,10 @@
               WHERE ci.contract_status = 0
                 AND TO_DAYS(ci.lease_end_time) - TO_DAYS(
                       NOW()) > 0) t
-        WHERE t.room_type = 2
-            AND t.surplus &lt; 20
-           OR t.room_type &lt;&gt; 2
-            AND t.surplus &lt; 20
+        WHERE (t.room_type = 2
+            AND t.surplus &lt; #{apartmentRemind})
+           OR (t.room_type &lt;&gt; 2
+            AND t.surplus &lt; #{officeShopRemind})
     </select>
 
 

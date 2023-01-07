@@ -3,6 +3,7 @@ package com.ruoyi.common.core.service;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
+import com.ruoyi.common.core.domain.vo.ContractExpireVo;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IStatisticsService {
 
     public AjaxResult getSettleStatistics();
 
-    public List<ContractExpireDto> getContractExpire();
+    public List<ContractExpireDto> getContractExpire(ContractExpireVo contractExpireVo);
 
     public List<CredentialExpireDto> getCredentialExpire();
 

@@ -1,5 +1,8 @@
 package com.ruoyi.system.service;
 
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.dto.ContractExpireDto;
+import com.ruoyi.common.core.domain.vo.RentConfigVo;
 import com.ruoyi.system.domain.SysConfig;
 
 import java.util.List;
@@ -101,4 +104,17 @@ public interface ISysConfigService {
      * @return
      */
     SysConfig selectXyConfigById(Long configId);
+
+    /**
+     * 设置首页提醒参数配置
+     *
+     * @param configVo 提醒配置参数
+     * @return
+     */
+    AjaxResult setRentRmind(RentConfigVo configVo);
+
+
+    List<ContractExpireDto> getContractExpire();
+
+
 }

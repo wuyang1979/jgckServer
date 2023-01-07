@@ -23,3 +23,11 @@ export function getCredential() {
     method: 'get'
   })
 }
+
+export function setRemindConfig(param) {
+  return request({
+    url: '/statistics/remind/setConfig',
+    method: 'post',
+    data:param
+  })
+}

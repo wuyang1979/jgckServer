@@ -37,9 +37,9 @@
           </el-table-column>
           <el-table-column prop="name" align="center" label="房源类型">
           </el-table-column>
-          <el-table-column  prop="address" align="center" label="到期时间">
+          <el-table-column prop="address" align="center" label="到期时间">
             <template slot-scope="scope">
-              <span style="color: red">{{scope.row.address}}</span>
+              <span style="color: red">{{ scope.row.address }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -84,7 +84,7 @@
           <el-table-column prop="name" align="center" label="报修人名称"/>
           <el-table-column prop="address" align="center" label="报修日期">
             <template slot-scope="scope">
-              <span style="color: red">{{scope.row.address}}</span>
+              <span style="color: red">{{ scope.row.address }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -118,9 +118,10 @@
     </div>
 
     <el-dialog :title="title" :visible.sync="setRent" width="450px" :show-close="false" append-to-body>
-      <el-form ref="rent" :model="rentForm" label-width="80px">
-        <el-form-item label="提醒天数">
-          <el-input type="number" v-model="rentForm.name"></el-input>
+      <el-form ref="rent" :model="rentForm" :rules="rentRules" label-width="80px">
+        <el-form-item label="提醒天数" prop="rentRemind">
+          <el-input oninput="if(value.length>3) value=value.slice(0,3)" type="number"
+                    v-model="rentForm.rentRemind"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -131,12 +132,14 @@
 
 
     <el-dialog :title="title" :visible.sync="setContract" width="450px" :show-close="false" append-to-body>
-      <el-form ref="contract" :model="contractForm" label-width="80px">
-        <el-form-item label="公寓">
-          <el-input type="number" v-model="contractForm.name"></el-input>
+      <el-form ref="contract" :model="contractForm" :rules="contractRules" label-width="90px">
+        <el-form-item label="公寓" prop="apartmentRemind">
+          <el-input oninput="if(value.length>3) value=value.slice(0,3)" type="number"
+                    v-model="contractForm.apartmentRemind"></el-input>
         </el-form-item>
-        <el-form-item label="办公/商铺">
-          <el-input type="number" v-model="contractForm.name"></el-input>
+        <el-form-item label="办公/商铺" prop="officeShopRemind">
+          <el-input oninput="if(value.length>3) value=value.slice(0,3)" type="number"
+                    v-model="contractForm.officeShopRemind"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -151,10 +154,12 @@
 <script>
 
 import {getContract, getCredential, getSettle} from "@/api/statistics/statistics";
+import {setRemindConfig} from "../../api/statistics/statistics";
+import {getConfigKey} from "../../api/system/config";
 
 export default {
   name: "Index",
-  dicts:['room_type','credential_type'],
+  dicts: ['room_type', 'credential_type'],
   data() {
     return {
 
@@ -205,19 +210,34 @@ export default {
       shopForm: [],
       officeForm: [],
       apartmentForm: [],
+      rentRules: {
+        rentRemind: [{required: true, message: '提醒天数不能为空', trigger: 'blur'}],
+      },
+      contractRules: {
+        apartmentRemind: [{required: true, message: '公寓提醒天数不能为空', trigger: 'blur'}],
+        officeShopRemind: [{required: true, message: '办公/商铺提醒天数不能为空', trigger: 'blur'}],
+      },
     };
   },
   methods: {
 
-    getCredential(){
-      getCredential().then(respone=>{
-        this.credentialData=respone.rows;
+    async getRemindConfig(key) {
+      var result = null;
+      await getConfigKey(key).then(respone => {
+        result = JSON.parse(respone.msg);
+      })
+      return result;
+    },
+
+    getCredential() {
+      getCredential().then(respone => {
+        this.credentialData = respone.rows;
       })
     },
 
-    goContractTable(){
+    goContractTable() {
       this.$router.push({
-        path:'/business/contract/info',
+        path: '/business/contract/info',
       })
     },
 
@@ -231,13 +251,29 @@ export default {
       this.$refs["contract"].validate(valid => {
         if (valid) {
           this.setContract = false;
-          this.contractForm = {};
+          var params = {
+            configKey: "hpContractRemindDays",
+            configValue: {
+              apartmentRemind: this.contractForm.apartmentRemind,
+              officeShopRemind: this.contractForm.officeShopRemind
+            }
+          }
+          setRemindConfig(params).then(respone => {
+            if (respone.code == 200) {
+              this.$modal.msgSuccess("保存成功")
+            } else {
+              this.$modal.msgError("保存失败")
+            }
+          }).catch()
         }
       });
     },
 
     handleContract() {
       this.title = "合同到期提醒设置";
+      this.getRemindConfig("hpContractRemindDays").then(res=>{
+        this.contractForm=res
+      })
       this.setContract = true;
     },
 
@@ -250,13 +286,28 @@ export default {
       this.$refs["rent"].validate(valid => {
         if (valid) {
           this.setRent = false;
-          this.rentForm = {};
+          var params = {
+            configKey: "hpRentRemindDays",
+            configValue: {
+              rentRemind: this.rentForm.rentRemind
+            }
+          }
+          setRemindConfig(params).then(respone => {
+            if (respone.code == 200) {
+              this.$modal.msgSuccess("保存成功")
+            } else {
+              this.$modal.msgError("保存失败")
+            }
+          }).catch()
         }
       });
     },
 
     handleRent() {
       this.title = "租金到期提醒设置";
+      this.getRemindConfig("hpRentRemindDays").then(res=>{
+        this.rentForm=res;
+      });
       this.setRent = true;
     },
 
@@ -289,8 +340,8 @@ export default {
         legend: {
           top: '80%',
           left: 'center',
-          formatter:function (name){
-            let data=option.series[0].data
+          formatter: function (name) {
+            let data = option.series[0].data
             for (let i = 0; i < data.length; i++) {
               return `${name}\t\t${data[i].value}`
             }
@@ -343,8 +394,8 @@ export default {
         legend: {
           top: '80%',
           left: 'center',
-          formatter:function (name){
-            let data=option.series[0].data
+          formatter: function (name) {
+            let data = option.series[0].data
             for (let i = 0; i < data.length; i++) {
               return `${name}\t\t${data[i].value}`
             }
@@ -397,8 +448,8 @@ export default {
         legend: {
           top: '80%',
           left: 'center',
-          formatter:function (name){
-            let data=option.series[0].data
+          formatter: function (name) {
+            let data = option.series[0].data
             for (let i = 0; i < data.length; i++) {
               return `${name}\t\t${data[i].value}`
             }

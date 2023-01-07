@@ -3,6 +3,7 @@ package com.ruoyi.common.core.mapper;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
 import com.ruoyi.common.core.domain.dto.SettleStatisticsDto;
+import com.ruoyi.common.core.domain.vo.ContractExpireVo;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface StatisticsMapper {
 
     List<SettleStatisticsDto> getSettleStatistics(Long roomType);
 
-    List<ContractExpireDto> getContractExpire();
+    List<ContractExpireDto> getContractExpire(ContractExpireVo contractExpireVo);
 
     List<CredentialExpireDto> getCredentialExpire();
 

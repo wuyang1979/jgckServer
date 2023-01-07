@@ -1,11 +1,18 @@
 package com.ruoyi.system.service.impl;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.dto.ContractExpireDto;
+import com.ruoyi.common.core.domain.vo.ContractExpireVo;
+import com.ruoyi.common.core.domain.vo.RentConfigVo;
 import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.core.service.IFileInfoService;
+import com.ruoyi.common.core.service.IStatisticsService;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.exception.ServiceException;
@@ -13,10 +20,13 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.mapper.SysConfigMapper;
 import com.ruoyi.system.service.ISysConfigService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,11 +37,17 @@ import java.util.List;
  */
 @Service
 public class SysConfigServiceImpl implements ISysConfigService {
+
+    protected final Logger logger = LoggerFactory.getLogger(SysConfigServiceImpl.class);
+
     @Autowired
     private SysConfigMapper configMapper;
 
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private IStatisticsService statisticsService;
 
     /**
      * 项目启动时，初始化参数到缓存
@@ -219,5 +235,34 @@ public class SysConfigServiceImpl implements ISysConfigService {
      */
     private String getCacheKey(String configKey) {
         return CacheConstants.SYS_CONFIG_KEY + configKey;
+    }
+
+    /**
+     * 设置首页提醒参数配置
+     * @param rentConfigVo 提醒配置参数
+     * @return
+     */
+    @Override
+    public AjaxResult setRentRmind(RentConfigVo rentConfigVo) {
+        SysConfig config = new SysConfig();
+        config.setConfigKey(rentConfigVo.getConfigKey());
+        SysConfig sysConfig = configMapper.selectConfig(config);
+        sysConfig.setConfigValue(rentConfigVo.getConfigValue().toString());
+        int i = configMapper.updateConfig(sysConfig);
+        if (i == 0) {
+            AjaxResult.error();
+        }
+        //刷新缓存
+        resetConfigCache();
+        return AjaxResult.success();
+    }
+
+
+    @Override
+    public List<ContractExpireDto> getContractExpire() {
+        String configValue = selectConfigByKey("hpContractRemindDays");
+        String jsonValue = JSONObject.toJSONString(configValue);
+        ContractExpireVo contractExpireVo = JSON.parseObject(configValue, ContractExpireVo.class);
+        return statisticsService.getContractExpire(contractExpireVo);
     }
 }
