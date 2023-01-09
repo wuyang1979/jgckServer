@@ -1,3 +1,5 @@
+import request from "../../utils/request";
+
 export function intCovString(val) {
   var type = typeof (val);
   if ('string' === type) {

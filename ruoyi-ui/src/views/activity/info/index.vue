@@ -196,7 +196,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="报名人数" prop="registerNumber">
-              <el-input  type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
+              <el-input type="number" v-model="form.registerNumber" placeholder="请输入报名人数"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -265,7 +265,10 @@
         multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件</div>
+        <div class="el-upload__tip" slot="tip">
+          <div class="el-button-download">只能上传jpg/png文件</div>
+          <el-button class="el-button-download" @click="downloadImg" size="mini">下载</el-button>
+        </div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitUpload">保 存</el-button>
@@ -281,6 +284,10 @@
       append-to-body
     >
       <el-image :src="url" style="width: 100%; height: 400px" fit="contain"></el-image>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="downloadById">下载</el-button>
+        <el-button @click="cancelDownload">返 回</el-button>
+      </div>
     </el-dialog>
 
   </div>
@@ -305,7 +312,6 @@ import {
   listFile
 } from "@/api/activity/relation";
 import {getToken} from "@/utils/auth";
-import upLoadPic from "../../../components/upLoadPic";
 import UpLoadPic from "../../../components/upLoadPic";
 
 export default {
@@ -314,11 +320,14 @@ export default {
   dicts: ['sys_notice_status'],
   data() {
     return {
+
+      imageId: '',
+
       dialogVisible: false,
 
       uploadUrl: process.env.VUE_APP_BASE_API + '/common/upload/img/',
 
-      cover:'',
+      cover: '',
 
       url: '',
 
@@ -327,7 +336,7 @@ export default {
       fileIds: [],
 
       headers: {
-        Authorization:'Bearer '+ getToken()
+        Authorization: 'Bearer ' + getToken()
       },
 
       upload: false,
@@ -395,6 +404,34 @@ export default {
   },
   methods: {
 
+    //关闭查看文件弹框
+    cancelDownload() {
+      this.dialogVisible = false;
+    },
+
+    //根据文件id下载单个文件
+    downloadById() {
+      this.$download.id(this.imageId)
+    },
+
+    //已zip格式下载活动全部图片
+    downloadImg() {
+      let imgs = this.fileList;
+      if (imgs.length === 0) {
+        this.$modal.msgError("没有图片可以下载")
+      } else {
+        let arrimgs = [];
+        imgs.forEach(i => {
+          let img = {
+            fileUrl: i.url,
+            renameFileName: i.renameFileName,
+          }
+          arrimgs.push(img)
+        })
+        this.$download.filesToRar(arrimgs, `活动图片${new Date().getTime()}`);
+      }
+    },
+
     //删除文件
     handleRemove(file, fileList) {
       this.fileIds = [];
@@ -415,6 +452,7 @@ export default {
             name: r.originalFileName,
             id: r.fileId,
             url: r.url,
+            renameFileName: r.newFileName,
           })
         })
         this.fileList = list;
@@ -452,8 +490,9 @@ export default {
 
     //查看图片
     handlePreview(file) {
-      this.cover=file.url||file.response.src
-      this.dialogVisible=true
+      this.cover = file.url || file.response.src;
+      this.imageId = file.id || file.response.id;
+      this.dialogVisible = true;
     },
 
     //图片上传保存按钮
@@ -683,11 +722,9 @@ export default {
     }
 
   },
-  watch:{
+  watch: {
     cover: {
-      handler(newVal, oldVal) {
-        console.info("newVal+>",newVal);
-        console.info("oldVal+>",oldVal);
+      handler(newVal, oldVal, id) {
         if (newVal === '' || newVal === null || !newVal) {
           this.url = ''
           this.showUpload = true
@@ -711,6 +748,15 @@ export default {
 /deep/ .el-upload-dragger {
   height: 200px !important;
   width: 560px !important;
+}
+
+.el-upload__tip {
+  display: flex;
+  justify-content: space-between;
+}
+
+.el-button-download {
+  align-self: center;
 }
 
 

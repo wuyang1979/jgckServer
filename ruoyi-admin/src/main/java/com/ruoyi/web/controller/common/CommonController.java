@@ -240,4 +240,24 @@ public class CommonController extends BaseController {
             log.error("下载文件失败", e);
         }
     }
+
+
+    @GetMapping("/download/{id}")
+    public void downloadById(@PathVariable String id,HttpServletResponse response,HttpServletRequest request){
+        try {
+            FileInfo fileInfo = fileInfoService.selectFileInfoByFileId(id);
+            String fileName=fileInfo.getFileName();
+            if (!FileUtils.checkAllowDownload(fileName)) {
+                throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+            }
+            String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
+            String filePath = profileImg + fileName;
+
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            FileUtils.setAttachmentResponseHeader(response, realFileName);
+            FileUtils.writeBytes(filePath, response.getOutputStream());
+        } catch (Exception e) {
+            log.error("下载文件失败", e);
+        }
+    }
 }
