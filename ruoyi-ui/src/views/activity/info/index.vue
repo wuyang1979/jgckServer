@@ -394,6 +394,8 @@ export default {
     this.getSign();
   },
   methods: {
+
+    //删除文件
     handleRemove(file, fileList) {
       this.fileIds = [];
       fileList.forEach(fl => {
@@ -401,6 +403,7 @@ export default {
       })
     },
 
+    //获取图片list
     listFile() {
       listFile(this.businessId).then(respone => {
         var list = [];
@@ -418,17 +421,19 @@ export default {
       })
     },
 
+    //关闭上传图片弹框
     cancelUpload() {
       this.upload = false;
     },
 
+    //上传图片绑定业务id
     editFileByBusinessId(businessId) {
       editFileByBusinessId(businessId, this.fileIds).then(respone => {
         this.$modal.msgSuccess("保存成功")
       })
     },
 
-
+    //文件变化事件
     handleChange(file, fileList) {
       var fileIds = [];
       if (fileList.length > 0) {
@@ -444,34 +449,44 @@ export default {
       }
       this.fileIds = fileIds
     },
+
+    //查看图片
     handlePreview(file) {
       this.cover=file.url||file.response.src
       this.dialogVisible=true
     },
 
+    //图片上传保存按钮
     submitUpload() {
       this.editFileByBusinessId(this.businessId)
       this.upload = false;
     },
 
+    //文件个数超出
     handleExceed() {
       this.$modal.msgError('最多上传12个文件！');
     },
+
+    //打开图片上传弹框
     handleUpload(row) {
       this.fileList = [];
       this.title = '活动图片上传';
       this.businessId = row.activityId;
       this.listFile();
       this.upload = true;
-
     },
+
+    //获取今天时间
     getToday() {
       return getNowDateTime();
     },
 
+    //删除报名人员
     delRelationaAll(val) {
       return delRelationAll(val)
     },
+
+    //查看报名人员
     goDetail(val) {
       this.$router.push({
         path: '/service/person',
@@ -480,6 +495,8 @@ export default {
         }
       })
     },
+
+    //取消报名
     canceSign(row) {
       this.$modal.confirm('是否确认取消活动标题为"' + row.activityTitle + '"的报名？').then(function () {
         return cancelRelation(row.activityId);
@@ -490,6 +507,7 @@ export default {
       });
     },
 
+    //查询是否报名
     selectIsSign(activityId) {
       var list = this.signList;
       var result;
@@ -500,6 +518,8 @@ export default {
       })
       return result;
     },
+
+    //获取报名人员集合
     getSign() {
       selectSign().then(respone => {
         this.signList = respone.rows;
@@ -507,6 +527,7 @@ export default {
       })
     },
 
+    //报名活动
     SignActivity(row) {
       this.signQueryParams.activityId = row.activityId;
       addRelation(this.signQueryParams).then(respone => {
@@ -514,8 +535,8 @@ export default {
         this.getList();
       }).catch(() => {
       })
-
     },
+
     //取消发布
     cancelRelease(row) {
       this.$modal.confirm('是否确认取消发布标题为"' + row.activityTitle + '"的活动？').then(function () {
@@ -543,7 +564,6 @@ export default {
       });
     },
 
-
     /** 查询活动基本信息列表 */
     getList() {
       this.getSign()
@@ -554,11 +574,13 @@ export default {
         this.loading = false;
       });
     },
+
     // 取消按钮
     cancel() {
       this.open = false;
       this.reset();
     },
+
     // 表单重置
     reset() {
       this.form = {
@@ -578,16 +600,19 @@ export default {
       };
       this.resetForm("form");
     },
+
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
       this.getList();
     },
+
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm("queryForm");
       this.handleQuery();
     },
+
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.activityId)
@@ -595,12 +620,14 @@ export default {
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
+
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
       this.open = true;
       this.title = "添加活动基本信息";
     },
+
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.activityTime = [];
@@ -612,6 +639,7 @@ export default {
         this.title = "修改活动基本信息";
       });
     },
+
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
@@ -633,6 +661,7 @@ export default {
         }
       });
     },
+
     /** 删除按钮操作 */
     handleDelete(row) {
       const activityIds = row.activityId || this.ids;
@@ -645,12 +674,14 @@ export default {
       }).catch(() => {
       });
     },
+
     /** 导出按钮操作 */
     handleExport() {
       this.download('activity/info/export', {
         ...this.queryParams
       }, `info_${new Date().getTime()}.xlsx`)
     }
+
   },
   watch:{
     cover: {
