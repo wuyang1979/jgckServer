@@ -271,8 +271,8 @@ export default {
 
     handleContract() {
       this.title = "合同到期提醒设置";
-      this.getRemindConfig("hpContractRemindDays").then(res=>{
-        this.contractForm=res
+      this.getRemindConfig("hpContractRemindDays").then(res => {
+        this.contractForm = res
       })
       this.setContract = true;
     },
@@ -305,8 +305,8 @@ export default {
 
     handleRent() {
       this.title = "租金到期提醒设置";
-      this.getRemindConfig("hpRentRemindDays").then(res=>{
-        this.rentForm=res;
+      this.getRemindConfig("hpRentRemindDays").then(res => {
+        this.rentForm = res;
       });
       this.setRent = true;
     },
@@ -342,9 +342,13 @@ export default {
           left: 'center',
           formatter: function (name) {
             let data = option.series[0].data
-            for (let i = 0; i < data.length; i++) {
-              return `${name}\t\t${data[i].value}`
-            }
+            let value;
+            data.forEach(d => {
+              if (name === d.name) {
+                value = d.value
+              }
+            })
+            return `${name}\t\t ${value}`
           },
         },
         series: [
@@ -355,7 +359,7 @@ export default {
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 40,
-              borderColor: '#fff',
+              borderColor: 'whitesmoke',
               borderWidth: 2
             },
             label: {
@@ -375,7 +379,7 @@ export default {
             data: this.shopForm,
             // 颜色
             color: [
-              '#794af0', '#d6c221'
+              '#EDEEF0', '#1A79FF'
             ]
           }
         ]
@@ -396,9 +400,13 @@ export default {
           left: 'center',
           formatter: function (name) {
             let data = option.series[0].data
-            for (let i = 0; i < data.length; i++) {
-              return `${name}\t\t${data[i].value}`
-            }
+            let value;
+            data.forEach(d => {
+              if (name === d.name) {
+                value = d.value
+              }
+            })
+            return `${name}\t\t ${value}`
           },
         },
         series: [
@@ -409,7 +417,7 @@ export default {
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 40,
-              borderColor: '#fff',
+              borderColor: 'whitesmoke',
               borderWidth: 2
             },
             label: {
@@ -429,7 +437,7 @@ export default {
             data: this.officeForm,
             // 颜色
             color: [
-              '#794af0', '#d6c221'
+              '#EDEEF0', '#1A79FF'
             ]
           }
         ]
@@ -450,9 +458,13 @@ export default {
           left: 'center',
           formatter: function (name) {
             let data = option.series[0].data
-            for (let i = 0; i < data.length; i++) {
-              return `${name}\t\t${data[i].value}`
-            }
+            let value;
+            data.forEach(d => {
+              if (name === d.name) {
+                value = d.value
+              }
+            })
+            return `${name}\t\t ${value}`
           },
         },
         series: [
@@ -463,7 +475,7 @@ export default {
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 40,
-              borderColor: '#fff',
+              borderColor: 'whitesmoke',
               borderWidth: 2
             },
             label: {
@@ -484,7 +496,7 @@ export default {
             this.apartmentForm,
             // 颜色
             color: [
-              '#794af0', '#d6c221'
+              '#EDEEF0', '#1A79FF'
             ]
           }
         ]
