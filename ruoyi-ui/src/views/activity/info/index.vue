@@ -113,25 +113,6 @@
       <el-table-column label="操作" align="left" class-name="small-padding fixed-width" width="250px">
         <template slot-scope="scope">
           <el-button
-            v-if="selectIsSign(scope.row.activityId)==='0'&&scope.row.status==='1'"
-            :disabled="getToday()>scope.row.registerDeadline"
-            size="mini"
-            type="text"
-            icon="el-icon-thumb"
-            @click="SignActivity(scope.row)"
-            v-hasPermi="['activity:relation:add']"
-          >报名
-          </el-button>
-          <el-button
-            v-if="scope.row.status==='1'&&selectIsSign(scope.row.activityId)!='0'"
-            size="mini"
-            type="text"
-            icon="el-icon-thumb"
-            @click="canceSign(scope.row)"
-            v-hasPermi="['activity:relation:remove']"
-          >取消报名
-          </el-button>
-          <el-button
             v-if="scope.row.status==='1'"
             size="mini"
             type="text"
@@ -400,7 +381,7 @@ export default {
   },
   created() {
     this.getList();
-    this.getSign();
+    // this.getSign();
   },
   methods: {
 
@@ -536,27 +517,27 @@ export default {
     },
 
     //取消报名
-    canceSign(row) {
-      this.$modal.confirm('是否确认取消活动标题为"' + row.activityTitle + '"的报名？').then(function () {
-        return cancelRelation(row.activityId);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("取消报名成功");
-      }).catch(() => {
-      });
-    },
+    // canceSign(row) {
+    //   this.$modal.confirm('是否确认取消活动标题为"' + row.activityTitle + '"的报名？').then(function () {
+    //     return cancelRelation(row.activityId);
+    //   }).then(() => {
+    //     this.getList();
+    //     this.$modal.msgSuccess("取消报名成功");
+    //   }).catch(() => {
+    //   });
+    // },
 
     //查询是否报名
-    selectIsSign(activityId) {
-      var list = this.signList;
-      var result;
-      list.forEach(l => {
-        if (activityId === l.activityId) {
-          result = l.isSign
-        }
-      })
-      return result;
-    },
+    // selectIsSign(activityId) {
+    //   var list = this.signList;
+    //   var result;
+    //   list.forEach(l => {
+    //     if (activityId === l.activityId) {
+    //       result = l.isSign
+    //     }
+    //   })
+    //   return result;
+    // },
 
     //获取报名人员集合
     getSign() {
@@ -605,7 +586,7 @@ export default {
 
     /** 查询活动基本信息列表 */
     getList() {
-      this.getSign()
+      // this.getSign()
       this.loading = true;
       listActivity(this.queryParams).then(response => {
         this.infoList = response.rows;

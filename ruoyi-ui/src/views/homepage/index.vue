@@ -80,9 +80,10 @@
           height="220"
           stripe
           style="width: 100%">
+          <el-table-column prop="name" align="center" label="报修人"/>
           <el-table-column prop="date" align="center" label="房源号"/>
-          <el-table-column prop="name" align="center" label="报修人名称"/>
-          <el-table-column prop="address" align="center" label="报修日期">
+          <el-table-column prop="name" align="center" label="描述"/>
+          <el-table-column prop="address" align="center" label="报修时间">
             <template slot-scope="scope">
               <span style="color: red">{{ scope.row.address }}</span>
             </template>
@@ -221,6 +222,7 @@ export default {
   },
   methods: {
 
+    // 获取提醒设置参数
     async getRemindConfig(key) {
       var result = null;
       await getConfigKey(key).then(respone => {
@@ -229,24 +231,27 @@ export default {
       return result;
     },
 
+    // 获取证件列表
     getCredential() {
       getCredential().then(respone => {
         this.credentialData = respone.rows;
       })
     },
 
+    // 跳转合同列表页面
     goContractTable() {
       this.$router.push({
         path: '/business/contract/info',
       })
     },
 
-
+    // 关闭合同提醒设置弹窗
     cancelContract() {
       this.setContract = false;
       this.contractForm = {};
     },
 
+    // 合同到期时间提交
     submitContract() {
       this.$refs["contract"].validate(valid => {
         if (valid) {
@@ -269,6 +274,7 @@ export default {
       });
     },
 
+    // 设置合同到期提醒时间
     handleContract() {
       this.title = "合同到期提醒设置";
       this.getRemindConfig("hpContractRemindDays").then(res => {
@@ -277,11 +283,13 @@ export default {
       this.setContract = true;
     },
 
+    // 关闭租金到期时间弹框
     cancelRent() {
       this.setRent = false;
       this.rentForm = {};
     },
 
+    // 租金到期时间提交
     submitRent() {
       this.$refs["rent"].validate(valid => {
         if (valid) {
@@ -303,6 +311,7 @@ export default {
       });
     },
 
+    // 设置租金到期提醒时间
     handleRent() {
       this.title = "租金到期提醒设置";
       this.getRemindConfig("hpRentRemindDays").then(res => {
@@ -311,13 +320,14 @@ export default {
       this.setRent = true;
     },
 
+    // 获取合同列表
     getContract() {
       getContract().then(respone => {
         this.contractData = respone.rows;
       })
     },
 
-    //入驻统计
+    // 入驻统计
     getSettle() {
       getSettle().then(respone => {
         this.shopForm = respone.shop;
@@ -329,6 +339,7 @@ export default {
       })
     },
 
+    // 商铺饼图
     shopStatisticsChart() {
       // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
       let myChart = this.$echarts.init(document.getElementById("shopStatistics"));
@@ -387,6 +398,8 @@ export default {
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
     },
+
+    // 办公饼图
     officeStatistics() {
       // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
       let myChart = this.$echarts.init(document.getElementById("officeStatistics"));
@@ -445,6 +458,8 @@ export default {
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
     },
+
+    // 公寓饼图
     apartmentStatistics() {
       // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
       let myChart = this.$echarts.init(document.getElementById("apartmentStatistics"));
@@ -538,10 +553,6 @@ export default {
   margin: 0.2%;
   background-color: whitesmoke;
 }
-
-//.div_middle {
-//  padding-top: 20px;
-//}
 
 .left {
   text-align: left;

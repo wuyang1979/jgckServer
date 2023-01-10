@@ -41,15 +41,16 @@
       </el-row>
       <div class="div_history_table">
         <el-table v-loading="loading" :data="infoList" height="400">
-          <el-table-column label="人员名称" align="center" prop="nickName"/>
-          <el-table-column label="性别" align="center" prop="sex">
-            <template slot-scope="scope">
-              <dict-tag :options="dict.type.sys_user_sex" :value="scope.row.sex"/>
-            </template>
-          </el-table-column>
-          <el-table-column label="人员角色" align="center" prop="roleName"/>
-          <el-table-column label="人员部门" align="center" prop="deptName"/>
-          <el-table-column label="人员手机号" align="center" prop="phoneNumber"/>
+          <el-table-column label="姓名" align="center" prop="nickName"/>
+<!--          <el-table-column label="性别" align="center" prop="sex">-->
+<!--            <template slot-scope="scope">-->
+<!--              <dict-tag :options="dict.type.sys_user_sex" :value="scope.row.sex"/>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+<!--          <el-table-column label="人员角色" align="center" prop="roleName"/>-->
+<!--          <el-table-column label="人员部门" align="center" prop="deptName"/>-->
+<!--          <el-table-column label="人员手机号" align="center" prop="phoneNumber"/>-->
+          <el-table-column label="电话" align="center" prop="phoneNumber"/>
           <el-table-column label="报名时间" align="center" prop="signTime">
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
@@ -117,7 +118,7 @@ export default {
     //返回房源列表
     backRoom() {
       this.$router.push({
-        path: '/service/info'
+        path: '/service/activity'
       })
     }
   }

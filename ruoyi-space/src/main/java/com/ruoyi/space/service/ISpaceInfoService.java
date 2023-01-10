@@ -28,6 +28,13 @@ public interface ISpaceInfoService {
     public List<SpaceInfo> selectSpaceInfoList(SpaceInfo spaceInfo);
 
     /**
+     * 查询空间基本信息列表(无数据过滤)
+     * @param spaceInfo
+     * @return
+     */
+    public List<SpaceInfo> listNoScope(SpaceInfo spaceInfo);
+
+    /**
      * 新增空间基本信息
      *
      * @param spaceInfo 空间基本信息

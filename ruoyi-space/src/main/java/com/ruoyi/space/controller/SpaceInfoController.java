@@ -46,6 +46,15 @@ public class SpaceInfoController extends BaseController {
     }
 
     /**
+     * 查询空间基本信息列表
+     */
+    @GetMapping("/listNoScope")
+    public TableDataInfo listNoScope(SpaceInfo spaceInfo) {
+        List<SpaceInfo> list = tSpaceInfoService.listNoScope(spaceInfo);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出空间基本信息列表
      */
     @PreAuthorize("@ss.hasPermi('space:info:export')")

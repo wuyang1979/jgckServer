@@ -53,7 +53,7 @@
                ai.activity_address,
                ai.register_deadline,
                ai.register_number,
-               (select COUNT(DISTINCT aur.activity_id, aur.user_id)
+               (select COUNT(DISTINCT aur.activity_id, aur.user_name)
                 from t_activity_user_relation aur
                 where aur.activity_id = ai.activity_id) signNumber
         from t_activity_info ai

@@ -102,6 +102,17 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img" />
         </div>
       </el-form-item>
+      <el-form-item prop="spaceId">
+        <el-select  style="width: 100%" v-model="loginForm.spaceId" placeholder="空间">
+          <el-option
+            v-for="item in spaceOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+          <svg-icon slot="prefix" icon-class="coin" class="el-icon-coin input-icon" />
+        </el-select>
+      </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
 
       <el-form-item style="width:100%;">
@@ -190,11 +201,14 @@ import {
 } from '@/api/login'
 import Cookies from 'js-cookie'
 import { encrypt, decrypt } from '@/utils/jsencrypt'
+import {listSpaceNoScope} from "../api/space/info";
+import cache from "../plugins/cache";
 
 export default {
   name: 'Login',
   data() {
     return {
+      spaceOptions:[],
       codeUrl: '',
       Copyright: '',
       ICP: '',
@@ -212,6 +226,7 @@ export default {
         rememberMe: false,
         code: '',
         uuid: '',
+        spaceId:'',
       },
       loginVerForm: {
         mobile: '',
@@ -237,6 +252,8 @@ export default {
           { required: true, trigger: 'blur', message: '请输入您的密码' },
         ],
         code: [{ required: true, trigger: 'change', message: '请输入验证码' }],
+
+        spaceId: [{ required: true, trigger: 'change', message: '请选择空间' }],
       },
       loginVerRules: {
         mobile: [
@@ -278,8 +295,24 @@ export default {
     this.getLoginType()
     this.getCookie()
     this.getSysInfo()
+    this.getSpaceList()
   },
   methods: {
+
+    getSpaceList(){
+      let params={}
+      listSpaceNoScope(params).then(response=>{
+        let list=response.rows;
+        list.forEach(l=>{
+          let opt={
+            value:l.spaceId,
+            label:l.spaceName
+          }
+          this.spaceOptions.push(opt)
+        })
+      })
+    },
+
     getCode() {
       getCodeImg().then((res) => {
         this.captchaEnabled =
@@ -434,14 +467,19 @@ export default {
             Cookies.set('rememberMe', this.loginForm.rememberMe, {
               expires: 30,
             })
+            Cookies.set('spaceId', this.loginForm.spaceId, {
+              expires: 30,
+            })
           } else {
             Cookies.remove('username')
             Cookies.remove('password')
             Cookies.remove('rememberMe')
+            Cookies.remove('spaceId')
           }
           this.$store
             .dispatch('Login', this.loginForm)
             .then(() => {
+              cache.session.set("spaceId",this.loginForm.spaceId)
               this.$router.push({ path: this.redirect || '/' }).catch(() => {})
             })
             .catch(() => {

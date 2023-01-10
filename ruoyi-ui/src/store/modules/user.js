@@ -8,7 +8,8 @@ const user = {
     name: '',
     avatar: '',
     roles: [],
-    permissions: []
+    permissions: [],
+    spaces:[]
   },
 
   mutations: {
@@ -23,6 +24,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_SPACES: (state, spaces) => {
+      state.spaces = spaces
     },
     SET_PERMISSIONS: (state, permissions) => {
       state.permissions = permissions
@@ -89,6 +93,11 @@ const user = {
             commit('SET_PERMISSIONS', res.permissions)
           } else {
             commit('SET_ROLES', ['ROLE_DEFAULT'])
+          }
+          if (res.spaces&& res.spaces.length>0){
+            commit('SET_SPACES',res.spaces)
+          }else {
+            commit('SET_SPACES',['SPACE_DEFAULT'])
           }
           commit('SET_NAME', user.userName)
           commit('SET_AVATAR', avatar)

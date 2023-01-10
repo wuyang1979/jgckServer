@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.common;
 
 
-import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
@@ -9,13 +8,13 @@ import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
 import com.ruoyi.common.core.domain.vo.RentConfigVo;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.service.IStatisticsService;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.service.ISysConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -24,6 +23,7 @@ import java.util.List;
  * @author gubut
  * @date 2022-12-28
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/statistics")
 @Api("首页")
@@ -37,7 +37,8 @@ public class StatisticsController extends BaseController {
 
     @GetMapping("/settle")
     @ApiOperation("入驻统计")
-    public AjaxResult getSettleStatistics() {
+    public AjaxResult getSettleStatistics(HttpServletRequest request) {
+        String token = (String) request.getSession().getAttribute("spaceId");
         return statisticsService.getSettleStatistics();
     }
 
@@ -60,8 +61,9 @@ public class StatisticsController extends BaseController {
     @ApiOperation("设置到期提醒配置")
     public AjaxResult setRentRmind(@RequestBody RentConfigVo rentConfigVo) {
         return sysConfigService.setRentRmind(rentConfigVo);
-    };
+    }
 
+    ;
 
 
 }

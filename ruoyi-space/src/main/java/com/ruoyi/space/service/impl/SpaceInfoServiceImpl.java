@@ -43,9 +43,20 @@ public class SpaceInfoServiceImpl implements ISpaceInfoService {
      * @param spaceInfo 空间基本信息
      * @return 空间基本信息
      */
-    @DataScope(userAlias = "s",deptAlias = "s")
+    @DataScope(userAlias = "s", deptAlias = "s")
     @Override
     public List<SpaceInfo> selectSpaceInfoList(SpaceInfo spaceInfo) {
+        return spaceInfoMapper.selectSpaceInfoList(spaceInfo);
+    }
+
+    /**
+     * 查询空间基本信息列表 (无数据过滤)
+     *
+     * @param spaceInfo
+     * @return
+     */
+    @Override
+    public List<SpaceInfo> listNoScope(SpaceInfo spaceInfo) {
         return spaceInfoMapper.selectSpaceInfoList(spaceInfo);
     }
 

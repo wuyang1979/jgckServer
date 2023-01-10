@@ -55,4 +55,21 @@ public class SysPermissionService {
         }
         return perms;
     }
+
+    /**
+     * 获取空间数据权限
+     *
+     * @param user 用户信息
+     * @return 菜单权限信息
+     */
+    public Set<String> getSpacePermission(SysUser user) {
+        Set<String> perms = new HashSet<String>();
+        // 管理员拥有所有权限
+        if (user.isAdmin()) {
+            perms.add("admin");
+        } else {
+            perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));
+        }
+        return perms;
+    }
 }

@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.system;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysMenu;
@@ -10,6 +9,7 @@ import com.ruoyi.common.core.domain.model.LoginBody;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
+import com.ruoyi.space.service.ISpaceInfoService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 import io.swagger.annotations.Api;
@@ -42,6 +42,9 @@ public class SysLoginController {
 
     @Autowired
     private SysPermissionService permissionService;
+
+    @Autowired
+    private ISpaceInfoService spaceInfoService;
 
     /**
      * 登录方式
@@ -113,10 +116,13 @@ public class SysLoginController {
         Set<String> roles = permissionService.getRolePermission(user);
         // 权限集合
         Set<String> permissions = permissionService.getMenuPermission(user);
+        // todo 空间集合
+        List<String> spaces = spaceInfoService.selectSpaceListByUserId(user.getUserId());
         AjaxResult ajax = AjaxResult.success();
         ajax.put("user", user);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
+        ajax.put("spaces", spaces);
         return ajax;
     }
 

@@ -113,20 +113,10 @@
 
 
     <select id="selectActivityPersonList" resultMap="ActivityPersonDtoResult">
-        SELECT aur.user_id,
-               su.nick_name,
-               su.phonenumber,
-               GROUP_CONCAT(sr.role_name) role_name,
-               su.sex,
-               sd.dept_name,
+        SELECT aur.user_name,
                aur.create_time
         FROM t_activity_user_relation aur
-                 LEFT JOIN sys_user su ON aur.user_id = su.user_id
-                 LEFT JOIN sys_user_role sur ON su.user_id = sur.user_id
-                 LEFT JOIN sys_role sr ON sr.role_id = sur.role_id
-                 LEFT JOIN sys_dept sd ON su.dept_id = sd.dept_id
         WHERE aur.activity_id = #{activityId}
-        GROUP BY aur.user_id
     </select>
 
 
