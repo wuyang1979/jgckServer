@@ -228,6 +228,8 @@
 import {listTenants, getTenants, delTenants, addTenants, updateTenants} from "@/api/tenants/info";
 import {intCovString} from "@/api/common/common";
 
+const spaceId=sessionStorage.getItem("spaceId");
+
 export default {
   name: "Tenants",
   dicts: ['sex_type', 'card_type'],
@@ -293,6 +295,7 @@ export default {
         emergencyContactName: null,
         emergencyContactPhone: null,
         remark: null,
+        spaceId:spaceId,
       },
 
       // 表单参数
@@ -482,6 +485,7 @@ export default {
           if (this.isQuery) {
             this.open = false;
           } else {
+            this.form.spaceId=spaceId;
             if (this.form.tenantsId != null) {
               updateTenants(this.form).then(response => {
                 this.$modal.msgSuccess("修改成功");

@@ -41,9 +41,10 @@ router.beforeEach((to, from, next) => {
               next({...to, replace: true}) // hack方法 确保addRoutes已完成
             })
           }else if (!isAdmin && !isSpace){
-            store.dispatch('LogOut').then(() => {})
-            Message.error("请选择正确的空间");
-            location.reload();
+            store.dispatch('LogOut').then(() => {
+              location.reload();
+              Message.error("请选择正确的空间")
+            })
           }
         }).catch(err => {
           store.dispatch('LogOut').then(() => {

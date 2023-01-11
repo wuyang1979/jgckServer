@@ -175,7 +175,7 @@
                 v-model="form.roomId"
                 placeholder="请选择房源号">
                 <el-option
-                  v-for="item in roomOptions"
+                  v-for="item in roomList"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -365,6 +365,8 @@ import {intCovString} from "@/api/common/common";
 import {listTenantsNoScope} from "../../../api/tenants/info";
 import {listRoomNoScope} from "../../../api/room/info";
 
+const spaceId=sessionStorage.getItem("spaceId")
+
 export default {
   name: "Info",
   dicts: ['payment_type', 'room_type', 'contract_type', 'pay_type', 'contract_status', 'room_status'],
@@ -408,16 +410,19 @@ export default {
       open: false,
 
       roomQueryParams: {
-        pageSize: 99999
+        pageSize: 99999,
+        spaceId:spaceId,
       },
 
       tenantsQueryParams: {
         pageSize: 99999,
+        spaceId:spaceId,
       },
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        spaceId:spaceId,
         contractNumber: null,
         signTimeStart: null,
         signTimeEnd: null,
@@ -444,7 +449,6 @@ export default {
     this.getList();
     this.initTenants();
     this.initRoom()
-    this.roomOptions = this.roomList;
     this.tenantsOptions = this.tenantsList;
 
   },
@@ -753,6 +757,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.spaceId=spaceId;
           this.initTogetherPersonIdParams();
           if (this.form.contractId != null) {
             updateContract(this.form).then(response => {

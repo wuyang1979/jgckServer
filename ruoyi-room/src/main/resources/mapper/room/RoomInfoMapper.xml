@@ -85,8 +85,7 @@
         <where>
             <if test="roomId != null  and roomId != ''">and room_id = #{roomId}</if>
             <if test="roomName != null  and roomName != ''">and room_name like concat('%',#{roomName},'%')</if>
-            <if test="spaceName != null  and spaceName != ''">and space_name like concat('%',#{spaceName},'%')</if>
-            <if test="spaceId != null  and spaceId != ''">and r.space_id in(#{spaceId})</if>
+            <if test="spaceId != null  and spaceId != ''">and r.space_id = #{spaceId}</if>
             <if test="roomType != null ">and room_type = #{roomType}</if>
             <if test="roomStatus != null ">and room_status = #{roomStatus}</if>
             <if test="floor != null  and floor != ''">and floor = #{floor}</if>

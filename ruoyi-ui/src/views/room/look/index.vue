@@ -99,7 +99,7 @@
 
     <el-table v-loading="loading" :data="lookList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="房源名称" align="center" prop="roomName"/>
+      <el-table-column label="房源号" align="center" prop="roomName"/>
       <el-table-column label="带看人" align="center" prop="nickName"/>
       <el-table-column label="客户姓名" align="center" prop="customerName"/>
       <el-table-column label="客户电话" align="center" prop="customerPhone"/>
@@ -149,18 +149,14 @@
     <!-- 添加或修改房源带看基本信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="房源名称" prop="roomId">
+        <el-form-item label="房源号" prop="roomId">
           <template>
             <el-select
               v-model="form.roomId"
-              filterable
-              remote
               clearable
-              placeholder="请输入关键词"
-              :remote-method="getRoomList"
-              :loading="loading">
+              placeholder="请选择房源号">
               <el-option
-                v-for="item in roomOptions"
+                v-for="item in roomList"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -196,18 +192,14 @@
     <!--    房源带看详情-->
     <el-dialog :title="title" :visible.sync="query" width="700px" append-to-body>
       <el-form ref="queryForm" :model="queryForm" :rules="rules" label-width="80px">
-        <el-form-item label="房源名称" prop="roomId">
+        <el-form-item label="房源号" prop="roomId">
           <template>
             <el-select disabled
                        v-model="queryForm.roomId"
-                       filterable
-                       remote
                        clearable
-                       placeholder="请输入关键词"
-                       :remote-method="getRoomList"
-                       :loading="loading">
+                       placeholder="请选择房源号">
               <el-option
-                v-for="item in roomOptions"
+                v-for="item in roomList"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -216,7 +208,7 @@
           </template>
         </el-form-item>
         <el-form-item label="带看人" prop="bindUserId">
-          <treeselect v-model="queryForm.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
+          <treeselect disabled="true" v-model="queryForm.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
         </el-form-item>
         <el-form-item label="客户姓名" prop="customerName">
           <el-input readonly v-model="queryForm.customerName" placeholder="请输入客户姓名"/>
@@ -244,6 +236,9 @@ import {listLook, getLook, delLook, addLook, updateLook, getTree} from "@/api/ro
 import {listRoomNoScope} from "../../../api/room/info";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {intCovString} from "../../../api/common/common";
+
+const spaceId=sessionStorage.getItem("spaceId")
 
 export default {
   name: "Look",
@@ -254,49 +249,62 @@ export default {
 
     return {
       appointTime: [],
+
       roomQueryParams: {
         pageSize: 99999,
-        spaceName: null,
-        spaceAddress: null,
-        delstatus: null,
+        spaceId:spaceId,
       },
       roomOptions: [],
-      roomList: [],
-      treeData: [],
 
+      roomList: [],
+
+      treeData: [],
 
       queryForm: {},
 
       query: false,
+
       // 遮罩层
       loading: true,
+
       // 选中数组
       ids: [],
+
       // 非单个禁用
       single: true,
+
       // 非多个禁用
       multiple: true,
+
       // 显示搜索条件
       showSearch: true,
+
       // 总条数
       total: 0,
+
       // 房源带看基本信息表格数据
       lookList: [],
+
       // 弹出层标题
       title: "",
+
       // 是否显示弹出层
       open: false,
+
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        spaceId:spaceId,
         customerName: null,
         customerPhone: null,
         appointTimeStart: null,
         appointTimeEnd: null,
       },
+
       // 表单参数
       form: {},
+
       // 表单校验
       rules: {
         bindUserId: [{required: true, message: '请选择带看人', trigger: 'change'}],
@@ -325,6 +333,7 @@ export default {
     this.initRoom()
   },
   methods: {
+
     //递归删除为0的children属性
     delectChildren(tree){
       tree.forEach(t=>{
@@ -336,6 +345,7 @@ export default {
       })
     },
 
+    //初始化房源集合
     initRoom() {
       var list = [];
       listRoomNoScope(this.roomQueryParams).then(respone => {
@@ -351,20 +361,9 @@ export default {
       this.roomList = list
     },
 
-    getRoomList(query) {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-        this.roomOptions = this.roomList.filter(item => {
-          return item.label.indexOf(query) > -1;
-        });
-      }, 200);
-    },
-
     init() {
       getTree().then(response => {
         this.treeData.push(response.data)
-        console.info("treeData=>",this.treeData)
         this.delectChildren(this.treeData)
       })
     },
@@ -374,16 +373,17 @@ export default {
       this.query = false;
       this.queryForm = {};
     },
+
     // 查看空间详情
     queryLook(row) {
       this.query = true;
       this.title = "房源带看基本信息详情";
       this.queryForm = row;
-      this.getRoomList("")
       this.treeData.forEach(t => {
         this.$set(t, 'disabled', true)
       })
     },
+
     /** 查询房源带看基本信息列表 */
     getList() {
       this.loading = true;
@@ -394,11 +394,13 @@ export default {
         this.loading = false;
       });
     },
+
     // 取消按钮
     cancel() {
       this.open = false;
       this.reset();
     },
+
     // 表单重置
     reset() {
       this.form = {
@@ -408,6 +410,7 @@ export default {
       };
       this.resetForm("form");
     },
+
     initAppointTime() {
       var time = this.appointTime;
       if (time.length > 0) {
@@ -415,11 +418,13 @@ export default {
         this.queryParams.appointTimeEnd = time[1]
       }
     },
+
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
       this.getList();
     },
+
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm("queryForm");
@@ -428,33 +433,38 @@ export default {
       this.queryParams.appointTimeEnd = null
       this.handleQuery();
     },
+
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.lookId)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
+
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
       this.open = true;
       this.title = "添加房源带看基本信息";
     },
+
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const lookId = row.lookId || this.ids
       getLook(lookId).then(response => {
         this.form = response.data;
-        this.getRoomList("")
+        this.form.roomId=intCovString(this.form.roomId)
         this.open = true;
         this.title = "修改房源带看基本信息";
       });
     },
+
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.spaceId=spaceId;
           if (this.form.lookId != null) {
             updateLook(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

@@ -2,13 +2,16 @@ package com.ruoyi.web.controller.system;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysMenu;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginBody;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
+import com.ruoyi.space.domain.SpaceInfo;
 import com.ruoyi.space.service.ISpaceInfoService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
@@ -30,7 +33,7 @@ import java.util.Set;
  */
 @RestController
 @Api(tags = "登录")
-public class SysLoginController {
+public class SysLoginController extends BaseController {
     @Autowired
     private SysLoginService loginService;
 
@@ -45,6 +48,7 @@ public class SysLoginController {
 
     @Autowired
     private ISpaceInfoService spaceInfoService;
+
 
     /**
      * 登录方式
@@ -136,5 +140,14 @@ public class SysLoginController {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return AjaxResult.success(menuService.buildMenus(menus));
+    }
+
+    /**
+     * 查询空间基本信息列表
+     */
+    @GetMapping("/listNoScope")
+    public TableDataInfo listNoScope(SpaceInfo spaceInfo) {
+        List<SpaceInfo> list = spaceInfoService.listNoScope(spaceInfo);
+        return getDataTable(list);
     }
 }

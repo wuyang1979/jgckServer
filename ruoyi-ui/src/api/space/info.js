@@ -12,7 +12,7 @@ export function listSpace(query) {
 // 查询空间基本信息列表
 export function listSpaceNoScope(query) {
   return request({
-    url: '/space/info/listNoScope',
+    url: '/listNoScope',
     method: 'get',
     params: query
   })

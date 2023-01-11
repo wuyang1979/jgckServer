@@ -53,7 +53,7 @@
                ai.activity_address,
                ai.register_deadline,
                ai.register_number,
-               (select COUNT(DISTINCT aur.activity_id, aur.user_name)
+               (select COUNT(DISTINCT aur.activity_id, aur.name)
                 from t_activity_user_relation aur
                 where aur.activity_id = ai.activity_id) signNumber
         from t_activity_info ai
@@ -72,8 +72,8 @@
             <if test="releaseTime != null ">and ai.release_time = #{releaseTime}</if>
             <if test="activityStartTime != null ">and ai.activity_start_time = #{activityStartTime}</if>
             <if test="activityEndTime != null ">and ai.activity_end_time = #{activityEndTime}</if>
-            <if test="activityAddress != null  and activityAddress != ''">and ai.activity_address = #{activityAddress}
-            </if>
+            <if test="activityAddress != null  and activityAddress != ''">and ai.activity_address = #{activityAddress}</if>
+            <if test="spaceId != null  and spaceId != ''">and ai.space_id = #{spaceId}</if>
             ${params.dataScope}
         </where>
     </select>
@@ -98,6 +98,7 @@
             <if test="registerNumber != null">register_number,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="spaceId != null">space_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -116,6 +117,7 @@
             <if test="registerNumber != null">#{registerNumber},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="spaceId != null">#{spaceId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -135,6 +137,7 @@
             <if test="activityAddress != null">activity_address = #{activityAddress},</if>
             <if test="registerDeadline != null">register_deadline = #{registerDeadline},</if>
             <if test="registerNumber != null">register_number = #{registerNumber},</if>
+            <if test="spaceId != null">space_id = #{spaceId},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

@@ -45,8 +45,12 @@ public class RoomLookVoPage extends BaseEntity {
     /**
      * 预约结束时间
      */
-
     private String appointTimeEnd;
+
+    /**
+     * 空间id
+     */
+    private String spaceId;
 
 
 }

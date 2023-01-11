@@ -113,7 +113,7 @@
 
 
     <select id="selectActivityPersonList" resultMap="ActivityPersonDtoResult">
-        SELECT aur.user_name,
+        SELECT aur.name,
                aur.create_time
         FROM t_activity_user_relation aur
         WHERE aur.activity_id = #{activityId}

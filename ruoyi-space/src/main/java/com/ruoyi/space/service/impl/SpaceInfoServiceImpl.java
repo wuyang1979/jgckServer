@@ -57,7 +57,7 @@ public class SpaceInfoServiceImpl implements ISpaceInfoService {
      */
     @Override
     public List<SpaceInfo> listNoScope(SpaceInfo spaceInfo) {
-        return spaceInfoMapper.selectSpaceInfoList(spaceInfo);
+        return spaceInfoMapper.selectSpaceInfoListNoScope(spaceInfo);
     }
 
     /**

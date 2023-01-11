@@ -107,6 +107,7 @@
             <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like concat('%', #{emergencyContactName},'%')</if>
             <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone = #{emergencyContactPhone} </if>
             <if test="remark != null  and remark != ''">and remark = #{remark}</if>
+            <if test="spaceId != null  and spaceId != ''">and t.space_id = #{spaceId}</if>
             ${params.dataScope}
         </where>
     </select>
@@ -138,6 +139,7 @@
             <if test="remark != null">remark,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="spaceId != null">space_id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -163,6 +165,7 @@
             <if test="remark != null">#{remark},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="spaceId != null">#{spaceId},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -189,6 +192,7 @@
             <if test="emergencyContactName != null">emergency_contact_name = #{emergencyContactName},</if>
             <if test="emergencyContactPhone != null">emergency_contact_phone = #{emergencyContactPhone},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="spaceId != null">space_id = #{spaceId},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

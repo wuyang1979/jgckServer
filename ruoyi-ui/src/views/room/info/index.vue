@@ -261,6 +261,7 @@ import {listRoom, getRoom, delRoom, addRoom, updateRoom} from "@/api/room/info";
 import {intCovString} from "@/api/common/common";
 import {getToken} from "../../../utils/auth";
 import {editFileByBusinessId, listFile} from "../../../api/activity/relation";
+const spaceId=sessionStorage.getItem("spaceId")
 
 export default {
   name: "Info",
@@ -337,7 +338,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         roomId: null,
-        spaceId: null,
+        spaceId: spaceId,
         roomType: null,
         roomName: null,
         floor: null,
@@ -529,7 +530,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.form.spaceId = 'ff208f04-6d48-4cb3-b8f3-ae4ae596c53c'
+          this.form.spaceId = spaceId;
           if (this.form.roomId != null) {
             updateRoom(this.form).then(response => {
               console.info("修改房源返回信息", response)

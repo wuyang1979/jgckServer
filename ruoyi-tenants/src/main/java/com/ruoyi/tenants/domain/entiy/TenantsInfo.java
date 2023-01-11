@@ -113,6 +113,8 @@ public class TenantsInfo extends BaseEntity {
 
     private String deptId;
 
+    private String spaceId;
+
     public void setTenantsId(String tenantsId) {
         this.tenantsId = tenantsId;
     }
@@ -257,6 +259,14 @@ public class TenantsInfo extends BaseEntity {
         this.deptId = deptId;
     }
 
+    public String getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(String spaceId) {
+        this.spaceId = spaceId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -279,6 +289,7 @@ public class TenantsInfo extends BaseEntity {
                 .append("remark", getRemark())
                 .append("userId", getUserId())
                 .append("deptId", getDeptId())
+                .append("spaceId", getSpaceId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

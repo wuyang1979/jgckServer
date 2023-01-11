@@ -58,6 +58,8 @@ public class RoomLook extends BaseEntity {
 
     private String deptId;
 
+    private String spaceId;
+
     public void setLookId(String lookId) {
         this.lookId = lookId;
     }
@@ -122,6 +124,14 @@ public class RoomLook extends BaseEntity {
         this.deptId = deptId;
     }
 
+    public String getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(String spaceId) {
+        this.spaceId = spaceId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -133,6 +143,7 @@ public class RoomLook extends BaseEntity {
                 .append("appointTime", getAppointTime())
                 .append("userId", getUserId())
                 .append("deptId", getDeptId())
+                .append("spaceId", getSpaceId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

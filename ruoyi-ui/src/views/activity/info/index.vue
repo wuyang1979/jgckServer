@@ -295,6 +295,8 @@ import {
 import {getToken} from "@/utils/auth";
 import UpLoadPic from "../../../components/upLoadPic";
 
+const spaceId=sessionStorage.getItem("spaceId");
+
 export default {
   name: "Info",
   components: {UpLoadPic},
@@ -361,6 +363,7 @@ export default {
         activityStartTime: null,
         activityAddress: null,
         registerDeadline: null,
+        spaceId: spaceId,
       },
       // 表单参数
       form: {},
@@ -395,7 +398,7 @@ export default {
       this.$download.id(this.imageId)
     },
 
-    //已zip格式下载活动全部图片
+    //以zip格式下载活动全部图片
     downloadImg() {
       let imgs = this.fileList;
       if (imgs.length === 0) {
@@ -548,14 +551,14 @@ export default {
     },
 
     //报名活动
-    SignActivity(row) {
-      this.signQueryParams.activityId = row.activityId;
-      addRelation(this.signQueryParams).then(respone => {
-        this.$modal.msgSuccess('报名成功');
-        this.getList();
-      }).catch(() => {
-      })
-    },
+    // SignActivity(row) {
+    //   this.signQueryParams.activityId = row.activityId;
+    //   addRelation(this.signQueryParams).then(respone => {
+    //     this.$modal.msgSuccess('报名成功');
+    //     this.getList();
+    //   }).catch(() => {
+    //   })
+    // },
 
     //取消发布
     cancelRelease(row) {
@@ -664,6 +667,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.spaceId=spaceId;
           if (this.form.activityId != null) {
             updateActivity(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

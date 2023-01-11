@@ -133,4 +133,6 @@ public class ContractInfoPageVo extends BaseEntity {
     private String userId;
 
     private String deptId;
+
+    private String spaceId;
 }

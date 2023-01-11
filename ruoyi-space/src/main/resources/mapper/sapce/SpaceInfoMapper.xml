@@ -52,6 +52,11 @@
         order by create_time desc
     </select>
 
+    <select id="selectSpaceInfoListNoScope" parameterType="SpaceInfo" resultMap="SpaceInfoResult">
+        <include refid="selectSpaceInfoVo"/>
+        order by create_time desc
+    </select>
+
     <select id="selectSpaceInfoBySpaceId" parameterType="String" resultMap="SpaceInfoResult">
         <include refid="selectSpaceInfoVo"/>
         where space_id = #{spaceId}

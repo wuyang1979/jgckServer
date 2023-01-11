@@ -10,7 +10,7 @@
       <h3 class="title">金谷创客空间智慧运维管理系统</h3>
       <el-form-item prop="username">
         <el-input v-model="loginDouForm.username" type="text" auto-complete="off" placeholder="账号">
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -21,7 +21,7 @@
           placeholder="密码"
           @keyup.enter.native="handleDouLogin"
         >
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="smsCode">
@@ -32,7 +32,7 @@
           style="width: 63%"
           @keyup.enter.native="handleDouLogin"
         >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon"/>
         </el-input>
         <div class="login-code">
           <!-- <img :src="codeUrl" @click="getCode" class="login-code-img"/> -->
@@ -41,7 +41,8 @@
             type="primary"
             v-if="this.showDouCode"
             style="height: 38px"
-          >获取验证码</el-button>
+          >获取验证码
+          </el-button>
           <el-button type="primary" disabled v-else style="height: 38px">{{ count }} s后重发</el-button>
         </div>
       </el-form-item>
@@ -74,7 +75,7 @@
       <h3 class="title">金谷创客空间智慧运维管理系统</h3>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -85,7 +86,7 @@
           placeholder="密码"
           @keyup.enter.native="handleLogin"
         >
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="code" v-if="captchaEnabled">
@@ -96,21 +97,21 @@
           style="width: 63%"
           @keyup.enter.native="handleLogin"
         >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon"/>
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img" />
+          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
       <el-form-item prop="spaceId">
-        <el-select  style="width: 100%" v-model="loginForm.spaceId" placeholder="空间">
+        <el-select style="width: 100%" v-model="loginForm.spaceId" placeholder="空间">
           <el-option
             v-for="item in spaceOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value">
           </el-option>
-          <svg-icon slot="prefix" icon-class="coin" class="el-icon-coin input-icon" />
+          <svg-icon slot="prefix" icon-class="coin" class="el-icon-coin input-icon"/>
         </el-select>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
@@ -148,7 +149,7 @@
           placeholder="输入手机号"
           @keyup.enter.native="handleVerLogin"
         >
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="smsCode">
@@ -159,7 +160,7 @@
           style="width: 63%"
           @keyup.enter.native="handleVerLogin"
         >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon"/>
         </el-input>
         <div class="login-code">
           <!-- <img :src="codeUrl" @click="getCode" class="login-code-img"/> -->
@@ -168,7 +169,8 @@
             type="primary"
             v-if="this.showCode"
             style="height: 38px"
-          >获取验证码</el-button>
+          >获取验证码
+          </el-button>
           <el-button type="primary" disabled v-else style="height: 38px">{{ count }} s后重发</el-button>
         </div>
       </el-form-item>
@@ -186,7 +188,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright {{Copyright}} © 2022 {{ICP}} {{police}}</span>
+      <span>Copyright {{ Copyright }} © 2022 {{ ICP }} {{ police }}</span>
     </div>
   </div>
 </template>
@@ -200,7 +202,7 @@ import {
   getSysInfo,
 } from '@/api/login'
 import Cookies from 'js-cookie'
-import { encrypt, decrypt } from '@/utils/jsencrypt'
+import {encrypt, decrypt} from '@/utils/jsencrypt'
 import {listSpaceNoScope} from "../api/space/info";
 import cache from "../plugins/cache";
 
@@ -208,7 +210,7 @@ export default {
   name: 'Login',
   data() {
     return {
-      spaceOptions:[],
+      spaceOptions: [],
       codeUrl: '',
       Copyright: '',
       ICP: '',
@@ -226,7 +228,7 @@ export default {
         rememberMe: false,
         code: '',
         uuid: '',
-        spaceId:'',
+        spaceId: '',
       },
       loginVerForm: {
         mobile: '',
@@ -235,29 +237,29 @@ export default {
       },
       loginDouRules: {
         username: [
-          { required: true, trigger: 'blur', message: '请输入您的账号' },
+          {required: true, trigger: 'blur', message: '请输入您的账号'},
         ],
         password: [
-          { required: true, trigger: 'blur', message: '请输入您的密码' },
+          {required: true, trigger: 'blur', message: '请输入您的密码'},
         ],
         smsCode: [
-          { required: true, trigger: 'change', message: '请输入验证码' },
+          {required: true, trigger: 'change', message: '请输入验证码'},
         ],
       },
       loginRules: {
         username: [
-          { required: true, trigger: 'blur', message: '请输入您的账号' },
+          {required: true, trigger: 'blur', message: '请输入您的账号'},
         ],
         password: [
-          { required: true, trigger: 'blur', message: '请输入您的密码' },
+          {required: true, trigger: 'blur', message: '请输入您的密码'},
         ],
-        code: [{ required: true, trigger: 'change', message: '请输入验证码' }],
+        code: [{required: true, trigger: 'change', message: '请输入验证码'}],
 
-        spaceId: [{ required: true, trigger: 'change', message: '请选择空间' }],
+        spaceId: [{required: true, trigger: 'change', message: '请选择空间'}],
       },
       loginVerRules: {
         mobile: [
-          { required: true, trigger: 'blur', message: '请输入您的手机号' },
+          {required: true, trigger: 'blur', message: '请输入您的手机号'},
           {
             pattern:
               /^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/,
@@ -266,7 +268,7 @@ export default {
           },
         ],
         smsCode: [
-          { required: true, trigger: 'blur', message: '请输入您的验证码' },
+          {required: true, trigger: 'blur', message: '请输入您的验证码'},
         ],
       },
       loading: false,
@@ -290,6 +292,7 @@ export default {
       immediate: true,
     },
   },
+
   created() {
     this.getCode()
     this.getLoginType()
@@ -299,14 +302,14 @@ export default {
   },
   methods: {
 
-    getSpaceList(){
-      let params={}
-      listSpaceNoScope(params).then(response=>{
-        let list=response.rows;
-        list.forEach(l=>{
-          let opt={
-            value:l.spaceId,
-            label:l.spaceName
+    getSpaceList() {
+      let params = {}
+      listSpaceNoScope(params).then(response => {
+        let list = response.rows;
+        list.forEach(l => {
+          let opt = {
+            value: l.spaceId,
+            label: l.spaceName
           }
           this.spaceOptions.push(opt)
         })
@@ -432,7 +435,7 @@ export default {
         if (valid) {
           this.loading = true
           if (this.loginDouForm.rememberMe) {
-            Cookies.set('username', this.loginDouForm.username, { expires: 30 })
+            Cookies.set('username', this.loginDouForm.username, {expires: 30})
             Cookies.set('password', encrypt(this.loginDouForm.password), {
               expires: 30,
             })
@@ -447,7 +450,8 @@ export default {
           this.$store
             .dispatch('LoginDou', this.loginDouForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/' }).catch(() => {})
+              this.$router.push({path: this.redirect || '/'}).catch(() => {
+              })
             })
             .catch(() => {
               this.loading = false
@@ -460,7 +464,7 @@ export default {
         if (valid) {
           this.loading = true
           if (this.loginForm.rememberMe) {
-            Cookies.set('username', this.loginForm.username, { expires: 30 })
+            Cookies.set('username', this.loginForm.username, {expires: 30})
             Cookies.set('password', encrypt(this.loginForm.password), {
               expires: 30,
             })
@@ -479,8 +483,9 @@ export default {
           this.$store
             .dispatch('Login', this.loginForm)
             .then(() => {
-              cache.session.set("spaceId",this.loginForm.spaceId)
-              this.$router.push({ path: this.redirect || '/' }).catch(() => {})
+              cache.session.set("spaceId", this.loginForm.spaceId)
+              this.$router.push({path: this.redirect || '/'}).catch(() => {
+              })
             })
             .catch(() => {
               this.loading = false
@@ -498,7 +503,8 @@ export default {
           this.$store
             .dispatch('smsLogin', this.loginVerForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/' }).catch(() => {})
+              this.$router.push({path: this.redirect || '/'}).catch(() => {
+              })
             })
             .catch(() => {
               this.loading = false
@@ -519,6 +525,7 @@ export default {
   background-image: url('../assets/images/login-background.jpg');
   background-size: cover;
 }
+
 .title {
   margin: 0px auto 30px auto;
   text-align: center;
@@ -530,32 +537,39 @@ export default {
   background: #ffffff;
   width: 400px;
   padding: 25px 25px 5px 25px;
+
   .el-input {
     height: 38px;
+
     input {
       height: 38px;
     }
   }
+
   .input-icon {
     height: 39px;
     width: 14px;
     margin-left: 2px;
   }
 }
+
 .login-tip {
   font-size: 13px;
   text-align: center;
   color: #bfbfbf;
 }
+
 .login-code {
   width: 33%;
   height: 38px;
   float: right;
+
   img {
     cursor: pointer;
     vertical-align: middle;
   }
 }
+
 .el-login-footer {
   height: 40px;
   line-height: 40px;
@@ -568,6 +582,7 @@ export default {
   font-size: 12px;
   letter-spacing: 1px;
 }
+
 .login-code-img {
   height: 38px;
 }

@@ -28,6 +28,14 @@ public interface SpaceInfoMapper {
     public List<SpaceInfo> selectSpaceInfoList(SpaceInfo spaceInfo);
 
     /**
+     * 查询空间基本信息列表
+     *
+     * @param spaceInfo 空间基本信息
+     * @return 空间基本信息集合
+     */
+    public List<SpaceInfo> selectSpaceInfoListNoScope(SpaceInfo spaceInfo);
+
+    /**
      * 新增空间基本信息
      *
      * @param spaceInfo 空间基本信息
