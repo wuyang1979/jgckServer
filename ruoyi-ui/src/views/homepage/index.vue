@@ -1,19 +1,19 @@
 <template>
   <div class="div_body">
     <div class="div_top">
-      <div class="shopStatistics yellow">
+      <div class="shopStatistics">
         <div class="div_title">
           商铺统计
         </div>
         <div id="shopStatistics" style="width: 100%; height: 200px"></div>
       </div>
-      <div class="officeStatistics yellow">
+      <div class="officeStatistics">
         <div class="div_title">
           办公室统计
         </div>
         <div id="officeStatistics" style="width: 100%; height: 200px"></div>
       </div>
-      <div class="apartmentStatistics yellow">
+      <div class="apartmentStatistics">
         <div class="div_title">
           公寓统计
         </div>
@@ -567,7 +567,7 @@ export default {
 
 .div_body {
   margin: 10px;
-  background-color: snow;
+  //background-color: snow;
 }
 
 .yellow {
