@@ -15,4 +15,9 @@ public class ContractExpireVo {
      */
     private String officeShopRemind;
 
+    /**
+     * 所属空间
+     */
+    private String spaceId;
+
 }

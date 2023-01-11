@@ -1,25 +1,25 @@
 // 入驻统计
 import request from "@/utils/request";
 
-export function getSettle() {
+export function getSettle(spaceId) {
   return request({
-    url: '/statistics/settle',
+    url: '/statistics/settle/'+spaceId,
     method: 'get'
   })
 }
 
 
-export function getContract() {
+export function getContract(spaceId) {
   return request({
-    url: '/statistics/contract',
+    url: '/statistics/contract/'+spaceId,
     method: 'get'
   })
 }
 
 
-export function getCredential() {
+export function getCredential(spaceId) {
   return request({
-    url: '/statistics/credential',
+    url: '/statistics/credential/'+spaceId,
     method: 'get'
   })
 }

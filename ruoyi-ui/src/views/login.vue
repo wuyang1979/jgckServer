@@ -302,6 +302,9 @@ export default {
   },
   methods: {
 
+    test(){
+      console.info("1111111111111111")
+    },
     getSpaceList() {
       let params = {}
       listSpaceNoScope(params).then(response => {
@@ -495,6 +498,13 @@ export default {
             })
         }
       })
+    },
+    handleError(){debugger
+      this.loading = false
+      console.log(this.loading)
+      if (this.captchaEnabled) {
+        this.getCode()
+      }
     },
     handleVerLogin() {
       this.$refs.loginVerForm.validate((valid) => {

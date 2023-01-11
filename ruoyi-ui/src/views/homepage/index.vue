@@ -158,11 +158,15 @@ import {getContract, getCredential, getSettle} from "@/api/statistics/statistics
 import {setRemindConfig} from "../../api/statistics/statistics";
 import {getConfigKey} from "../../api/system/config";
 
+
 export default {
   name: "Index",
   dicts: ['room_type', 'credential_type'],
   data() {
     return {
+
+      // 所属空间id
+      spaceId:sessionStorage.getItem("spaceId"),
 
       // 租金form表单
       rentForm: {},
@@ -329,7 +333,7 @@ export default {
 
     // 入驻统计
     getSettle() {
-      getSettle().then(respone => {
+      getSettle(this.spaceId).then(respone => {
         this.shopForm = respone.shop;
         this.officeForm = respone.office;
         this.apartmentForm = respone.apartment;
@@ -524,6 +528,7 @@ export default {
     this.getSettle();
     this.getContract();
     this.getCredential();
+    console.log(this.loading)
   }
 };
 </script>

@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface IStatisticsService {
 
-    public AjaxResult getSettleStatistics();
+    public AjaxResult getSettleStatistics(String spaceId);
 
     public List<ContractExpireDto> getContractExpire(ContractExpireVo contractExpireVo);
 
-    public List<CredentialExpireDto> getCredentialExpire();
+    public List<CredentialExpireDto> getCredentialExpire(String spaceId);
 
 
 }

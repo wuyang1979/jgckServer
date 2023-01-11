@@ -26,11 +26,11 @@ public class StatisticsServiceImpl implements IStatisticsService {
 
 
     @Override
-    public AjaxResult getSettleStatistics() {
+    public AjaxResult getSettleStatistics(String spaceId) {
         AjaxResult ajax = AjaxResult.success();
-        ajax.put("shop", statisticsMapper.getSettleStatistics(0l));
-        ajax.put("office", statisticsMapper.getSettleStatistics(1l));
-        ajax.put("apartment", statisticsMapper.getSettleStatistics(2l));
+        ajax.put("shop", statisticsMapper.getSettleStatistics(0l,spaceId));
+        ajax.put("office", statisticsMapper.getSettleStatistics(1l,spaceId));
+        ajax.put("apartment", statisticsMapper.getSettleStatistics(2l,spaceId));
         return ajax;
     }
 
@@ -42,7 +42,7 @@ public class StatisticsServiceImpl implements IStatisticsService {
 
 
     @Override
-    public List<CredentialExpireDto> getCredentialExpire() {
-        return statisticsMapper.getCredentialExpire();
+    public List<CredentialExpireDto> getCredentialExpire(String spaceId) {
+        return statisticsMapper.getCredentialExpire(spaceId);
     }
 }

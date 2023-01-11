@@ -100,6 +100,7 @@
     <el-table v-loading="loading" :data="lookList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="房源号" align="center" prop="roomName"/>
+      <el-table-column label="带看状态" align="center" prop="lookStatus"/>
       <el-table-column label="带看人" align="center" prop="nickName"/>
       <el-table-column label="客户姓名" align="center" prop="customerName"/>
       <el-table-column label="客户电话" align="center" prop="customerPhone"/>

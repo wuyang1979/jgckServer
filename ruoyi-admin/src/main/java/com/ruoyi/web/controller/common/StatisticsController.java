@@ -35,25 +35,24 @@ public class StatisticsController extends BaseController {
     @Autowired
     private ISysConfigService sysConfigService;
 
-    @GetMapping("/settle")
+    @GetMapping("/settle/{spaceId}")
     @ApiOperation("入驻统计")
-    public AjaxResult getSettleStatistics(HttpServletRequest request) {
-        String token = (String) request.getSession().getAttribute("spaceId");
-        return statisticsService.getSettleStatistics();
+    public AjaxResult getSettleStatistics(@PathVariable String spaceId) {
+        return statisticsService.getSettleStatistics(spaceId);
     }
 
 
-    @GetMapping("/contract")
+    @GetMapping("/contract/{spaceId}")
     @ApiOperation("合同到期提醒")
-    public TableDataInfo getContractExpire() {
-        List<ContractExpireDto> list = sysConfigService.getContractExpire();
+    public TableDataInfo getContractExpire(@PathVariable String spaceId) {
+        List<ContractExpireDto> list = sysConfigService.getContractExpire(spaceId);
         return getDataTable(list);
     }
 
-    @GetMapping("/credential")
+    @GetMapping("/credential/{spaceId}")
     @ApiOperation("证件到期提醒")
-    public TableDataInfo getCredentialExpire() {
-        List<CredentialExpireDto> list = statisticsService.getCredentialExpire();
+    public TableDataInfo getCredentialExpire(@PathVariable String spaceId) {
+        List<CredentialExpireDto> list = statisticsService.getCredentialExpire(spaceId);
         return getDataTable(list);
     }
 
@@ -62,8 +61,6 @@ public class StatisticsController extends BaseController {
     public AjaxResult setRentRmind(@RequestBody RentConfigVo rentConfigVo) {
         return sysConfigService.setRentRmind(rentConfigVo);
     }
-
-    ;
 
 
 }

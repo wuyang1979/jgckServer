@@ -114,7 +114,7 @@ public interface ISysConfigService {
     AjaxResult setRentRmind(RentConfigVo configVo);
 
 
-    List<ContractExpireDto> getContractExpire();
+    List<ContractExpireDto> getContractExpire(String spaceId);
 
 
 }

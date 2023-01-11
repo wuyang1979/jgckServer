@@ -259,10 +259,11 @@ public class SysConfigServiceImpl implements ISysConfigService {
 
 
     @Override
-    public List<ContractExpireDto> getContractExpire() {
+    public List<ContractExpireDto> getContractExpire(String spaceId) {
         String configValue = selectConfigByKey("hpContractRemindDays");
         String jsonValue = JSONObject.toJSONString(configValue);
         ContractExpireVo contractExpireVo = JSON.parseObject(configValue, ContractExpireVo.class);
+        contractExpireVo.setSpaceId(spaceId);
         return statisticsService.getContractExpire(contractExpireVo);
     }
 }

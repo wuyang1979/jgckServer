@@ -165,24 +165,6 @@
               </el-select>
             </el-form-item>
           </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="房源号" prop="roomId">
-              <el-select
-                :disabled="isQuery"
-                v-model="form.roomId"
-                placeholder="请选择房源号">
-                <el-option
-                  v-for="item in roomList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
           <el-col :span="12">
             <el-form-item label="合同状态" prop="contractStatus">
               <el-select :disabled="isQuery" v-model="form.contractStatus"
@@ -194,6 +176,30 @@
                   :value="dict.value">
                 </el-option>
               </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="房源号" prop="roomId">
+                <el-select
+                  @change="handleChange"
+                  :disabled="isQuery"
+                  v-model="form.roomId"
+                  placeholder="请选择房源号">
+                  <el-option
+                    v-for="item in roomList"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="面积" prop="area">
+              <el-input readonly v-model="form.area" placeholder="请输入房屋面积"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -218,19 +224,6 @@
                               value-format="yyyy-MM-dd"
                               placeholder="请选择租赁结束日期">
               </el-date-picker>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-
-          <el-col :span="12">
-            <el-form-item label="地址" prop="roomAddress">
-              <el-input readonly v-model="form.roomAddress" placeholder="请输入房屋地址"/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="面积" prop="area">
-              <el-input readonly v-model="form.area" placeholder="请输入房屋面积"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -309,19 +302,19 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="首付时间" prop="paymentFirstTime">
+            <el-form-item label="首期支付" prop="paymentFirstTime">
               <el-date-picker :readonly="isQuery" clearable
                               v-model="form.paymentFirstTime"
                               type="date"
                               value-format="yyyy-MM-dd"
-                              placeholder="请选择首付时间">
+                              placeholder="请选择首期支付时间">
               </el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="首付款" prop="paymentFirstMoney">
+            <el-form-item label="首付款项" prop="paymentFirstMoney">
               <el-input type="number" :readonly="isQuery" v-model="form.paymentFirstMoney"
-                        placeholder="请输入首付款"/>
+                        placeholder="请输入首付款项"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -453,6 +446,11 @@ export default {
 
   },
   methods: {
+
+    // 房源号选择框触发事件
+    handleChange(){
+      this.handleChangeRoomName(this.form.roomId)
+    },
 
     // todo 通过房源号查询合同，新合同的开始时间不能在旧合同的时间范围类
     handleContractLeaseStartTimeVerify() {

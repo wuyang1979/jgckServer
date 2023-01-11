@@ -5,6 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import {getToken} from '@/utils/auth'
 import {isRelogin} from '@/utils/request'
+import login from './views/login'
 
 NProgress.configure({showSpinner: false})
 
@@ -27,24 +28,34 @@ router.beforeEach((to, from, next) => {
           let spaces = res.spaces;
           let isAdmin = res.user.admin;
           let isSpace = false;
-          spaces.forEach(s => {
-            if (s === spaceId) {
-              isSpace = true;
-              return
+          if (!spaceId) {
+            store.dispatch('LogOut').then((res)=>{
+              next({path: '/'})
+            })
+
+          } else {
+            spaces.forEach(s => {
+              if (s === spaceId) {
+                isSpace = true;
+                return
+              }
+            })
+            if (isAdmin || isSpace) {
+              isRelogin.show = false
+              store.dispatch('GenerateRoutes').then(accessRoutes => {
+                // 根据roles权限生成可访问的路由表
+                router.addRoutes(accessRoutes) // 动态添加可访问路由表
+                next({...to, replace: true}) // hack方法 确保addRoutes已完成
+              })
+            } else if (!isAdmin && !isSpace) {
+              store.dispatch('LogOut').then(() => {
+                Message.error("请选择正确的空间 ")
+                setTimeout(() => {
+                  //需要定时执行的代码
+                  location.reload()
+                }, 800)
+              })
             }
-          })
-          if (isAdmin||isSpace) {
-            isRelogin.show = false
-            store.dispatch('GenerateRoutes').then(accessRoutes => {
-              // 根据roles权限生成可访问的路由表
-              router.addRoutes(accessRoutes) // 动态添加可访问路由表
-              next({...to, replace: true}) // hack方法 确保addRoutes已完成
-            })
-          }else if (!isAdmin && !isSpace){
-            store.dispatch('LogOut').then(() => {
-              location.reload();
-              Message.error("请选择正确的空间")
-            })
           }
         }).catch(err => {
           store.dispatch('LogOut').then(() => {

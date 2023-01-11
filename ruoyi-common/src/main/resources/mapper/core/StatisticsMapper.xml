@@ -38,6 +38,7 @@
             LEFT JOIN t_room_info ri
         ON t1.dict_value = ri.room_status
             AND ri.room_type = #{roomType}
+            AND ri.space_id = #{spaceId}
         GROUP BY
             t1.dict_label
     </select>
@@ -56,7 +57,8 @@
                        LEFT JOIN t_room_info ri ON ci.room_id = ri.room_id
               WHERE ci.contract_status = 0
                 AND TO_DAYS(ci.lease_end_time) - TO_DAYS(
-                      NOW()) > 0) t
+                      NOW()) > 0
+                AND ci.space_id = #{spaceId}) t
         WHERE (t.room_type = 2
             AND t.surplus &lt; #{apartmentRemind})
            OR (t.room_type &lt;&gt; 2
@@ -83,7 +85,7 @@
                                            LEFT JOIN sys_dict_data sdd ON sdt.dict_type = sdd.dict_type
                                   WHERE sdt.dict_type = 'credential_type') t1 ON ci.credential_type = t1.dict_value
               WHERE TO_DAYS(ci.credential_expire_time) - TO_DAYS(
-                      NOW()) > 0) t2
+                      NOW()) > 0   AND ci.space_id = #{spaceId}) t2
         WHERE t2.surplus &lt; 20
     </select>
 
