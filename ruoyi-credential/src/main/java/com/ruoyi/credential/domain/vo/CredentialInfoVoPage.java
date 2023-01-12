@@ -53,4 +53,6 @@ public class CredentialInfoVoPage extends BaseEntity {
 
     private String deptId;
 
+    private String spaceId;
+
 }

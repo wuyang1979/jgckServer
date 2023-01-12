@@ -158,15 +158,14 @@ import {getContract, getCredential, getSettle} from "@/api/statistics/statistics
 import {setRemindConfig} from "../../api/statistics/statistics";
 import {getConfigKey} from "../../api/system/config";
 
+const spaceId=sessionStorage.getItem("spaceId")
+
 
 export default {
   name: "Index",
   dicts: ['room_type', 'credential_type'],
   data() {
     return {
-
-      // 所属空间id
-      spaceId:sessionStorage.getItem("spaceId"),
 
       // 租金form表单
       rentForm: {},
@@ -237,7 +236,7 @@ export default {
 
     // 获取证件列表
     getCredential() {
-      getCredential().then(respone => {
+      getCredential(spaceId).then(respone => {
         this.credentialData = respone.rows;
       })
     },
@@ -326,14 +325,14 @@ export default {
 
     // 获取合同列表
     getContract() {
-      getContract().then(respone => {
+      getContract(spaceId).then(respone => {
         this.contractData = respone.rows;
       })
     },
 
     // 入驻统计
     getSettle() {
-      getSettle(this.spaceId).then(respone => {
+      getSettle(spaceId).then(respone => {
         this.shopForm = respone.shop;
         this.officeForm = respone.office;
         this.apartmentForm = respone.apartment;

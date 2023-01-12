@@ -4,7 +4,7 @@
       <el-form-item label="用户名称" prop="userId">
         <el-input
           v-model="queryParams.userId"
-          placeholder="请输入用户id"
+          placeholder="请输入用户名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -172,6 +172,8 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import {intCovString} from "@/api/common/common";
 
+const spaceId=sessionStorage.getItem("spaceId");
+
 export default {
   name: "Info",
   dicts: ['credential_type'],
@@ -212,6 +214,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        spaceId:spaceId,
         bindUserId:null,
         credentialType: null,
         credentialExpireTime: null,
@@ -238,7 +241,7 @@ export default {
     handleChangeUserId(val) {
       var params = {};
       params.pageSize = 999;
-      params.userId = val;
+      params.bindUserId = val;
       var credentialList = [];
       listCredential(params).then(respone => {
         credentialList = respone.rows;
@@ -368,6 +371,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.spaceId=spaceId;
           if (this.form.credentialId != null) {
             updateCredential(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

@@ -78,7 +78,7 @@
                      TO_DAYS(ci.credential_expire_time) - TO_DAYS(
                              NOW()) surplus
               FROM t_credential_info ci
-                       LEFT JOIN sys_user su ON ci.user_id = su.user_id
+                       LEFT JOIN sys_user su ON ci.bind_user_id = su.user_id
                        LEFT JOIN (SELECT sdd.dict_value,
                                          sdd.dict_label
                                   FROM sys_dict_type sdt

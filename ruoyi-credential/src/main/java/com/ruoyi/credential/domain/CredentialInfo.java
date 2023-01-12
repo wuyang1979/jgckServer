@@ -45,6 +45,8 @@ public class CredentialInfo extends BaseEntity {
 
     private String deptId;
 
+    private String spaceId;
+
     public void setCredentialId(String credentialId) {
         this.credentialId = credentialId;
     }
@@ -93,6 +95,15 @@ public class CredentialInfo extends BaseEntity {
         this.deptId = deptId;
     }
 
+
+    public String getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(String spaceId) {
+        this.spaceId = spaceId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -102,6 +113,7 @@ public class CredentialInfo extends BaseEntity {
                 .append("credentialExpireTime", getCredentialExpireTime())
                 .append("userId", getUserId())
                 .append("deptId", getDeptId())
+                .append("spaceId", getSpaceId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())
