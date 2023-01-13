@@ -1,10 +1,12 @@
 package com.ruoyi.contract.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.contract.domain.dto.ContractInfoPageDto;
 import com.ruoyi.contract.domain.entiy.ContractInfo;
 import com.ruoyi.contract.domain.vo.ContractInfoPageVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 合同信息Mapper接口
@@ -60,4 +62,12 @@ public interface ContractInfoMapper {
      * @return 结果
      */
     public int deleteContractInfoByContractIds(String[] contractIds);
+
+    /**
+     * 获取结束时间
+     * @param roomId
+     * @param spaceId
+     * @return
+     */
+    public Date getLeaseEndTimeByRoomId(@Param("roomId") String roomId,@Param("spaceId") String spaceId);
 }

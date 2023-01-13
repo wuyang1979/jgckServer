@@ -74,6 +74,11 @@ public class ContractInfoController extends BaseController {
     @Log(title = "合同信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ContractInfoPageVo contractInfoPageVo) {
+        //todo  校验合同开始日期是否与房源的上个合同交叉
+        Boolean isExceed = contractInfoService.DateExceed(contractInfoPageVo.getRoomId(), contractInfoPageVo.getSpaceId(),contractInfoPageVo.getLeaseStartTime());
+        if (!isExceed){
+            return AjaxResult.error("合同开始时间不能再上个合同时间之内");
+        }
         contractInfoPageVo.setCreateBy(getUsername());
         contractInfoPageVo.setUserId(getUserId().toString());
         contractInfoPageVo.setDeptId(getDeptId().toString());

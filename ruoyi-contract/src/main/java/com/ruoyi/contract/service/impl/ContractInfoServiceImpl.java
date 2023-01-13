@@ -1,5 +1,6 @@
 package com.ruoyi.contract.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.annotation.DataScope;
@@ -43,7 +44,7 @@ public class ContractInfoServiceImpl implements IContractInfoService {
      * @param contractInfoPageVo 合同信息
      * @return 合同信息
      */
-    @DataScope(userAlias = "c",deptAlias = "c")
+    @DataScope(userAlias = "c", deptAlias = "c")
     @Override
     public List<ContractInfoPageDto> selectContractInfoList(ContractInfoPageVo contractInfoPageVo) {
         return contractInfoMapper.selectContractInfoList(contractInfoPageVo);
@@ -97,4 +98,34 @@ public class ContractInfoServiceImpl implements IContractInfoService {
         return contractInfoMapper.deleteContractInfoByContractId(contractId);
     }
 
+    /**
+     * 合同开始时间是否冲突
+     *
+     * @param roomId  房源id
+     * @param spaceId 空间id
+     * @return
+     */
+    @Override
+    public Boolean DateExceed(String roomId, String spaceId, Date leaseStartTime) {
+        Boolean isExceed = true;
+        Date leaseTime = getLeaseEndTimeByRoomId(roomId, spaceId);
+        int days = DateUtils.differentDaysByMillisecond(leaseTime,leaseStartTime);
+        if (days > 0) {
+            isExceed = false;
+            return isExceed;
+        }
+        return isExceed;
+    }
+
+    /**
+     * 根据房源id获取结束时间
+     *
+     * @param roomId  房源id
+     * @param spaceId 空间id
+     * @return
+     */
+    @Override
+    public Date getLeaseEndTimeByRoomId(String roomId, String spaceId) {
+        return contractInfoMapper.getLeaseEndTimeByRoomId(roomId, spaceId);
+    }
 }

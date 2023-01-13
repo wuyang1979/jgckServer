@@ -63,13 +63,6 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
      */
     @Override
     public int updateNotice(SysNotice notice) {
-        if (StringUtils.isNotEmpty(notice.getStatus())){
-            if (notice.getStatus().equals("1")){
-                notice.setReleaseTime(LocalDateTime.now());
-            }else if (notice.getStatus().equals("0")){
-                notice.setReleaseTime(null);
-            }
-        }
         return noticeMapper.updateNotice(notice);
     }
 

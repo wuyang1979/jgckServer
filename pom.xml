@@ -244,6 +244,16 @@
                 <artifactId>ruoyi-space</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-repair</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-brand</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -264,6 +274,8 @@
         <module>xy-weixin</module>
         <module>xy-system</module>
         <module>xy-news</module>
+        <module>ruoyi-repair</module>
+        <module>ruoyi-brand</module>
     </modules>
     <packaging>pom</packaging>
 

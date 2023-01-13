@@ -93,6 +93,10 @@ public class TenantsInfoController extends BaseController {
     @Log(title = "租客基本信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TenantsInfo tenantsInfo) {
+        Boolean unique = tenantsInfoService.checkPhoneUnique(tenantsInfo.getContactPhone(),tenantsInfo.getSpaceId());
+        if (!unique){
+            return AjaxResult.error("手机号码不能重复");
+        }
         tenantsInfo.setTenantsId(UUID.randomUUID().toString());
         tenantsInfo.setUserId(getUserId().toString());
         tenantsInfo.setDeptId(getDeptId().toString());
@@ -121,4 +125,5 @@ public class TenantsInfoController extends BaseController {
     public AjaxResult remove(@PathVariable String[] tenantsIds) {
         return toAjax(tenantsInfoService.deleteTenantsInfoByTenantsIds(tenantsIds));
     }
+
 }

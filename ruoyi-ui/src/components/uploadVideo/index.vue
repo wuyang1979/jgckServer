@@ -110,6 +110,7 @@ export default {
   },
   created() {},
   methods: {
+
     // 上传之前
     beforeAvatarUpload(file) {
       return new Promise((resolve, reject) => {
@@ -154,6 +155,7 @@ export default {
     uploadImgApi(data) {
       uploadvideos(data.raw).then((res) => {
         if (res.videoUrl) {
+          console.log(11)
           this.videoList.push({
             url: res.videoUrl,
             isShowPopup: false,

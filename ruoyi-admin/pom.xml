@@ -146,6 +146,14 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-space</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-repair</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-brand</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

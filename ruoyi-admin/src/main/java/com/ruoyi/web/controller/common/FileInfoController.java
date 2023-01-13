@@ -39,7 +39,6 @@ public class FileInfoController extends BaseController {
 //    @PreAuthorize("@ss.hasPermi('space:list')")
     @GetMapping("/list")
     public TableDataInfo list(FileInfo fileInfo) {
-        startPage();
         List<FileInfo> list = fileInfoService.selectFileInfoList(fileInfo);
         return getDataTable(list);
     }

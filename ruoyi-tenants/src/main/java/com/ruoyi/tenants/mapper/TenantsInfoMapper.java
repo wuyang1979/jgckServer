@@ -68,4 +68,12 @@ public interface TenantsInfoMapper {
      * @return 结果
      */
     public int deleteTenantsInfoByTenantsIds(String[] tenantsIds);
+
+    /**
+     * 获取租客所有手机号
+     *
+     * @param spaceId
+     * @return
+     */
+    public List<String> listContantactPhone(String spaceId);
 }

@@ -58,7 +58,7 @@ export default {
     //返回房源列表
     backRoom() {
       this.$router.push({
-        path: '/service/notice'
+        path: '/service/program/advertising'
       })
     }
   }

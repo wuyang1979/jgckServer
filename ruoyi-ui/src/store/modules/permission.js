@@ -130,4 +130,9 @@ export const loadView = (view) => {
   }
 }
 
+
+// export const loadView = (view) => {
+//   return (resolve) => require([`@/views/${view}`], resolve)
+// }
+
 export default permission

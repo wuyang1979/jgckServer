@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="消息标题" prop="noticeTitle">
+      <el-form-item label="广告标题" prop="noticeTitle">
         <el-input
           v-model="queryParams.noticeTitle"
-          placeholder="请输入消息标题"
+          placeholder="请输入广告标题"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="类型" prop="noticeType">
-        <el-select v-model="queryParams.noticeType" placeholder="消息类型" clearable>
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择发布状态" clearable>
           <el-option
-            v-for="dict in dict.type.sys_notice_type"
+            v-for="dict in dict.type.sys_notice_status"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -73,24 +73,18 @@
         prop="noticeTitle"
         :show-overflow-tooltip="true"
       />
-      <el-table-column label="消息类型" align="center" prop="noticeType">
-        <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_notice_type" :value="scope.row.noticeType"/>
-        </template>
-      </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_notice_status" :value="scope.row.status"/>
         </template>
       </el-table-column>
-      <!--      <el-table-column label="创建者" align="center" prop="createBy" width="100" />-->
       <el-table-column label="发布时间" align="center" prop="releaseTime">
         <template slot-scope="scope">
-          <span v-if="scope.row.status=='1'">{{ parseTime(scope.row.releaseTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+          <span v-if="scope.row.status=='0'">{{ parseTime(scope.row.releaseTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="left" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -101,7 +95,7 @@
           >详情
           </el-button>
           <el-button
-            v-if="scope.row.status==='1'"
+            v-if="scope.row.status==='0'"
             size="mini"
             type="text"
             icon="el-icon-document-delete"
@@ -118,11 +112,11 @@
             v-hasPermi="['system:notice:edit']"
           >发布
           </el-button>
-
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
+            :disabled="isRelease(scope.row)"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['system:notice:edit']"
           >修改
@@ -152,39 +146,40 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="信息标题" prop="noticeTitle">
+            <el-form-item label="广告标题" prop="noticeTitle">
               <el-input v-model="form.noticeTitle" placeholder="请输入信息标题"/>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="信息类型" prop="noticeType">
-              <el-select v-model="form.noticeType" placeholder="请选择信息类型">
-                <el-option
-                  v-for="dict in dict.type.sys_notice_type"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                ></el-option>
-              </el-select>
+          <el-col :span="24">
+            <el-form-item label="封面">
+              <el-upload
+                ref="upload"
+                :file-list="fileList"
+                :headers="headers"
+                :limit="1"
+                :auto-upload="true"
+                :action="uploadUrl"
+                list-type="picture-card"
+                accept=".jpg,.png"
+                :on-exceed="handleExceed"
+                :on-preview="handlePreview"
+                :on-change="handleChange"
+                :on-remove="handleRemove"
+                :on-success="handleSuccess"
+                multiple>
+                <i class="el-icon-plus"></i>
+              </el-upload>
             </el-form-item>
           </el-col>
-          <!--          <el-col :span="24">-->
-          <!--            <el-form-item label="状态">-->
-          <!--              <el-radio-group v-model="form.status">-->
-          <!--                <el-radio-->
-          <!--                  v-for="dict in dict.type.sys_notice_status"-->
-          <!--                  :key="dict.value"-->
-          <!--                  :label="dict.value"-->
-          <!--                >{{dict.label}}</el-radio>-->
-          <!--              </el-radio-group>-->
-          <!--            </el-form-item>-->
-          <!--          </el-col>-->
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="内容">
               <editor v-model="form.noticeContent" :min-height="192"/>
             </el-form-item>
           </el-col>
         </el-row>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">保 存</el-button>
@@ -192,23 +187,60 @@
       </div>
     </el-dialog>
 
+    <el-dialog
+      title="查看图片"
+      :close-on-click-modal="false"
+      width="850px"
+      :visible.sync="dialogVisible"
+      append-to-body
+    >
+      <el-image :src="url" style="width: 100%; height: 400px" fit="contain"></el-image>
+    </el-dialog>
+
     <el-dialog title="信息详情" :visible.sync="query" width="780px" append-to-body>
       <div v-html="queryForm.noticeContent"></div>
     </el-dialog>
-
-
   </div>
 </template>
 
 <script>
 import {listNotice, getNotice, delNotice, addNotice, updateNotice} from "@/api/system/notice";
 import {getNowDateTime} from "@/api/common/common";
+import {editFileByBusinessId, listFile} from "../../../../api/activity/relation";
+import {getToken} from "../../../../utils/auth";
+
+const spaceId = sessionStorage.getItem("spaceId");
 
 export default {
   name: "Notice",
   dicts: ['sys_notice_status', 'sys_notice_type'],
   data() {
     return {
+
+      //查看图片是否显示弹出层
+      dialogVisible: false,
+
+      //上传图片地址
+      uploadUrl: process.env.VUE_APP_BASE_API + '/common/upload/img/',
+
+      //查看图片
+      cover: '',
+
+      //查看图片url
+      url: '',
+
+      //上传图片id集合
+      fileIds: [],
+
+      fileUrls: [],
+
+      //请求头
+      headers: {
+        Authorization: 'Bearer ' + getToken()
+      },
+
+      //文件集合
+      fileList: [],
 
       // 详情参数
       queryForm: {},
@@ -240,9 +272,11 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        noticeType: 2,
         noticeTitle: undefined,
         createBy: undefined,
-        status: undefined
+        status: '',
+        spaceId: spaceId,
       },
       // 表单参数
       form: {},
@@ -261,12 +295,95 @@ export default {
     this.getList();
   },
   methods: {
+
+    isRelease(row) {
+      if (row.status == '0') {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+
+    handleSuccess(response, file, fileList) {
+      file.url = response.url;
+    },
+
+    //删除文件
+    handleRemove(file, fileList) {
+      this.fileIds = [];
+      this.fileUrls = [];
+      fileList.forEach(fl => {
+        this.fileIds.push(fl.id);
+        this.fileUrls.push(fl.url);
+      })
+    },
+
+    //获取文件list
+    listFile(businessId) {
+      listFile(businessId).then(respone => {
+        var list = [];
+        var rows = respone.rows;
+        rows.forEach(r => {
+          var rep = {};
+          rep = r;
+          list.push({
+            name: r.originalFileName,
+            id: r.fileId,
+            url: r.url,
+          })
+        })
+        this.fileList = list;
+      })
+    },
+
+    //文件绑定业务id
+    editFileByBusinessId(businessId) {
+      editFileByBusinessId(businessId, this.fileIds).then(respone => {
+      })
+    },
+
+    //上传文件变化
+    handleChange(file, fileList) {
+      var fileIds = [];
+      var fileUrls = [];
+      if (fileList.length > 0) {
+        fileList.forEach(fl => {
+          if (fl.id) {
+            fileIds.push(fl.id)
+          } else if (fl.response) {
+            fileIds.push(fl.response.id);
+          }
+          if (fl.url) {
+            fileUrls.push(fl.url)
+          } else if (fl.response.url) {
+            fileUrls.push(fl.response.url)
+          }
+        })
+      } else {
+        fileIds = [];
+      }
+      this.fileIds = fileIds;
+      this.fileUrls = fileUrls;
+    },
+
+    //查看图片
+    handlePreview(file) {
+      this.cover = file.url || file.response.src
+      this.dialogVisible = true
+    },
+
+    //最多上传文件个数
+    handleExceed() {
+      this.$modal.msgError('最多上传1张图片！');
+    },
+
     queryNotice(row) {
       this.queryForm = row;
       this.$router.push({
-        path:'/service/notice/detail',
-        query:{
-          id:row.noticeId
+        path: '/service/program/advertising/detail',
+        query: {
+          id: row.noticeId
         }
       })
     },
@@ -274,7 +391,7 @@ export default {
     //取消发布
     cancelRelease(row) {
       this.$modal.confirm('是否确认取消发布标题为"' + row.noticeTitle + '"的信息').then(function () {
-        row.status = '0';
+        row.status = '1';
         return updateNotice(row);
       }).then(() => {
         this.getList();
@@ -286,9 +403,8 @@ export default {
     //发布
     release(row) {
       this.$modal.confirm('是否确认发布标题为"' + row.noticeTitle + '"的信息').then(function () {
-        row.status = '1';
-        row.releaseTime=getNowDateTime();
-        console.info("nowTime=>",row.releaseTime)
+        row.status = '0';
+        row.releaseTime = getNowDateTime();
         return updateNotice(row);
       }).then(() => {
         this.getList();
@@ -316,9 +432,10 @@ export default {
       this.form = {
         noticeId: undefined,
         noticeTitle: undefined,
-        noticeType: undefined,
+        noticeType: 2,
         noticeContent: undefined,
-        status: "0"
+        status: "0",
+        spaceId: spaceId,
       };
       this.resetForm("form");
     },
@@ -347,10 +464,14 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
+      this.fileList = [];
       this.reset();
       const noticeId = row.noticeId || this.ids
       getNotice(noticeId).then(response => {
         this.form = response.data;
+        if (this.form.coverUrl) {
+          this.fileList.push({url: this.form.coverUrl});
+        }
         this.open = true;
         this.title = "修改公告";
       });
@@ -359,6 +480,8 @@ export default {
     submitForm: function () {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.coverUrl = this.fileUrls[0];
+          console.info("fileList=>", this.fileUrls)
           if (this.form.noticeId != undefined) {
             updateNotice(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
@@ -387,6 +510,24 @@ export default {
       }).catch(() => {
       });
     }
+  },
+  watch: {
+    //监听查看图片
+    cover: {
+      handler(newVal, oldVal) {
+        console.info("newVal+>", newVal);
+        console.info("oldVal+>", oldVal);
+        if (newVal === '' || newVal === null || !newVal) {
+          this.url = ''
+          this.showUpload = true
+        } else {
+          this.url = newVal
+          this.showUpload = false
+        }
+      },
+      immediate: true,
+      deep: true,
+    },
   }
 };
 </script>

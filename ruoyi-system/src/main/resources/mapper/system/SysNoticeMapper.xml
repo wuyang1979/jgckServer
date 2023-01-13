@@ -16,6 +16,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
         <result property="releaseTime" column="release_time"/>
+        <result property="coverUrl" column="cover_url"/>
     </resultMap>
 
     <sql id="selectNoticeVo">
@@ -24,6 +25,7 @@
                notice_type,
                cast(notice_content as char) as notice_content,
                status,
+               cover_url,
                create_by,
                create_time,
                update_by,
@@ -41,14 +43,15 @@
     <select id="selectNoticeList" parameterType="SysNotice" resultMap="SysNoticeResult">
         <include refid="selectNoticeVo"/>
         <where>
+            space_id=#{spaceId}
             <if test="noticeTitle != null and noticeTitle != ''">
                 AND notice_title like concat('%', #{noticeTitle}, '%')
             </if>
             <if test="noticeType != null and noticeType != ''">
                 AND notice_type = #{noticeType}
             </if>
-            <if test="createBy != null and createBy != ''">
-                AND create_by like concat('%', #{createBy}, '%')
+            <if test="status != null and status != ''">
+                AND status = #{status}
             </if>
         </where>
     </select>
@@ -61,6 +64,7 @@
         <if test="status != null and status != '' ">status,</if>
         <if test="remark != null and remark != ''">remark,</if>
         <if test="createBy != null and createBy != ''">create_by,</if>
+        <if test="coverUrl != null and coverUrl != ''">cover_url,</if>
         create_time
         )values(
         <if test="noticeTitle != null and noticeTitle != ''">#{noticeTitle},</if>
@@ -69,6 +73,7 @@
         <if test="status != null and status != ''">#{status},</if>
         <if test="remark != null and remark != ''">#{remark},</if>
         <if test="createBy != null and createBy != ''">#{createBy},</if>
+        <if test="coverUrl != null and coverUrl != ''">#{coverUrl},</if>
         sysdate()
         )
     </insert>
@@ -81,6 +86,7 @@
             <if test="noticeContent != null">notice_content = #{noticeContent},</if>
             <if test="status != null and status != ''">status = #{status},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            cover_url = #{coverUrl},
             release_time=#{releaseTime},
             update_time = sysdate()
         </set>

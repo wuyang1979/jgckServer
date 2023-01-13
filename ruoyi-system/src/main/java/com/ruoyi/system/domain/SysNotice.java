@@ -45,7 +45,12 @@ public class SysNotice extends BaseEntity {
      */
     private String status;
 
+    // 备注
     private String remark;
+
+    private String coverUrl;
+
+    private String spaceId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime releaseTime;
@@ -111,6 +116,22 @@ public class SysNotice extends BaseEntity {
         this.releaseTime = releaseTime;
     }
 
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public String getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(String spaceId) {
+        this.spaceId = spaceId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -125,6 +146,8 @@ public class SysNotice extends BaseEntity {
                 .append("updateTime", getUpdateTime())
                 .append("remark", getRemark())
                 .append("releaseTime", getReleaseTime())
+                .append("coverUrl", getCoverUrl())
+                .append("spaceId", getSpaceId())
                 .toString();
     }
 }

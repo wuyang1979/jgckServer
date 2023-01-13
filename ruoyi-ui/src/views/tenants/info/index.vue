@@ -169,7 +169,7 @@
           <el-input :readonly="isQuery" v-model="form.contactName" placeholder="请输入联系人名称"/>
         </el-form-item>
         <el-form-item label="联系人电话" prop="contactPhone">
-          <el-input :readonly="isQuery" v-model="form.contactPhone" placeholder="请输入联系人电话"/>
+          <el-input :readonly="isQuery" oninput="if (value.length>11) value=value.slice(0,11)" v-model="form.contactPhone" placeholder="请输入联系人电话"/>
         </el-form-item>
         <div v-if="isShowCompany">
           <el-form-item label="注册地址" prop="registerAddress">
@@ -179,7 +179,7 @@
             <el-input :readonly="isQuery" v-model="form.officeAddress" placeholder="请输入办公地址"/>
           </el-form-item>
           <el-form-item label="电话" prop="phone">
-            <el-input :readonly="isQuery" v-model="form.phone" placeholder="请输入电话"/>
+            <el-input :readonly="isQuery" oninput="if (value.length>11) value=value.slice(0,11)" v-model="form.phone" placeholder="请输入电话"/>
           </el-form-item>
           <el-form-item label="传真" prop="fax">
             <el-input :readonly="isQuery" v-model="form.fax" placeholder="请输入传真"/>
@@ -209,7 +209,7 @@
             <el-input :readonly="isQuery" v-model="form.emergencyContactName" placeholder="请输入紧急联系人姓名"/>
           </el-form-item>
           <el-form-item label="紧急联系人电话" prop="emergencyContactPhone">
-            <el-input :readonly="isQuery" v-model="form.emergencyContactPhone" placeholder="请输入紧急联系人电话"/>
+            <el-input :readonly="isQuery" oninput="if (value.length>11) value=value.slice(0,11)" v-model="form.emergencyContactPhone" placeholder="请输入紧急联系人电话"/>
           </el-form-item>
           <el-form-item label="附加情况说明" prop="remark">
             <el-input :readonly="isQuery" v-model="form.remark" type="textarea" placeholder="请输入内容"/>
@@ -321,7 +321,7 @@ export default {
           }],
         registerAddress: [{max: 50, message: "注册地址长度不能超过50字符", trigger: "blur"}],
         officeAddress: [{max: 50, message: "办公地址长度不能超过50字符", trigger: "blur"}],
-        phone: [{max: 20, message: "电话长度不能超过20字符", trigger: "blur"}],
+        phone: [{required: false, pattern: /^[1][3,4,5,7,8,9][0-9]{9}$/, message: '请输入正确的手机号码', trigger: 'blur',}],
         fax: [{max: 20, message: "传真长度不能超过20字符", trigger: "blur"}],
         email: [{max: 40, message: "游戏长度不能超过40字符", trigger: "blur"}],
         contactName: [{required: true, message: '请输入联系人', trigger: "blur"},
@@ -350,8 +350,7 @@ export default {
         profession: [{max: 20, message: "职业长度不能超过20字符", trigger: "blur"}],
         communicationAddress: [{max: 50, message: "通讯地址长度不能超过50字符", trigger: "blur"}],
         emergencyContactName: [{max: 25, message: "紧急联系人长度不能超过25字符", trigger: "blur"}],
-        emergencyContactPhone: [{max: 20, message: "紧急联系人号码不能超过20字符", trigger: "blur"},
-          {required: false, pattern: /^[1][3,4,5,7,8,9][0-9]{9}$/, message: '请输入正确的手机号码', trigger: 'blur',}],
+        emergencyContactPhone: [{required: false, pattern: /^[1][3,4,5,7,8,9][0-9]{9}$/, message: '请输入正确的手机号码', trigger: 'blur',}],
         remark: [{max: 250, message: "附加情况说明长度不能超过250字符", trigger: "blur"}],
       }
 

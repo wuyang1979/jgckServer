@@ -77,4 +77,19 @@ public interface ITenantsInfoService {
      * @return 结果
      */
     public int deleteTenantsInfoByTenantsId(String tenantsId);
+
+    /**
+     * 获取租客所有手机号
+     *
+     * @param spaceId
+     * @return
+     */
+    public List<String> listContantactPhone(String spaceId);
+
+    /**
+     * 验证手机号是否唯一
+     * @param mobile 手机号码
+     * @return
+     */
+    public Boolean checkPhoneUnique(String mobile,String spaceId);
 }

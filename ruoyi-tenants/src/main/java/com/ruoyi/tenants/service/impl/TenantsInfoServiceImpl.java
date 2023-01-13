@@ -51,7 +51,7 @@ public class TenantsInfoServiceImpl implements ITenantsInfoService {
      * @param tenantsInfo 租客基本信息
      * @return 租客基本信息
      */
-    @DataScope(userAlias = "t",deptAlias = "t")
+    @DataScope(userAlias = "t", deptAlias = "t")
     @Override
     public List<TenantsInfo> selectTenantsInfoList(TenantsInfo tenantsInfo) {
         return tenantsInfoMapper.selectTenantsInfoList(tenantsInfo);
@@ -106,5 +106,23 @@ public class TenantsInfoServiceImpl implements ITenantsInfoService {
     @Override
     public int deleteTenantsInfoByTenantsId(String tenantsId) {
         return tenantsInfoMapper.deleteTenantsInfoByTenantsId(tenantsId);
+    }
+
+    @Override
+    public List<String> listContantactPhone(String spaceId) {
+        return tenantsInfoMapper.listContantactPhone(spaceId);
+    }
+
+    @Override
+    public Boolean checkPhoneUnique(String mobile, String spaceId) {
+        Boolean unquie = true;
+        List<String> list = listContantactPhone(spaceId);
+        for (String m : list) {
+            if (mobile.equals(m)) {
+                unquie = false;
+                break;
+            }
+        }
+        return unquie;
     }
 }

@@ -91,7 +91,9 @@
     <select id="selectTenantsInfoList" parameterType="TenantsInfo" resultMap="TenantsInfoResult">
         <include refid="selectTenantsInfoVo"/>
         <where>
-            <if test="tenantsName != null  and tenantsName != ''">and tenants_name like concat('%', #{tenantsName},'%')</if>
+            <if test="tenantsName != null  and tenantsName != ''">and tenants_name like concat('%',
+                #{tenantsName},'%')
+            </if>
             <if test="cardType != null ">and card_type = #{cardType}</if>
             <if test="cardNumber != null  and cardNumber != ''">and card_number = #{cardNumber}</if>
             <if test="registerAddress != null  and registerAddress != ''">and register_address = #{registerAddress}</if>
@@ -100,12 +102,20 @@
             <if test="fax != null  and fax != ''">and fax = #{fax}</if>
             <if test="email != null  and email != ''">and email = #{email}</if>
             <if test="contactPhone != null  and contactPhone != ''">and contact_phone = #{contactPhone}</if>
-            <if test="contactName != null  and contactName != ''">and contact_name like concat('%', #{contactName},'%')</if>
+            <if test="contactName != null  and contactName != ''">and contact_name like concat('%',
+                #{contactName},'%')
+            </if>
             <if test="sex != null ">and sex = #{sex}</if>
             <if test="profession != null  and profession != ''">and profession = #{profession}</if>
-            <if test="communicationAddress != null  and communicationAddress != ''">and communication_address = #{communicationAddress}</if>
-            <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like concat('%', #{emergencyContactName},'%')</if>
-            <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone = #{emergencyContactPhone} </if>
+            <if test="communicationAddress != null  and communicationAddress != ''">and communication_address =
+                #{communicationAddress}
+            </if>
+            <if test="emergencyContactName != null  and emergencyContactName != ''">and emergency_contact_name like
+                concat('%', #{emergencyContactName},'%')
+            </if>
+            <if test="emergencyContactPhone != null  and emergencyContactPhone != ''">and emergency_contact_phone =
+                #{emergencyContactPhone}
+            </if>
             <if test="remark != null  and remark != ''">and remark = #{remark}</if>
             <if test="spaceId != null  and spaceId != ''">and t.space_id = #{spaceId}</if>
             ${params.dataScope}
@@ -213,4 +223,10 @@
             #{tenantsId}
         </foreach>
     </delete>
+
+    <select id="listContantactPhone" resultType="String">
+        SELECT DISTINCT contact_phone mobile
+        FROM t_tenants_info
+        where space_id = #{spaceId}
+    </select>
 </mapper>

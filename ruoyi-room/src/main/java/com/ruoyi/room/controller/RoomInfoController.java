@@ -58,7 +58,6 @@ public class RoomInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('room:info:list')")
     @GetMapping("/listNoScope")
     public TableDataInfo listNoScope(RoomInfoVo roomInfoVo) {
-        startPage();
         List<RoomInfoDtoPage> list = roomInfoService.listNoScope(roomInfoVo);
         return getDataTable(list);
     }

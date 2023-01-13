@@ -183,18 +183,18 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="房源号" prop="roomId">
-                <el-select
-                  @change="handleChange"
-                  :disabled="isQuery"
-                  v-model="form.roomId"
-                  placeholder="请选择房源号">
-                  <el-option
-                    v-for="item in roomList"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
+              <el-select
+                @change="handleChange"
+                :disabled="isQuery"
+                v-model="form.roomId"
+                placeholder="请选择房源号">
+                <el-option
+                  v-for="item in roomList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -210,6 +210,7 @@
               <el-date-picker :readonly="isQuery" clearable
                               v-model="form.leaseStartTime"
                               type="date"
+                              :picker-options="pickerOptionsStart"
                               value-format="yyyy-MM-dd"
                               placeholder="请选择租赁开始日期">
               </el-date-picker>
@@ -221,6 +222,7 @@
               <el-date-picker :readonly="isQuery" clearable
                               v-model="form.leaseEndTime"
                               type="date"
+                              :picker-options="pickerOptionsEnd"
                               value-format="yyyy-MM-dd"
                               placeholder="请选择租赁结束日期">
               </el-date-picker>
@@ -358,13 +360,31 @@ import {intCovString} from "@/api/common/common";
 import {listTenantsNoScope} from "../../../api/tenants/info";
 import {listRoomNoScope} from "../../../api/room/info";
 
-const spaceId=sessionStorage.getItem("spaceId")
+const spaceId = sessionStorage.getItem("spaceId")
 
 export default {
   name: "Info",
   dicts: ['payment_type', 'room_type', 'contract_type', 'pay_type', 'contract_status', 'room_status'],
   data() {
     return {
+
+      pickerOptionsStart: {//结束时间不能大于开始时间
+      },
+      pickerOptionsEnd: {
+        disabledDate: (time) => {
+          if (this.form.leaseStartTime) {
+            let beginDateVal = new Date(this.form.leaseStartTime).getTime()
+            if (beginDateVal) { // 等于的时候是临界值00:00:00
+              return (time.getTime()) <= beginDateVal - 8.64e7
+            } else {
+              return time.getTime() < Date.now() - 8.64e7
+            }
+          } else {
+            this.form.leaseEndTime='';
+            return true;
+          }
+        }
+      },
 
       queryTime: [],
 
@@ -404,18 +424,18 @@ export default {
 
       roomQueryParams: {
         pageSize: 99999,
-        spaceId:spaceId,
+        spaceId: spaceId,
       },
 
       tenantsQueryParams: {
         pageSize: 99999,
-        spaceId:spaceId,
+        spaceId: spaceId,
       },
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        spaceId:spaceId,
+        spaceId: spaceId,
         contractNumber: null,
         signTimeStart: null,
         signTimeEnd: null,
@@ -448,7 +468,7 @@ export default {
   methods: {
 
     // 房源号选择框触发事件
-    handleChange(){
+    handleChange() {
       this.handleChangeRoomName(this.form.roomId)
     },
 
@@ -755,7 +775,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.form.spaceId=spaceId;
+          this.form.spaceId = spaceId;
           this.initTogetherPersonIdParams();
           if (this.form.contractId != null) {
             updateContract(this.form).then(response => {

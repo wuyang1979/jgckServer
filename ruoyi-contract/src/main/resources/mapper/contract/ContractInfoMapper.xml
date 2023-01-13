@@ -225,4 +225,13 @@
             #{contractId}
         </foreach>
     </delete>
+
+
+    <select id="getLeaseEndTimeByRoomId" resultType="Date">
+        SELECT lease_end_time
+        FROM t_contract_info
+        WHERE contract_status = 0
+          AND room_id = #{roomId}
+          AND space_id = #{spaceId} limit 1
+    </select>
 </mapper>

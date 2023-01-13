@@ -1,5 +1,6 @@
 package com.ruoyi.contract.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -62,6 +63,12 @@ public interface IContractInfoService {
      * @return 结果
      */
     public int deleteContractInfoByContractId(String contractId);
+
+
+    public Boolean DateExceed(String roomId,String spaceId,Date leaseEndTime);
+
+
+    public Date getLeaseEndTimeByRoomId(String roomId,String spaceId);
 
 
 }

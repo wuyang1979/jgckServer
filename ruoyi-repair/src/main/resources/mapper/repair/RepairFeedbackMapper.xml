@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.repair.mapper.RepairFeedbackMapper">
+
+    <resultMap type="RepairFeedback" id="RepairFeedbackResult">
+        <result property="repairId" column="repair_id"/>
+        <result property="repairMobile" column="repair_mobile"/>
+        <result property="repairStatus" column="repair_status"/>
+        <result property="repairType" column="repair_type"/>
+        <result property="remark" column="remark"/>
+        <result property="handleId" column="handle_id"/>
+        <result property="handlerTime" column="handler_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="RepairFeedbackDTO" id="RepairFeedbackDtoResult">
+        <result property="repairId" column="repair_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="repairName" column="repair_name"/>
+        <result property="repairMobile" column="repair_mobile"/>
+        <result property="repairStatus" column="repair_status"/>
+        <result property="repairType" column="repair_type"/>
+        <result property="remark" column="remark"/>
+        <result property="handleName" column="handle_name"/>
+        <result property="handlerTime" column="handler_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectRepairFeedbackVo">
+        SELECT rf.repair_id,
+               ti.tenants_name repair_name,
+               su.nick_name    handle_name,
+               ri.room_name,
+               rf.repair_mobile,
+               rf.repair_status,
+               rf.repair_type,
+               rf.remark,
+               rf.handle_id,
+               rf.handler_time
+        FROM t_repair_feedback rf
+                 LEFT JOIN t_tenants_info ti ON rf.repair_mobile = ti.contact_phone
+                 LEFT JOIN t_contract_info ci ON ci.tenants_id = ti.tenants_id
+                 LEFT JOIN t_room_info ri ON ri.room_id = ci.room_id
+                 LEFT JOIN sys_user su ON su.user_id = rf.handle_id
+    </sql>
+
+    <sql id="selectRepairFeedback">
+        SELECT repair_id,
+               repair_mobile,
+               repair_status,
+               repair_type,
+               handle_id,
+               handler_time,
+               remark
+        FROM t_repair_feedback
+    </sql>
+
+    <select id="selectRepairFeedbackList" parameterType="RepairFeedbackVo" resultMap="RepairFeedbackDtoResult">
+        <include refid="selectRepairFeedbackVo"/>
+        <where>
+            <if test="repairMobile != null  and repairMobile != ''">
+                and rf.repair_mobile = #{repairMobile}
+            </if>
+            <if test="repairStatus != null ">
+                and rf.repair_status = #{repairStatus}
+            </if>
+            <if test="repairType != null ">
+                and rf.repair_type = #{repairType}
+            </if>
+            <if test="handleId != null  and handleId != ''">
+                and rf.handle_id = #{handleId}
+            </if>
+            <if test="handlerTime != null ">
+                and rf.handler_time = #{handlerTime}
+            </if>
+            <if test="spaceId != null ">
+                and rf.space_id = #{spaceId}
+            </if>
+            and ci.contract_status=0
+        </where>
+    </select>
+
+    <select id="selectRepairFeedbackByRepairId" parameterType="String" resultMap="RepairFeedbackResult">
+        <include refid="selectRepairFeedback"/>
+        where repair_id = #{repairId}
+    </select>
+
+    <insert id="insertRepairFeedback" parameterType="RepairFeedbackVo">
+        insert into t_repair_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="repairId != null">repair_id,</if>
+            <if test="repairMobile != null">repair_mobile,</if>
+            <if test="repairStatus != null">repair_status,</if>
+            <if test="repairType != null">repair_type,</if>
+            <if test="remark != null">remark,</if>
+            <if test="handleId != null">handle_id,</if>
+            <if test="handlerTime != null">handler_time,</if>
+            <if test="spaceId != null">space_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="repairId != null">#{repairId},</if>
+            <if test="repairMobile != null">#{repairMobile},</if>
+            <if test="repairStatus != null">#{repairStatus},</if>
+            <if test="repairType != null">#{repairType},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="handleId != null">#{handleId},</if>
+            <if test="handlerTime != null">#{handlerTime},</if>
+            <if test="spaceId != null">#{spaceId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRepairFeedback" parameterType="RepairFeedbackVo">
+        update t_repair_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="repairMobile != null">repair_mobile =
+                #{repairMobile},
+            </if>
+            <if test="repairStatus != null">repair_status =
+                #{repairStatus},
+            </if>
+            <if test="repairType != null">repair_type =
+                #{repairType},
+            </if>
+            <if test="remark != null">remark =
+                #{remark},
+            </if>
+            <if test="handleId != null">handle_id =
+                #{handleId},
+            </if>
+            <if test="handlerTime != null">handler_time =
+                #{handlerTime},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
+        </trim>
+        where repair_id = #{repairId}
+    </update>
+
+    <delete id="deleteRepairFeedbackByRepairId" parameterType="String">
+        delete
+        from t_repair_feedback
+        where repair_id = #{repairId}
+    </delete>
+
+    <delete id="deleteRepairFeedbackByRepairIds" parameterType="String">
+        delete from t_repair_feedback where repair_id in
+        <foreach item="repairId" collection="array" open="(" separator="," close=")">
+            #{repairId}
+        </foreach>
+    </delete>
+</mapper>
