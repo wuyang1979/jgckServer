@@ -28,9 +28,9 @@ public class RepairFeedbackVo extends BaseEntity {
     /**
      * 报修人手机号
      */
-    @Excel(name = "报修人手机号")
-    @ApiModelProperty("报修人手机号")
-    private String repairMobile;
+    @Excel(name = "报修人id")
+    @ApiModelProperty("报修人id号")
+    private String repairHandleId;
 
     /**
      * 报修状态
@@ -67,5 +67,16 @@ public class RepairFeedbackVo extends BaseEntity {
     @Excel(name = "空间id")
     @ApiModelProperty("空间id")
     private String spaceId;
+
+    /**
+     * 房源id
+     */
+    @Excel(name = "房源id")
+    @ApiModelProperty("房源id")
+    private String roomId;
+
+    private String repairName;
+
+    private String handleName;
 
 }

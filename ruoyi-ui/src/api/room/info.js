@@ -10,6 +10,15 @@ export function listRoom(query) {
 }
 
 // 查询房源基本信息列表
+export function listRoomByTenantsId(query) {
+    return request({
+        url: '/room/info/listByTenantsId',
+        method: 'get',
+        params: query
+    })
+}
+
+// 查询房源基本信息列表
 export function listRoomNoScope(query) {
     return request({
         url: '/room/info/listNoScope',

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.room.domain.dto.RoomInfoDtoPage;
+import com.ruoyi.room.domain.vo.RoomInfoRepairVo;
 import com.ruoyi.room.domain.vo.RoomInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -120,5 +121,12 @@ public class RoomInfoController extends BaseController {
     @DeleteMapping("/{roomIds}")
     public AjaxResult remove(@PathVariable String[] roomIds) {
         return toAjax(roomInfoService.deleteRoomInfoByRoomIds(roomIds));
+    }
+
+    @ApiOperation("根据租客手机号查询房源号")
+    @GetMapping("/listByTenantsId")
+    public TableDataInfo listByTenantsId(RoomInfoRepairVo roomInfoRepairVo) {
+        List<RoomInfoDtoPage> list = roomInfoService.listByTenantsId(roomInfoRepairVo);
+        return getDataTable(list);
     }
 }

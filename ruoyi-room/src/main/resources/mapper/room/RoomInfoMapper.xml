@@ -179,4 +179,18 @@
             #{roomId}
         </foreach>
     </delete>
+
+
+    <select id="listByTenantsId" parameterType="RoomInfoRepairVo" resultMap="RoomInfoVoResult">
+        SELECT DISTINCT ri.room_id,
+        ri.room_name
+        FROM t_room_info ri
+        LEFT JOIN t_contract_info ci ON ci.room_id = ri.room_id
+        AND ci.contract_status = 0
+        AND ci.room_id = ri.room_id
+        <where>
+            ci.tenants_id = #{repairHandleId}
+            AND ci.space_id=#{spaceId}
+        </where>
+    </select>
 </mapper>

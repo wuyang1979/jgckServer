@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.room.domain.dto.RoomInfoDtoPage;
 import com.ruoyi.room.domain.entiy.RoomInfo;
+import com.ruoyi.room.domain.vo.RoomInfoRepairVo;
 import com.ruoyi.room.domain.vo.RoomInfoVo;
 
 /**
@@ -68,4 +69,12 @@ public interface IRoomInfoService {
      * @return 结果
      */
     public int deleteRoomInfoByRoomId(String roomId);
+
+    /**
+     * 根据租客id获取房源集合
+     *
+     * @param roomInfoRepairVo
+     * @return
+     */
+    public List<RoomInfoDtoPage> listByTenantsId(RoomInfoRepairVo roomInfoRepairVo);
 }

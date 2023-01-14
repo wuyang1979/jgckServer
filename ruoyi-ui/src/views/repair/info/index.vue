@@ -2,9 +2,9 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
              label-width="68px">
-      <el-form-item label="房源号" prop="repairMobile">
+      <el-form-item label="房源号" prop="repairName">
         <el-input
-          v-model="queryParams.repairMobile"
+          v-model="queryParams.repairName"
           placeholder="请输入房源号"
           clearable
           @keyup.enter.native="handleQuery"
@@ -32,9 +32,9 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="处理人" prop="handleId">
+      <el-form-item label="处理人" prop="handleName">
         <el-input
-          v-model="queryParams.handleId"
+          v-model="queryParams.handleName"
           placeholder="处理人"
           clearable
           @keyup.enter.native="handleQuery"
@@ -155,9 +155,21 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="报修人" prop="repairMobile">
+            <el-form-item label="报修类型" prop="repairType">
+              <el-select v-model="form.repairType" placeholder="请选择报修类型">
+                <el-option
+                  v-for="dict in dict.type.repair_type"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="parseInt(dict.value)"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="报修人" prop="repairHandleId">
               <el-select
-                v-model="form.repairMobile"
+                v-model="form.repairHandleId"
                 filterable
                 remote
                 clearable
@@ -171,6 +183,27 @@
                   :value="item.value">
                 </el-option>
               </el-select>
+            </el-form-item>
+          </el-col>
+
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="房源号" prop="roomId">
+              <template>
+                <el-select
+                  :disabled="isUser"
+                  v-model="form.roomId"
+                  clearable
+                  placeholder="请选择房源号">
+                  <el-option
+                    v-for="item in roomList"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </template>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -187,26 +220,13 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="报修类型" prop="repairType">
-              <el-select v-model="form.repairType" placeholder="请选择报修类型">
-                <el-option
-                  v-for="dict in dict.type.repair_type"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="parseInt(dict.value)"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
+
           <el-col :span="12">
             <el-form-item label="处理人" prop="handleId">
               <treeselect v-model="form.handleId" :options="treeData" :disable-branch-nodes="true" :show-count="true"
                           placeholder="请选择处理人"/>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12">
             <el-form-item label="处理时间" prop="handlerTime">
               <el-date-picker clearable
@@ -275,6 +295,9 @@ import {listTenantsNoScope} from "../../../api/tenants/info";
 import {getTree} from "../../../api/room/look";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {listRoomNoScope,listRoomByTenantsId} from "../../../api/room/info";
+import {intCovString} from "../../../api/common/common";
+import {listUser} from "../../../api/system/user";
 
 const spaceId = sessionStorage.getItem("spaceId")
 
@@ -286,6 +309,14 @@ export default {
   dicts: ['repair_type', 'repair_status'],
   data() {
     return {
+
+      isUser:true,
+
+      roomQueryParams:{
+        spaceId:spaceId,
+      },
+
+      roomList: [],
 
       isQuery: false,
 
@@ -345,11 +376,10 @@ export default {
         pageNum: 1,
         pageSize: 10,
         spaceId: spaceId,
-        repairMobile: null,
+        repairName: null,
         repairStatus: null,
         repairType: null,
-        handleId: null,
-        handlerTime: null,
+        handleName: null,
       },
       // 表单参数
       form: {}
@@ -362,12 +392,95 @@ export default {
     this.getList();
     this.initTenants();
     this.init();
+    this.initRoom();
   },
   methods: {
 
+    getListRoom(){
+      let params={
+        repairHandleId:this.form.repairHandleId,
+        spaceId:spaceId
+      }
+      listRoomByTenantsId(params).then(res=>{
+        let list=[];
+        let data=res.rows;
+        data.forEach(d=>{
+          list.push({
+            label:d.roomName,
+            value:d.roomId,
+          })
+        })
+        this.roomList=list;
+      })
+    },
+
+    getUserList(){
+      let userQueryParams={};
+      listUser(userQueryParams).then(res=>{
+        let data=res.rows;
+        let list=[];
+        data.forEach(d=>{
+          list.push({
+            label:d.nickName,
+            value:d.userId
+          })
+        })
+        this.tenantsOptions=list
+      })
+    },
+
+    handlerepairHandleIdChange(){
+      let type=this.form.repairType;
+      let id=this.form.repairHandleId;
+      if (type==3){
+      }else {
+        this.getListRoom();
+        console.log("通过租客id查询房源号")
+      }
+
+    },
+
+    handleRepairTypeChange() {
+      let type=this.form.repairType;
+      if (type==3){
+        this.isUser=true;
+        this.getUserList();
+      }else {
+        this.isUser=false;
+        this.tenantsFilterType(type);
+      }
+    },
+    //初始化房源集合
+    initRoom() {
+      var list = [];
+      listRoomNoScope(this.roomQueryParams).then(respone => {
+        var rooms = respone.rows
+        rooms.forEach(rs => {
+          list.push({
+              value: rs.roomId,
+              label: rs.roomName,
+            }
+          )
+        })
+      })
+      this.roomList = list
+    },
+
+    tenantsFilterType(type){
+      this.tenantsOptions = this.tenantsList.filter(item => {
+        if (type != null) {
+          if (type==2){
+            return item.type.indexOf("0") > -1;
+          }else {
+            return item.type.indexOf("1") > -1;
+          }
+        }
+      });
+    },
+
     queryRoom(row) {
       this.title = '租客反馈详情';
-      this.isQuery=true;
+      this.isQuery = true;
       getRepair(row.repairId).then(respone => {
         this.listFile(row.repairId);
         this.tenantsOptions = this.tenantsList;
@@ -415,7 +528,8 @@ export default {
         list.forEach(l => {
           tenants = {
             label: l.tenantsName,
-            value: l.contactPhone
+            value: l.tenantsId,
+            type: intCovString(l.cardType)
           };
           tenantList.push(tenants)
         })
@@ -503,7 +617,7 @@ export default {
     reset() {
       this.form = {
         repairId: null,
-        repairMobile: null,
+        repairHandleId: null,
         repairStatus: 0,
         repairType: 3,
         remark: null,
@@ -616,6 +730,10 @@ export default {
       immediate: true,
       deep: true,
     },
+
+    'form.repairType': 'handleRepairTypeChange',
+
+    'form.repairHandleId':'handlerepairHandleIdChange'
   }
 };
 </script>

@@ -28,7 +28,7 @@ public class RepairFeedback extends BaseEntity {
      */
     @Excel(name = "报修人手机号")
     @ApiModelProperty("报修人手机号")
-    private String repairMobile;
+    private String repairHandleId;
 
     /**
      * 报修状态
@@ -61,6 +61,8 @@ public class RepairFeedback extends BaseEntity {
 
     private String spaceId;
 
+    private String roomId;
+
     public void setRepairId(String repairId) {
         this.repairId = repairId;
     }
@@ -69,12 +71,12 @@ public class RepairFeedback extends BaseEntity {
         return repairId;
     }
 
-    public void setRepairMobile(String repairMobile) {
-        this.repairMobile = repairMobile;
+    public String getRepairHandleId() {
+        return repairHandleId;
     }
 
-    public String getRepairMobile() {
-        return repairMobile;
+    public void setRepairHandleId(String repairHandleId) {
+        this.repairHandleId = repairHandleId;
     }
 
     public void setRepairStatus(Long repairStatus) {
@@ -117,11 +119,20 @@ public class RepairFeedback extends BaseEntity {
         this.spaceId = spaceId;
     }
 
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("repairId", getRepairId())
-                .append("repairMobile", getRepairMobile())
+                .append("repairHandleId", getRepairHandleId())
+                .append("roomId", getRoomId())
                 .append("repairStatus", getRepairStatus())
                 .append("repairType", getRepairType())
                 .append("remark", getRemark())

@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.room.domain.dto.RoomInfoDtoPage;
+import com.ruoyi.room.domain.vo.RoomInfoRepairVo;
 import com.ruoyi.room.domain.vo.RoomInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +99,11 @@ public class RoomInfoServiceImpl implements IRoomInfoService {
     @Override
     public int deleteRoomInfoByRoomId(String roomId) {
         return roomInfoMapper.deleteRoomInfoByRoomId(roomId);
+    }
+
+
+    @Override
+    public List<RoomInfoDtoPage> listByTenantsId(RoomInfoRepairVo roomInfoRepairVo) {
+        return roomInfoMapper.listByTenantsId(roomInfoRepairVo);
     }
 }

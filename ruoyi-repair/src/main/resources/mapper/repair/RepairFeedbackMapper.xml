@@ -6,7 +6,8 @@
 
     <resultMap type="RepairFeedback" id="RepairFeedbackResult">
         <result property="repairId" column="repair_id"/>
-        <result property="repairMobile" column="repair_mobile"/>
+        <result property="repairHandleId" column="repair_handle_id"/>
+        <result property="roomId" column="room_id"/>
         <result property="repairStatus" column="repair_status"/>
         <result property="repairType" column="repair_type"/>
         <result property="remark" column="remark"/>
@@ -35,26 +36,28 @@
     </resultMap>
 
     <sql id="selectRepairFeedbackVo">
-        SELECT rf.repair_id,
-               ti.tenants_name repair_name,
-               su.nick_name    handle_name,
-               ri.room_name,
-               rf.repair_mobile,
-               rf.repair_status,
-               rf.repair_type,
-               rf.remark,
-               rf.handle_id,
-               rf.handler_time
-        FROM t_repair_feedback rf
-                 LEFT JOIN t_tenants_info ti ON rf.repair_mobile = ti.contact_phone
-                 LEFT JOIN t_contract_info ci ON ci.tenants_id = ti.tenants_id
-                 LEFT JOIN t_room_info ri ON ri.room_id = ci.room_id
-                 LEFT JOIN sys_user su ON su.user_id = rf.handle_id
+        SELECT
+            rf.repair_id,
+            ri.room_name,
+            rf.repair_type,
+            rf.repair_status,
+            su.nick_name handle_name,
+            su.phonenumber,
+            ti.tenants_name repair_name,
+            ti.contact_phone,
+            rf.create_time,
+            rf.handler_time
+        FROM
+            t_repair_feedback rf
+                LEFT JOIN t_room_info ri ON rf.room_id = ri.room_id
+                LEFT JOIN t_tenants_info ti ON rf.repair_handle_id=ti.tenants_id
+                LEFT JOIN sys_user su ON su.user_id=rf.handle_id
     </sql>
 
     <sql id="selectRepairFeedback">
         SELECT repair_id,
-               repair_mobile,
+               room_id,
+               repair_handle_id,
                repair_status,
                repair_type,
                handle_id,
@@ -66,8 +69,8 @@
     <select id="selectRepairFeedbackList" parameterType="RepairFeedbackVo" resultMap="RepairFeedbackDtoResult">
         <include refid="selectRepairFeedbackVo"/>
         <where>
-            <if test="repairMobile != null  and repairMobile != ''">
-                and rf.repair_mobile = #{repairMobile}
+            <if test="repairName != null  and repairName != ''">
+                and ti.tenants_name like concat('%', #{repairName},'%')
             </if>
             <if test="repairStatus != null ">
                 and rf.repair_status = #{repairStatus}
@@ -75,8 +78,8 @@
             <if test="repairType != null ">
                 and rf.repair_type = #{repairType}
             </if>
-            <if test="handleId != null  and handleId != ''">
-                and rf.handle_id = #{handleId}
+            <if test="handleName != null  and handleName != ''">
+                and su.nick_name like concat('%',#{handleName},'%')
             </if>
             <if test="handlerTime != null ">
                 and rf.handler_time = #{handlerTime}
@@ -84,7 +87,6 @@
             <if test="spaceId != null ">
                 and rf.space_id = #{spaceId}
             </if>
-            and ci.contract_status=0
         </where>
     </select>
 
@@ -97,8 +99,9 @@
         insert into t_repair_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="repairId != null">repair_id,</if>
-            <if test="repairMobile != null">repair_mobile,</if>
+            <if test="repairHandleId != null">repair_handle_id,</if>
             <if test="repairStatus != null">repair_status,</if>
+            <if test="roomId != null">room_id,</if>
             <if test="repairType != null">repair_type,</if>
             <if test="remark != null">remark,</if>
             <if test="handleId != null">handle_id,</if>
@@ -111,8 +114,9 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="repairId != null">#{repairId},</if>
-            <if test="repairMobile != null">#{repairMobile},</if>
+            <if test="repairHandleId != null">#{repairHandleId},</if>
             <if test="repairStatus != null">#{repairStatus},</if>
+            <if test="roomId != null">#{roomId},</if>
             <if test="repairType != null">#{repairType},</if>
             <if test="remark != null">#{remark},</if>
             <if test="handleId != null">#{handleId},</if>
