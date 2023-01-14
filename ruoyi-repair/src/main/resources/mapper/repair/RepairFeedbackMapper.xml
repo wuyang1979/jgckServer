@@ -70,7 +70,7 @@
         <include refid="selectRepairFeedbackVo"/>
         <where>
             <if test="repairName != null  and repairName != ''">
-                and ti.tenants_name like concat('%', #{repairName},'%')
+                and ri.room_name like concat('%', #{repairName},'%')
             </if>
             <if test="repairStatus != null ">
                 and rf.repair_status = #{repairStatus}

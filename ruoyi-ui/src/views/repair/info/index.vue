@@ -100,7 +100,7 @@
       </el-table-column>
       <el-table-column label="报修人" align="center" prop="repairName"/>
       <el-table-column label="报修人电话" align="center" prop="repairMobile"/>
-      <el-table-column label="处理人" align="center" prop="handleId"/>
+      <el-table-column label="处理人" align="center" prop="handleName"/>
       <el-table-column label="报修时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
@@ -156,7 +156,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="报修类型" prop="repairType">
-              <el-select v-model="form.repairType" placeholder="请选择报修类型">
+              <el-select :disabled="isQuery" v-model="form.repairType" placeholder="请选择报修类型">
                 <el-option
                   v-for="dict in dict.type.repair_type"
                   :key="dict.value"
@@ -169,6 +169,7 @@
           <el-col :span="12">
             <el-form-item label="报修人" prop="repairHandleId">
               <el-select
+                :disabled="isQuery"
                 v-model="form.repairHandleId"
                 filterable
                 remote
@@ -208,7 +209,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="报修状态" prop="repairStatus">
-              <el-select v-model="form.repairStatus" placeholder="请选择报修状态">
+              <el-select :disabled="isQuery" v-model="form.repairStatus" placeholder="请选择报修状态">
                 <el-option
                   v-for="dict in dict.type.repair_status"
                   :key="dict.value"
@@ -229,7 +230,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="处理时间" prop="handlerTime">
-              <el-date-picker clearable
+              <el-date-picker :disabled="isQuery" clearable
                               v-model="form.handlerTime"
                               type="datetime"
                               value-format="yyyy-MM-dd HH:mm:ss"
@@ -264,7 +265,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="描述" prop="remark">
-              <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
+              <el-input :readonly="isQuery" v-model="form.remark" type="textarea" placeholder="请输入内容"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -446,7 +447,9 @@ export default {
         this.isUser=true;
         this.getUserList();
       }else {
-        this.isUser=false;
+        if (!this.isQuery){
+          this.isUser=false;
+        }
         this.tenantsFilterType(type);
       }
     },
@@ -481,6 +484,7 @@ export default {
     queryRoom(row) {
       this.title = '租客反馈详情';
       this.isQuery = true;
+      this.isUser=true;
       getRepair(row.repairId).then(respone => {
         this.listFile(row.repairId);
         this.tenantsOptions = this.tenantsList;
@@ -658,6 +662,7 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
+      this.isQuery=false;
       const repairId = row.repairId || this.ids
       getRepair(repairId).then(response => {
         this.tenantsOptions = this.tenantsList;
