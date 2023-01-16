@@ -154,6 +154,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-brand</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-pay</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

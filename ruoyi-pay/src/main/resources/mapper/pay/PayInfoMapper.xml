@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.pay.mapper.PayInfoMapper">
+
+    <resultMap type="PayInfoPageDTO" id="PayInfoPageDTOResult">
+        <result property="payId" column="pay_id"/>
+        <result property="month" column="month"/>
+        <result property="lastMonthParameter" column="last_month_parameter"/>
+        <result property="thisMonthParameter" column="this_month_parameter"/>
+        <result property="unitPrice" column="unit_price"/>
+        <result property="thisMonthUse" column="this_month_use"/>
+        <result property="payableMoney" column="payable_money"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="payType" column="pay_type"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="roomName" column="room_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="PayInfo" id="PayInfoResult">
+        <result property="payId" column="pay_id"/>
+        <result property="month" column="month"/>
+        <result property="lastMonthParameter" column="last_month_parameter"/>
+        <result property="thisMonthParameter" column="this_month_parameter"/>
+        <result property="unitPrice" column="unit_price"/>
+        <result property="thisMonthUse" column="this_month_use"/>
+        <result property="payableMoney" column="payable_money"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="payType" column="pay_type"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectPayInfoVo">
+        SELECT
+            pi.pay_id,
+            pi.MONTH,
+            pi.pay_type,
+            ri.room_name,
+            pi.last_month_parameter,
+            pi.this_month_parameter,
+            pi.unit_price,
+            pi.this_month_use,
+            pi.payable_money,
+            pi.pay_status,
+            pi.space_id,
+            pi.room_id,
+            pi.create_by,
+            pi.create_time,
+            pi.update_by,
+            pi.update_time
+        FROM
+            t_pay_info pi LEFT JOIN t_room_info ri ON pi.room_id=ri.room_id
+    </sql>
+
+    <select id="selectPayInfoList" parameterType="PayInfoVo" resultMap="PayInfoPageDTOResult">
+        <include refid="selectPayInfoVo"/>
+        <where>
+            <if test="month != null ">
+                and pi.month = #{month}
+            </if>
+            <if test="lastMonthParameter != null ">
+                and pi.last_month_parameter = #{lastMonthParameter}
+            </if>
+            <if test="thisMonthParameter != null ">
+                and pi.this_month_parameter = #{thisMonthParameter}
+            </if>
+            <if test="unitPrice != null ">
+                and pi.unit_price = #{unitPrice}
+            </if>
+            <if test="thisMonthUse != null ">
+                and pi.this_month_use = #{thisMonthUse}
+            </if>
+            <if test="payableMoney != null  and payableMoney != ''">
+                and pi.payable_money = #{payableMoney}
+            </if>
+            <if test="payStatus != null ">
+                and pi.pay_status = #{payStatus}
+            </if>
+            <if test="roomName != null ">
+                and ri.room_name like CONCAT('%', #{roomName},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPayInfoByPayId" parameterType="String" resultMap="PayInfoResult">
+        <include refid="selectPayInfoVo"/>
+        where pi.pay_id = #{payId}
+    </select>
+
+    <insert id="insertPayInfo" parameterType="PayInfo">
+        insert into t_pay_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payId != null">pay_id,
+            </if>
+            <if test="month != null">month,
+            </if>
+            <if test="lastMonthParameter != null">last_month_parameter,
+            </if>
+            <if test="thisMonthParameter != null">this_month_parameter,
+            </if>
+            <if test="unitPrice != null">unit_price,
+            </if>
+            <if test="thisMonthUse != null">this_month_use,
+            </if>
+            <if test="payableMoney != null">payable_money,
+            </if>
+            <if test="payStatus != null">pay_status,
+            </if>
+            <if test="payType != null">pay_type,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="roomId != null">room_id,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payId != null">#{payId},
+            </if>
+            <if test="month != null">#{month},
+            </if>
+            <if test="lastMonthParameter != null">#{lastMonthParameter},
+            </if>
+            <if test="thisMonthParameter != null">#{thisMonthParameter},
+            </if>
+            <if test="unitPrice != null">#{unitPrice},
+            </if>
+            <if test="thisMonthUse != null">#{thisMonthUse},
+            </if>
+            <if test="payableMoney != null">#{payableMoney},
+            </if>
+            <if test="payStatus != null">#{payStatus},
+            </if>
+            <if test="payType != null">#{payType},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="roomId != null">#{roomId},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePayInfo" parameterType="PayInfo">
+        update t_pay_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="month != null">month =
+                #{month},
+            </if>
+            <if test="lastMonthParameter != null">last_month_parameter =
+                #{lastMonthParameter},
+            </if>
+            <if test="thisMonthParameter != null">this_month_parameter =
+                #{thisMonthParameter},
+            </if>
+            <if test="unitPrice != null">unit_price =
+                #{unitPrice},
+            </if>
+            <if test="thisMonthUse != null">this_month_use =
+                #{thisMonthUse},
+            </if>
+            <if test="payableMoney != null">payable_money =
+                #{payableMoney},
+            </if>
+            <if test="payStatus != null">pay_status =
+                #{payStatus},
+            </if>
+            <if test="payType != null">pay_type =
+                #{payType},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
+        </trim>
+        where pay_id = #{payId}
+    </update>
+
+    <delete id="deletePayInfoByPayId" parameterType="String">
+        delete
+        from t_pay_info
+        where pay_id = #{payId}
+    </delete>
+
+    <delete id="deletePayInfoByPayIds" parameterType="String">
+        delete from t_pay_info where pay_id in
+        <foreach item="payId" collection="array" open="(" separator="," close=")">
+            #{payId}
+        </foreach>
+    </delete>
+</mapper>

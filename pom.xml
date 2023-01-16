@@ -254,6 +254,11 @@
                 <artifactId>ruoyi-brand</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-pay</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -276,6 +281,7 @@
         <module>xy-news</module>
         <module>ruoyi-repair</module>
         <module>ruoyi-brand</module>
+        <module>ruoyi-pay</module>
     </modules>
     <packaging>pom</packaging>
 
