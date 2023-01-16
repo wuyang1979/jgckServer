@@ -221,7 +221,6 @@
           </el-col>
         </el-row>
         <el-row>
-
           <el-col :span="12">
             <el-form-item label="处理人" prop="handleId">
               <treeselect v-model="form.handleId" :options="treeData" :disable-branch-nodes="true" :show-count="true"
@@ -296,7 +295,7 @@ import {listTenantsNoScope} from "../../../api/tenants/info";
 import {getTree} from "../../../api/room/look";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-import {listRoomNoScope,listRoomByTenantsId} from "../../../api/room/info";
+import {listRoomNoScope, listRoomByTenantsId} from "../../../api/room/info";
 import {intCovString} from "../../../api/common/common";
 import {listUser} from "../../../api/system/user";
 
@@ -311,10 +310,12 @@ export default {
   data() {
     return {
 
-      isUser:true,
+      userList:[],
 
-      roomQueryParams:{
-        spaceId:spaceId,
+      isUser: true,
+
+      roomQueryParams: {
+        spaceId: spaceId,
       },
 
       roomList: [],
@@ -394,61 +395,61 @@ export default {
     this.initTenants();
     this.init();
     this.initRoom();
+    this.getUserList();
   },
   methods: {
 
-    getListRoom(){
-      let params={
-        repairHandleId:this.form.repairHandleId,
-        spaceId:spaceId
+    getListRoom() {
+      let params = {
+        repairHandleId: this.form.repairHandleId,
+        spaceId: spaceId
       }
-      listRoomByTenantsId(params).then(res=>{
-        let list=[];
-        let data=res.rows;
-        data.forEach(d=>{
+      listRoomByTenantsId(params).then(res => {
+        let list = [];
+        let data = res.rows;
+        data.forEach(d => {
           list.push({
-            label:d.roomName,
-            value:d.roomId,
+            label: d.roomName,
+            value: d.roomId,
           })
         })
-        this.roomList=list;
+        this.roomList = list;
       })
     },
 
-    getUserList(){
-      let userQueryParams={};
-      listUser(userQueryParams).then(res=>{
-        let data=res.rows;
-        let list=[];
-        data.forEach(d=>{
+    getUserList() {
+      let userQueryParams = {};
+      listUser(userQueryParams).then(res => {
+        let data = res.rows;
+        let list = [];
+        data.forEach(d => {
           list.push({
-            label:d.nickName,
-            value:d.userId
+            label: d.nickName,
+            value: intCovString(d.userId)
           })
         })
-        this.tenantsOptions=list
+        this.userList = list
       })
     },
 
-    handlerepairHandleIdChange(){
-      let type=this.form.repairType;
-      let id=this.form.repairHandleId;
-      if (type==3){
-      }else {
+    handlerepairHandleIdChange() {
+      let type = this.form.repairType;
+      let id = this.form.repairHandleId;
+      if (type == 3) {
+      } else {
         this.getListRoom();
-        console.log("通过租客id查询房源号")
       }
 
     },
 
     handleRepairTypeChange() {
-      let type=this.form.repairType;
-      if (type==3){
-        this.isUser=true;
-        this.getUserList();
-      }else {
-        if (!this.isQuery){
-          this.isUser=false;
+      let type = this.form.repairType;
+      if (type == 3) {
+        this.isUser = true;
+        this.tenantsOptions=this.userList;
+      } else {
+        if (!this.isQuery) {
+          this.isUser = false;
         }
         this.tenantsFilterType(type);
       }
@@ -469,12 +470,12 @@ export default {
       this.roomList = list
     },
 
-    tenantsFilterType(type){
+    tenantsFilterType(type) {
       this.tenantsOptions = this.tenantsList.filter(item => {
         if (type != null) {
-          if (type==2){
+          if (type == 2) {
             return item.type.indexOf("0") > -1;
-          }else {
+          } else {
             return item.type.indexOf("1") > -1;
           }
         }
@@ -484,12 +485,17 @@ export default {
     queryRoom(row) {
       this.title = '租客反馈详情';
       this.isQuery = true;
-      this.isUser=true;
+      this.isUser = true;
       getRepair(row.repairId).then(respone => {
         this.listFile(row.repairId);
-        this.tenantsOptions = this.tenantsList;
+        if (respone.data.repairType == 3) {
+          this.tenantsOptions=this.userList;
+        } else {
+          this.tenantsOptions = this.tenantsList;
+        }
         listFile(row.repairId)
         this.form = respone.data;
+        this.initRoom();
       })
       this.open = true
     },
@@ -662,7 +668,7 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      this.isQuery=false;
+      this.isQuery = false;
       const repairId = row.repairId || this.ids
       getRepair(repairId).then(response => {
         this.tenantsOptions = this.tenantsList;
@@ -738,7 +744,7 @@ export default {
 
     'form.repairType': 'handleRepairTypeChange',
 
-    'form.repairHandleId':'handlerepairHandleIdChange'
+    'form.repairHandleId': 'handlerepairHandleIdChange'
   }
 };
 </script>

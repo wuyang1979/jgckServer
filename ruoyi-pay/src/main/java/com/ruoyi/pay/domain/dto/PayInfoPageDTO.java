@@ -8,6 +8,7 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -100,5 +101,7 @@ public class PayInfoPageDTO extends BaseEntity {
      * 房源号
      */
     private String roomName;
+
+    private LocalDateTime paymentTime;
 
 }

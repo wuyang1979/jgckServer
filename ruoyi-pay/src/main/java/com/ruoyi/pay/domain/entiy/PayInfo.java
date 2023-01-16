@@ -1,5 +1,6 @@
 package com.ruoyi.pay.domain.entiy;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -94,6 +95,11 @@ public class PayInfo extends BaseEntity {
     @ApiModelProperty("缴费类型")
     private Long payType;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "缴费日期", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("缴费日期")
+    private LocalDateTime paymentTime;
+
     public void setPayId(String payId) {
         this.payId = payId;
     }
@@ -182,6 +188,14 @@ public class PayInfo extends BaseEntity {
         this.roomId = roomId;
     }
 
+    public LocalDateTime getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(LocalDateTime paymentTime) {
+        this.paymentTime = paymentTime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -196,6 +210,7 @@ public class PayInfo extends BaseEntity {
                 .append("payType", getPayType())
                 .append("spaceId", getSpaceId())
                 .append("roomId", getRoomId())
+                .append("paymentTime", getPaymentTime())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

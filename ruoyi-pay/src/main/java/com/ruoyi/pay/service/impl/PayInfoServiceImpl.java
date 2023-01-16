@@ -1,5 +1,6 @@
 package com.ruoyi.pay.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +67,11 @@ public class PayInfoServiceImpl implements IPayInfoService {
      */
     @Override
     public int updatePayInfo(PayInfo payInfo) {
+        if (payInfo.getPayStatus()==1){
+            payInfo.setPaymentTime(LocalDateTime.now());
+        }else {
+            payInfo.setPaymentTime(null);
+        }
         payInfo.setUpdateTime(DateUtils.getNowDate());
         return payInfoMapper.updatePayInfo(payInfo);
     }

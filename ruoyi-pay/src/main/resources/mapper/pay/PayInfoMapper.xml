@@ -33,6 +33,7 @@
         <result property="payStatus" column="pay_status"/>
         <result property="payType" column="pay_type"/>
         <result property="spaceId" column="space_id"/>
+        <result property="paymentTime" column="payment_time"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -40,25 +41,25 @@
     </resultMap>
 
     <sql id="selectPayInfoVo">
-        SELECT
-            pi.pay_id,
-            pi.MONTH,
-            pi.pay_type,
-            ri.room_name,
-            pi.last_month_parameter,
-            pi.this_month_parameter,
-            pi.unit_price,
-            pi.this_month_use,
-            pi.payable_money,
-            pi.pay_status,
-            pi.space_id,
-            pi.room_id,
-            pi.create_by,
-            pi.create_time,
-            pi.update_by,
-            pi.update_time
-        FROM
-            t_pay_info pi LEFT JOIN t_room_info ri ON pi.room_id=ri.room_id
+        SELECT pi.pay_id,
+               pi.MONTH,
+               pi.pay_type,
+               ri.room_name,
+               pi.last_month_parameter,
+               pi.this_month_parameter,
+               pi.unit_price,
+               pi.this_month_use,
+               pi.payable_money,
+               pi.pay_status,
+               pi.space_id,
+               pi.room_id,
+               pi.payment_time,
+               pi.create_by,
+               pi.create_time,
+               pi.update_by,
+               pi.update_time
+        FROM t_pay_info pi
+                 LEFT JOIN t_room_info ri ON pi.room_id = ri.room_id
     </sql>
 
     <select id="selectPayInfoList" parameterType="PayInfoVo" resultMap="PayInfoPageDTOResult">
@@ -121,6 +122,8 @@
             </if>
             <if test="roomId != null">room_id,
             </if>
+            <if test="paymentTime != null">payment_time,
+            </if>
             <if test="createBy != null">create_by,
             </if>
             <if test="createTime != null">create_time,
@@ -152,6 +155,8 @@
             <if test="spaceId != null">#{spaceId},
             </if>
             <if test="roomId != null">#{roomId},
+            </if>
+            <if test="paymentTime != null">#{paymentTime},
             </if>
             <if test="createBy != null">#{createBy},
             </if>
@@ -193,6 +198,9 @@
             </if>
             <if test="spaceId != null">space_id =
                 #{spaceId},
+            </if>
+            <if test="paymentTime != null">payment_time =
+                #{paymentTime},
             </if>
             <if test="createBy != null">create_by =
                 #{createBy},

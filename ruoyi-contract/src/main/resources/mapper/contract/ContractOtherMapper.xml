@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.contract.mapper.ContractOtherMapper">
+
+    <resultMap type="ContractOther" id="ContractOtherResult">
+        <result property="contractId" column="contract_id"/>
+        <result property="contractNumber" column="contract_number"/>
+        <result property="customerId" column="customer_id"/>
+        <result property="projectName" column="project_name"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="payPeriod" column="pay_period"/>
+        <result property="contractStartTime" column="contract_start_time"/>
+        <result property="contractEndTime" column="contract_end_time"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="remark" column="remark"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="ContractOtherPageDTO" id="ContractOtherPageDTOResult">
+        <result property="contractId" column="contract_id"/>
+        <result property="contractNumber" column="contract_number"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="projectName" column="project_name"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="payPeriod" column="pay_period"/>
+        <result property="contractStartTime" column="contract_start_time"/>
+        <result property="contractEndTime" column="contract_end_time"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="remark" column="remark"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectContractOtherVo">
+        select contract_id,
+               contract_number,
+               customer_id,
+               project_name,
+               pay_money,
+               pay_period,
+               contract_start_time,
+               contract_end_time,
+               sign_time,
+               remark,
+               space_id,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from t_contract_other
+    </sql>
+
+
+    <sql id="selectContractOtherPageDto">
+        SELECT co.contract_id,
+               co.project_name,
+               ti.tenants_name customer_name,
+               co.pay_money,
+               co.contract_start_time,
+               co.contract_end_time,
+               co.sign_time
+        FROM t_contract_other co
+                 LEFT JOIN t_tenants_info ti ON co.customer_id = ti.tenants_id
+    </sql>
+
+    <select id="selectContractOtherList" parameterType="ContractOtherVo" resultMap="ContractOtherPageDTOResult">
+        <include refid="selectContractOtherPageDto"/>
+        <where>
+            <if test="customerName != null  and customerName != ''">
+                and ti.tenants_name like concat('%', #{customerName}, '%')
+            </if>
+            <if test="projectName != null  and projectName != ''">
+                and co.project_name like concat('%', #{projectName}, '%')
+            </if>
+
+        </where>
+    </select>
+
+    <select id="selectContractOtherByContractId" parameterType="String"
+            resultMap="ContractOtherResult">
+        <include refid="selectContractOtherVo"/>
+        where contract_id = #{contractId}
+    </select>
+
+    <insert id="insertContractOther" parameterType="ContractOther">
+        insert into t_contract_other
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">contract_id,
+            </if>
+            <if test="contractNumber != null">contract_number,
+            </if>
+            <if test="customerId != null">customer_id,
+            </if>
+            <if test="projectName != null">project_name,
+            </if>
+            <if test="payMoney != null">pay_money,
+            </if>
+            <if test="payPeriod != null">pay_period,
+            </if>
+            <if test="contractStartTime != null">contract_start_time,
+            </if>
+            <if test="contractEndTime != null">contract_end_time,
+            </if>
+            <if test="signTime != null">sign_time,
+            </if>
+            <if test="remark != null">remark,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">#{contractId},
+            </if>
+            <if test="contractNumber != null">#{contractNumber},
+            </if>
+            <if test="customerId != null">#{customerId},
+            </if>
+            <if test="projectName != null">#{projectName},
+            </if>
+            <if test="payMoney != null">#{payMoney},
+            </if>
+            <if test="payPeriod != null">#{payPeriod},
+            </if>
+            <if test="contractStartTime != null">#{contractStartTime},
+            </if>
+            <if test="contractEndTime != null">#{contractEndTime},
+            </if>
+            <if test="signTime != null">#{signTime},
+            </if>
+            <if test="remark != null">#{remark},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateContractOther" parameterType="ContractOther">
+        update t_contract_other
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractNumber != null">contract_number =
+                #{contractNumber},
+            </if>
+            <if test="customerId != null">customer_id =
+                #{customerId},
+            </if>
+            <if test="projectName != null">project_name =
+                #{projectName},
+            </if>
+            <if test="payMoney != null">pay_money =
+                #{payMoney},
+            </if>
+            <if test="payPeriod != null">pay_period =
+                #{payPeriod},
+            </if>
+            <if test="contractStartTime != null">contract_start_time =
+                #{contractStartTime},
+            </if>
+            <if test="contractEndTime != null">contract_end_time =
+                #{contractEndTime},
+            </if>
+            <if test="signTime != null">sign_time =
+                #{signTime},
+            </if>
+            <if test="remark != null">remark =
+                #{remark},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
+        </trim>
+        where contract_id = #{contractId}
+    </update>
+
+    <delete id="deleteContractOtherByContractId" parameterType="String">
+        delete
+        from t_contract_other
+        where contract_id = #{contractId}
+    </delete>
+
+    <delete id="deleteContractOtherByContractIds" parameterType="String">
+        delete from t_contract_other where contract_id in
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+</mapper>

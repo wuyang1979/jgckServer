@@ -93,6 +93,11 @@
           <span>{{ parseTime(scope.row.month, '{y}-{m}') }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="缴费类型" align="center" prop="payType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.payment_type" :value="scope.row.payType"/>
+        </template>
+      </el-table-column>
       <!--      <el-table-column label="上月参数" align="center" prop="lastMonthParameter"/>-->
       <!--      <el-table-column label="本月参数" align="center" prop="thisMonthParameter"/>-->
       <!--      <el-table-column label="单价" align="center" prop="unitPrice"/>-->
@@ -103,8 +108,20 @@
           <dict-tag :options="dict.type.pay_status" :value="scope.row.payStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="缴费时间" align="center" prop="paymentTime" width="180">
         <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.paymentTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" align="center" width="200px" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="text"
+            @click="changePayStatus(scope.row)"
+            v-hasPermi="['pay:edit']"
+          >缴费
+          </el-button>
           <el-button
             size="mini"
             type="text"
@@ -229,6 +246,17 @@
               <el-input :readonly="isQuery" v-model="form.payableMoney" placeholder="请输入应缴金额"/>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item v-if="isQuery" label="缴费时间" prop="paymentTime">
+              <el-date-picker clearable
+                              :disabled="isQuery"
+                              v-model="form.paymentTime"
+                              type="datetime"
+                              value-format="yyyy-MM-dd HH:mm:ss"
+                              placeholder="请选择月份">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
 
         </el-row>
       </el-form>
@@ -249,6 +277,8 @@ import {
   updatePay
 } from "@/api/pay/pay";
 import {listRoomNoScope} from "../../../api/room/info";
+import {parseTime} from "../../../utils/ruoyi";
+import {getNowDateTime} from "../../../api/common/common";
 
 const spaceId = sessionStorage.getItem("spaceId")
 
@@ -331,6 +361,21 @@ export default {
     this.initRoom();
   },
   methods: {
+
+    changePayStatus(row) {
+      let params = {};
+      getPay(row.payId).then(res => {
+        params = res.data;
+        params.payStatus = 1;
+      });
+      this.$modal.confirm('是否确认将房源号为' + row.roomName + ',' + parseTime(row.month, '{y}-{m}') + '的缴费状态改为已缴费？').then(function () {
+        return updatePay(params);
+      }).then(() => {
+        this.getList();
+        this.$modal.msgSuccess("修改成功");
+      }).catch(() => {
+      });
+    },
     handleMonthParameterChange() {
       if (this.isAdd) {
         if (this.form.lastMonthParameter != null && this.form.thisMonthParameter != null) {
@@ -353,6 +398,7 @@ export default {
 
     queryPay(row) {
       this.title = '缴费详情';
+      this.rules = {};
       this.form = row;
       this.isQuery = true;
       this.isAdd = false;
@@ -361,8 +407,6 @@ export default {
 
     handlePayTypeChange() {
       this.rules = {};
-      console.info("类型变化")
-      // todo 根据payType 设置表单
       if (this.form.payType == 2) {
         this.isService = true;
         this.rules = this.serviceRules;
