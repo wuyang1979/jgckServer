@@ -258,6 +258,8 @@ export default {
   data() {
     return {
 
+      isAdd: false,
+
       // 是否详情
       isQuery: false,
 
@@ -274,7 +276,7 @@ export default {
       // 选中数组
       ids: [],
 
-      names:[],
+      names: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -295,7 +297,7 @@ export default {
         pageSize: 10,
         payableMoney: null,
         payStatus: null,
-        roomName:null,
+        roomName: null,
         spaceId: spaceId,
       },
       // 表单参数
@@ -329,11 +331,31 @@ export default {
     this.initRoom();
   },
   methods: {
+    handleMonthParameterChange() {
+      if (this.isAdd) {
+        if (this.form.lastMonthParameter != null && this.form.thisMonthParameter != null) {
+          this.form.thisMonthUse = (parseFloat(this.form.thisMonthParameter) - parseFloat(this.form.lastMonthParameter)).toFixed(2);
+        } else {
+          this.form.thisMonthUse
+        }
+      }
+    },
+
+    handleunitPriceChange() {
+      if (this.isAdd) {
+        if (this.form.unitPrice != null && this.form.thisMonthUse != null) {
+          this.form.payableMoney = (parseFloat(this.form.unitPrice) * parseFloat(this.form.thisMonthUse)).toFixed(2);
+        } else {
+          this.form.payableMoney = ''
+        }
+      }
+    },
 
     queryPay(row) {
       this.title = '缴费详情';
       this.form = row;
       this.isQuery = true;
+      this.isAdd = false;
       this.open = true;
     },
 
@@ -394,7 +416,7 @@ export default {
         spaceId: null,
       };
       this.resetForm("form");
-      this.isQuery=false;
+      this.isQuery = false;
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -416,6 +438,7 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
+      this.isAdd = true;
       this.open = true;
       this.title = "添加缴费基本信息";
     },
@@ -426,6 +449,7 @@ export default {
       getPay(payId).then(response => {
         this.form = response.data;
         this.form.payStatus = this.form.payStatus;
+        this.isAdd = false;
         this.open = true;
         this.title = "修改缴费基本信息";
       });
@@ -458,7 +482,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const payIds = row.payId || this.ids;
-      const names=row.roomName || this.names;
+      const names = row.roomName || this.names;
       this.$modal.confirm('是否确认删除缴费基本信息房源号为"' + names + '"的数据项？').then(function () {
         return delPay(payIds);
       }).then(() => {
@@ -475,10 +499,13 @@ export default {
     }
   },
   watch: {
-    'form.payType': 'handlePayTypeChange'
+    'form.payType': 'handlePayTypeChange',
+    'form.lastMonthParameter': 'handleMonthParameterChange',
+    'form.thisMonthParameter': 'handleMonthParameterChange',
+    'form.unitPrice': 'handleunitPriceChange',
+    'form.thisMonthUse': 'handleunitPriceChange',
   }
-}
-;
+};
 </script>
 
 <style scoped>

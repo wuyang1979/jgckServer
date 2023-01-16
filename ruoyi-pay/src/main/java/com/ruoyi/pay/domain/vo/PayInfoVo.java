@@ -38,28 +38,28 @@ public class PayInfoVo extends BaseEntity {
      */
     @Excel(name = "上月参数")
     @ApiModelProperty("上月参数")
-    private Long lastMonthParameter;
+    private String lastMonthParameter;
 
     /**
      * 本月参数
      */
     @Excel(name = "本月参数")
     @ApiModelProperty("本月参数")
-    private Long thisMonthParameter;
+    private String thisMonthParameter;
 
     /**
      * 单价
      */
     @Excel(name = "单价")
     @ApiModelProperty("单价")
-    private Long unitPrice;
+    private String unitPrice;
 
     /**
      * 本月使用
      */
     @Excel(name = "本月使用")
     @ApiModelProperty("本月使用")
-    private Long thisMonthUse;
+    private String thisMonthUse;
 
     /**
      * 应缴金额

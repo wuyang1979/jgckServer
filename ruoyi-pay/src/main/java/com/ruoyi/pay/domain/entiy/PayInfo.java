@@ -36,28 +36,28 @@ public class PayInfo extends BaseEntity {
      */
     @Excel(name = "上月参数")
     @ApiModelProperty("上月参数")
-    private Long lastMonthParameter;
+    private String lastMonthParameter;
 
     /**
      * 本月参数
      */
     @Excel(name = "本月参数")
     @ApiModelProperty("本月参数")
-    private Long thisMonthParameter;
+    private String thisMonthParameter;
 
     /**
      * 单价
      */
     @Excel(name = "单价")
     @ApiModelProperty("单价")
-    private Float unitPrice;
+    private String unitPrice;
 
     /**
      * 本月使用
      */
     @Excel(name = "本月使用")
     @ApiModelProperty("本月使用")
-    private Long thisMonthUse;
+    private String thisMonthUse;
 
     /**
      * 应缴金额
@@ -110,35 +110,35 @@ public class PayInfo extends BaseEntity {
         return month;
     }
 
-    public void setLastMonthParameter(Long lastMonthParameter) {
+    public void setLastMonthParameter(String lastMonthParameter) {
         this.lastMonthParameter = lastMonthParameter;
     }
 
-    public Long getLastMonthParameter() {
+    public String getLastMonthParameter() {
         return lastMonthParameter;
     }
 
-    public void setThisMonthParameter(Long thisMonthParameter) {
+    public void setThisMonthParameter(String thisMonthParameter) {
         this.thisMonthParameter = thisMonthParameter;
     }
 
-    public Long getThisMonthParameter() {
+    public String getThisMonthParameter() {
         return thisMonthParameter;
     }
 
-    public Float getUnitPrice() {
+    public String getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Float unitPrice) {
+    public void setUnitPrice(String unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public void setThisMonthUse(Long thisMonthUse) {
+    public void setThisMonthUse(String thisMonthUse) {
         this.thisMonthUse = thisMonthUse;
     }
 
-    public Long getThisMonthUse() {
+    public String getThisMonthUse() {
         return thisMonthUse;
     }
 
