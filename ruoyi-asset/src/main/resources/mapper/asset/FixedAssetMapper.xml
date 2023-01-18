@@ -3,15 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.asset.mapper.FixedAssetMapper">
-
     <resultMap type="FixedAsset" id="FixedAssetResult">
         <result property="assetId" column="asset_id"/>
         <result property="assetNo" column="asset_no"/>
         <result property="spaceId" column="space_id"/>
         <result property="assetName" column="asset_name"/>
         <result property="assetModel" column="asset_model"/>
-        <result property="userTenantsId" column="user_tenants_id"/>
-        <result property="userTenantsName" column="user_tenants_name"/>
+        <result property="userTenants" column="user_tenants"/>
         <result property="receiverTenantsId" column="receiver_tenants_id"/>
         <result property="receiverTenantsName" column="receiver_tenants_name"/>
         <result property="storageLocation" column="storage_location"/>
@@ -33,10 +31,9 @@
         fa.space_id,
         fa.asset_name,
         fa.asset_model,
-        fa.user_tenants_id,
-        (select tenants_name from t_tenants_info ti where ti.tenants_id = fa.user_tenants_id) user_tenants_name,
+        fa.user_tenants,
         fa.receiver_tenants_id,
-        (select tenants_name from t_tenants_info ti where ti.tenants_id = fa.receiver_tenants_id) receiver_tenants_name,
+        (select nick_name from sys_user su where su.user_id = fa.receiver_tenants_id) receiver_tenants_name,
         fa.storage_location,
         fa.custody_department,
         fa.purchase_time,
@@ -79,7 +76,7 @@
             </if>
             <if test="assetModel != null">asset_model,
             </if>
-            <if test="userTenantsId != null">user_tenants_id,
+            <if test="userTenants != null">user_tenants,
             </if>
             <if test="receiverTenantsId != null">receiver_tenants_id,
             </if>
@@ -115,7 +112,7 @@
             </if>
             <if test="assetModel != null">#{assetModel},
             </if>
-            <if test="userTenantsId != null">#{userTenantsId},
+            <if test="userTenants != null">#{userTenants},
             </if>
             <if test="receiverTenantsId != null">#{receiverTenantsId},
             </if>
@@ -157,8 +154,8 @@
             <if test="assetModel != null">asset_model =
                 #{assetModel},
             </if>
-            <if test="userTenantsId != null">user_tenants_id =
-                #{userTenantsId},
+            <if test="userTenants != null">user_tenants =
+                #{userTenants},
             </if>
             <if test="receiverTenantsId != null">receiver_tenants_id =
                 #{receiverTenantsId},
