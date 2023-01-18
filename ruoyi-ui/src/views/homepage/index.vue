@@ -2,24 +2,26 @@
   <div class="div_body">
     <div class="div_top">
       <div class="shopStatistics">
-        <div class="div_title">
-          商铺统计
-        </div>
         <div id="shopStatistics" style="width: 100%; height: 200px"></div>
       </div>
       <div class="officeStatistics">
-        <div class="div_title">
-          办公室统计
-        </div>
         <div id="officeStatistics" style="width: 100%; height: 200px"></div>
       </div>
       <div class="apartmentStatistics">
-        <div class="div_title">
-          公寓统计
-        </div>
         <div id="apartmentStatistics" style="width: 100%; height: 200px"></div>
       </div>
-
+    </div>
+    <div class="div_top">
+      <div>
+        <div id="maintainStatistics" style="width: 100%;height: 300px">
+        </div>
+      </div>
+      <div>
+        <div id="rectificationStatistics" style="width: 100%;height: 300px"></div>
+      </div>
+      <div>
+        <div id="serviceQualityStatistics" style="width: 100%;height: 270px"></div>
+      </div>
     </div>
     <div class="div_middle">
       <div class="half">
@@ -69,7 +71,7 @@
         </el-table>
       </div>
     </div>
-    <div class="div_bottom">
+    <div class="div_middle">
       <div class="half">
         <div class="div_title left">
           报修提醒
@@ -157,8 +159,9 @@
 import {getContract, getCredential, getSettle} from "@/api/statistics/statistics";
 import {setRemindConfig} from "../../api/statistics/statistics";
 import {getConfigKey} from "../../api/system/config";
+import echarts from "echarts";
 
-const spaceId=sessionStorage.getItem("spaceId")
+const spaceId = sessionStorage.getItem("spaceId")
 
 
 export default {
@@ -224,6 +227,7 @@ export default {
     };
   },
   methods: {
+
 
     // 获取提醒设置参数
     async getRemindConfig(key) {
@@ -348,6 +352,11 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("shopStatistics"));
       // 指定图表的配置项和数据
       let option = {
+        title: {
+          text: '商铺统计',
+          x: 'center',
+          y: 15
+        },
         tooltip: {
           trigger: 'item'
         },
@@ -402,12 +411,197 @@ export default {
       myChart.setOption(option);
     },
 
+    //维修柱状图
+    maintainStatistics() {
+      // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
+      let myChart = this.$echarts.init(document.getElementById("maintainStatistics"));
+
+      let option;
+
+
+      let data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+      let yMax = 500;
+      let dataShadow = [];
+      for (let i = 0; i < data.length; i++) {
+        dataShadow.push(yMax);
+      }
+      option = {
+        title: {
+          text: '维修数据统计',
+          x: 'center',
+          y: 15
+        },
+        xAxis: {
+          data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+          axisLabel: {
+            inside: true,
+            color: '#fff',
+            fontSize: 8
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false,
+          },
+          z: 10,
+        },
+        yAxis: {
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            color: '#999'
+          }
+        },
+        dataZoom: [
+          {
+            type: 'inside'
+          }
+        ],
+        series: [
+          {
+            type: 'bar',
+            showBackground: true,
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {offset: 0, color: '#a5ebf3'},
+                {offset: 0.5, color: '#57d1e0'},
+                {offset: 1, color: '#1992a0'}
+              ])
+            },
+            emphasis: {
+              itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {offset: 0, color: '#1992a0'},
+                  {offset: 0.7, color: '#57d1e0'},
+                  {offset: 1, color: '#a5ebf3'}
+                ])
+              }
+            },
+            data: data
+          }
+        ]
+      };
+// Enable data zoom when user click bar.
+      const zoomSize = 6;
+      myChart.on('click', function (params) {
+        console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+        myChart.dispatchAction({
+          type: 'dataZoom',
+          startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+          endValue:
+            dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+        });
+      });
+
+      option && myChart.setOption(option);
+    },
+
+    //服务质量柱状图
+    serviceQualityStatistics() {
+      // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
+      let myChart = this.$echarts.init(document.getElementById("serviceQualityStatistics"));
+
+      let option = {
+        title: {
+          text: '服务质量统计',
+          x: 'center',
+          y: 15
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            axisTick: {
+              alignWithLabel: true
+            },
+            axisLabel: {
+              fontSize: 8
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: 'Direct',
+            type: 'bar',
+            barWidth: '60%',
+            data: [10, 52, 200, 334, 390, 330, 220, 120, 155, 136, 200, 210]
+          }
+        ],
+        color: ['#5eabe0', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+      };
+
+      option && myChart.setOption(option);
+    },
+
+    //整改柱状图
+    rectificationStatistics() {
+      // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
+      let myChart = this.$echarts.init(document.getElementById("rectificationStatistics"));
+
+      let option = {
+        title: {
+          text: '整改数据统计',
+          x: 'center',
+          y: 15
+        },
+        xAxis: {
+          type: 'category',
+          data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+          axisLabel: {
+            fontSize: 8,
+          },
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [120, 200, 150, 80, 70, 110, 130, 90, 80, 71, 40, 101],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+              color: 'rgba(180, 180, 180, 0.2)'
+            }
+          }
+        ],
+        color: ['#acf6f0', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+      };
+
+      option && myChart.setOption(option);
+    },
     // 办公饼图
     officeStatistics() {
       // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
       let myChart = this.$echarts.init(document.getElementById("officeStatistics"));
       // 指定图表的配置项和数据
       let option = {
+        title: {
+          text: '办公室统计',
+          x: 'center',
+          y: 15
+        },
         tooltip: {
           trigger: 'item'
         },
@@ -468,6 +662,11 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("apartmentStatistics"));
       // 指定图表的配置项和数据
       let option = {
+        title: {
+          text: '公寓统计',
+          x: 'center',
+          y: 15
+        },
         tooltip: {
           trigger: 'item'
         },
@@ -527,7 +726,9 @@ export default {
     this.getSettle();
     this.getContract();
     this.getCredential();
-    console.log(this.loading)
+    this.maintainStatistics();
+    this.rectificationStatistics();
+    this.serviceQualityStatistics();
   }
 };
 </script>
