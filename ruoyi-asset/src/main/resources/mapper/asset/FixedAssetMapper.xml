@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.asset.mapper.FixedAssetMapper">
+
+    <resultMap type="FixedAsset" id="FixedAssetResult">
+        <result property="assetId" column="asset_id"/>
+        <result property="assetNo" column="asset_no"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="assetName" column="asset_name"/>
+        <result property="assetModel" column="asset_model"/>
+        <result property="userTenantsId" column="user_tenants_id"/>
+        <result property="userTenantsName" column="user_tenants_name"/>
+        <result property="receiverTenantsId" column="receiver_tenants_id"/>
+        <result property="receiverTenantsName" column="receiver_tenants_name"/>
+        <result property="storageLocation" column="storage_location"/>
+        <result property="custodyDepartment" column="custody_department"/>
+        <result property="purchaseTime" column="purchase_time"/>
+        <result property="remark" column="remark"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="deptId" column="dept_id"/>
+    </resultMap>
+
+    <sql id="selectFixedAssetVo">
+        select
+        fa.asset_id,
+        fa.asset_no,
+        fa.space_id,
+        fa.asset_name,
+        fa.asset_model,
+        fa.user_tenants_id,
+        (select tenants_name from t_tenants_info ti where ti.tenants_id = fa.user_tenants_id) user_tenants_name,
+        fa.receiver_tenants_id,
+        (select tenants_name from t_tenants_info ti where ti.tenants_id = fa.receiver_tenants_id) receiver_tenants_name,
+        fa.storage_location,
+        fa.custody_department,
+        fa.purchase_time,
+        fa.remark,
+        fa.create_by,
+        fa.create_time,
+        fa.update_by,
+        fa.update_time,
+        fa.user_id,
+        fa.dept_id
+        from t_fixed_asset fa
+    </sql>
+
+    <select id="selectFixedAssetList" parameterType="FixedAsset" resultMap="FixedAssetResult">
+        <include refid="selectFixedAssetVo"/>
+        <where>
+            <if test="assetName != null  and assetName != ''">
+                and asset_name like concat('%', #{assetName}, '%')
+            </if>
+            ${params.dataScope}
+        </where>
+    </select>
+
+    <select id="selectFixedAssetByAssetId" parameterType="String"
+            resultMap="FixedAssetResult">
+        <include refid="selectFixedAssetVo"/>
+        where asset_id = #{assetId}
+    </select>
+
+    <insert id="insertFixedAsset" parameterType="FixedAsset">
+        insert into t_fixed_asset
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="assetId != null">asset_id,
+            </if>
+            <if test="assetNo != null and assetNo != ''">asset_no,
+            </if>
+            <if test="spaceId != null and spaceId != ''">space_id,
+            </if>
+            <if test="assetName != null and assetName != ''">asset_name,
+            </if>
+            <if test="assetModel != null">asset_model,
+            </if>
+            <if test="userTenantsId != null">user_tenants_id,
+            </if>
+            <if test="receiverTenantsId != null">receiver_tenants_id,
+            </if>
+            <if test="storageLocation != null">storage_location,
+            </if>
+            <if test="custodyDepartment != null">custody_department,
+            </if>
+            <if test="purchaseTime != null">purchase_time,
+            </if>
+            <if test="remark != null">remark,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
+            <if test="userId != null">user_id,
+            </if>
+            <if test="deptId != null">dept_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="assetId != null">#{assetId},
+            </if>
+            <if test="assetNo != null and assetNo != ''">#{assetNo},
+            </if>
+            <if test="spaceId != null and spaceId != ''">#{spaceId},
+            </if>
+            <if test="assetName != null and assetName != ''">#{assetName},
+            </if>
+            <if test="assetModel != null">#{assetModel},
+            </if>
+            <if test="userTenantsId != null">#{userTenantsId},
+            </if>
+            <if test="receiverTenantsId != null">#{receiverTenantsId},
+            </if>
+            <if test="storageLocation != null">#{storageLocation},
+            </if>
+            <if test="custodyDepartment != null">#{custodyDepartment},
+            </if>
+            <if test="purchaseTime != null">#{purchaseTime},
+            </if>
+            <if test="remark != null">#{remark},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
+            <if test="userId != null">#{userId},
+            </if>
+            <if test="deptId != null">#{deptId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFixedAsset" parameterType="FixedAsset">
+        update t_fixed_asset
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="assetNo != null and assetNo != ''">asset_no =
+                #{assetNo},
+            </if>
+            <if test="spaceId != null and spaceId != ''">space_id =
+                #{spaceId},
+            </if>
+            <if test="assetName != null and assetName != ''">asset_name =
+                #{assetName},
+            </if>
+            <if test="assetModel != null">asset_model =
+                #{assetModel},
+            </if>
+            <if test="userTenantsId != null">user_tenants_id =
+                #{userTenantsId},
+            </if>
+            <if test="receiverTenantsId != null">receiver_tenants_id =
+                #{receiverTenantsId},
+            </if>
+            <if test="storageLocation != null">storage_location =
+                #{storageLocation},
+            </if>
+            <if test="custodyDepartment != null">custody_department =
+                #{custodyDepartment},
+            </if>
+            <if test="purchaseTime != null">purchase_time =
+                #{purchaseTime},
+            </if>
+            <if test="remark != null">remark =
+                #{remark},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
+            <if test="userId != null">user_id =
+                #{userId},
+            </if>
+            <if test="deptId != null">dept_id =
+                #{deptId},
+            </if>
+        </trim>
+        where asset_id = #{assetId}
+    </update>
+
+    <delete id="deleteFixedAssetByAssetId" parameterType="String">
+        delete
+        from t_fixed_asset where asset_id = #{assetId}
+    </delete>
+
+    <delete id="deleteFixedAssetByAssetIds" parameterType="String">
+        delete from t_fixed_asset where asset_id in
+        <foreach item="assetId" collection="array" open="(" separator="," close=")">
+            #{assetId}
+        </foreach>
+    </delete>
+</mapper>
