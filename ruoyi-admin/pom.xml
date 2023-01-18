@@ -166,6 +166,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-rent</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-asset</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
