@@ -270,6 +270,11 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-asset</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -294,6 +299,7 @@
         <module>ruoyi-pay</module>
         <module>ruoyi-fire</module>
         <module>ruoyi-rent</module>
+        <module>ruoyi-asset</module>
     </modules>
     <packaging>pom</packaging>
 
