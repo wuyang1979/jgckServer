@@ -158,6 +158,14 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-pay</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-fire</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-rent</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

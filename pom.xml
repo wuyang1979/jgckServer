@@ -259,6 +259,16 @@
                 <artifactId>ruoyi-pay</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-fire</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-rent</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -282,6 +292,8 @@
         <module>ruoyi-repair</module>
         <module>ruoyi-brand</module>
         <module>ruoyi-pay</module>
+        <module>ruoyi-fire</module>
+        <module>ruoyi-rent</module>
     </modules>
     <packaging>pom</packaging>
 

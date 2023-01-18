@@ -74,8 +74,8 @@ public class ContractOther extends BaseEntity {
     /**
      * 签约日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "签约日期", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "签约日期", width = 30, dateFormat = "yyyy-MM-dd")
     @ApiModelProperty("签约日期")
     private Date signTime;
 

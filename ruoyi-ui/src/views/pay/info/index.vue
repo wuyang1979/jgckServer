@@ -457,7 +457,7 @@ export default {
         payableMoney: null,
         payStatus: 0,
         payType: 0,
-        spaceId: null,
+        spaceId: spaceId,
       };
       this.resetForm("form");
       this.isQuery = false;

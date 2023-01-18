@@ -16,6 +16,7 @@
         <result property="payType" column="pay_type"/>
         <result property="spaceId" column="space_id"/>
         <result property="roomName" column="room_name"/>
+        <result property="paymentTime" column="payment_time"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>

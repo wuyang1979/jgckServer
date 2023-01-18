@@ -78,7 +78,7 @@
       </el-table-column>
       <el-table-column label="签约日期" align="center" prop="signTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.signTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -200,8 +200,8 @@
               <el-date-picker clearable
                               :disabled="isQuery"
                               v-model="form.signTime"
-                              type="datetime"
-                              value-format="yyyy-MM-dd HH:mm:ss"
+                              type="date"
+                              value-format="yyyy-MM-dd"
                               placeholder="请选择签约日期">
               </el-date-picker>
             </el-form-item>

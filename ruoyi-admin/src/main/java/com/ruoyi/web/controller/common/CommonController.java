@@ -53,9 +53,9 @@ public class CommonController extends BaseController {
 
     private static final String FILE_DELIMETER = ",";
 
-//    private static final String VIDEO_ROUTE = "/www/server/nginx/html/videos/";
+    private static final String VIDEO_ROUTE = "/www/server/nginx/html/videos/";
 
-    private static final String VIDEO_ROUTE = "D:/1/nginx-1.7.11.3-Gryphon/html/videos/";
+//    private static final String VIDEO_ROUTE = "D:/1/nginx-1.7.11.3-Gryphon/html/videos/";
 
     /**
      * 通用下载请求

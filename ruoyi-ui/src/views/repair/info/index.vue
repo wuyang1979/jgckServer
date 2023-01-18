@@ -222,13 +222,13 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="处理人" prop="handleId">
+            <el-form-item v-if="isStatus0" label="处理人" prop="handleId">
               <treeselect v-model="form.handleId" :options="treeData" :disable-branch-nodes="true" :show-count="true"
                           placeholder="请选择处理人"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="处理时间" prop="handlerTime">
+            <el-form-item v-if="isStatus0" label="处理时间" prop="handlerTime">
               <el-date-picker :disabled="isQuery" clearable
                               v-model="form.handlerTime"
                               type="datetime"
@@ -310,7 +310,9 @@ export default {
   data() {
     return {
 
-      userList:[],
+      isStatus0: false,
+
+      userList: [],
 
       isUser: true,
 
@@ -399,6 +401,14 @@ export default {
   },
   methods: {
 
+    handleRepairStatusChange() {
+      if (this.form.repairStatus == 0) {
+        this.isStatus0 = false;
+      } else {
+        this.isStatus0 = true;
+      }
+    },
+
     getListRoom() {
       let params = {
         repairHandleId: this.form.repairHandleId,
@@ -432,7 +442,7 @@ export default {
       })
     },
 
-    handlerepairHandleIdChange() {
+    handleRepairHandleIdChange() {
       let type = this.form.repairType;
       let id = this.form.repairHandleId;
       if (type == 3) {
@@ -446,7 +456,7 @@ export default {
       let type = this.form.repairType;
       if (type == 3) {
         this.isUser = true;
-        this.tenantsOptions=this.userList;
+        this.tenantsOptions = this.userList;
       } else {
         if (!this.isQuery) {
           this.isUser = false;
@@ -489,7 +499,7 @@ export default {
       getRepair(row.repairId).then(respone => {
         this.listFile(row.repairId);
         if (respone.data.repairType == 3) {
-          this.tenantsOptions=this.userList;
+          this.tenantsOptions = this.userList;
         } else {
           this.tenantsOptions = this.tenantsList;
         }
@@ -744,7 +754,9 @@ export default {
 
     'form.repairType': 'handleRepairTypeChange',
 
-    'form.repairHandleId': 'handlerepairHandleIdChange'
+    'form.repairHandleId': 'handleRepairHandleIdChange',
+
+    'form.repairStatus': 'handleRepairStatusChange'
   }
 };
 </script>

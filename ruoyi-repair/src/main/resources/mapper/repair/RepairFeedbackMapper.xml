@@ -36,22 +36,21 @@
     </resultMap>
 
     <sql id="selectRepairFeedbackVo">
-        SELECT
-            rf.repair_id,
-            ri.room_name,
-            rf.repair_type,
-            rf.repair_status,
-            su.nick_name handle_name,
-            su.phonenumber,
-            ti.tenants_name repair_name,
-            ti.contact_phone,
-            rf.create_time,
-            rf.handler_time
-        FROM
-            t_repair_feedback rf
-                LEFT JOIN t_room_info ri ON rf.room_id = ri.room_id
-                LEFT JOIN t_tenants_info ti ON rf.repair_handle_id=ti.tenants_id
-                LEFT JOIN sys_user su ON su.user_id=rf.handle_id
+        SELECT rf.repair_id,
+               ri.room_name,
+               rf.repair_type,
+               rf.repair_status,
+               su.nick_name    handle_name,
+               su.phonenumber,
+               ti.tenants_name repair_name,
+               su.nick_name,
+               ti.contact_phone,
+               rf.create_time,
+               rf.handler_time
+        FROM t_repair_feedback rf
+                 LEFT JOIN t_room_info ri ON rf.room_id = ri.room_id
+                 LEFT JOIN t_tenants_info ti ON rf.repair_handle_id = ti.tenants_id
+                 LEFT JOIN sys_user su ON su.user_id = rf.handle_id
     </sql>
 
     <sql id="selectRepairFeedback">
@@ -132,9 +131,6 @@
     <update id="updateRepairFeedback" parameterType="RepairFeedbackVo">
         update t_repair_feedback
         <trim prefix="SET" suffixOverrides=",">
-            <if test="repairMobile != null">repair_mobile =
-                #{repairMobile},
-            </if>
             <if test="repairStatus != null">repair_status =
                 #{repairStatus},
             </if>

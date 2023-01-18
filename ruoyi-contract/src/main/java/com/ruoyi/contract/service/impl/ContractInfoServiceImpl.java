@@ -109,10 +109,12 @@ public class ContractInfoServiceImpl implements IContractInfoService {
     public Boolean DateExceed(String roomId, String spaceId, Date leaseStartTime) {
         Boolean isExceed = true;
         Date leaseTime = getLeaseEndTimeByRoomId(roomId, spaceId);
-        int days = DateUtils.differentDaysByMillisecond(leaseTime,leaseStartTime);
-        if (days > 0) {
-            isExceed = false;
-            return isExceed;
+        if (leaseTime != null) {
+            int days = DateUtils.differentDaysByMillisecond(leaseTime, leaseStartTime);
+            if (days > 0) {
+                isExceed = false;
+                return isExceed;
+            }
         }
         return isExceed;
     }
