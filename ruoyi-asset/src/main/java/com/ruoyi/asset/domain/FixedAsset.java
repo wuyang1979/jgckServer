@@ -52,18 +52,11 @@ public class FixedAsset extends BaseEntity {
     private String assetModel;
 
     /**
-     * 使用人id
+     * 使用人
      */
-    @Excel(name = "使用人id")
-    @ApiModelProperty("使用人id")
-    private String userTenantsId;
-
-    /**
-     * 使用人姓名
-     */
-    @Excel(name = "使用人姓名")
-    @ApiModelProperty("使用人姓名")
-    private String userTenantsName;
+    @Excel(name = "使用人")
+    @ApiModelProperty("使用人")
+    private String userTenants;
 
     /**
      * 领用人id
