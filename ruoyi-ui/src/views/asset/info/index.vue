@@ -34,13 +34,13 @@
       <el-table-column label="资产编码" align="center" prop="assetNo" />
       <el-table-column label="资产名称" align="center" prop="assetName" />
       <el-table-column label="资产型号" align="center" prop="assetModel" />
-      <el-table-column label="使用人" align="center" prop="userTenantsName" />
+      <el-table-column label="使用人" align="center" prop="userTenants" />
       <el-table-column label="领用人" align="center" prop="receiverTenantsName" />
       <el-table-column label="存放地点" align="center" prop="storageLocation" />
       <el-table-column label="保管部门" align="center" prop="custodyDepartment" />
       <el-table-column label="采购时间" align="center" prop="purchaseTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.purchaseTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.purchaseTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
@@ -90,21 +90,14 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="使用人" prop="userTenantsId">
-              <el-select :disabled="isQuery" v-model="form.userTenantsId" filterable remote clearable
-                placeholder="请输入关键词" :remote-method="getTenantsList" :loading="loading">
-                <el-option v-for="item in tenantsOptions" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+            <el-form-item label="使用人" prop="userTenants">
+              <el-input :disabled="isQuery" v-model="form.userTenants" placeholder="请输入使用人" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="领用人" prop="receiverTenantsId">
-              <el-select :disabled="isQuery" v-model="form.receiverTenantsId" filterable remote clearable
-                placeholder="请输入关键词" :remote-method="getTenantsList" :loading="loading">
-                <el-option v-for="item in tenantsOptions" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+            <el-form-item v-if="isStatus0" label="领用人" prop="receiverTenantsId">
+              <treeselect v-model="form.receiverTenantsId" :options="treeData" :disable-branch-nodes="true"
+                :show-count="true" placeholder="请选择领用人" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -116,7 +109,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="采购时间" prop="purchaseTime">
-              <el-date-picker :disabled="isQuery" clearable v-model="form.purchaseTime" type="datetime"
+              <el-date-picker :disabled="isQuery" clearable v-model="form.purchaseTime" type="date"
                 value-format="yyyy-MM-dd HH:mm:ss" placeholder="请选择采购时间">
               </el-date-picker>
             </el-form-item>
@@ -145,6 +138,7 @@
   import { listAsset, getAsset, addAsset, updateAsset, delAsset } from "../../../api/asset/asset";
   import { getToken } from "../../../utils/auth";
   import { listTenantsNoScope } from "../../../api/tenants/info";
+  import {getTree} from "../../../api/room/look";
   import Treeselect from "@riophae/vue-treeselect";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
   import { listRoomNoScope, listRoomByTenantsId } from "../../../api/room/info";
@@ -241,8 +235,27 @@
     created() {
       this.getList();
       this.initTenants();
+      this.init();
     },
     methods: {
+
+      init() {
+        getTree().then(response => {
+          this.treeData.push(response.data)
+          this.delectChildren(this.treeData)
+        })
+      },
+
+      //递归删除为0的children属性
+      delectChildren(tree) {
+        tree.forEach(t => {
+          if (t.children.length > 0) {
+            this.delectChildren(t.children)
+          } else {
+            delete t.children;
+          }
+        })
+      },
 
       queryAsset(row) {
         this.title = '固定资产详情';
