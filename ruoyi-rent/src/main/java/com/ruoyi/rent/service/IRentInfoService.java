@@ -2,7 +2,11 @@ package com.ruoyi.rent.service;
 
 import java.util.List;
 
-import com.ruoyi.rent.domain.RentInfo;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.rent.domain.dto.RentInfoPageDTO;
+import com.ruoyi.rent.domain.entiy.RentInfo;
+import com.ruoyi.rent.domain.vo.RentInfoInsertVo;
+import com.ruoyi.rent.domain.vo.RentInfoPageVo;
 
 /**
  * 租金管理Service接口
@@ -17,23 +21,23 @@ public interface IRentInfoService {
      * @param rentId 租金管理主键
      * @return 租金管理
      */
-    public RentInfo selectRentInfoByRentId(String rentId);
+    public RentInfoPageDTO selectRentInfoByRentId(String rentId);
 
     /**
      * 查询租金管理列表
      *
-     * @param rentInfo 租金管理
+     * @param rentInfoPageVo 租金管理
      * @return 租金管理集合
      */
-    public List<RentInfo> selectRentInfoList(RentInfo rentInfo);
+    public List<RentInfoPageDTO> selectRentInfoList(RentInfoPageVo rentInfoPageVo);
 
     /**
      * 新增租金管理
      *
-     * @param rentInfo 租金管理
+     * @param rentInfoInsertVo 租金管理
      * @return 结果
      */
-    public int insertRentInfo(RentInfo rentInfo);
+    public AjaxResult insertRentInfo(RentInfoInsertVo rentInfoInsertVo);
 
     /**
      * 修改租金管理

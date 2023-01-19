@@ -3,6 +3,9 @@ package com.ruoyi.rent.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.rent.domain.dto.RentInfoPageDTO;
+import com.ruoyi.rent.domain.vo.RentInfoInsertVo;
+import com.ruoyi.rent.domain.vo.RentInfoPageVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +22,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.rent.domain.RentInfo;
+import com.ruoyi.rent.domain.entiy.RentInfo;
 import com.ruoyi.rent.service.IRentInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -43,9 +46,9 @@ public class RentInfoController extends BaseController {
     @ApiOperation("查询租金管理列表")
     @PreAuthorize("@ss.hasPermi('rent:info:list')")
     @GetMapping("/list")
-    public TableDataInfo list(RentInfo rentInfo) {
+    public TableDataInfo list(RentInfoPageVo rentInfoPageVo) {
         startPage();
-        List<RentInfo> list = rentInfoService.selectRentInfoList(rentInfo);
+        List<RentInfoPageDTO> list = rentInfoService.selectRentInfoList(rentInfoPageVo);
         return getDataTable(list);
     }
 
@@ -57,9 +60,9 @@ public class RentInfoController extends BaseController {
     @Log(title = "租金管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, RentInfo rentInfo) {
-        List<RentInfo> list = rentInfoService.selectRentInfoList(rentInfo);
-        ExcelUtil<RentInfo> util = new ExcelUtil<RentInfo>(RentInfo.class);
-        util.exportExcel(response, list, "租金管理数据");
+//        List<RentInfo> list = rentInfoService.selectRentInfoList(rentInfo);
+//        ExcelUtil<RentInfo> util = new ExcelUtil<RentInfo>(RentInfo.class);
+//        util.exportExcel(response, list, "租金管理数据");
     }
 
     /**
@@ -79,9 +82,9 @@ public class RentInfoController extends BaseController {
     @PreAuthorize("@ss.hasPermi('rent:info:add')")
     @Log(title = "租金管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody RentInfo rentInfo) {
-        rentInfo.setCreateBy(getUsername());
-        return toAjax(rentInfoService.insertRentInfo(rentInfo));
+    public AjaxResult add(@RequestBody RentInfoInsertVo rentInfoInsertVo) {
+        rentInfoInsertVo.setCreateBy(getUsername());
+        return rentInfoService.insertRentInfo(rentInfoInsertVo);
     }
 
     /**

@@ -82,7 +82,8 @@ public class ContractInfoController extends BaseController {
         contractInfoPageVo.setCreateBy(getUsername());
         contractInfoPageVo.setUserId(getUserId().toString());
         contractInfoPageVo.setDeptId(getDeptId().toString());
-        return toAjax(contractInfoService.insertContractInfo(contractInfoPageVo));
+        contractInfoService.insertContractInfo(contractInfoPageVo);
+        return toAjax(contractInfoPageVo.getContractId());
     }
 
     /**

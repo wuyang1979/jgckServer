@@ -1,42 +1,37 @@
-15:55:30.962 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 22328 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-15:55:30.965 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
-15:55:30.965 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-15:55:33.855 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-15:55:33.857 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-15:55:33.859 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:55:33.859 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:55:33.861 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-15:55:33.861 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-15:55:33.862 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-15:55:33.862 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-15:55:33.862 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-15:55:33.862 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-15:55:33.862 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-15:55:34.525 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-15:55:34.535 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-15:55:34.537 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-15:55:35.307 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-15:55:35.307 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-15:55:35.308 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-15:55:35.308 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-15:55:35.312 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-15:55:35.329 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-15:55:35.330 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-15:55:35.330 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-15:55:35.492 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-15:55:36.606 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-15:55:36.617 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-15:55:36.618 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-15:55:36.618 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-15:55:36.619 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-15:55:36.619 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-15:55:36.624 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-15:55:45.046 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
-15:55:51.094 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-15:55:51.110 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-15:55:51.111 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-15:55:51.112 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-15:55:51.113 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+09:17:02.235 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+09:17:02.233 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 8000 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+09:17:02.242 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+09:17:13.253 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+09:17:13.254 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:17:13.256 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:17:13.257 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:17:13.258 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+09:17:13.259 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+09:17:13.260 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+09:17:13.260 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:17:13.261 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:17:13.261 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:17:13.261 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+09:17:14.096 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+09:17:14.119 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+09:17:14.122 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+09:17:15.238 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+09:17:15.239 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+09:17:15.239 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:17:15.463 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+09:17:17.107 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+09:17:17.127 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+09:17:17.127 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+09:17:17.128 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+09:17:17.129 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+09:17:17.129 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+09:17:17.133 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+09:17:20.625 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+09:17:23.610 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+09:17:23.630 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+09:17:23.630 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+09:17:23.631 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+09:17:23.632 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -44,66 +39,68 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-15:55:51.113 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-15:55:51.114 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-15:55:51.114 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@59aa3913
-15:55:54.757 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-15:55:54.780 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-15:55:54.781 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-15:55:54.781 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-15:55:54.781 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-15:55:54.782 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-15:55:54.782 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-15:55:54.782 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-15:55:54.782 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-15:55:54.782 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-15:55:54.782 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-15:55:54.782 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:55:54.783 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-15:55:55.849 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-15:55:55.863 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 25.404 seconds (JVM running for 28.177)
-15:58:30.771 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 892 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-15:58:30.780 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-15:58:30.784 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
-15:59:10.958 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 20464 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-15:59:10.956 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
-15:59:10.959 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-15:59:14.158 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-15:59:14.159 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-15:59:14.162 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:59:14.162 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:59:14.164 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-15:59:14.165 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-15:59:14.166 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-15:59:14.166 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-15:59:14.166 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-15:59:14.166 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-15:59:14.166 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-15:59:14.894 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-15:59:14.920 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-15:59:14.923 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-15:59:15.810 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-15:59:15.810 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-15:59:15.811 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-15:59:15.811 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-15:59:15.825 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-15:59:15.840 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-15:59:15.841 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-15:59:15.841 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-15:59:16.040 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-15:59:17.325 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-15:59:17.355 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-15:59:17.356 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-15:59:17.356 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-15:59:17.357 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-15:59:17.358 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-15:59:17.363 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-15:59:24.621 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
-15:59:29.851 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-15:59:29.868 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-15:59:29.868 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-15:59:29.870 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-15:59:29.871 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+09:17:23.632 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+09:17:23.632 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+09:17:23.633 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6cf3d71c
+09:17:27.791 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+09:17:27.833 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+09:17:27.834 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+09:17:27.834 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+09:17:27.835 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:17:27.835 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:17:27.836 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:17:27.836 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+09:17:29.261 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+09:17:29.273 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 28.153 seconds (JVM running for 37.692)
+09:20:30.504 [http-nio-39001-exec-4] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:21:03.957 [schedule-pool-1] INFO  sys-user - [run,52] - [172.19.3.84]内网IP[cheny][Success][登录成功]
+09:36:49.251 [schedule-pool-2] INFO  sys-user - [run,52] - [172.19.3.84]内网IP[admin][Success][登录成功]
+09:39:17.138 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:39:17.829 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+09:39:17.829 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:39:17.830 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+09:39:17.830 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+09:39:17.836 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+09:39:17.862 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+09:39:25.643 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 6876 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+09:39:25.657 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+09:39:25.661 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+09:39:34.303 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+09:39:34.304 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:39:34.305 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:39:34.306 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:39:34.307 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+09:39:34.308 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+09:39:34.308 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+09:39:34.308 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:39:34.309 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:39:34.309 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:39:34.309 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+09:39:34.866 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+09:39:34.879 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+09:39:34.881 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+09:39:35.830 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+09:39:35.832 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+09:39:35.832 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:39:36.022 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+09:39:37.174 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+09:39:37.187 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+09:39:37.188 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+09:39:37.188 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+09:39:37.189 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+09:39:37.190 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+09:39:37.193 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+09:39:40.531 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+09:39:43.013 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+09:39:43.030 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+09:39:43.030 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+09:39:43.031 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+09:39:43.032 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -111,64 +108,66 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-15:59:29.871 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-15:59:29.871 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-15:59:29.871 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@3e7014d0
-15:59:33.392 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-15:59:33.421 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-15:59:33.422 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-15:59:33.422 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-15:59:33.422 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-15:59:33.422 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-15:59:33.422 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-15:59:33.423 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-15:59:33.423 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-15:59:33.423 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-15:59:33.423 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-15:59:33.423 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-15:59:33.424 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-15:59:34.609 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-15:59:34.622 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 24.459 seconds (JVM running for 27.972)
-16:00:18.674 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:01:30.298 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 19524 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-16:01:30.298 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
-16:01:30.309 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-16:01:36.725 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-16:01:36.727 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:01:36.729 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:01:36.731 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:01:36.733 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-16:01:36.734 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-16:01:36.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-16:01:36.739 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:01:36.740 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:01:36.740 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:01:36.741 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-16:01:37.860 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-16:01:37.900 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-16:01:37.911 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-16:01:39.044 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-16:01:39.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-16:01:39.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-16:01:39.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-16:01:39.049 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-16:01:39.066 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-16:01:39.067 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-16:01:39.069 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-16:01:39.279 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-16:01:42.830 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-16:01:42.859 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-16:01:42.862 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-16:01:42.864 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-16:01:42.865 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-16:01:42.874 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-16:01:42.881 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-16:01:55.080 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
-16:02:04.339 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-16:02:04.369 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-16:02:04.370 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-16:02:04.371 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-16:02:04.373 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+09:39:43.033 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+09:39:43.033 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+09:39:43.033 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5f4cde10
+09:39:46.430 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+09:39:46.460 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+09:39:46.461 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+09:39:46.461 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+09:39:46.461 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+09:39:46.461 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+09:39:46.461 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+09:39:46.462 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+09:39:46.462 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+09:39:46.462 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:39:46.462 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:39:46.462 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:39:46.463 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+09:39:47.788 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+09:39:47.800 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 22.791 seconds (JVM running for 24.875)
+09:39:52.748 [http-nio-39001-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:43:17.503 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:43:18.460 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+09:43:18.460 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:43:18.461 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+09:43:18.461 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+09:43:18.469 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+09:43:18.478 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+09:43:27.454 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 6020 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+09:43:27.469 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+09:43:27.471 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+09:43:30.839 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+09:43:30.840 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:43:30.842 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:43:30.842 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:43:30.844 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+09:43:30.845 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+09:43:30.847 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+09:43:30.847 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:43:30.847 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:43:30.847 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:43:30.848 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+09:43:31.484 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+09:43:31.499 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+09:43:31.503 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+09:43:32.334 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+09:43:32.336 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+09:43:32.337 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:43:32.587 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+09:43:33.733 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+09:43:33.747 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+09:43:33.747 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+09:43:33.748 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+09:43:33.749 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+09:43:33.749 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+09:43:33.753 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+09:43:36.357 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+09:43:38.737 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+09:43:38.754 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+09:43:38.754 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+09:43:38.755 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+09:43:38.757 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -176,72 +175,66 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-16:02:04.373 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-16:02:04.373 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-16:02:04.374 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@d5c31ac
-16:02:11.030 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-16:02:11.068 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-16:02:11.070 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-16:02:11.070 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-16:02:11.070 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-16:02:11.070 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-16:02:11.070 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-16:02:11.071 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-16:02:11.071 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-16:02:11.071 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:02:11.071 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:02:11.072 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:02:11.073 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-16:02:13.756 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-16:02:13.790 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 44.693 seconds (JVM running for 50.709)
-16:03:10.397 [http-nio-39001-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-16:03:16.246 [schedule-pool-1] INFO  sys-user - [run,52] - [127.0.0.1]内网IP[admin][Error][验证码错误]
-16:03:21.013 [schedule-pool-1] INFO  sys-user - [run,52] - [127.0.0.1]内网IP[admin][Success][登录成功]
-16:05:41.968 [Thread-41] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:05:45.891 [Thread-41] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
-16:05:45.892 [Thread-41] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:05:45.893 [Thread-41] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
-16:05:45.893 [Thread-41] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
-16:05:45.900 [Thread-41] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
-16:05:45.917 [Thread-41] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
-16:05:46.884 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 19524 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-16:05:46.884 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-16:05:49.447 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-16:05:49.447 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:05:49.447 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:05:49.447 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:05:49.447 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-16:05:49.447 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-16:05:49.448 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-16:05:49.448 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:05:49.448 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:05:49.448 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:05:49.448 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-16:05:49.554 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-16:05:49.559 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-16:05:49.559 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-16:05:49.816 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-16:05:49.817 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-16:05:49.817 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-16:05:49.817 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-16:05:49.817 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-16:05:49.818 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-16:05:49.818 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-16:05:49.818 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-16:05:49.845 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-16:05:50.330 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-16:05:50.333 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-16:05:50.333 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-16:05:50.334 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-16:05:50.334 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-16:05:50.334 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-16:05:50.335 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-16:05:53.786 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-2} inited
-16:05:55.233 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-16:05:55.235 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-16:05:55.235 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-16:05:55.236 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-16:05:55.236 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+09:43:38.757 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+09:43:38.757 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+09:43:38.757 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@76173a59
+09:43:42.050 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+09:43:42.080 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+09:43:42.081 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+09:43:42.081 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+09:43:42.082 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:43:42.082 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:43:42.082 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:43:42.083 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+09:43:43.444 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+09:43:43.456 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 16.597 seconds (JVM running for 18.457)
+09:43:48.839 [http-nio-39001-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:48:29.418 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:48:29.930 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+09:48:31.163 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+09:48:31.164 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+09:48:31.164 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+09:48:31.171 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+09:48:31.181 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+09:48:39.991 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 11444 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+09:48:40.006 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+09:48:40.006 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+09:48:43.201 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+09:48:43.202 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:48:43.203 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:48:43.203 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:48:43.205 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+09:48:43.205 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+09:48:43.206 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+09:48:43.206 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:48:43.207 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+09:48:43.207 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:48:43.207 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+09:48:43.751 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+09:48:43.765 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+09:48:43.767 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+09:48:44.531 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+09:48:44.533 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+09:48:44.533 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+09:48:44.702 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+09:48:45.782 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+09:48:45.795 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+09:48:45.795 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+09:48:45.796 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+09:48:45.796 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+09:48:45.797 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+09:48:45.800 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+09:48:48.437 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+09:48:50.838 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+09:48:50.854 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+09:48:50.854 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+09:48:50.855 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+09:48:50.856 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -249,69 +242,66 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-16:05:55.236 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-16:05:55.237 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-16:05:55.237 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@7e2294b
-16:05:59.234 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-16:05:59.258 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-16:05:59.259 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-16:05:59.259 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-16:05:59.259 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-16:05:59.259 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-16:05:59.259 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-16:05:59.260 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-16:05:59.260 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-16:05:59.260 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:05:59.260 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:05:59.260 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:05:59.261 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-16:06:00.167 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-16:06:00.174 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 13.429 seconds (JVM running for 277.093)
-16:06:00.659 [Thread-51] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:06:02.372 [Thread-51] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
-16:06:02.372 [Thread-51] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:06:02.372 [Thread-51] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
-16:06:02.373 [Thread-51] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
-16:06:02.378 [Thread-51] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-2} closing ...
-16:06:02.381 [Thread-51] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-2} closed
-16:06:03.242 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 19524 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-16:06:03.243 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-16:06:04.562 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-16:06:04.562 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:04.563 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-16:06:04.830 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-16:06:04.840 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-16:06:04.841 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-16:06:05.555 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-16:06:05.559 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-16:06:05.559 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-16:06:05.559 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-16:06:05.560 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-16:06:05.561 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-16:06:05.561 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-16:06:05.562 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-16:06:05.648 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-16:06:07.563 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-16:06:07.573 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-16:06:07.574 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-16:06:07.574 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-16:06:07.575 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-16:06:07.575 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-16:06:07.577 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-16:06:12.626 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-3} inited
-16:06:14.255 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-16:06:14.258 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-16:06:14.259 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-16:06:14.259 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-16:06:14.260 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+09:48:50.857 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+09:48:50.857 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+09:48:50.857 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@a8f9ffa
+09:48:54.208 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+09:48:54.238 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+09:48:54.239 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+09:48:54.239 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+09:48:54.240 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+09:48:54.240 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+09:48:54.240 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+09:48:54.241 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+09:48:55.567 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+09:48:55.580 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 16.174 seconds (JVM running for 18.198)
+09:55:50.081 [http-nio-39001-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:01:16.327 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:01:16.923 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+11:01:16.924 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:01:16.924 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+11:01:16.925 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+11:01:17.010 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+11:01:17.018 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+11:01:30.201 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 8372 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+11:01:30.215 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+11:01:30.220 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+11:01:38.445 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+11:01:38.445 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:01:38.446 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:01:38.446 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:01:38.449 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:01:38.451 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+11:01:39.125 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+11:01:39.138 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+11:01:39.140 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+11:01:40.167 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+11:01:40.168 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+11:01:40.169 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+11:01:40.449 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+11:01:41.737 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+11:01:41.752 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+11:01:41.752 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+11:01:41.753 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+11:01:41.753 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+11:01:41.754 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+11:01:41.756 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+11:01:45.330 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+11:01:48.114 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+11:01:48.130 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+11:01:48.130 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+11:01:48.131 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+11:01:48.132 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -319,69 +309,65 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-16:06:14.261 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-16:06:14.261 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-16:06:14.261 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@b23b79c
-16:06:16.645 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-16:06:16.657 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-16:06:16.657 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-16:06:16.658 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:16.658 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:06:16.658 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:16.658 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-16:06:17.222 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-16:06:17.226 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 14.094 seconds (JVM running for 294.147)
-16:06:18.110 [Thread-55] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:06:19.744 [Thread-55] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
-16:06:19.744 [Thread-55] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
-16:06:19.744 [Thread-55] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
-16:06:19.745 [Thread-55] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
-16:06:19.749 [Thread-55] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-3} closing ...
-16:06:19.752 [Thread-55] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-3} closed
-16:06:20.490 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_181 on PC-201905242354 with PID 19524 (D:\Java\Project\jgckServer\ruoyi-admin\target\classes started by Administrator in D:\Java\Project\jgckServer)
-16:06:20.491 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
-16:06:21.737 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:21.738 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:21.739 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:21.739 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
-16:06:21.824 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
-16:06:21.827 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
-16:06:21.828 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
-16:06:22.044 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - An older version [1.2.24] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.30]
-16:06:22.044 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-16:06:22.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [false].
-16:06:22.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-16:06:22.045 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-16:06:22.045 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
-16:06:22.045 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
-16:06:22.046 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
-16:06:22.071 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
-16:06:22.512 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
-16:06:22.516 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
-16:06:22.517 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
-16:06:22.517 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
-16:06:22.517 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
-16:06:22.517 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
-16:06:22.518 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
-16:06:25.599 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-4} inited
-16:06:26.776 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
-16:06:26.777 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
-16:06:26.777 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
-16:06:26.777 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
-16:06:26.777 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+11:01:48.133 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+11:01:48.133 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+11:01:48.133 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@3f252030
+11:01:52.993 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+11:01:53.122 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+11:01:53.123 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+11:01:53.124 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+11:01:53.124 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+11:01:53.124 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+11:01:53.124 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+11:01:53.125 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+11:01:53.125 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+11:01:53.125 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:01:53.125 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:01:53.125 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:01:53.126 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+11:01:55.766 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+11:01:55.778 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 26.232 seconds (JVM running for 28.067)
+11:02:57.610 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:02:58.227 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+11:02:58.227 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:02:58.228 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+11:02:58.228 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+11:02:58.236 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+11:02:58.245 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+11:03:04.363 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 14196 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+11:03:04.377 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+11:03:04.379 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+11:03:07.585 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+11:03:07.586 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:03:07.587 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:03:07.587 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:03:07.589 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+11:03:07.589 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+11:03:07.590 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+11:03:07.590 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:03:07.590 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:03:07.590 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:03:07.591 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+11:03:08.135 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+11:03:08.149 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+11:03:08.151 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+11:03:08.922 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+11:03:08.923 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+11:03:08.923 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+11:03:09.123 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+11:03:10.182 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+11:03:10.195 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+11:03:10.195 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+11:03:10.196 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+11:03:10.196 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+11:03:10.197 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+11:03:10.200 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+11:03:12.845 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+11:03:15.230 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+11:03:15.245 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+11:03:15.245 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+11:03:15.247 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+11:03:15.248 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
   NOT STARTED.
   Currently in standby mode.
@@ -389,22 +375,88 @@
   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
-16:06:26.777 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
-16:06:26.778 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
-16:06:26.778 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@286f8a13
-16:06:29.121 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
-16:06:29.135 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
-16:06:29.135 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
-16:06:29.135 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
-16:06:29.135 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
-16:06:29.135 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
-16:06:29.136 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
-16:06:29.136 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
-16:06:29.136 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
-16:06:29.136 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
-16:06:29.136 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
-16:06:29.136 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
-16:06:29.136 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
-16:06:30.973 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
-16:06:30.984 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 10.578 seconds (JVM running for 307.903)
-16:06:31.787 [http-nio-39001-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:03:15.248 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+11:03:15.248 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+11:03:15.249 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2cbeb425
+11:03:18.633 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+11:03:18.663 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+11:03:18.664 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+11:03:18.664 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+11:03:18.664 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+11:03:18.664 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+11:03:18.665 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+11:03:18.665 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+11:03:18.665 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+11:03:18.665 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:03:18.665 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:03:18.665 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:03:18.666 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+11:03:20.007 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+11:03:20.020 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 16.291 seconds (JVM running for 17.973)
+11:04:13.857 [http-nio-39001-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:07:18.070 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:07:18.473 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+11:07:18.473 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+11:07:18.474 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+11:07:18.474 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,28] - ====关闭后台任务任务线程池====
+11:07:18.481 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2051] - {dataSource-1} closing ...
+11:07:18.490 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2124] - {dataSource-1} closed
+11:07:24.261 [restartedMain] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 1.8.0_271 on DESKTOP-79UQ3BF with PID 2028 (D:\workspace\jgckServer\ruoyi-admin\target\classes started by Gu in D:\workspace\jgckServer)
+11:07:24.266 [restartedMain] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "dev"
+11:07:24.271 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.3.Final
+11:07:27.381 [restartedMain] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - [postProcessBeanFactory,40] - Post-processing PropertySource instances
+11:07:27.382 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:07:27.383 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:07:27.384 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:07:27.385 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+11:07:27.386 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+11:07:27.387 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+11:07:27.387 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:07:27.387 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+11:07:27.387 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:07:27.387 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource class path resource [generator.yml] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+11:07:27.924 [restartedMain] INFO  c.u.j.f.DefaultLazyPropertyFilter - [lambda$new$2,31] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+11:07:27.935 [restartedMain] INFO  c.u.j.r.DefaultLazyPropertyResolver - [lambda$new$2,35] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+11:07:27.938 [restartedMain] INFO  c.u.j.d.DefaultLazyPropertyDetector - [lambda$new$2,35] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+11:07:28.684 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-39001"]
+11:07:28.685 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+11:07:28.686 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.63]
+11:07:28.874 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+11:07:29.935 [restartedMain] INFO  c.u.j.e.DefaultLazyEncryptor - [lambda$new$2,37] - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+11:07:29.948 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+11:07:29.949 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+11:07:29.950 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+11:07:29.951 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+11:07:29.951 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+11:07:29.954 [restartedMain] INFO  c.u.j.c.StringEncryptorBuilder - [get,102] - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+11:07:32.589 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+11:07:34.987 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+11:07:35.003 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+11:07:35.003 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+11:07:35.004 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+11:07:35.005 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+11:07:35.006 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+11:07:35.006 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+11:07:35.006 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@1ec6317d
+11:07:38.313 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-39001"]
+11:07:38.344 [restartedMain] INFO  c.u.j.c.RefreshScopeRefreshedEventListener - [onApplicationEvent,47] - Refreshing cached encryptable property sources on ServletWebServerInitializedEvent
+11:07:38.345 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemProperties refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source systemEnvironment refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source random refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/' refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source devtools refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.c.CachingDelegateEncryptablePropertySource - [refresh,55] - Property Source class path resource [generator.yml] refreshed
+11:07:38.346 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+11:07:38.346 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+11:07:38.347 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,76] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+11:07:38.348 [restartedMain] INFO  c.u.j.EncryptablePropertySourceConverter - [makeEncryptable,81] - Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper
+11:07:39.663 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+11:07:39.676 [restartedMain] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 16.015 seconds (JVM running for 17.743)

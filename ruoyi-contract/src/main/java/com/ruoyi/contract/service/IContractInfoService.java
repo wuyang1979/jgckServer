@@ -3,11 +3,10 @@ package com.ruoyi.contract.service;
 import java.util.Date;
 import java.util.List;
 
-import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.contract.domain.dto.ContractInfoPageDto;
 import com.ruoyi.contract.domain.entiy.ContractInfo;
 import com.ruoyi.contract.domain.vo.ContractInfoPageVo;
-import org.apache.commons.math3.analysis.function.Abs;
+import com.ruoyi.contract.domain.vo.RentInfoAddVo;
 
 /**
  * 合同信息Service接口
@@ -70,5 +69,11 @@ public interface IContractInfoService {
 
     public Date getLeaseEndTimeByRoomId(String roomId,String spaceId);
 
-
+    /**
+     * 新增租金管理
+     *
+     * @param rentInfoInsertVo 租金管理
+     * @return 结果
+     */
+    public int insertRentInfo(RentInfoAddVo rentInfoInsertVo);
 }

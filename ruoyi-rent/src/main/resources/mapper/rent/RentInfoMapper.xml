@@ -5,187 +5,253 @@
 <mapper namespace="com.ruoyi.rent.mapper.RentInfoMapper">
 
     <resultMap type="RentInfo" id="RentInfoResult">
-            <result property="rentId" column="rent_id"/>
-            <result property="contractId" column="contract_id"/>
-            <result property="spaceId" column="space_id"/>
-            <result property="contractRent" column="contract_rent"/>
-            <result property="collectionPeriod" column="collection_period"/>
-            <result property="rentalPeriod" column="rental_period"/>
-            <result property="receivableMoney" column="receivable_money"/>
-            <result property="receivableDate" column="receivable_date"/>
-            <result property="practicalMoney" column="practical_money"/>
-            <result property="practicalDate" column="practical_date"/>
-            <result property="remark" column="remark"/>
-            <result property="createBy" column="create_by"/>
-            <result property="createTime" column="create_time"/>
-            <result property="updateBy" column="update_by"/>
-            <result property="updateTime" column="update_time"/>
+        <result property="rentId" column="rent_id"/>
+        <result property="contractId" column="contract_id"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="contractRent" column="contract_rent"/>
+        <result property="collectionPeriod" column="collection_period"/>
+        <result property="rentalPeriod" column="rental_period"/>
+        <result property="receivableMoney" column="receivable_money"/>
+        <result property="receivableDate" column="receivable_date"/>
+        <result property="practicalMoney" column="practical_money"/>
+        <result property="practicalDate" column="practical_date"/>
+        <result property="remark" column="remark"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="RentInfoPageDTO" id="RentInfoPageDTOResult">
+        <result property="rentId" column="rent_id"/>
+        <result property="contractId" column="contract_id"/>
+        <result property="contractRent" column="contract_rent"/>
+        <result property="collectionPeriod" column="collection_period"/>
+        <result property="rentalPeriod" column="rental_period"/>
+        <result property="receivableMoney" column="receivable_money"/>
+        <result property="receivableDate" column="receivable_date"/>
+        <result property="practicalMoney" column="practical_money"/>
+        <result property="practicalDate" column="practical_date"/>
+        <result property="remark" column="remark"/>
+        <result property="roomName" column="room_name"/>
+        <result property="roomId" column="room_id"/>
+        <result property="rentStatus" column="rent_status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectRentInfoVo">
-        select rent_id, contract_id, space_id, contract_rent, collection_period, rental_period, receivable_money, receivable_date, practical_money, practical_date, remark, create_by, create_time, update_by, update_time
+        select rent_id,
+               contract_id,
+               space_id,
+               contract_rent,
+               collection_period,
+               rental_period,
+               receivable_money,
+               receivable_date,
+               practical_money,
+               practical_date,
+               remark,
+               create_by,
+               create_time,
+               update_by,
+               update_time
         from t_rent_info
     </sql>
 
-    <select id="selectRentInfoList" parameterType="RentInfo" resultMap="RentInfoResult">
-        <include refid="selectRentInfoVo"/>
+    <sql id="selectRentInfoPageDTO">
+        SELECT ri.rent_id,
+               ri.contract_rent,
+               ri.collection_period,
+               ri.rental_period,
+               ri.receivable_money,
+               ri.receivable_date,
+               ri.practical_money,
+               ri.practical_date,
+               ri.remark,
+               r.room_name,
+               r.room_id,
+               ri.rent_status
+        FROM t_rent_info ri
+                 LEFT JOIN t_contract_info ci ON ri.contract_id = ci.contract_id
+                 LEFT JOIN t_room_info r ON r.room_id = ci.room_id
+    </sql>
+
+    <select id="selectRentInfoList" parameterType="RentInfoPageVo" resultMap="RentInfoPageDTOResult">
+        <include refid="selectRentInfoPageDTO"/>
         <where>
-                        <if test="contractId != null  and contractId != ''">
-                            and contract_id = #{contractId}
-                        </if>
-                        <if test="spaceId != null  and spaceId != ''">
-                            and space_id = #{spaceId}
-                        </if>
-                        <if test="contractRent != null  and contractRent != ''">
-                            and contract_rent = #{contractRent}
-                        </if>
-                        <if test="collectionPeriod != null  and collectionPeriod != ''">
-                            and collection_period = #{collectionPeriod}
-                        </if>
-                        <if test="rentalPeriod != null  and rentalPeriod != ''">
-                            and rental_period = #{rentalPeriod}
-                        </if>
-                        <if test="receivableMoney != null  and receivableMoney != ''">
-                            and receivable_money = #{receivableMoney}
-                        </if>
-                        <if test="receivableDate != null  and receivableDate != ''">
-                            and receivable_date = #{receivableDate}
-                        </if>
-                        <if test="practicalMoney != null  and practicalMoney != ''">
-                            and practical_money = #{practicalMoney}
-                        </if>
-                        <if test="practicalDate != null  and practicalDate != ''">
-                            and practical_date = #{practicalDate}
-                        </if>
+            <if test="contractId != null  and contractId != ''">
+                and contract_id = #{contractId}
+            </if>
+            <if test="spaceId != null  and spaceId != ''">
+                and ri.space_id = #{spaceId}
+            </if>
+            <if test="contractRent != null  and contractRent != ''">
+                and contract_rent = #{contractRent}
+            </if>
+            <if test="collectionPeriod != null  and collectionPeriod != ''">
+                and collection_period = #{collectionPeriod}
+            </if>
+            <if test="rentalPeriod != null  and rentalPeriod != ''">
+                and rental_period = #{rentalPeriod}
+            </if>
+            <if test="receivableMoney != null  and receivableMoney != ''">
+                and receivable_money = #{receivableMoney}
+            </if>
+            <if test="receivableDate != null  and receivableDate != ''">
+                and receivable_date = #{receivableDate}
+            </if>
+            <if test="practicalMoney != null  and practicalMoney != ''">
+                and practical_money = #{practicalMoney}
+            </if>
+            <if test="practicalDate != null  and practicalDate != ''">
+                and practical_date = #{practicalDate}
+            </if>
+            <if test="rentStatus != null  and rentStatus != ''">
+                and ri.rent_status = #{rentStatus}
+            </if>
+            <if test="roomName != null  and roomName != ''">
+                and r.room_name like CONCAT('%',#{roomName},'%')
+            </if>
         </where>
+        ORDER BY r.room_name,ri.receivable_date
     </select>
 
-    <select id="selectRentInfoByRentId" parameterType="String"
-            resultMap="RentInfoResult">
-            <include refid="selectRentInfoVo"/>
-            where rent_id = #{rentId}
+    <select id="selectRentInfoByRentId" parameterType="String" resultMap="RentInfoPageDTOResult">
+        <include refid="selectRentInfoPageDTO"/>
+        where ri.rent_id = #{rentId}
     </select>
 
-    <insert id="insertRentInfo" parameterType="RentInfo">
+    <insert id="insertRentInfo" parameterType="RentInfoInsertVo">
         insert into t_rent_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                    <if test="rentId != null">rent_id,
-                    </if>
-                    <if test="contractId != null">contract_id,
-                    </if>
-                    <if test="spaceId != null">space_id,
-                    </if>
-                    <if test="contractRent != null">contract_rent,
-                    </if>
-                    <if test="collectionPeriod != null">collection_period,
-                    </if>
-                    <if test="rentalPeriod != null">rental_period,
-                    </if>
-                    <if test="receivableMoney != null">receivable_money,
-                    </if>
-                    <if test="receivableDate != null">receivable_date,
-                    </if>
-                    <if test="practicalMoney != null">practical_money,
-                    </if>
-                    <if test="practicalDate != null">practical_date,
-                    </if>
-                    <if test="remark != null">remark,
-                    </if>
-                    <if test="createBy != null">create_by,
-                    </if>
-                    <if test="createTime != null">create_time,
-                    </if>
-                    <if test="updateBy != null">update_by,
-                    </if>
-                    <if test="updateTime != null">update_time,
-                    </if>
+            <if test="rentId != null">rent_id,
+            </if>
+            <if test="contractId != null">contract_id,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="contractRent != null">contract_rent,
+            </if>
+            <if test="collectionPeriod != null">collection_period,
+            </if>
+            <if test="rentalPeriod != null">rental_period,
+            </if>
+            <if test="receivableMoney != null">receivable_money,
+            </if>
+            <if test="receivableDate != null">receivable_date,
+            </if>
+            <if test="practicalMoney != null">practical_money,
+            </if>
+            <if test="practicalDate != null">practical_date,
+            </if>
+            <if test="remark != null">remark,
+            </if>
+            <if test="rentStatus != null">rent_status,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                    <if test="rentId != null">#{rentId},
-                    </if>
-                    <if test="contractId != null">#{contractId},
-                    </if>
-                    <if test="spaceId != null">#{spaceId},
-                    </if>
-                    <if test="contractRent != null">#{contractRent},
-                    </if>
-                    <if test="collectionPeriod != null">#{collectionPeriod},
-                    </if>
-                    <if test="rentalPeriod != null">#{rentalPeriod},
-                    </if>
-                    <if test="receivableMoney != null">#{receivableMoney},
-                    </if>
-                    <if test="receivableDate != null">#{receivableDate},
-                    </if>
-                    <if test="practicalMoney != null">#{practicalMoney},
-                    </if>
-                    <if test="practicalDate != null">#{practicalDate},
-                    </if>
-                    <if test="remark != null">#{remark},
-                    </if>
-                    <if test="createBy != null">#{createBy},
-                    </if>
-                    <if test="createTime != null">#{createTime},
-                    </if>
-                    <if test="updateBy != null">#{updateBy},
-                    </if>
-                    <if test="updateTime != null">#{updateTime},
-                    </if>
+            <if test="rentId != null">#{rentId},
+            </if>
+            <if test="contractId != null">#{contractId},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="contractRent != null">#{contractRent},
+            </if>
+            <if test="collectionPeriod != null">#{collectionPeriod},
+            </if>
+            <if test="rentalPeriod != null">#{rentalPeriod},
+            </if>
+            <if test="receivableMoney != null">#{receivableMoney},
+            </if>
+            <if test="receivableDate != null">#{receivableDate},
+            </if>
+            <if test="practicalMoney != null">#{practicalMoney},
+            </if>
+            <if test="practicalDate != null">#{practicalDate},
+            </if>
+            <if test="remark != null">#{remark},
+            </if>
+            <if test="rentStatus != null">#{rentStatus},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
         </trim>
     </insert>
 
     <update id="updateRentInfo" parameterType="RentInfo">
         update t_rent_info
         <trim prefix="SET" suffixOverrides=",">
-                    <if test="contractId != null">contract_id =
-                        #{contractId},
-                    </if>
-                    <if test="spaceId != null">space_id =
-                        #{spaceId},
-                    </if>
-                    <if test="contractRent != null">contract_rent =
-                        #{contractRent},
-                    </if>
-                    <if test="collectionPeriod != null">collection_period =
-                        #{collectionPeriod},
-                    </if>
-                    <if test="rentalPeriod != null">rental_period =
-                        #{rentalPeriod},
-                    </if>
-                    <if test="receivableMoney != null">receivable_money =
-                        #{receivableMoney},
-                    </if>
-                    <if test="receivableDate != null">receivable_date =
-                        #{receivableDate},
-                    </if>
-                    <if test="practicalMoney != null">practical_money =
-                        #{practicalMoney},
-                    </if>
-                    <if test="practicalDate != null">practical_date =
-                        #{practicalDate},
-                    </if>
-                    <if test="remark != null">remark =
-                        #{remark},
-                    </if>
-                    <if test="createBy != null">create_by =
-                        #{createBy},
-                    </if>
-                    <if test="createTime != null">create_time =
-                        #{createTime},
-                    </if>
-                    <if test="updateBy != null">update_by =
-                        #{updateBy},
-                    </if>
-                    <if test="updateTime != null">update_time =
-                        #{updateTime},
-                    </if>
+            <if test="contractId != null">contract_id =
+                #{contractId},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="contractRent != null">contract_rent =
+                #{contractRent},
+            </if>
+            <if test="collectionPeriod != null">collection_period =
+                #{collectionPeriod},
+            </if>
+            <if test="rentalPeriod != null">rental_period =
+                #{rentalPeriod},
+            </if>
+            <if test="receivableMoney != null">receivable_money =
+                #{receivableMoney},
+            </if>
+            <if test="receivableDate != null">receivable_date =
+                #{receivableDate},
+            </if>
+            <if test="practicalMoney != null">practical_money =
+                #{practicalMoney},
+            </if>
+            <if test="practicalDate != null">practical_date =
+                #{practicalDate},
+            </if>
+            <if test="remark != null">remark =
+                #{remark},
+            </if>
+            <if test="rentStatus != null">rent_status =
+                #{rentStatus},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
         </trim>
         where rent_id = #{rentId}
     </update>
 
     <delete id="deleteRentInfoByRentId" parameterType="String">
         delete
-        from t_rent_info where rent_id = #{rentId}
+        from t_rent_info
+        where rent_id = #{rentId}
     </delete>
 
     <delete id="deleteRentInfoByRentIds" parameterType="String">

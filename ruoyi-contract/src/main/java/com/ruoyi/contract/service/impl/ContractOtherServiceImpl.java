@@ -90,4 +90,5 @@ public class ContractOtherServiceImpl implements IContractOtherService {
     public int deleteContractOtherByContractId(String contractId) {
         return contractOtherMapper.deleteContractOtherByContractId(contractId);
     }
+
 }

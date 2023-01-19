@@ -720,7 +720,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const repairIds = row.repairId || this.ids;
-      this.$modal.confirm('是否确认删除报修反馈基本信息编号为"' + repairIds + '"的数据项？').then(function () {
+      this.$modal.confirm('是否确认删除您已选中的保修反馈的数据项？').then(function () {
         return delRepair(repairIds);
       }).then(() => {
         this.getList();

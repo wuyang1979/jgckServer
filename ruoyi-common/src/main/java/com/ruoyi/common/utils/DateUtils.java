@@ -202,4 +202,97 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(getNowDate()) + " 23:59:59";
     }
+
+    /**
+     * 根据两个时间获取相差的月数
+     *
+     * @param d1 日期起期
+     * @param d2 日期止期
+     * @return
+     */
+    public static int getMonth(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(d1);
+        c2.setTime(d2);
+        int year1 = c1.get(Calendar.YEAR);
+        int year2 = c2.get(Calendar.YEAR);
+        int month1 = c1.get(Calendar.MONTH);
+        int month2 = c2.get(Calendar.MONTH);
+        int day1 = c1.get(Calendar.DAY_OF_MONTH);
+        int day2 = c2.get(Calendar.DAY_OF_MONTH);
+        // 获取年的差值
+        int yearInterval = year1 - year2;
+        // 如果 d1的 月-日 小于 d2的 月-日 那么 yearInterval-- 这样就得到了相差的年数
+        if (month1 < month2 || month1 == month2 && day1 < day2) {
+            yearInterval--;
+        }
+        // 获取月数差值
+        int monthInterval = (month1 + 12) - month2;
+        if (day1 < day2) {
+            monthInterval--;
+        }
+        monthInterval %= 12;
+        int monthsDiff = Math.abs(yearInterval * 12 + monthInterval);
+        return monthsDiff;
+    }
+
+
+    /**
+     * 根据两个日期获取相差年数
+     *
+     * @param startDate 日期起期
+     * @param endDate   日期止期
+     * @return
+     */
+    public static int getYear(Date startDate, Date endDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String startDateStr = simpleDateFormat.format(startDate);
+        String endDateStr = simpleDateFormat.format(endDate);
+        return (Integer.parseInt(endDateStr) - Integer.parseInt(startDateStr)) / 10000;
+    }
+
+
+    /**
+     * @Description:获取任意月后的时间
+     * @Params: mon 1表示后一个月 -1表示前一个月
+     * @Return
+     */
+    public static Date getMon(Date day, int mon) {
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(day);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        calendar2.add(Calendar.MONTH, mon);
+        return calendar2.getTime();
+    }
+
+
+    /**
+     * @Description:获取任意天后的时间
+     * @Params: day 1表示后一天 -1表示前一天
+     * @Return
+     */
+    public static Date getDay(Date time, int day) {
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(time);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        calendar2.add(Calendar.DAY_OF_MONTH, day);
+        return calendar2.getTime();
+    }
+
+
+    /**
+     * 判断当前时间是否在某个时间之前
+     *
+     * @param dateTime 判断的标准
+     * @return true是，false不是
+     */
+    public static boolean belongCalendarBefore(Date dateTime) {
+        boolean is = false;
+        Calendar contCalendar = Calendar.getInstance();
+        Calendar tagCalendar = (Calendar) contCalendar.clone();
+        tagCalendar.setTime(dateTime);
+        is = contCalendar.before(tagCalendar);
+        return is;
+    }
 }

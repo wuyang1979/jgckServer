@@ -6,6 +6,7 @@ import java.util.List;
 import com.ruoyi.contract.domain.dto.ContractInfoPageDto;
 import com.ruoyi.contract.domain.entiy.ContractInfo;
 import com.ruoyi.contract.domain.vo.ContractInfoPageVo;
+import com.ruoyi.contract.domain.vo.RentInfoAddVo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -70,4 +71,12 @@ public interface ContractInfoMapper {
      * @return
      */
     public Date getLeaseEndTimeByRoomId(@Param("roomId") String roomId,@Param("spaceId") String spaceId);
+
+    /**
+     * 新增租金管理
+     *
+     * @param rentInfoInsertVo 租金管理
+     * @return 结果
+     */
+    public int insertRentInfo(RentInfoAddVo rentInfoInsertVo);
 }

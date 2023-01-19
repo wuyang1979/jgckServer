@@ -112,7 +112,7 @@
                 #{paymentFirstMoney}
             </if>
             <if test="paymentDeadline != null  and paymentDeadline != ''">and payment_deadline = #{paymentDeadline}</if>
-            <if test="roomId != null  and roomId != ''">and room_id = #{roomId}</if>
+            <if test="roomId != null  and roomId != ''">and c.room_id = #{roomId}</if>
             <if test="securityDeposit != null  and securityDeposit != ''">and security_deposit = #{securityDeposit}</if>
             <if test="tenantsId != null  and tenantsId != ''">and tenants_id = #{tenantsId}</if>
             <if test="signTime != null ">and sign_time = #{signTime}</if>
@@ -234,4 +234,73 @@
           AND room_id = #{roomId}
           AND space_id = #{spaceId} limit 1
     </select>
+
+
+    <insert id="insertRentInfo" parameterType="RentInfoAddVo">
+        insert into t_rent_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rentId != null">rent_id,
+            </if>
+            <if test="contractId != null">contract_id,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="contractRent != null">contract_rent,
+            </if>
+            <if test="collectionPeriod != null">collection_period,
+            </if>
+            <if test="rentalPeriod != null">rental_period,
+            </if>
+            <if test="receivableMoney != null">receivable_money,
+            </if>
+            <if test="receivableDate != null">receivable_date,
+            </if>
+            <if test="practicalMoney != null">practical_money,
+            </if>
+            <if test="practicalDate != null">practical_date,
+            </if>
+            <if test="remark != null">remark,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rentId != null">#{rentId},
+            </if>
+            <if test="contractId != null">#{contractId},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="contractRent != null">#{contractRent},
+            </if>
+            <if test="collectionPeriod != null">#{collectionPeriod},
+            </if>
+            <if test="rentalPeriod != null">#{rentalPeriod},
+            </if>
+            <if test="receivableMoney != null">#{receivableMoney},
+            </if>
+            <if test="receivableDate != null">#{receivableDate},
+            </if>
+            <if test="practicalMoney != null">#{practicalMoney},
+            </if>
+            <if test="practicalDate != null">#{practicalDate},
+            </if>
+            <if test="remark != null">#{remark},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
+        </trim>
+    </insert>
 </mapper>

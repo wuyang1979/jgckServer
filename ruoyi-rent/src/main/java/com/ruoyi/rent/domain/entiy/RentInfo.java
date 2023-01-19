@@ -1,4 +1,4 @@
-package com.ruoyi.rent.domain;
+package com.ruoyi.rent.domain.entiy;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -83,6 +83,13 @@ public class RentInfo extends BaseEntity {
     @ApiModelProperty("实收日期")
     private String practicalDate;
 
+    /**
+     * 缴费状态
+     */
+    @Excel(name = "缴费状态")
+    @ApiModelProperty("缴费状态")
+    private Long rentStatus;
+
     public void setRentId(String rentId) {
         this.rentId = rentId;
     }
@@ -163,6 +170,14 @@ public class RentInfo extends BaseEntity {
         return practicalDate;
     }
 
+    public Long getRentStatus() {
+        return rentStatus;
+    }
+
+    public void setRentStatus(Long rentStatus) {
+        this.rentStatus = rentStatus;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -177,6 +192,7 @@ public class RentInfo extends BaseEntity {
                 .append("practicalMoney", getPracticalMoney())
                 .append("practicalDate", getPracticalDate())
                 .append("remark", getRemark())
+                .append("rentStatus", getRentStatus())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

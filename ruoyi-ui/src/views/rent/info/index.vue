@@ -2,6 +2,25 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
              label-width="68px">
+      <el-form-item label="房源号" prop="roomName">
+        <el-input
+          v-model="queryParams.roomName"
+          placeholder="请输入房源号"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="报修状态" prop="rentStatus">
+        <el-select v-model="queryParams.rentStatus" placeholder="请选择报修状态"
+                   clearable>
+          <el-option
+            v-for="dict in dict.type.pay_status"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -60,15 +79,41 @@
 
     <el-table v-loading="loading" :data="rentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="合同租金" align="center" prop="contractRent"/>
-      <el-table-column label="收款期数" align="center" prop="collectionPeriod"/>
-      <el-table-column label="租金所属期" align="center" prop="rentalPeriod"/>
-      <el-table-column label="应收金额" align="center" prop="receivableMoney"/>
-      <el-table-column label="应收日期" align="center" prop="receivableDate"/>
-      <el-table-column label="实收金额" align="center" prop="practicalMoney"/>
-      <el-table-column label="实收日期" align="center" prop="practicalDate"/>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="房源号" align="center" prop="roomName"/>
+      <el-table-column label="缴费状态" align="center" prop="rentStatus">
         <template slot-scope="scope">
+          <dict-tag :options="dict.type.pay_status" :value="scope.row.rentStatus"/>
+        </template>
+      </el-table-column>
+      <!--      <el-table-column label="合同租金(万元)" align="center" prop="contractRent">-->
+      <!--        <template slot-scope="scope">-->
+      <!--          <span>{{ scope.row.contractRent / 10000 }}</span>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
+      <el-table-column label="收款期数" align="center" prop="collectionPeriod"/>
+      <el-table-column label="租金所属期" align="center" prop="rentalPeriod" width="180"/>
+      <el-table-column label="应收金额(万元)" align="center" prop="receivableMoney">
+        <template slot-scope="scope">
+          <span>{{ scope.row.receivableMoney / 10000 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="应收日期" align="center" prop="receivableDate"/>
+      <!--      <el-table-column label="实收金额(万元)" align="center" prop="practicalMoney">-->
+      <!--        <template slot-scope="scope">-->
+      <!--          <span>{{ (scope.row.practicalMoney / 10000)==0?'':scope.row.practicalMoney / 10000 }}</span>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column label="实收日期" align="center" prop="practicalDate"/>-->
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-tickets"
+            @click="queryRent(scope.row)"
+            v-hasPermi="['rent:info:query']"
+          >详情
+          </el-button>
           <el-button
             size="mini"
             type="text"
@@ -99,66 +144,95 @@
 
     <!-- 添加或修改租金管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="780px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="90px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="110px">
         <el-row>
           <el-col :span="12">
-<!--            <el-form-item label="合同编号" prop="contractId">-->
-<!--              <el-input v-model="form.contractId" placeholder="请输入合同编号"/>-->
-<!--            </el-form-item>-->
+            <el-form-item label="房源号" prop="roomId">
+              <template>
+                <el-select v-model="form.roomId"
+                           :disabled="isQuery"
+                           clearable
+                           placeholder="请选择房源号">
+                  <el-option
+                    v-for="item in roomList"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </template>
+            </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="合同租金" prop="contractRent">
-              <el-input v-model="form.contractRent" placeholder="请输入合同租金"/>
+            <el-form-item label="缴费状态" prop="rentStatus">
+              <el-select :disabled="isQuery" v-model="form.rentStatus" placeholder="请选择报修类型">
+                <el-option
+                  v-for="dict in dict.type.pay_status"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="parseInt(dict.value)"
+                ></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="合同租金(元)" prop="contractRent">
+              <el-input type="number" oninput="if(value.length>9)value=value.slice(0,9)" :readonly="isQuery"
+                        v-model="form.contractRent" placeholder="请输入合同租金"/>
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
             <el-form-item label="收款期数" prop="collectionPeriod">
-              <el-input v-model="form.collectionPeriod" placeholder="请输入收款期数"/>
+              <el-input :readonly="isQuery" v-model="form.collectionPeriod" placeholder="请输入收款期数"/>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
             <el-form-item label="租金所属期" prop="rentalPeriod">
-              <el-input v-model="form.rentalPeriod" placeholder="请输入租金所属期"/>
+              <el-input :readonly="isQuery" v-model="form.rentalPeriod" placeholder="请输入租金所属期"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="应收金额(元)" prop="receivableMoney">
+              <el-input type="number" oninput="if(value.length>9)value=value.slice(0,9)" :readonly="isQuery"
+                        v-model="form.receivableMoney" placeholder="请输入应收金额"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="应收金额" prop="receivableMoney">
-              <el-input v-model="form.receivableMoney" placeholder="请输入应收金额"/>
-            </el-form-item>
-          </el-col>
           <el-col :span="12">
             <el-form-item label="应收日期" prop="receivableDate">
-              <el-input v-model="form.receivableDate" placeholder="请输入应收日期"/>
+              <el-input :readonly="isQuery" v-model="form.receivableDate" placeholder="请输入应收日期"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="实收金额(元)" prop="practicalMoney">
+              <el-input type="number" oninput="if(value.length>9)value=value.slice(0,9)" :readonly="isQuery"
+                        v-model="form.practicalMoney" placeholder="请输入实收金额"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="实收金额" prop="practicalMoney">
-              <el-input v-model="form.practicalMoney" placeholder="请输入实收金额"/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="实收日期" prop="practicalDate">
-              <el-input v-model="form.practicalDate" placeholder="请输入实收日期"/>
+              <el-input :readonly="isQuery" v-model="form.practicalDate" placeholder="请输入实收日期"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col>
             <el-form-item label="备注" prop="remark">
-              <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
+              <el-input :readonly="isQuery" v-model="form.remark" type="textarea" placeholder="请输入内容"/>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <el-button v-if="!isQuery" @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -172,17 +246,29 @@ import {
   addRent,
   updateRent
 } from "@/api/rent/rent";
+import {listRoomNoScope} from "../../../api/room/info";
 
 const spaceId = sessionStorage.getItem("spaceId")
 
 export default {
   name: "Rent",
+  dicts: ['pay_status'],
   data() {
     return {
+
+      isQuery: false,
+
+      roomQueryParams: {
+        spaceId: spaceId
+      },
+
+      roomList: [],
       // 遮罩层
       loading: true,
       // 选中数组
       ids: [],
+
+      names: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -210,19 +296,58 @@ export default {
         receivableDate: null,
         practicalMoney: null,
         practicalDate: null,
+        rentStatus: null,
+        roonName:null
       },
       // 表单参数
       form: {}
       ,
       // 表单校验
-      rules: {}
+      rules: {},
+      noQueryRules: {
+        roomId: [{required: true, message: '请选择房源号', trigger: 'change'}],
+        rentStatus: [{required: true, message: '请选择缴费状态', trigger: 'change'}],
+        contractRent: [{required: true, message: '请输入合同租金', trigger: 'blur'}],
+        collectionPeriod: [{required: true, message: '请输入收款期数', trigger: 'blur'}],
+        rentalPeriod: [{required: true, message: '请输入租金所属期', trigger: 'blur'}],
+        receivableMoney: [{required: true, message: '请输入应收金额', trigger: 'blur'}],
+        receivableDate: [{required: true, message: '请输入应收日期', trigger: 'blur'}],
+      }
     }
       ;
   },
   created() {
     this.getList();
+    this.initRoom();
   },
   methods: {
+
+    queryRent(row) {
+      getRent(row.rentId).then(res => {
+        this.form = res.data;
+        this.title = "房租详情";
+        this.isQuery = true;
+        this.rules = {};
+        this.open = true;
+      })
+    },
+
+    //初始化房源集合
+    initRoom() {
+      var list = [];
+      listRoomNoScope(this.roomQueryParams).then(respone => {
+        var rooms = respone.rows
+        rooms.forEach(rs => {
+          list.push({
+              value: rs.roomId,
+              label: rs.roomName,
+            }
+          )
+        })
+      })
+      this.roomList = list
+    },
+
     /** 查询租金管理列表 */
     getList() {
       this.loading = true;
@@ -251,6 +376,7 @@ export default {
         practicalMoney: null,
         practicalDate: null,
         remark: null,
+        rentStatus: 0,
         createBy: null,
         createTime: null,
         updateBy: null,
@@ -272,6 +398,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.rentId)
+      this.names = selection.map(item => item.collectionPeriod)
       this.single = selection.length !== 1
       this.multiple = !selection.length
     },
@@ -279,15 +406,18 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
+      this.isQuery = false;
+      this.rules = this.noQueryRules;
       this.title = "添加租金管理";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const rentId =
-        row.rentId || this.ids
+      const rentId = row.rentId || this.ids
       getRent(rentId).then(response => {
         this.form = response.data;
+        this.isQuery = false;
+        this.rules = this.noQueryRules;
         this.open = true;
         this.title = "修改租金管理";
       });
@@ -296,18 +426,23 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.rentId != null) {
-            updateRent(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
-            });
+          if (this.isQuery) {
+            this.open = false;
+            this.getList();
           } else {
-            addRent(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
+            if (this.form.rentId != null) {
+              updateRent(this.form).then(response => {
+                this.$modal.msgSuccess("修改成功");
+                this.open = false;
+                this.getList();
+              });
+            } else {
+              addRent(this.form).then(response => {
+                this.$modal.msgSuccess("新增成功");
+                this.open = false;
+                this.getList();
+              });
+            }
           }
         }
       });
@@ -315,7 +450,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const rentIds = row.rentId || this.ids;
-      this.$modal.confirm('是否确认删除租金管理编号为"' + rentIds + '"的数据项？').then(function () {
+      const names = row.collectionPeriod || this.names
+      this.$modal.confirm('是否确认删除租金管理收款期数为"' + names + '"的数据项？').then(function () {
         return delRent(rentIds);
       }).then(() => {
         this.getList();
@@ -333,7 +469,7 @@ export default {
 };
 </script>
 <style scoped>
-.el-form-item__content > .el-input {
+.el-form-item__content > .el-input, .el-select {
   width: 80% !important;
 }
 
