@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.MaterialInfoMapper">
+
+    <resultMap type="MaterialInfo" id="MaterialInfoResult">
+            <result property="materialId" column="material_id"/>
+            <result property="materialName" column="material_name"/>
+            <result property="materialStatus" column="material_status"/>
+            <result property="materialType" column="material_type"/>
+            <result property="materialSize" column="material_size"/>
+            <result property="warehouseIn" column="warehouse_in"/>
+            <result property="warehouseOut" column="warehouse_out"/>
+            <result property="balance" column="balance"/>
+            <result property="remark" column="remark"/>
+            <result property="warehouseInUser" column="warehouse_in_user"/>
+            <result property="warehouseOutUser" column="warehouse_out_user"/>
+            <result property="warehouseOutAudit" column="warehouse_out_audit"/>
+            <result property="warehouseInTime" column="warehouse_in_time"/>
+            <result property="warehouseOutTime" column="warehouse_out_time"/>
+            <result property="spaceId" column="space_id"/>
+            <result property="createBy" column="create_by"/>
+            <result property="createTime" column="create_time"/>
+            <result property="updateBy" column="update_by"/>
+            <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectMaterialInfoVo">
+        select material_id, material_name, material_status, material_type, material_size, warehouse_in, warehouse_out, balance, remark, warehouse_in_user, warehouse_out_user, warehouse_out_audit, warehouse_in_time, warehouse_out_time, space_id, create_by, create_time, update_by, update_time
+        from t_material_info
+    </sql>
+
+    <select id="selectMaterialInfoList" parameterType="MaterialInfo" resultMap="MaterialInfoResult">
+        <include refid="selectMaterialInfoVo"/>
+        <where>
+                        <if test="materialName != null  and materialName != ''">
+                            and material_name like concat('%', #{materialName}, '%')
+                        </if>
+                        <if test="materialStatus != null ">
+                            and material_status = #{materialStatus}
+                        </if>
+                        <if test="materialType != null ">
+                            and material_type = #{materialType}
+                        </if>
+                        <if test="materialSize != null  and materialSize != ''">
+                            and material_size = #{materialSize}
+                        </if>
+                        <if test="warehouseIn != null  and warehouseIn != ''">
+                            and warehouse_in = #{warehouseIn}
+                        </if>
+                        <if test="warehouseOut != null  and warehouseOut != ''">
+                            and warehouse_out = #{warehouseOut}
+                        </if>
+                        <if test="balance != null  and balance != ''">
+                            and balance = #{balance}
+                        </if>
+                        <if test="warehouseInUser != null  and warehouseInUser != ''">
+                            and warehouse_in_user = #{warehouseInUser}
+                        </if>
+                        <if test="warehouseOutUser != null  and warehouseOutUser != ''">
+                            and warehouse_out_user = #{warehouseOutUser}
+                        </if>
+                        <if test="warehouseOutAudit != null  and warehouseOutAudit != ''">
+                            and warehouse_out_audit = #{warehouseOutAudit}
+                        </if>
+                        <if test="warehouseInTime != null ">
+                            and warehouse_in_time = #{warehouseInTime}
+                        </if>
+                        <if test="warehouseOutTime != null ">
+                            and warehouse_out_time = #{warehouseOutTime}
+                        </if>
+                        <if test="spaceId != null  and spaceId != ''">
+                            and space_id = #{spaceId}
+                        </if>
+        </where>
+    </select>
+
+    <select id="selectMaterialInfoByMaterialId" parameterType="String"
+            resultMap="MaterialInfoResult">
+            <include refid="selectMaterialInfoVo"/>
+            where material_id = #{materialId}
+    </select>
+
+    <insert id="insertMaterialInfo" parameterType="MaterialInfo">
+        insert into t_material_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="materialId != null">material_id,
+                    </if>
+                    <if test="materialName != null">material_name,
+                    </if>
+                    <if test="materialStatus != null">material_status,
+                    </if>
+                    <if test="materialType != null">material_type,
+                    </if>
+                    <if test="materialSize != null">material_size,
+                    </if>
+                    <if test="warehouseIn != null">warehouse_in,
+                    </if>
+                    <if test="warehouseOut != null">warehouse_out,
+                    </if>
+                    <if test="balance != null">balance,
+                    </if>
+                    <if test="remark != null">remark,
+                    </if>
+                    <if test="warehouseInUser != null">warehouse_in_user,
+                    </if>
+                    <if test="warehouseOutUser != null">warehouse_out_user,
+                    </if>
+                    <if test="warehouseOutAudit != null">warehouse_out_audit,
+                    </if>
+                    <if test="warehouseInTime != null">warehouse_in_time,
+                    </if>
+                    <if test="warehouseOutTime != null">warehouse_out_time,
+                    </if>
+                    <if test="spaceId != null">space_id,
+                    </if>
+                    <if test="createBy != null">create_by,
+                    </if>
+                    <if test="createTime != null">create_time,
+                    </if>
+                    <if test="updateBy != null">update_by,
+                    </if>
+                    <if test="updateTime != null">update_time,
+                    </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="materialId != null">#{materialId},
+                    </if>
+                    <if test="materialName != null">#{materialName},
+                    </if>
+                    <if test="materialStatus != null">#{materialStatus},
+                    </if>
+                    <if test="materialType != null">#{materialType},
+                    </if>
+                    <if test="materialSize != null">#{materialSize},
+                    </if>
+                    <if test="warehouseIn != null">#{warehouseIn},
+                    </if>
+                    <if test="warehouseOut != null">#{warehouseOut},
+                    </if>
+                    <if test="balance != null">#{balance},
+                    </if>
+                    <if test="remark != null">#{remark},
+                    </if>
+                    <if test="warehouseInUser != null">#{warehouseInUser},
+                    </if>
+                    <if test="warehouseOutUser != null">#{warehouseOutUser},
+                    </if>
+                    <if test="warehouseOutAudit != null">#{warehouseOutAudit},
+                    </if>
+                    <if test="warehouseInTime != null">#{warehouseInTime},
+                    </if>
+                    <if test="warehouseOutTime != null">#{warehouseOutTime},
+                    </if>
+                    <if test="spaceId != null">#{spaceId},
+                    </if>
+                    <if test="createBy != null">#{createBy},
+                    </if>
+                    <if test="createTime != null">#{createTime},
+                    </if>
+                    <if test="updateBy != null">#{updateBy},
+                    </if>
+                    <if test="updateTime != null">#{updateTime},
+                    </if>
+        </trim>
+    </insert>
+
+    <update id="updateMaterialInfo" parameterType="MaterialInfo">
+        update t_material_info
+        <trim prefix="SET" suffixOverrides=",">
+                    <if test="materialName != null">material_name =
+                        #{materialName},
+                    </if>
+                    <if test="materialStatus != null">material_status =
+                        #{materialStatus},
+                    </if>
+                    <if test="materialType != null">material_type =
+                        #{materialType},
+                    </if>
+                    <if test="materialSize != null">material_size =
+                        #{materialSize},
+                    </if>
+                    <if test="warehouseIn != null">warehouse_in =
+                        #{warehouseIn},
+                    </if>
+                    <if test="warehouseOut != null">warehouse_out =
+                        #{warehouseOut},
+                    </if>
+                    <if test="balance != null">balance =
+                        #{balance},
+                    </if>
+                    <if test="remark != null">remark =
+                        #{remark},
+                    </if>
+                    <if test="warehouseInUser != null">warehouse_in_user =
+                        #{warehouseInUser},
+                    </if>
+                    <if test="warehouseOutUser != null">warehouse_out_user =
+                        #{warehouseOutUser},
+                    </if>
+                    <if test="warehouseOutAudit != null">warehouse_out_audit =
+                        #{warehouseOutAudit},
+                    </if>
+                    <if test="warehouseInTime != null">warehouse_in_time =
+                        #{warehouseInTime},
+                    </if>
+                    <if test="warehouseOutTime != null">warehouse_out_time =
+                        #{warehouseOutTime},
+                    </if>
+                    <if test="spaceId != null">space_id =
+                        #{spaceId},
+                    </if>
+                    <if test="createBy != null">create_by =
+                        #{createBy},
+                    </if>
+                    <if test="createTime != null">create_time =
+                        #{createTime},
+                    </if>
+                    <if test="updateBy != null">update_by =
+                        #{updateBy},
+                    </if>
+                    <if test="updateTime != null">update_time =
+                        #{updateTime},
+                    </if>
+        </trim>
+        where material_id = #{materialId}
+    </update>
+
+    <delete id="deleteMaterialInfoByMaterialId" parameterType="String">
+        delete
+        from t_material_info where material_id = #{materialId}
+    </delete>
+
+    <delete id="deleteMaterialInfoByMaterialIds" parameterType="String">
+        delete from t_material_info where material_id in
+        <foreach item="materialId" collection="array" open="(" separator="," close=")">
+            #{materialId}
+        </foreach>
+    </delete>
+</mapper>

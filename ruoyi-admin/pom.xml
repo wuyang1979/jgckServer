@@ -170,6 +170,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-asset</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-material</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
