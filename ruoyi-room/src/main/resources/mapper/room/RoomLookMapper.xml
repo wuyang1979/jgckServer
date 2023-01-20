@@ -11,6 +11,7 @@
         <result property="customerName" column="customer_name"/>
         <result property="customerPhone" column="customer_phone"/>
         <result property="appointTime" column="appoint_time"/>
+        <result property="lookStatus" column="look_status"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
@@ -26,6 +27,7 @@
         <result property="customerName" column="customer_name"/>
         <result property="customerPhone" column="customer_phone"/>
         <result property="appointTime" column="appoint_time"/>
+        <result property="lookStatus" column="look_status"/>
     </resultMap>
 
     <sql id="selectRoomLookVo">
@@ -38,7 +40,8 @@
                create_by,
                create_time,
                update_by,
-               update_time
+               update_time,
+               look_status
         from t_room_look
     </sql>
 
@@ -50,7 +53,8 @@
                u.nick_name,
                l.customer_name,
                l.customer_phone,
-               l.appoint_time
+               l.appoint_time,
+               l.look_status
         from t_room_look l
                  left join t_room_info i on l.room_id = i.room_id
                  left join sys_user u on l.bind_user_id = u.user_id
@@ -89,6 +93,7 @@
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
             <if test="spaceId != null">space_Id,</if>
+            <if test="lookStatus != null">look_status,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -104,6 +109,7 @@
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
             <if test="spaceId != null">#{spaceId},</if>
+            <if test="lookStatus != null">#{lookStatus},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -120,6 +126,7 @@
             <if test="customerPhone != null">customer_phone = #{customerPhone},</if>
             <if test="appointTime != null">appoint_time = #{appointTime},</if>
             <if test="spaceId != null">space_id = #{spaceId},</if>
+            <if test="lookStatus != null">look_status = #{lookStatus},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

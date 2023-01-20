@@ -62,4 +62,6 @@ public class RoomLookDtoPage extends BaseEntity {
    private String userId;
 
    private String deptId;
+
+   private Long lookStatus;
 }

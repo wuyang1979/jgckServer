@@ -76,7 +76,7 @@
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="证件类型" align="center" prop="credentialType" width="120">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.credential_type" :value="scope.row.credentialType"/>
+          <g :options="dict.type.credential_type" :value="scope.row.credentialType"/>
         </template>
       </el-table-column>
       <el-table-column label="用户名称" align="center" prop="userName" width="160"/>

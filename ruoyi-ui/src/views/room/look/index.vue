@@ -100,7 +100,11 @@
     <el-table v-loading="loading" :data="lookList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="房源号" align="center" prop="roomName"/>
-      <el-table-column label="带看状态" align="center" prop="lookStatus"/>
+      <el-table-column label="带看状态" align="center" prop="lookStatus">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.look_status" :value="scope.row.lookStatus"/>
+        </template>
+      </el-table-column>
       <el-table-column label="带看人" align="center" prop="nickName"/>
       <el-table-column label="客户姓名" align="center" prop="customerName"/>
       <el-table-column label="客户电话" align="center" prop="customerPhone"/>
@@ -168,6 +172,17 @@
         <el-form-item label="带看人" prop="bindUserId">
           <treeselect v-model="form.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
         </el-form-item>
+        <el-form-item label="带看状态" prop="lookStatus">
+          <el-select v-model="form.lookStatus" placeholder="请选择带看状态"
+                     clearable>
+            <el-option
+              v-for="dict in dict.type.look_status"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="客户姓名" prop="customerName">
           <el-input v-model="form.customerName" placeholder="请输入客户姓名"/>
         </el-form-item>
@@ -211,6 +226,17 @@
         <el-form-item label="带看人" prop="bindUserId">
           <treeselect disabled="true" v-model="queryForm.bindUserId" :options="treeData"  :disable-branch-nodes="true" :show-count="true" placeholder="请选择带看人" />
         </el-form-item>
+        <el-form-item label="带看状态" prop="lookStatus">
+          <el-select disabled v-model="queryForm.lookStatus" placeholder="请选择带看状态"
+                     clearable>
+            <el-option
+              v-for="dict in dict.type.look_status"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="客户姓名" prop="customerName">
           <el-input readonly v-model="queryForm.customerName" placeholder="请输入客户姓名"/>
         </el-form-item>
@@ -243,6 +269,7 @@ const spaceId=sessionStorage.getItem("spaceId")
 
 export default {
   name: "Look",
+  dicts:['look_status'],
   components:{
     Treeselect
   },
@@ -301,6 +328,7 @@ export default {
         customerPhone: null,
         appointTimeStart: null,
         appointTimeEnd: null,
+        lookStatus:null,
       },
 
       // 表单参数
@@ -380,6 +408,7 @@ export default {
       this.query = true;
       this.title = "房源带看基本信息详情";
       this.queryForm = row;
+      this.queryForm.lookStatus=intCovString(this.queryForm.lookStatus)
       this.treeData.forEach(t => {
         this.$set(t, 'disabled', true)
       })
@@ -408,6 +437,7 @@ export default {
         customerName: null,
         customerPhone: null,
         appointTime: null,
+        lookStatus:'0',
       };
       this.resetForm("form");
     },
@@ -456,6 +486,7 @@ export default {
       getLook(lookId).then(response => {
         this.form = response.data;
         this.form.roomId=intCovString(this.form.roomId)
+        this.form.lookStatus=intCovString(this.form.lookStatus)
         this.open = true;
         this.title = "修改房源带看基本信息";
       });

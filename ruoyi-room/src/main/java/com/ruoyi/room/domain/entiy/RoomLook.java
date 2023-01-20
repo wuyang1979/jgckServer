@@ -60,6 +60,8 @@ public class RoomLook extends BaseEntity {
 
     private String spaceId;
 
+    private Long lookStatus;
+
     public void setLookId(String lookId) {
         this.lookId = lookId;
     }
@@ -132,6 +134,14 @@ public class RoomLook extends BaseEntity {
         this.spaceId = spaceId;
     }
 
+    public Long getLookStatus() {
+        return lookStatus;
+    }
+
+    public void setLookStatus(Long lookStatus) {
+        this.lookStatus = lookStatus;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -144,6 +154,7 @@ public class RoomLook extends BaseEntity {
                 .append("userId", getUserId())
                 .append("deptId", getDeptId())
                 .append("spaceId", getSpaceId())
+                .append("lookStatus", getLookStatus())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

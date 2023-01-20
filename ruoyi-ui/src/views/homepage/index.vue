@@ -419,7 +419,7 @@ export default {
       let option;
 
 
-      let data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+      let data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149];
       let yMax = 500;
       let dataShadow = [];
       for (let i = 0; i < data.length; i++) {
@@ -543,7 +543,7 @@ export default {
         ],
         series: [
           {
-            name: 'Direct',
+            // name: 'Direct',
             type: 'bar',
             barWidth: '60%',
             data: [10, 52, 200, 334, 390, 330, 220, 120, 155, 136, 200, 210]
@@ -591,6 +591,7 @@ export default {
 
       option && myChart.setOption(option);
     },
+
     // 办公饼图
     officeStatistics() {
       // 基于准备好的dom，初始化echarts实例  这个和上面的main对应
