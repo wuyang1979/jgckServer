@@ -21,6 +21,12 @@
         <result property="credentialExpireTime" column="credential_expire_Time"/>
     </resultMap>
 
+    <resultMap id="RentStatisticsDTOResult" type="RentStatisticsDTO">
+        <result property="receiveAdvance" column="receive_advance"/>
+        <result property="actualReceipt" column="actual_receipt"/>
+        <result property="accumulative" column="accumulative"/>
+    </resultMap>
+
 
     <select id="getSettleStatistics" resultMap="SettleStatisticsDtoResult">
         SELECT t1.dict_label name,
@@ -85,8 +91,21 @@
                                            LEFT JOIN sys_dict_data sdd ON sdt.dict_type = sdd.dict_type
                                   WHERE sdt.dict_type = 'credential_type') t1 ON ci.credential_type = t1.dict_value
               WHERE TO_DAYS(ci.credential_expire_time) - TO_DAYS(
-                      NOW()) > 0   AND ci.space_id = #{spaceId}) t2
+                      NOW()) > 0
+                AND ci.space_id = #{spaceId}) t2
         WHERE t2.surplus &lt; 20
+    </select>
+
+
+    <select id="getRentStatisticsByYear" parameterType="String" resultMap="RentStatisticsDTOResult">
+        SELECT
+               CASE  WHEN t.receive_advance is not null THEN t.receive_advance ELSE 0 END receive_advance,
+               CASE  WHEN t.actual_receipt is not null THEN t.actual_receipt ELSE 0 END actual_receipt,
+               CASE  WHEN  (t.receive_advance + t.actual_receipt) is not null THEN  (t.receive_advance + t.actual_receipt) ELSE 0 END accumulative
+        FROM (SELECT SUM(ri.receivable_money) receive_advance,
+                     SUM(IF (ri.rent_status = 1, ri.practical_money, 0)) actual_receipt
+              FROM t_rent_info ri
+              WHERE ri.receivable_date LIKE CONCAT(#{year}, '%')) t
     </select>
 
 </mapper>

@@ -1,10 +1,12 @@
 package com.ruoyi.web.controller.common;
 
 
+import cn.hutool.json.JSONObject;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
+import com.ruoyi.common.core.domain.dto.RentStatisticsDTO;
 import com.ruoyi.common.core.domain.vo.RentConfigVo;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.service.IStatisticsService;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +63,13 @@ public class StatisticsController extends BaseController {
     @ApiOperation("设置到期提醒配置")
     public AjaxResult setRentRmind(@RequestBody RentConfigVo rentConfigVo) {
         return sysConfigService.setRentRmind(rentConfigVo);
+    }
+
+    @GetMapping("/rent/{year}")
+    @ApiOperation("获取房租统计")
+    public AjaxResult getRentStatisticsByYear(@PathVariable String year) {
+        RentStatisticsDTO rentStatistics = statisticsService.getRentStatisticsByYear(year);
+        return success(rentStatistics);
     }
 
 

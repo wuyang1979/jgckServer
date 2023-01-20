@@ -1,8 +1,10 @@
 package com.ruoyi.common.core.service.impl;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
+import com.ruoyi.common.core.domain.dto.RentStatisticsDTO;
 import com.ruoyi.common.core.domain.vo.ContractExpireVo;
 import com.ruoyi.common.core.mapper.StatisticsMapper;
 import com.ruoyi.common.core.service.IStatisticsService;
@@ -44,5 +46,10 @@ public class StatisticsServiceImpl implements IStatisticsService {
     @Override
     public List<CredentialExpireDto> getCredentialExpire(String spaceId) {
         return statisticsMapper.getCredentialExpire(spaceId);
+    }
+
+    @Override
+    public RentStatisticsDTO getRentStatisticsByYear(String year) {
+        return statisticsMapper.getRentStatisticsByYear(year);
     }
 }

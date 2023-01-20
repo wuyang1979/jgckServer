@@ -1,7 +1,9 @@
 package com.ruoyi.common.core.mapper;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.core.domain.dto.ContractExpireDto;
 import com.ruoyi.common.core.domain.dto.CredentialExpireDto;
+import com.ruoyi.common.core.domain.dto.RentStatisticsDTO;
 import com.ruoyi.common.core.domain.dto.SettleStatisticsDto;
 import com.ruoyi.common.core.domain.vo.ContractExpireVo;
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +23,7 @@ public interface StatisticsMapper {
     List<ContractExpireDto> getContractExpire(ContractExpireVo contractExpireVo);
 
     List<CredentialExpireDto> getCredentialExpire(String spaceId);
+
+    RentStatisticsDTO getRentStatisticsByYear(String year);
 
 }

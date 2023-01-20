@@ -3,7 +3,7 @@ import request from "@/utils/request";
 
 export function getSettle(spaceId) {
   return request({
-    url: '/statistics/settle/'+spaceId,
+    url: '/statistics/settle/' + spaceId,
     method: 'get'
   })
 }
@@ -11,7 +11,7 @@ export function getSettle(spaceId) {
 
 export function getContract(spaceId) {
   return request({
-    url: '/statistics/contract/'+spaceId,
+    url: '/statistics/contract/' + spaceId,
     method: 'get'
   })
 }
@@ -19,7 +19,7 @@ export function getContract(spaceId) {
 
 export function getCredential(spaceId) {
   return request({
-    url: '/statistics/credential/'+spaceId,
+    url: '/statistics/credential/' + spaceId,
     method: 'get'
   })
 }
@@ -28,6 +28,14 @@ export function setRemindConfig(param) {
   return request({
     url: '/statistics/remind/setConfig',
     method: 'post',
-    data:param
+    data: param
+  })
+}
+
+
+export function getRentStatistics(year) {
+  return request({
+    url: '/statistics/rent/' + year,
+    method: 'get'
   })
 }

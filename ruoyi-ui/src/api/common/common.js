@@ -54,3 +54,16 @@ export function getNowDateTime() {
 }
 
 
+export function Fixed(val) {
+  if (val) {
+    if (val != 0) {
+      return val / 10000
+    } else {
+      return 0;
+    }
+  } else {
+    return 0;
+  }
+}
+
+
