@@ -436,7 +436,7 @@ export default {
           axisLabel: {
             inside: true,
             color: '#fff',
-            fontSize: 8
+            fontSize: 7
           },
           axisTick: {
             show: false
@@ -532,7 +532,7 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              fontSize: 8
+              fontSize: 7
             }
           }
         ],
@@ -570,7 +570,7 @@ export default {
           type: 'category',
           data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
           axisLabel: {
-            fontSize: 8,
+            fontSize: 7,
           },
         },
         yAxis: {
