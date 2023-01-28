@@ -82,6 +82,8 @@ public class ContractOtherController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody ContractOther contractOther) {
         contractOther.setCreateBy(getUsername());
+        contractOther.setUserId(getUserId().toString());
+        contractOther.setDeptId(getDeptId().toString());
         contractOtherService.insertContractOther(contractOther);
         return toAjax(contractOther.getContractId());
     }

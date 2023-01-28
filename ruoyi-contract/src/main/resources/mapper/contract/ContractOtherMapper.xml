@@ -60,15 +60,19 @@
 
 
     <sql id="selectContractOtherPageDto">
-        SELECT co.contract_id,
-               co.project_name,
-               ti.tenants_name customer_name,
-               co.pay_money,
-               co.contract_start_time,
-               co.contract_end_time,
-               co.sign_time
-        FROM t_contract_other co
-                 LEFT JOIN t_tenants_info ti ON co.customer_id = ti.tenants_id
+        SELECT
+            co.contract_id,
+            co.project_name,
+            ti.tenants_name customer_name,
+            co.pay_money,
+            co.contract_start_time,
+            co.contract_end_time,
+            co.sign_time
+        FROM
+            t_contract_other co
+                LEFT JOIN t_tenants_info ti ON co.customer_id = ti.tenants_id
+                LEFT JOIN sys_user u ON co.user_id = u.user_id
+                LEFT JOIN sys_dept d ON co.dept_id = d.dept_id
     </sql>
 
     <select id="selectContractOtherList" parameterType="ContractOtherVo" resultMap="ContractOtherPageDTOResult">
@@ -80,12 +84,11 @@
             <if test="projectName != null  and projectName != ''">
                 and co.project_name like concat('%', #{projectName}, '%')
             </if>
-
+            ${params.dataScope}
         </where>
     </select>
 
-    <select id="selectContractOtherByContractId" parameterType="String"
-            resultMap="ContractOtherResult">
+    <select id="selectContractOtherByContractId" parameterType="String" resultMap="ContractOtherResult">
         <include refid="selectContractOtherVo"/>
         where contract_id = #{contractId}
     </select>
@@ -114,6 +117,10 @@
             <if test="remark != null">remark,
             </if>
             <if test="spaceId != null">space_id,
+            </if>
+            <if test="userId != null">user_id,
+            </if>
+            <if test="deptId != null">dept_id,
             </if>
             <if test="createBy != null">create_by,
             </if>
@@ -146,6 +153,10 @@
             <if test="remark != null">#{remark},
             </if>
             <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="userId != null">#{userId},
+            </if>
+            <if test="deptId != null">#{deptId},
             </if>
             <if test="createBy != null">#{createBy},
             </if>

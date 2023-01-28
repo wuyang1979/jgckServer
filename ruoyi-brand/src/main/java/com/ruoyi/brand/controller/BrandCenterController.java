@@ -81,6 +81,8 @@ public class BrandCenterController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody BrandCenter brandCenter) {
         brandCenter.setCreateBy(getUsername());
+        brandCenter.setUserId(getUserId().toString());
+        brandCenter.setDeptId(getDeptId().toString());
         brandCenterService.insertBrandCenter(brandCenter);
         return toAjax(brandCenter.getBrandId());
     }

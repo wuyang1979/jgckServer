@@ -5,180 +5,204 @@
 <mapper namespace="com.ruoyi.fire.mapper.FireSafetyMapper">
 
     <resultMap type="FireSafety" id="FireSafetyResult">
-            <result property="fireId" column="fire_id"/>
-            <result property="floor" column="floor"/>
-            <result property="address" column="address"/>
-            <result property="quantity" column="quantity"/>
-            <result property="productionTime" column="production_time"/>
-            <result property="validityPeriod" column="validity_period"/>
-            <result property="purchaser" column="purchaser"/>
-            <result property="size" column="size"/>
-            <result property="number" column="number"/>
-            <result property="spaceId" column="space_id"/>
-            <result property="createBy" column="create_by"/>
-            <result property="createTime" column="create_time"/>
-            <result property="updateBy" column="update_by"/>
-            <result property="updateTime" column="update_time"/>
+        <result property="fireId" column="fire_id"/>
+        <result property="floor" column="floor"/>
+        <result property="address" column="address"/>
+        <result property="quantity" column="quantity"/>
+        <result property="productionTime" column="production_time"/>
+        <result property="validityPeriod" column="validity_period"/>
+        <result property="purchaser" column="purchaser"/>
+        <result property="size" column="size"/>
+        <result property="number" column="number"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectFireSafetyVo">
-        select fire_id, floor, address, quantity, production_time, validity_period, purchaser, size, number, space_id, create_by, create_time, update_by, update_time
-        from t_fire_safety
+        SELECT
+            fs.fire_id,
+            fs.floor,
+            fs.address,
+            fs.quantity,
+            fs.production_time,
+            fs.validity_period,
+            fs.purchaser,
+            fs.size,
+            fs.number,
+            fs.space_id,
+            fs.create_by,
+            fs.create_time,
+            fs.update_by,
+            fs.update_time
+        FROM
+            t_fire_safety fs
     </sql>
 
     <select id="selectFireSafetyList" parameterType="FireSafety" resultMap="FireSafetyResult">
         <include refid="selectFireSafetyVo"/>
         <where>
-                        <if test="floor != null ">
-                            and floor = #{floor}
-                        </if>
-                        <if test="address != null  and address != ''">
-                            and address like concat('%', #{address}, '%')
-                        </if>
-                        <if test="quantity != null ">
-                            and quantity = #{quantity}
-                        </if>
-                        <if test="productionTime != null ">
-                            and production_time = #{productionTime}
-                        </if>
-                        <if test="validityPeriod != null  and validityPeriod != ''">
-                            and validity_period = #{validityPeriod}
-                        </if>
-                        <if test="purchaser != null  and purchaser != ''">
-                            and purchaser = #{purchaser}
-                        </if>
-                        <if test="size != null  and size != ''">
-                            and size = #{size}
-                        </if>
-                        <if test="number != null ">
-                            and number = #{number}
-                        </if>
-                        <if test="spaceId != null  and spaceId != ''">
-                            and space_id = #{spaceId}
-                        </if>
+            <if test="floor != null ">
+                and floor = #{floor}
+            </if>
+            <if test="address != null  and address != ''">
+                and address like concat('%', #{address}, '%')
+            </if>
+            <if test="quantity != null ">
+                and quantity = #{quantity}
+            </if>
+            <if test="productionTime != null ">
+                and production_time = #{productionTime}
+            </if>
+            <if test="validityPeriod != null  and validityPeriod != ''">
+                and validity_period = #{validityPeriod}
+            </if>
+            <if test="purchaser != null  and purchaser != ''">
+                and purchaser = #{purchaser}
+            </if>
+            <if test="size != null  and size != ''">
+                and size = #{size}
+            </if>
+            <if test="number != null ">
+                and number = #{number}
+            </if>
+            <if test="spaceId != null  and spaceId != ''">
+                and space_id = #{spaceId}
+            </if>
         </where>
         order by number,floor
     </select>
 
     <select id="selectFireSafetyByFireId" parameterType="String"
             resultMap="FireSafetyResult">
-            <include refid="selectFireSafetyVo"/>
-            where fire_id = #{fireId}
+        <include refid="selectFireSafetyVo"/>
+        where fire_id = #{fireId}
     </select>
 
     <insert id="insertFireSafety" parameterType="FireSafety">
         insert into t_fire_safety
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                    <if test="fireId != null">fire_id,
-                    </if>
-                    <if test="floor != null">floor,
-                    </if>
-                    <if test="address != null">address,
-                    </if>
-                    <if test="quantity != null">quantity,
-                    </if>
-                    <if test="productionTime != null">production_time,
-                    </if>
-                    <if test="validityPeriod != null">validity_period,
-                    </if>
-                    <if test="purchaser != null">purchaser,
-                    </if>
-                    <if test="size != null">size,
-                    </if>
-                    <if test="number != null">number,
-                    </if>
-                    <if test="spaceId != null">space_id,
-                    </if>
-                    <if test="createBy != null">create_by,
-                    </if>
-                    <if test="createTime != null">create_time,
-                    </if>
-                    <if test="updateBy != null">update_by,
-                    </if>
-                    <if test="updateTime != null">update_time,
-                    </if>
+            <if test="fireId != null">fire_id,
+            </if>
+            <if test="floor != null">floor,
+            </if>
+            <if test="address != null">address,
+            </if>
+            <if test="quantity != null">quantity,
+            </if>
+            <if test="productionTime != null">production_time,
+            </if>
+            <if test="validityPeriod != null">validity_period,
+            </if>
+            <if test="purchaser != null">purchaser,
+            </if>
+            <if test="size != null">size,
+            </if>
+            <if test="number != null">number,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="userId != null">user_id,
+            </if>
+            <if test="deptId != null">dept_id,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                    <if test="fireId != null">#{fireId},
-                    </if>
-                    <if test="floor != null">#{floor},
-                    </if>
-                    <if test="address != null">#{address},
-                    </if>
-                    <if test="quantity != null">#{quantity},
-                    </if>
-                    <if test="productionTime != null">#{productionTime},
-                    </if>
-                    <if test="validityPeriod != null">#{validityPeriod},
-                    </if>
-                    <if test="purchaser != null">#{purchaser},
-                    </if>
-                    <if test="size != null">#{size},
-                    </if>
-                    <if test="number != null">#{number},
-                    </if>
-                    <if test="spaceId != null">#{spaceId},
-                    </if>
-                    <if test="createBy != null">#{createBy},
-                    </if>
-                    <if test="createTime != null">#{createTime},
-                    </if>
-                    <if test="updateBy != null">#{updateBy},
-                    </if>
-                    <if test="updateTime != null">#{updateTime},
-                    </if>
+            <if test="fireId != null">#{fireId},
+            </if>
+            <if test="floor != null">#{floor},
+            </if>
+            <if test="address != null">#{address},
+            </if>
+            <if test="quantity != null">#{quantity},
+            </if>
+            <if test="productionTime != null">#{productionTime},
+            </if>
+            <if test="validityPeriod != null">#{validityPeriod},
+            </if>
+            <if test="purchaser != null">#{purchaser},
+            </if>
+            <if test="size != null">#{size},
+            </if>
+            <if test="number != null">#{number},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="userId != null">#{userId},
+            </if>
+            <if test="deptId != null">#{deptId},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
         </trim>
     </insert>
 
     <update id="updateFireSafety" parameterType="FireSafety">
         update t_fire_safety
         <trim prefix="SET" suffixOverrides=",">
-                    <if test="floor != null">floor =
-                        #{floor},
-                    </if>
-                    <if test="address != null">address =
-                        #{address},
-                    </if>
-                    <if test="quantity != null">quantity =
-                        #{quantity},
-                    </if>
-                    <if test="productionTime != null">production_time =
-                        #{productionTime},
-                    </if>
-                    <if test="validityPeriod != null">validity_period =
-                        #{validityPeriod},
-                    </if>
-                    <if test="purchaser != null">purchaser =
-                        #{purchaser},
-                    </if>
-                    <if test="size != null">size =
-                        #{size},
-                    </if>
-                    <if test="number != null">number =
-                        #{number},
-                    </if>
-                    <if test="spaceId != null">space_id =
-                        #{spaceId},
-                    </if>
-                    <if test="createBy != null">create_by =
-                        #{createBy},
-                    </if>
-                    <if test="createTime != null">create_time =
-                        #{createTime},
-                    </if>
-                    <if test="updateBy != null">update_by =
-                        #{updateBy},
-                    </if>
-                    <if test="updateTime != null">update_time =
-                        #{updateTime},
-                    </if>
+            <if test="floor != null">floor =
+                #{floor},
+            </if>
+            <if test="address != null">address =
+                #{address},
+            </if>
+            <if test="quantity != null">quantity =
+                #{quantity},
+            </if>
+            <if test="productionTime != null">production_time =
+                #{productionTime},
+            </if>
+            <if test="validityPeriod != null">validity_period =
+                #{validityPeriod},
+            </if>
+            <if test="purchaser != null">purchaser =
+                #{purchaser},
+            </if>
+            <if test="size != null">size =
+                #{size},
+            </if>
+            <if test="number != null">number =
+                #{number},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
         </trim>
         where fire_id = #{fireId}
     </update>
 
     <delete id="deleteFireSafetyByFireId" parameterType="String">
         delete
-        from t_fire_safety where fire_id = #{fireId}
+        from t_fire_safety
+        where fire_id = #{fireId}
     </delete>
 
     <delete id="deleteFireSafetyByFireIds" parameterType="String">

@@ -3,6 +3,7 @@ package com.ruoyi.brand.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class BrandCenterServiceImpl implements IBrandCenterService {
      * @param brandCenter 品牌中心基本信息
      * @return 品牌中心基本信息
      */
+    @DataScope(userAlias = "u",deptAlias = "d")
     @Override
     public List<BrandCenter> selectBrandCenterList(BrandCenter brandCenter) {
         return brandCenterMapper.selectBrandCenterList(brandCenter);

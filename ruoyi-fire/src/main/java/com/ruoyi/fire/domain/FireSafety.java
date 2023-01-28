@@ -87,6 +87,20 @@ public class FireSafety extends BaseEntity {
     @ApiModelProperty("空间id")
     private String spaceId;
 
+    /**
+     * 用户id
+     */
+    @Excel(name = "用户id")
+    @ApiModelProperty("用户id")
+    private String userId;
+
+    /**
+     * 部门id
+     */
+    @Excel(name = "部门id")
+    @ApiModelProperty("部门id")
+    private String deptId;
+
     public void setFireId(String fireId) {
         this.fireId = fireId;
     }
@@ -167,6 +181,22 @@ public class FireSafety extends BaseEntity {
         return spaceId;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -180,6 +210,8 @@ public class FireSafety extends BaseEntity {
                 .append("size", getSize())
                 .append("number", getNumber())
                 .append("spaceId", getSpaceId())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

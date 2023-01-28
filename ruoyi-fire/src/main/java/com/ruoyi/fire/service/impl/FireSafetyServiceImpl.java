@@ -3,6 +3,7 @@ package com.ruoyi.fire.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class FireSafetyServiceImpl implements IFireSafetyService {
      * @param fireSafety 消防安全
      * @return 消防安全
      */
+    @DataScope(userAlias = "u",deptAlias = "d")
     @Override
     public List<FireSafety> selectFireSafetyList(FireSafety fireSafety) {
         return fireSafetyMapper.selectFireSafetyList(fireSafety);

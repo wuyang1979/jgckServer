@@ -48,6 +48,20 @@ public class BrandCenter extends BaseEntity {
     @ApiModelProperty("空间名称")
     private String spaceId;
 
+    /**
+     * 用户id
+     */
+    @Excel(name = "用户id")
+    @ApiModelProperty("用户id")
+    private String userId;
+
+    /**
+     * 部门id
+     */
+    @Excel(name = "部门id")
+    @ApiModelProperty("部门id")
+    private String deptId;
+
     public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
@@ -88,6 +102,22 @@ public class BrandCenter extends BaseEntity {
         return spaceId;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -96,6 +126,8 @@ public class BrandCenter extends BaseEntity {
                 .append("brandVideoUrl", getBrandVideoUrl())
                 .append("publicWelfare", getPublicWelfare())
                 .append("spaceId", getSpaceId())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

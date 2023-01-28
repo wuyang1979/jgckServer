@@ -5,124 +5,144 @@
 <mapper namespace="com.ruoyi.brand.mapper.BrandCenterMapper">
 
     <resultMap type="BrandCenter" id="BrandCenterResult">
-            <result property="brandId" column="brand_id"/>
-            <result property="brandContent" column="brand_content"/>
-            <result property="brandVideoUrl" column="brand_video_url"/>
-            <result property="publicWelfare" column="public_welfare"/>
-            <result property="spaceId" column="space_id"/>
-            <result property="createBy" column="create_by"/>
-            <result property="createTime" column="create_time"/>
-            <result property="updateBy" column="update_by"/>
-            <result property="updateTime" column="update_time"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="brandContent" column="brand_content"/>
+        <result property="brandVideoUrl" column="brand_video_url"/>
+        <result property="publicWelfare" column="public_welfare"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectBrandCenterVo">
-        select brand_id, brand_content, brand_video_url, public_welfare, space_id, create_by, create_time, update_by, update_time
-        from t_brand_center
+        SELECT bc.brand_id,
+               bc.brand_content,
+               bc.brand_video_url,
+               bc.public_welfare,
+               bc.space_id,
+               bc.create_by,
+               bc.create_time,
+               bc.update_by,
+               bc.update_time
+        FROM t_brand_center bc
+                 LEFT JOIN sys_user u ON bc.user_id = u.user_id
+                 LEFT JOIN sys_dept d ON bc.dept_id = d.dept_id
     </sql>
 
     <select id="selectBrandCenterList" parameterType="BrandCenter" resultMap="BrandCenterResult">
         <include refid="selectBrandCenterVo"/>
         <where>
-                        <if test="brandContent != null  and brandContent != ''">
-                            and brand_content = #{brandContent}
-                        </if>
-                        <if test="brandVideoUrl != null  and brandVideoUrl != ''">
-                            and brand_video_url = #{brandVideoUrl}
-                        </if>
-                        <if test="publicWelfare != null  and publicWelfare != ''">
-                            and public_welfare = #{publicWelfare}
-                        </if>
-                        <if test="spaceId != null  and spaceId != ''">
-                            and space_id = #{spaceId}
-                        </if>
+            <if test="brandContent != null  and brandContent != ''">
+                and bc.brand_content = #{brandContent}
+            </if>
+            <if test="brandVideoUrl != null  and brandVideoUrl != ''">
+                and bc.brand_video_url = #{brandVideoUrl}
+            </if>
+            <if test="publicWelfare != null  and publicWelfare != ''">
+                and bc.public_welfare = #{publicWelfare}
+            </if>
+            <if test="spaceId != null  and spaceId != ''">
+                and bc.space_id = #{spaceId}
+            </if>
+            ${params.dataScope}
         </where>
     </select>
 
     <select id="selectBrandCenterByBrandId" parameterType="String"
             resultMap="BrandCenterResult">
-            <include refid="selectBrandCenterVo"/>
-            where brand_id = #{brandId}
+        <include refid="selectBrandCenterVo"/>
+        where brand_id = #{brandId}
     </select>
 
     <insert id="insertBrandCenter" parameterType="BrandCenter">
         insert into t_brand_center
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                    <if test="brandId != null">brand_id,
-                    </if>
-                    <if test="brandContent != null">brand_content,
-                    </if>
-                    <if test="brandVideoUrl != null">brand_video_url,
-                    </if>
-                    <if test="publicWelfare != null">public_welfare,
-                    </if>
-                    <if test="spaceId != null">space_id,
-                    </if>
-                    <if test="createBy != null">create_by,
-                    </if>
-                    <if test="createTime != null">create_time,
-                    </if>
-                    <if test="updateBy != null">update_by,
-                    </if>
-                    <if test="updateTime != null">update_time,
-                    </if>
+            <if test="brandId != null">brand_id,
+            </if>
+            <if test="brandContent != null">brand_content,
+            </if>
+            <if test="brandVideoUrl != null">brand_video_url,
+            </if>
+            <if test="publicWelfare != null">public_welfare,
+            </if>
+            <if test="spaceId != null">space_id,
+            </if>
+            <if test="userId != null">user_id,
+            </if>
+            <if test="deptId != null">dept_id,
+            </if>
+            <if test="createBy != null">create_by,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="updateBy != null">update_by,
+            </if>
+            <if test="updateTime != null">update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                    <if test="brandId != null">#{brandId},
-                    </if>
-                    <if test="brandContent != null">#{brandContent},
-                    </if>
-                    <if test="brandVideoUrl != null">#{brandVideoUrl},
-                    </if>
-                    <if test="publicWelfare != null">#{publicWelfare},
-                    </if>
-                    <if test="spaceId != null">#{spaceId},
-                    </if>
-                    <if test="createBy != null">#{createBy},
-                    </if>
-                    <if test="createTime != null">#{createTime},
-                    </if>
-                    <if test="updateBy != null">#{updateBy},
-                    </if>
-                    <if test="updateTime != null">#{updateTime},
-                    </if>
+            <if test="brandId != null">#{brandId},
+            </if>
+            <if test="brandContent != null">#{brandContent},
+            </if>
+            <if test="brandVideoUrl != null">#{brandVideoUrl},
+            </if>
+            <if test="publicWelfare != null">#{publicWelfare},
+            </if>
+            <if test="spaceId != null">#{spaceId},
+            </if>
+            <if test="userId != null">#{userId},
+            </if>
+            <if test="deptId != null">#{deptId},
+            </if>
+            <if test="createBy != null">#{createBy},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="updateBy != null">#{updateBy},
+            </if>
+            <if test="updateTime != null">#{updateTime},
+            </if>
         </trim>
     </insert>
 
     <update id="updateBrandCenter" parameterType="BrandCenter">
         update t_brand_center
         <trim prefix="SET" suffixOverrides=",">
-                    <if test="brandContent != null">brand_content =
-                        #{brandContent},
-                    </if>
-                    <if test="brandVideoUrl != null">brand_video_url =
-                        #{brandVideoUrl},
-                    </if>
-                    <if test="publicWelfare != null">public_welfare =
-                        #{publicWelfare},
-                    </if>
-                    <if test="spaceId != null">space_id =
-                        #{spaceId},
-                    </if>
-                    <if test="createBy != null">create_by =
-                        #{createBy},
-                    </if>
-                    <if test="createTime != null">create_time =
-                        #{createTime},
-                    </if>
-                    <if test="updateBy != null">update_by =
-                        #{updateBy},
-                    </if>
-                    <if test="updateTime != null">update_time =
-                        #{updateTime},
-                    </if>
+            <if test="brandContent != null">brand_content =
+                #{brandContent},
+            </if>
+            <if test="brandVideoUrl != null">brand_video_url =
+                #{brandVideoUrl},
+            </if>
+            <if test="publicWelfare != null">public_welfare =
+                #{publicWelfare},
+            </if>
+            <if test="spaceId != null">space_id =
+                #{spaceId},
+            </if>
+            <if test="createBy != null">create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">update_time =
+                #{updateTime},
+            </if>
         </trim>
         where brand_id = #{brandId}
     </update>
 
     <delete id="deleteBrandCenterByBrandId" parameterType="String">
         delete
-        from t_brand_center where brand_id = #{brandId}
+        from t_brand_center
+        where brand_id = #{brandId}
     </delete>
 
     <delete id="deleteBrandCenterByBrandIds" parameterType="String">

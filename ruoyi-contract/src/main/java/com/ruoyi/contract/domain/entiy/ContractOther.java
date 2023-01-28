@@ -82,7 +82,23 @@ public class ContractOther extends BaseEntity {
     /**
      * 空间id
      */
+    @Excel(name = "空间id")
+    @ApiModelProperty("空间id")
     private String spaceId;
+
+    /**
+     * 用户id
+     */
+    @Excel(name = "用户id")
+    @ApiModelProperty("用户id")
+    private String userId;
+
+    /**
+     * 部门id
+     */
+    @Excel(name = "部门id")
+    @ApiModelProperty("部门id")
+    private String deptId;
 
     public void setContractId(String contractId) {
         this.contractId = contractId;
@@ -164,6 +180,22 @@ public class ContractOther extends BaseEntity {
         return spaceId;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -178,6 +210,8 @@ public class ContractOther extends BaseEntity {
                 .append("signTime", getSignTime())
                 .append("remark", getRemark())
                 .append("spaceId", getSpaceId())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())
                 .append("updateBy", getUpdateBy())

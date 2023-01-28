@@ -81,6 +81,8 @@ public class FireSafetyController extends BaseController {
     @PostMapping
     public AjaxResult add(@RequestBody FireSafety fireSafety) {
         fireSafety.setCreateBy(getUsername());
+        fireSafety.setUserId(getUserId().toString());
+        fireSafety.setDeptId(getDeptId().toString());
         return toAjax(fireSafetyService.insertFireSafety(fireSafety));
     }
 

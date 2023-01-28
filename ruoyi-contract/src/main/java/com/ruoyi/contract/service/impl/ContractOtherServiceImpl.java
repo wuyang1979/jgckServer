@@ -3,6 +3,7 @@ package com.ruoyi.contract.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.contract.domain.vo.ContractOtherVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class ContractOtherServiceImpl implements IContractOtherService {
      * @return 其他合同
      */
     @Override
+    @DataScope(userAlias = "u",deptAlias = "d")
     public List<ContractOther> selectContractOtherList(ContractOtherVo contractOtherVo) {
         return contractOtherMapper.selectContractOtherList(contractOtherVo);
     }
